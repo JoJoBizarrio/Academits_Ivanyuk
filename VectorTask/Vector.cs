@@ -8,5 +8,12 @@ namespace VectorTask
 {
     internal class Vector
     {
+        public int Dimension { get; set; }
+
+        public Vector(int dimension)
+        {
+            Dimension = dimension;
+
+        }
     }
 }

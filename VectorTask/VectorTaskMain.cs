@@ -12,6 +12,5 @@ namespace VectorTask
         {
             Console.WriteLine("Hello, World!");
         }
-        
     }
 }

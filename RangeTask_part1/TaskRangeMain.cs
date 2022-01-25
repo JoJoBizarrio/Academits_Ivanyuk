@@ -24,18 +24,36 @@ namespace Range
             range1.WriteLineRange();
             Console.WriteLine();
 
-            Range intersectionWithRange2 = range1.GetIntersection(range2);
-            Range intersectionWithRange3 = range1.GetIntersection(range3);
-            Range intersectionWithRange4 = range1.GetIntersection(range4);
-            Range intersectionWithRange5 = range1.GetIntersection(range5);
-            Range intersectionWithRange6 = range1.GetIntersection(range6);
+            Range intersectionRange1WithRange2 = range1.GetIntersection(range2);
+            Range intersectionRange1WithRange3 = range1.GetIntersection(range3);
+            Range intersectionRange1WithRange4 = range1.GetIntersection(range4);
+            Range intersectionRange1WithRange5 = range1.GetIntersection(range5);
+            Range intersectionRange1WithRange6 = range1.GetIntersection(range6);
 
-            intersectionWithRange2.WriteLineRange();
-            intersectionWithRange3.WriteLineRange();
-            intersectionWithRange4.WriteLineRange();
-            intersectionWithRange5.WriteLineRange();
+            intersectionRange1WithRange2.WriteLineRange();
+            intersectionRange1WithRange3.WriteLineRange();
+            intersectionRange1WithRange4.WriteLineRange();
+            intersectionRange1WithRange5.WriteLineRange();
 
+            Range Range1mergeWithRange2 = range1.MergeWith(range2);
+            Range Range1mergeWithRange3 = range1.MergeWith(range3);
+            Range Range1mergeWithRange4 = range1.MergeWith(range4);
+            Range Range1mergeWithRange5 = range1.MergeWith(range5);
+            Range Range1mergeWithRange6 = range1.MergeWith(range6);
 
+            Console.WriteLine();
+
+            Range1mergeWithRange2.WriteLineRange();
+            Range1mergeWithRange3.WriteLineRange();
+            Range1mergeWithRange4.WriteLineRange();
+            Range1mergeWithRange5.WriteLineRange();
+
+            Console.WriteLine();
+
+            range1.Substract(range3).WriteLineRange();
+            range1.Substract(range4).WriteLineRange();
+            range1.Substract(range5).WriteLineRange();
+            range1.Substract(range6).WriteLineRange();
         }
     }
 }

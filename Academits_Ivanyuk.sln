@@ -5,9 +5,9 @@ VisualStudioVersion = 17.0.32112.339
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "GitHubTask", "GitHubTask\GitHubTask.csproj", "{F531C1F0-5F85-440D-BDDD-0487C96064A1}"
 EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "RangeTask", "RangeTask_part1\RangeTask.csproj", "{BEC3E644-B990-4A04-A1E5-5A6DF7D3D85A}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "RangeTask", "RangeTask\RangeTask.csproj", "{BEC3E644-B990-4A04-A1E5-5A6DF7D3D85A}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "VectorTask", "VectorTask\VectorTask.csproj", "{F2208301-F10E-4A6D-8DB9-C729C8D82B3A}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "VectorTask", "VectorTask\VectorTask.csproj", "{F2208301-F10E-4A6D-8DB9-C729C8D82B3A}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution

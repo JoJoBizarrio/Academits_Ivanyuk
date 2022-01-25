@@ -5,6 +5,8 @@
     <TargetFramework>net6.0</TargetFramework>
     <ImplicitUsings>enable</ImplicitUsings>
     <Nullable>disable</Nullable>
+    <BaseOutputPath>C:\Users\User\source\repos\Academits_Ivanyuk_22\RangeTask\bin</BaseOutputPath>
+    <BaseIntermediateOutputPath>C:\Users\User\source\repos\Academits_Ivanyuk_22\RangeTask\obj</BaseIntermediateOutputPath>
   </PropertyGroup>
 
 </Project>

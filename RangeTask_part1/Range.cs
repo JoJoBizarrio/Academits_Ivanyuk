@@ -28,5 +28,44 @@ namespace Range
         {
             return number >= From && number <= To;
         }
+
+        public Range GetIntersection(Range range)
+        {
+            if (range.IsInside(From) & range.IsInside(To))
+            {
+                Range intersection = new Range(From, To);
+                return intersection;
+            }
+
+            if (IsInside(range.From) & IsInside(range.To))
+            {
+                Range intersection = new Range(range.From, range.To);
+                return intersection;
+            }
+
+            if (range.IsInside(From) & IsInside(range.To)) 
+            {
+                Range intersection = new Range(From, range.To);
+                return intersection;
+            }
+
+            if (IsInside(range.From) & range.IsInside(To))
+            {
+                Range intersection = new Range(range.From, To);
+                return intersection;
+            }
+
+            return null;
+        }
+
+        public void WriteRange()
+        {
+            Console.Write("( " + From + " ; " + To + " )");
+        }
+
+        public void WriteLineRange()
+        {
+            Console.WriteLine("( " + From + " ; " + To + " )");
+        }
     }
 }

@@ -33,26 +33,22 @@ namespace Range
         {
             if (range.IsInside(From) & range.IsInside(To))
             {
-                Range intersection = new Range(From, To);
-                return intersection;
+                return new Range(From, To);
             }
 
             if (IsInside(range.From) & IsInside(range.To))
             {
-                Range intersection = new Range(range.From, range.To);
-                return intersection;
+                return new Range(range.From, range.To);
             }
 
-            if (range.IsInside(From) & IsInside(range.To)) 
+            if (range.IsInside(From) & IsInside(range.To))
             {
-                Range intersection = new Range(From, range.To);
-                return intersection;
+                return new Range(From, range.To);
             }
 
             if (IsInside(range.From) & range.IsInside(To))
             {
-                Range intersection = new Range(range.From, To);
-                return intersection;
+                return new Range(range.From, To);
             }
 
             return null;

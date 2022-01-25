@@ -7,6 +7,8 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "GitHubTask", "GitHubTask\Gi
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "RangeTask", "RangeTask_part1\RangeTask.csproj", "{BEC3E644-B990-4A04-A1E5-5A6DF7D3D85A}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "VectorTask", "VectorTask\VectorTask.csproj", "{F2208301-F10E-4A6D-8DB9-C729C8D82B3A}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -21,6 +23,10 @@ Global
 		{BEC3E644-B990-4A04-A1E5-5A6DF7D3D85A}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{BEC3E644-B990-4A04-A1E5-5A6DF7D3D85A}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{BEC3E644-B990-4A04-A1E5-5A6DF7D3D85A}.Release|Any CPU.Build.0 = Release|Any CPU
+		{F2208301-F10E-4A6D-8DB9-C729C8D82B3A}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{F2208301-F10E-4A6D-8DB9-C729C8D82B3A}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{F2208301-F10E-4A6D-8DB9-C729C8D82B3A}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{F2208301-F10E-4A6D-8DB9-C729C8D82B3A}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

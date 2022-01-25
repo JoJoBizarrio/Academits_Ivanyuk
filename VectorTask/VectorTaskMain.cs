@@ -10,9 +10,7 @@ namespace VectorTask
     {
         static void Main(string[] args)
         {
-            Vector v1 = new Vector(5);
-
-            v1.GetVector();
+            Console.WriteLine("Hello, World!");
         }
     }
 }

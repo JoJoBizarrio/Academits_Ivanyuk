@@ -2,7 +2,7 @@
 
 namespace Range
 {
-    class TaskRangeMain
+    class RangeTaskMain
     {
         static void Main(string[] args)
         {

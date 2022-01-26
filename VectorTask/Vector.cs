@@ -100,7 +100,7 @@ namespace VectorTask
         {
             string information = "{ ";
 
-            foreach (int e in Array)
+            foreach (double e in Array)
             {
                 information += e + ", ";
             }

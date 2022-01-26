@@ -10,9 +10,10 @@ namespace VectorTask
     {
         static void Main(string[] args)
         {
-            Vector v1 = new Vector(5);
+            Vector vector1 = new Vector(9);
 
-            v1.GetVector();
+            Console.WriteLine(vector1.toString());
+            Console.WriteLine(vector1.GetSize());
         }
     }
 }

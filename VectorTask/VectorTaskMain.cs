@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace VectorTask
 {
-    class VectorTask
+    class VectorTaskMain
     {
         static void Main(string[] args)
         {
@@ -14,6 +14,16 @@ namespace VectorTask
 
             Console.WriteLine(vector1.toString());
             Console.WriteLine(vector1.GetSize());
+
+            double[] array = { 5.3, 1.2, 2.9, 7.7, 3.1 };
+
+            Vector vector2 = new Vector(6, array);
+
+            vector1 = new Vector(vector2);
+
+            Console.WriteLine(vector1.toString());
+            Console.WriteLine(vector2.toString());
+
         }
     }
 }

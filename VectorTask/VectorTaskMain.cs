@@ -12,7 +12,8 @@ namespace VectorTask
         {
             Console.Write("Check 1a: ");
             Vector vector1A = new Vector(9);
-            Console.WriteLine(vector1A.ToString());
+            Console.Write(vector1A.ToString());
+            Console.WriteLine(".....dim: " + vector1A.GetSize());
             Console.WriteLine();
 
             // 1b after  1c
@@ -20,22 +21,21 @@ namespace VectorTask
             Console.Write("Check 1c: ");
             double[] array1C = { 0.1, 9.2, 2.9 };
             Vector vector1C = new Vector(array1C);
-            Console.WriteLine(vector1C.ToString());
-            Console.WriteLine(vector1C.GetSize());
+            Console.Write(vector1C.ToString());
+            Console.WriteLine(".....dim: " + vector1C.GetSize());
             Console.WriteLine();
 
             Console.Write("Check 1b: ");
             Vector vector1B = new Vector(vector1C);
-            Console.WriteLine(vector1B.ToString());
+            Console.Write(vector1B.ToString());
+            Console.WriteLine(".....dim: " + vector1B.GetSize());
             Console.WriteLine();
 
             Console.Write("Check 1d: ");
             double[] array1D = { 1.1, 9.2, 2.9 };
             Vector vector1D = new Vector(5, array1D);
-            Console.WriteLine(vector1D.ToString());
-            Console.WriteLine(vector1D.GetSize());
-
-
+            Console.Write(vector1D.ToString());
+            Console.WriteLine(".....dim: " + vector1D.GetSize());
 
         }
     }

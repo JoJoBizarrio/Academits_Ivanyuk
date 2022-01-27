@@ -98,7 +98,7 @@ namespace VectorTask
         /// <summary>
         /// (3) Выдает компоненты вектора через запятую { 1, 2, 3 }.
         /// </summary>
-        public string ToString()
+        public override string ToString() // выдал варнинг о том что ToString нужно перезаписать. Это иззз конфликта одинаковых названий? НА что влияет override?
         {
             string information = "{ ";
 
@@ -107,7 +107,7 @@ namespace VectorTask
                 information += $"{e:f1}, ";
             }
 
-            return information.Substring(0, information.Length - 2) + " }";
+            return information.Remove(information.Length - 2) + " }";
         }
 
         /// <summary>
@@ -116,6 +116,17 @@ namespace VectorTask
         /// <param name="addedVector"></param>
         public void Add(Vector addedVector)
         {
+            if (GetSize() < addedVector.GetSize())
+            {
+                Vector temp = new Vector(Array);
+                Array = new double[addedVector.GetSize()];
+
+                for (int i = 0; i < temp.GetSize(); i++)
+                {
+                    Array[i] = temp.GetElement(i);
+                }
+            }
+
             for (int i = 0; i < addedVector.GetSize(); i++)
             {
                 Array[i] += addedVector.GetElement(i);
@@ -126,8 +137,19 @@ namespace VectorTask
         /// (4b) Вычитание вектора из другого вектора.
         /// </summary>
         /// <param name="subtractedVector"></param>
-        public void Subtract(Vector subtractedVector)
+        public void GetDifference(Vector subtractedVector)
         {
+            if (GetSize() < subtractedVector.GetSize())
+            {
+                Vector temp = new Vector(Array);
+                Array = new double[subtractedVector.GetSize()];
+
+                for (int i = 0; i < temp.GetSize(); i++)
+                {
+                    Array[i] = temp.GetElement(i);
+                }
+            }
+
             for (int i = 0; i < subtractedVector.GetSize(); i++)
             {
                 Array[i] -= subtractedVector.GetElement(i);
@@ -135,14 +157,26 @@ namespace VectorTask
         }
 
         /// <summary>
+        /// (4c) Умноженение на скялар
+        /// </summary>
+        /// <param name="value"></param>
+        public void GetScalarMultiplication(double value)
+        {
+            for (int i = 0; i < GetSize(); i++)
+            {
+                Array[i] = value * GetElement(i);
+            }
+        }
+
+        /// <summary>
         /// (4d) Разворачивает вектор.
         /// </summary>
         /// <param name="unwrapVector"></param>
-        public void Revert(Vector unwrapVector)
+        public void Revert()
         {
-            for (int i = 0; i < unwrapVector.GetSize(); i++)
+            for (int i = 0; i < GetSize(); i++)
             {
-                unwrapVector.ChangeElement(unwrapVector.GetElement(i) * (-1), i);
+                GetElementChange(GetElement(i) * (-1), i);
             }
         }
 
@@ -183,7 +217,7 @@ namespace VectorTask
         /// </summary>
         /// <param name="index"></param>
         /// <returns></returns>
-        public double ChangeElement(double value, int index)
+        public double GetElementChange(double value, int index)
         {
             if (index >= GetSize())
             {
@@ -224,7 +258,7 @@ namespace VectorTask
         /// <param name="vector1"></param>
         /// <param name="vector2"></param>
         /// <returns> Возвращает результат сложения в виде нового вектора.</returns>
-        public static Vector Sum(Vector vector1, Vector vector2)
+        public static Vector GetSum(Vector vector1, Vector vector2)
         {
             int maxDimension;
             int minDimension;
@@ -246,7 +280,7 @@ namespace VectorTask
 
             for (int i = 0; i < minDimension; i++)
             {
-                result.ChangeElement(vector1.GetElement(i) + vector2.GetElement(i), i);
+                result.GetElementChange(vector1.GetElement(i) + vector2.GetElement(i), i);
             }
 
             if (minDimension == maxDimension)
@@ -258,14 +292,14 @@ namespace VectorTask
             {
                 for (int i = minDimension; i < maxDimension; i++)
                 {
-                    result.ChangeElement(vector1.GetElement(i), i);
+                    result.GetElementChange(vector1.GetElement(i), i);
                 }
             }
             else
             {
                 for (int i = minDimension; i < maxDimension; i++)
                 {
-                    result.ChangeElement(vector2.GetElement(i), i);
+                    result.GetElementChange(vector2.GetElement(i), i);
                 }
             }
 
@@ -278,7 +312,7 @@ namespace VectorTask
         /// <param name="vector1"></param>
         /// <param name="vector2"></param>
         /// <returns>Возвращает результат вычитания в виде нового вектора.</returns>
-        public static Vector Subtract(Vector vector1, Vector vector2)
+        public static Vector GetDifference(Vector vector1, Vector vector2)
         {
             int maxDimension;
             int minDimension;
@@ -300,7 +334,7 @@ namespace VectorTask
 
             for (int i = 0; i < minDimension; i++)
             {
-                result.ChangeElement(vector1.GetElement(i) - vector2.GetElement(i), i);
+                result.GetElementChange(vector1.GetElement(i) - vector2.GetElement(i), i);
             }
 
             if (minDimension == maxDimension)
@@ -312,14 +346,14 @@ namespace VectorTask
             {
                 for (int i = minDimension; i < maxDimension; i++)
                 {
-                    result.ChangeElement(-1 * vector1.GetElement(i), i);
+                    result.GetElementChange(-1 * vector1.GetElement(i), i);
                 }
             }
             else
             {
                 for (int i = minDimension; i < maxDimension; i++)
                 {
-                    result.ChangeElement(-1 * vector2.GetElement(i), i);
+                    result.GetElementChange(-1 * vector2.GetElement(i), i);
                 }
             }
 
@@ -330,7 +364,7 @@ namespace VectorTask
         /// (5c) Скалярное произведение.
         /// </summary>
         /// <returns></returns>
-        public double MultiplyScalarly(Vector vector1, Vector vector2)
+        public static double GetScalarMultiplication(Vector vector1, Vector vector2)
         {
             int minDimension;
             int vector1Size = vector1.GetSize();

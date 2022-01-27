@@ -8,7 +8,7 @@ namespace VectorTask
 {
     internal class Vector
     {
-        public int Dimension { get; set; } // это вроде можно убрать, но это не точно.
+        public int Dimension { get; set; }
 
         public double[] Array { get; set; }
 
@@ -41,6 +41,7 @@ namespace VectorTask
         {
             int givingVectorSize = givingVector.GetSize();
 
+            Dimension = givingVectorSize;
             Array = new double[givingVectorSize];
 
             for (int i = 0; i < givingVectorSize; i++)
@@ -55,6 +56,7 @@ namespace VectorTask
         /// <param name="array"></param>
         public Vector(double[] array)
         {
+            Dimension = array.Length;
             Array = new double[array.Length];
 
             for (int i = 0; i < array.Length; i++)
@@ -96,13 +98,13 @@ namespace VectorTask
         /// <summary>
         /// (3) Выдает компоненты вектора через запятую { 1, 2, 3 }.
         /// </summary>
-        public string toString()
+        public string ToString()
         {
             string information = "{ ";
 
             foreach (double e in Array)
             {
-                information += e + ", ";
+                information += $"{e:f1}, ";
             }
 
             return information.Substring(0, information.Length - 2) + " }";

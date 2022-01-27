@@ -10,20 +10,32 @@ namespace VectorTask
     {
         static void Main(string[] args)
         {
-            // 1a
-            Vector vector1 = new Vector(9); 
+            Console.Write("Check 1a: ");
+            Vector vector1A = new Vector(9);
+            Console.WriteLine(vector1A.ToString());
+            Console.WriteLine();
 
-            Console.WriteLine(vector1.toString());
-            Console.WriteLine(vector1.GetSize());
+            // 1b after  1c
 
-            double[] array = { 5.3, 1.2, 2.9, 7.7, 3.1 };
+            Console.Write("Check 1c: ");
+            double[] array1C = { 0.1, 9.2, 2.9 };
+            Vector vector1C = new Vector(array1C);
+            Console.WriteLine(vector1C.ToString());
+            Console.WriteLine(vector1C.GetSize());
+            Console.WriteLine();
 
-            Vector vector2 = new Vector(7, array);
+            Console.Write("Check 1b: ");
+            Vector vector1B = new Vector(vector1C);
+            Console.WriteLine(vector1B.ToString());
+            Console.WriteLine();
 
-            vector1 = new Vector(vector2);
+            Console.Write("Check 1d: ");
+            double[] array1D = { 1.1, 9.2, 2.9 };
+            Vector vector1D = new Vector(5, array1D);
+            Console.WriteLine(vector1D.ToString());
+            Console.WriteLine(vector1D.GetSize());
 
-            Console.WriteLine(vector1.toString());
-            Console.WriteLine(vector2.toString());
+
 
         }
     }

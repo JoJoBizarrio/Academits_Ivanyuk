@@ -14,6 +14,7 @@ namespace MatrixTask
 
         public Vector[] Array { get; set; }
 
+        // 1a
         public Matrix(int row, int column)
         {
             Row = row;
@@ -27,6 +28,45 @@ namespace MatrixTask
             }
         }
 
+        // 1b
+        /*
+        public Matrix(Matrix matrix)
+        {
+            for (int i = 0; i < Row; i++)
+            {
+                Array[i] = matrix.
+            }
+        }
+        */
+
+        // 2a
+        public int GetSize()
+        {
+            return Row * Column;
+        }
+
+        public int GetRowsCount()
+        {
+            return Row;
+        }
+
+        public int GetColumnsCount()
+        {
+            return Column;
+        }
+
+        // 2b
+        public Vector GetRowElements(int rowIndex)
+        {
+            return Array[rowIndex];
+        }
+
+        public Vector GetRowElementsChange(int rowIndex)
+        {
+            return Array[rowIndex];
+        }
+
+        // 2g
         public override string ToString()
         {
             string information = "{ ";

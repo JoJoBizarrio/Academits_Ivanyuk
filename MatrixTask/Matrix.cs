@@ -25,15 +25,18 @@ namespace MatrixTask
         }
 
         // 1b
-        /*
         public Matrix(Matrix matrix)
         {
+            Row = matrix.GetRowsCount();
+            Column = matrix.GetColumnsCount();
+
+            Array = new Vector[matrix.GetRowsCount()];
+
             for (int i = 0; i < Row; i++)
             {
-                Array[i] = matrix.
+                Array[i] = matrix.GetColumnElements(i);
             }
         }
-        */
 
         // 2a
         public int GetSize()
@@ -75,6 +78,12 @@ namespace MatrixTask
             return vectorColumn;
         }
 
+        // 2d 
+        public void GetTranspose()
+        {
+            
+        }
+
         // 2g
         public override string ToString()
         {
@@ -87,7 +96,5 @@ namespace MatrixTask
 
             return information.Remove(information.Length - 2) + " }";
         }
-
-
     }
 }

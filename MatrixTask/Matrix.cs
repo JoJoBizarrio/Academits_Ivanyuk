@@ -12,25 +12,33 @@ namespace MatrixTask
 
         public int Column { get; set; }
 
-        public Vector[] ArrayM { get; set; }
+        public Vector[] Array { get; set; }
 
         public Matrix(int row, int column)
         {
             Row = row;
             Column = column;
 
-            ArrayM = new Vector[row];
+            Array = new Vector[row];
 
             for (int i = 0; i < row; i++)
             {
-                ArrayM[i] = new Vector(column);
+                Array[i] = new Vector(column);
             }
         }
 
         public override string ToString()
         {
+            string information = "{ ";
 
+            foreach (Vector e in Array)
+            {
+                information += e.ToString() + ", ";
+            }
+
+            return information.Remove(information.Length - 2) + " }";
         }
+
 
     }
 }

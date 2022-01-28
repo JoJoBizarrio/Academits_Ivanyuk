@@ -6,7 +6,9 @@ namespace MatrixTask
     {
         static void Main(string[] args)
         {
-            Matrix mat = new Matrix(3, 3);
+            Matrix matrix1 = new Matrix(3, 3);
+
+            Console.Write(matrix1.ToString());
         }
     }
 }

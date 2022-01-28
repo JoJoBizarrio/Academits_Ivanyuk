@@ -1,8 +1,4 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace MatrixTask
 {
@@ -54,16 +50,29 @@ namespace MatrixTask
         {
             return Column;
         }
-
+        
         // 2b
         public Vector GetRowElements(int rowIndex)
         {
             return Array[rowIndex];
         }
 
-        public Vector GetRowElementsChange(int rowIndex)
+        public Vector GetRowElementsChange(Vector insertableVector, int rowIndex)
         {
-            return Array[rowIndex];
+            return Array[rowIndex] = insertableVector;
+        }
+
+        // 2c 
+        public Vector GetColumnElements(int columnIndex)
+        {
+            Vector vectorColumn = new Vector(Row);
+
+            for (int i = 0; i < Row; i++)
+            {
+                vectorColumn.GetElementChange(Array[i].GetElement(columnIndex), i);
+            }
+
+            return vectorColumn;
         }
 
         // 2g

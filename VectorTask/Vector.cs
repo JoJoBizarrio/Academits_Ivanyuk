@@ -94,7 +94,7 @@ namespace VectorTask
         /// <summary>
         /// (3) Выдает компоненты вектора через запятую { 1, 2, 3 }.
         /// </summary>
-        public override string ToString() // выдал варнинг о том что ToString нужно перезаписать. Это иззз конфликта одинаковых названий? НА что влияет override?
+        public override string ToString()
         {
             string information = "{ ";
 

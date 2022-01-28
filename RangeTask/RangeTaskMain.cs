@@ -1,6 +1,6 @@
 ﻿using System;
 
-namespace Range
+namespace RangeTask
 {
     class RangeTaskMain
     {

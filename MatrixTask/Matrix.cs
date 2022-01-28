@@ -38,6 +38,37 @@ namespace MatrixTask
             }
         }
 
+        // 1d
+        public Matrix(Vector[] vectorArray)
+        {
+            Row = vectorArray.GetLength(0);
+            Column = vectorArray.GetLength(1);
+
+            Array = new Vector[Row];
+
+            for (int i = 0; i < Row; i++)
+            {
+                Array[i] = vectorArray[i];
+            }
+        }
+        // 1с
+         /*
+        public Matrix(double[,] array)
+        {
+            Row = array.GetLength(0);
+            Column = array.GetLength(1);
+
+            Array = new Vector[array.GetLength(1)];
+
+            for (int i = 0; i < array.GetLength(1); i++)
+            {
+                for (int j = 0; j < array.GetLength(0); j++)
+                {
+                    Array[i].GetElementChange(array[i, j], j+1);
+                }
+            }
+        }
+        */
         // 2a
         public int GetSize()
         {

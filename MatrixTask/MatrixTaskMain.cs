@@ -18,12 +18,16 @@ namespace MatrixTask
 
             Console.WriteLine(matrix1.ToString());
 
-            double[,] array = { { 5.5, 3.1, 0 }, {9.4, 1.1, 0.5 } };
-
-            Matrix matrix2 = new Matrix(array);
-
-            Console.WriteLine();
-            Console.WriteLine(matrix2.ToString());
+            double[,] array = { { 5.5, 3.1, 0 }, { 9.4, 1.1, 0.5 } };
+            
+            matrix1.GetTranspose();
+            Console.WriteLine(matrix1.ToString());
+            
+            /*
+            Console.WriteLine(matrix1.GetSize());
+            Console.WriteLine(matrix1.GetRowsCount());
+            Console.WriteLine(matrix1.GetColumnsCount());
+            */
         }
     }
 }

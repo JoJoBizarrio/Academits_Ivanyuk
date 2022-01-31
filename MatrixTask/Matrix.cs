@@ -4,11 +4,11 @@ namespace MatrixTask
 {
     internal class Matrix
     {
-        public int Row { get; set; }
+        public int Row { get; }
 
-        public int Column { get; set; }
+        public int Column { get; }
 
-        public Vector[] Array { get; set; }
+        private Vector[] VectorsArray { get; set; }
 
         // 1a
         public Matrix(int row, int column)
@@ -16,12 +16,9 @@ namespace MatrixTask
             Row = row;
             Column = column;
 
-            Array = new Vector[row];
+            
+            VectorsArray = new Vector[row];
 
-            for (int i = 0; i < row; i++)
-            {
-                Array[i] = new Vector(column);
-            }
         }
 
         // 1b

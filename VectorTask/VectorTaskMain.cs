@@ -23,7 +23,7 @@ namespace VectorTask
             Console.WriteLine();
 
             Console.Write("(1c) Копирует значения из массива в вектор: ");
-            Vector vector1B = new Vector(vector1C);
+            Vector vector1B = new Vector(array1C);
             Console.WriteLine(vector1B);
             Console.WriteLine("Dimension: " + vector1B.GetSize());
             Console.WriteLine();
@@ -61,17 +61,17 @@ namespace VectorTask
             Console.WriteLine(vector1C);
             Console.WriteLine();
 
-            Console.Write("(4e) Получение длины вектора: ");
+            Console.Write("(4e) Получение длины вектора ");
             Vector vector4E = new Vector(3);
             vector4E.SetElement(0, 3);
             vector4E.SetElement(1, 4);
             vector4E.SetElement(2, -4);
-            Console.WriteLine($"{vector4E.Length():f1}");
+            Console.WriteLine($"{vector4E}: Length = {vector4E.Length():f1}");
             Console.WriteLine();
 
-            Console.WriteLine("(4f) Получение компоненты вектора по индексу: " + vector4E.GetElement(2));
+            Console.WriteLine("(4f) Получение компоненты вектора по индексу 2: " + vector4E.GetElement(2));
             vector4E.SetElement(2, 2.4);
-            Console.WriteLine("Поменяли последнее число на 2.4: " + vector4E.GetElement(2));
+            Console.WriteLine("Поменяли число c индексом 2 на 2.4: " + vector4E.GetElement(2));
             Console.WriteLine();
 
             Console.WriteLine("(4g) Возвращает true, если вектора одинаковой размерности и компоненты равны: ");

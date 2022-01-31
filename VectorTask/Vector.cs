@@ -34,12 +34,7 @@ namespace VectorTask
             Size = vectorSize;
             VectorArray = new double[vectorSize];
 
-            // VectorArray.CopyTo(vector, 0);
-
-            for (int i = 0; i < vectorSize; i++)
-            {
-                VectorArray[i] = vector.GetElement(i);
-            }
+            Array.Copy(vector.VectorArray, VectorArray, vector.GetSize());
         }
 
         // (1c) Копирует значения из массива в вектор.

@@ -1,233 +1,194 @@
 ﻿using System;
+using System.Text;
 
 namespace MatrixTask
 {
     internal class Vector
     {
-        public int Dimension { get; set; }
+        private double[] VectorArray { get; set; }
 
-        public double[] Array { get; set; }
-
-        /// <summary>
-        /// (1a) Создание вектора с размерностью dimension.
-        /// </summary>
-        /// <param name="dimension"> Размерность вектора. </param>
-        /// <exception cref="ArgumentException"> Если размерность <= 0. </exception>
+        // (1a) Создание вектора с размерностью dimension.
         public Vector(int dimension)
         {
             if (dimension <= 0)
             {
-                throw new ArgumentException("Dimension must be > 0");
+                throw new ArgumentException("Dimension must be > 0", "dimension");
             }
 
-            Dimension = dimension;
-            Array = new double[dimension];
+            VectorArray = new double[dimension];
 
             for (int i = 0; i < dimension; i++)
             {
-                Array[i] = 0;
+                VectorArray[i] = 0;
             }
         }
 
-        /// <summary>
-        /// (1b) Копировать из вектора в вектор.
-        /// </summary>
-        /// <param name="VectorPurpose"></param>
-        public Vector(Vector givingVector)
+        // (1b) Копировать из вектора в вектор.
+        public Vector(Vector vector)
         {
-            int givingVectorSize = givingVector.GetSize();
+            int vectorSize = vector.GetSize();
 
-            Dimension = givingVectorSize;
-            Array = new double[givingVectorSize];
+            VectorArray = new double[vectorSize];
 
-            for (int i = 0; i < givingVectorSize; i++)
+            // VectorArray.CopyTo(vector, 0);
+
+            for (int i = 0; i < vectorSize; i++)
             {
-                Array[i] = givingVector.GetElement(i);
+                VectorArray[i] = vector.GetElement(i);
             }
         }
 
-        /// <summary>
-        /// (1c) Копирует значения из массива в вектор.
-        /// </summary>
-        /// <param name="array"></param>
+        // (1c) Копирует значения из массива в вектор.
         public Vector(double[] array)
         {
-            Dimension = array.Length;
-            Array = new double[array.Length];
+            int arrayLength = array.Length;
 
-            for (int i = 0; i < array.Length; i++)
+            if (arrayLength <= 0)
             {
-                Array[i] = array[i];
+                throw new ArgumentException("Length of array have to be > 0", "array.Length");
             }
+
+            VectorArray = new double[arrayLength];
+
+            array.CopyTo(VectorArray, 0);
         }
 
-        /// <summary>
-        /// (1d) Заполнение вектора значениями из массива. Если длина массива меньше dimension, то в остальных компонентах 0.
-        /// </summary>
-        /// <param name="dimension"></param>
-        /// <param name="array"></param>
+        // (1d) Заполнение вектора значениями из массива. Если длина массива меньше dimension, то в остальных компонентах 0.
         public Vector(int dimension, double[] array)
         {
-            Dimension = dimension;
-            Array = new double[dimension];
-
-            for (int i = 0; i < array.Length; i++)
+            if (dimension <= 0)
             {
-                Array[i] = array[i];
+                throw new ArgumentException("Dimension have to be > 0", "dimension");
             }
 
-            for (int i = array.Length; i < dimension; i++)
+            int arrayLength = array.Length;
+
+            if (dimension <= arrayLength)
             {
-                Array[i] = 0;
+                throw new ArgumentException("Length of array have to be > 0", "array.Length");
             }
+
+            VectorArray = new double[dimension];
+
+            array.CopyTo(VectorArray, 0);
         }
 
-        /// <summary>
-        /// (2) Метод для получения размерности вектора.
-        /// </summary>
-        /// <returns></returns>
+        // (2) Метод для получения размерности вектора.
         public int GetSize()
         {
-            return Dimension;
+            return VectorArray.Length;
         }
 
-        /// <summary>
-        /// (3) Выдает компоненты вектора через запятую { 1, 2, 3 }.
-        /// </summary>
+        // (3) Выдает компоненты вектора через запятую {1, 2, 3}.
         public override string ToString()
         {
-            string information = "{ ";
+            StringBuilder vectorContent = new StringBuilder();
+            vectorContent.Append("{");
 
-            foreach (double e in Array)
+            foreach (double e in VectorArray)
             {
-                information += $"{e:f1}, ";
+                vectorContent.Append($"{e:f1}, ");
             }
 
-            return information.Remove(information.Length - 2) + " }";
+            return vectorContent.Remove(vectorContent.Length - 2, 2).Append("}").ToString();
         }
 
-        /// <summary>
-        /// (4a) Прибавление к вектору другого вектора.
-        /// </summary>
-        /// <param name="addedVector"></param>
-        public void Add(Vector addedVector)
+        //(4a) Прибавление к вектору другого вектора.
+        public void Add(Vector vector)
         {
-            if (GetSize() < addedVector.GetSize())
+            if (GetSize() < vector.GetSize())
             {
-                Vector temp = new Vector(Array);
-                Array = new double[addedVector.GetSize()];
+                Vector temp = new Vector(VectorArray);
+                VectorArray = new double[vector.GetSize()];
+
+                // Array.Resize(ref VectorArray, vector.GetSize()); - не работает
 
                 for (int i = 0; i < temp.GetSize(); i++)
                 {
-                    Array[i] = temp.GetElement(i);
+                    VectorArray[i] = temp.GetElement(i);
                 }
             }
 
-            for (int i = 0; i < addedVector.GetSize(); i++)
+            for (int i = 0; i < vector.GetSize(); i++)
             {
-                Array[i] += addedVector.GetElement(i);
+                VectorArray[i] += vector.GetElement(i);
             }
         }
 
-        /// <summary>
-        /// (4b) Вычитание вектора из другого вектора.
-        /// </summary>
-        /// <param name="subtractedVector"></param>
-        public void GetDifference(Vector subtractedVector)
+        // (4b) Вычитание вектора из другого вектора.
+        public void Substract(Vector vector)
         {
-            if (GetSize() < subtractedVector.GetSize())
+            if (GetSize() < vector.GetSize())
             {
-                Vector temp = new Vector(Array);
-                Array = new double[subtractedVector.GetSize()];
+                Vector temp = new Vector(VectorArray);
+                VectorArray = new double[vector.GetSize()];
+
+                // Array.Resize(ref VectorArray, vector.GetSize()); - не работает
 
                 for (int i = 0; i < temp.GetSize(); i++)
                 {
-                    Array[i] = temp.GetElement(i);
+                    VectorArray[i] = temp.GetElement(i);
                 }
             }
 
-            for (int i = 0; i < subtractedVector.GetSize(); i++)
+            for (int i = 0; i < vector.GetSize(); i++)
             {
-                Array[i] -= subtractedVector.GetElement(i);
+                VectorArray[i] -= vector.GetElement(i);
             }
         }
 
-        /// <summary>
-        /// (4c) Умноженение на скялар
-        /// </summary>
-        /// <param name="value"></param>
-        public void GetScalarMultiplication(double value)
+        // (4c) Умноженение на скялар
+        public void MultiplyByScalar(double scalar)
         {
             for (int i = 0; i < GetSize(); i++)
             {
-                Array[i] = value * GetElement(i);
+                VectorArray[i] *= scalar;
             }
         }
 
-        /// <summary>
-        /// (4d) Разворачивает вектор.
-        /// </summary>
-        /// <param name="unwrapVector"></param>
+        // (4d) Разворачивает вектор.
         public void Revert()
         {
-            for (int i = 0; i < GetSize(); i++)
-            {
-                GetElementChange(GetElement(i) * (-1), i);
-            }
+            MultiplyByScalar(-1);
         }
 
-        /// <summary>
-        /// (4e) Получение длины вектора.
-        /// </summary>
-        /// <returns></returns>
+        // (4e) Получение длины вектора.
         public double Length()
         {
-            double length = 0.0;
+            double sum = 0.0;
 
-            for (int i = 0; i < GetSize(); i++)
+            foreach (double e in VectorArray)
             {
-                length += Math.Pow(GetElement(i), 2);
+                sum += Math.Pow(e, 2);
             }
 
-            return Math.Sqrt(length);
+            return Math.Sqrt(sum);
         }
 
-        /// <summary>
-        /// (4f) Получение компоненты вектора по индексу.
-        /// </summary>
-        /// <param name="index"></param>
-        /// <returns></returns>
-        /// <exception cref="ArgumentOutOfRangeException"></exception>
+        // (4f) Получение компоненты вектора по индексу.
         public double GetElement(int index)
         {
-            if (index >= GetSize())
+            if (index >= GetSize() || index < 0)
             {
-                throw new ArgumentOutOfRangeException();
+                throw new ArgumentOutOfRangeException("index", index, "Index out of range.");
             }
 
-            return Array[index];
+            return VectorArray[index];
         }
 
-        /// <summary>
-        /// (4f) Изменить компоненту вектора по индексу.
-        /// </summary>
-        /// <param name="index"></param>
-        /// <returns></returns>
-        public double GetElementChange(double value, int index)
+        // (4f) Изменить компоненту вектора по индексу.
+        public void SetElement(int index, double value)
         {
-            if (index >= GetSize())
+            if (index >= GetSize() || index < 0)
             {
-                throw new ArgumentOutOfRangeException();
+                throw new ArgumentOutOfRangeException("index", index, "Index out of range.");
             }
 
-            return Array[index] = value;
+            VectorArray[index] = value;
         }
 
-        /// <summary>
-        /// (4g) Возвращает true, если вектора одинаковой разммерности и компоненты равны. Иначе false.
-        /// </summary>
-        /// <param name="compareWithVector"></param>
-        /// <returns></returns>
+        /*
+        // (4g) Возвращает true, если вектора одинаковой разммерности и компоненты равны. Иначе false.
         public bool Equals(Vector compareToVector)
         {
             int vectorSize = GetSize();
@@ -236,130 +197,62 @@ namespace MatrixTask
             {
                 for (int i = 0; i < vectorSize; i++)
                 {
-                    if (Array[i] != compareToVector.GetElement(i))
+                    if (VectorArray[i] != compareToVector.GetElement(i))
                     {
                         return false;
                     }
                 }
-
+                
                 return true;
             }
 
             return false;
         }
+        */
 
-        /// <summary>
-        /// (5a) Сложение двух векторов.
-        /// </summary>
-        /// <param name="vector1"></param>
-        /// <param name="vector2"></param>
-        /// <returns> Возвращает результат сложения в виде нового вектора.</returns>
+        // (4g) Возвращает true, если вектора одинаковой разммерности и компоненты равны. Иначе false.
+        public bool Equals(Vector compareToVector)
+        {
+            return base.Equals(compareToVector);
+        }
+
+        // (5a) Сложение двух векторов.
         public static Vector GetSum(Vector vector1, Vector vector2)
         {
-            int maxDimension;
-            int minDimension;
-            int vector1Size = vector1.GetSize();
-            int vector2Size = vector2.GetSize();
+            Vector result;
 
-            if (vector1Size >= vector2Size)
+            if (vector1.GetSize() >= vector2.GetSize())
             {
-                maxDimension = vector1Size;
-                minDimension = vector2Size;
-            }
-            else
-            {
-                maxDimension = vector2Size;
-                minDimension = vector1Size;
-            }
-
-            Vector result = new Vector(maxDimension);
-
-            for (int i = 0; i < minDimension; i++)
-            {
-                result.GetElementChange(vector1.GetElement(i) + vector2.GetElement(i), i);
-            }
-
-            if (minDimension == maxDimension)
-            {
+                result = new Vector(vector1);
+                result.Add(vector2);
                 return result;
             }
 
-            if (vector1Size > vector2Size)
-            {
-                for (int i = minDimension; i < maxDimension; i++)
-                {
-                    result.GetElementChange(vector1.GetElement(i), i);
-                }
-            }
-            else
-            {
-                for (int i = minDimension; i < maxDimension; i++)
-                {
-                    result.GetElementChange(vector2.GetElement(i), i);
-                }
-            }
+            result = new Vector(vector2);
+            result.Add(vector1);
 
             return result;
         }
 
-        /// <summary>
-        /// (5b) Вычитание двух векторов.
-        /// </summary>
-        /// <param name="vector1"></param>
-        /// <param name="vector2"></param>
-        /// <returns>Возвращает результат вычитания в виде нового вектора.</returns>
+        // (5b) Вычитание двух векторов.
         public static Vector GetDifference(Vector vector1, Vector vector2)
         {
-            int maxDimension;
-            int minDimension;
-            int vector1Size = vector1.GetSize();
-            int vector2Size = vector2.GetSize();
+            Vector result;
 
-            if (vector1Size >= vector2Size)
+            if (vector1.GetSize() >= vector2.GetSize())
             {
-                maxDimension = vector1Size;
-                minDimension = vector2Size;
-            }
-            else
-            {
-                maxDimension = vector2Size;
-                minDimension = vector1Size;
-            }
-
-            Vector result = new Vector(maxDimension);
-
-            for (int i = 0; i < minDimension; i++)
-            {
-                result.GetElementChange(vector1.GetElement(i) - vector2.GetElement(i), i);
-            }
-
-            if (minDimension == maxDimension)
-            {
+                result = new Vector(vector1);
+                result.Substract(vector2);
                 return result;
             }
 
-            if (vector1Size > vector2Size)
-            {
-                for (int i = minDimension; i < maxDimension; i++)
-                {
-                    result.GetElementChange(-1 * vector1.GetElement(i), i);
-                }
-            }
-            else
-            {
-                for (int i = minDimension; i < maxDimension; i++)
-                {
-                    result.GetElementChange(-1 * vector2.GetElement(i), i);
-                }
-            }
+            result = new Vector(vector2);
+            result.Add(vector1);
 
             return result;
         }
 
-        /// <summary>
-        /// (5c) Скалярное произведение.
-        /// </summary>
-        /// <returns></returns>
+        // (5c) Скалярное произведение.
         public static double GetScalarMultiplication(Vector vector1, Vector vector2)
         {
             int minDimension;

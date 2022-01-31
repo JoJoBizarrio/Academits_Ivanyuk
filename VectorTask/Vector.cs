@@ -5,6 +5,8 @@ namespace VectorTask
 {
     internal class Vector
     {
+        public int Size { get; }
+
         private double[] VectorArray { get; set; }
 
         // (1a) Создание вектора с размерностью dimension.
@@ -15,6 +17,7 @@ namespace VectorTask
                 throw new ArgumentException("Dimension must be > 0", "dimension");
             }
 
+            Size = dimension;
             VectorArray = new double[dimension];
 
             for (int i = 0; i < dimension; i++)
@@ -28,6 +31,7 @@ namespace VectorTask
         {
             int vectorSize = vector.GetSize();
 
+            Size = vectorSize;
             VectorArray = new double[vectorSize];
 
             // VectorArray.CopyTo(vector, 0);
@@ -48,6 +52,7 @@ namespace VectorTask
                 throw new ArgumentException("Length of array have to be > 0", "array.Length");
             }
 
+            Size = arrayLength;
             VectorArray = new double[arrayLength];
 
             array.CopyTo(VectorArray, 0);
@@ -68,6 +73,7 @@ namespace VectorTask
                 throw new ArgumentException("Length of array have to be > 0", "array.Length");
             }
 
+            Size = arrayLength;
             VectorArray = new double[dimension];
 
             array.CopyTo(VectorArray, 0);
@@ -93,7 +99,7 @@ namespace VectorTask
             return vectorContent.Remove(vectorContent.Length - 2, 2).Append("}").ToString();
         }
 
-        //(4a) Прибавление к вектору другого вектора.
+        // (4a) Прибавление к вектору другого вектора.
         public void Add(Vector vector)
         {
             if (GetSize() < vector.GetSize())

@@ -10,7 +10,7 @@ namespace VectorTask
             Console.Write("(1a) Создание вектора с размерностью dimension: ");
             Vector vector1A = new Vector(9);
             Console.WriteLine(vector1A);
-            Console.WriteLine("Dimension: " + vector1A.Size);
+            Console.WriteLine("Dimension: " + vector1A.Dimension);
             Console.WriteLine();
 
             // 1b after 1c
@@ -19,20 +19,20 @@ namespace VectorTask
             double[] array1C = { 0.1, 9.2, 2.9 };
             Vector vector1C = new Vector(array1C);
             Console.WriteLine(vector1C);
-            Console.WriteLine("Dimension: " + vector1C.GetSize());
+            Console.WriteLine("Dimension: " + vector1C.Dimension);
             Console.WriteLine();
 
             Console.Write("(1c) Копирует значения из массива в вектор: ");
             Vector vector1B = new Vector(array1C);
             Console.WriteLine(vector1B);
-            Console.WriteLine("Dimension: " + vector1B.GetSize());
+            Console.WriteLine("Dimension: " + vector1B.GetDimension());
             Console.WriteLine();
 
             Console.Write("(1d) Заполнение вектора значениями из массива. Если длина массива меньше dimension, то в остальных компонентах 0: ");
             double[] array1D = { 1.1, 4.2, 8.9 };
             Vector vector1D = new Vector(5, array1D);
             Console.WriteLine(vector1D);
-            Console.WriteLine("Dimension: " + vector1D.GetSize());
+            Console.WriteLine("Dimension: " + vector1D.GetDimension());
             Console.WriteLine();
             Console.WriteLine();
 

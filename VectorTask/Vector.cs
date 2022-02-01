@@ -144,7 +144,7 @@ namespace VectorTask
         }
 
         // (4e) Получение длины вектора.
-        public double Length()
+        public double GetLength()
         {
             double sum = 0.0;
 

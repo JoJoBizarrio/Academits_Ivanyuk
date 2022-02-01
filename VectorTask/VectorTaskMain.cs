@@ -66,7 +66,7 @@ namespace VectorTask
             vector4E.SetElement(0, 3);
             vector4E.SetElement(1, 4);
             vector4E.SetElement(2, -4);
-            Console.WriteLine($"{vector4E}: Length = {vector4E.Length():f1}");
+            Console.WriteLine($"{vector4E}: Length = {vector4E.GetLength():f1}");
             Console.WriteLine();
 
             Console.WriteLine("(4f) Получение компоненты вектора по индексу 2: " + vector4E.GetElement(2));

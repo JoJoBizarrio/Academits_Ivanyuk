@@ -100,7 +100,7 @@ namespace VectorTask
                 Vector temp = new Vector(VectorArray);
                 VectorArray = new double[vector.Dimension];
 
-                // Array.Resize(ref VectorArray, vector.Dimension);
+                // Array.Resize<double>(ref vector, vector.Dimension);
 
                 for (int i = 0; i < temp.Dimension; i++)
                 {
@@ -122,7 +122,7 @@ namespace VectorTask
                 Vector temp = new Vector(VectorArray);
                 VectorArray = new double[vector.Dimension];
 
-                // Array.Resize(ref vector.VectorArray, vector.Dimension); - не работает
+                // Array.Resize<double>(ref vector, vector.Dimension); - не работает
 
                 for (int i = 0; i < temp.Dimension; i++)
                 {

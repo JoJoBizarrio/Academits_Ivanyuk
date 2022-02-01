@@ -8,7 +8,7 @@ namespace VectorTask
     {
         public int Dimension { get; }
 
-        private double[] VectorArray { get; set; }
+        private double[] VectorArray;
 
         // (1a) Создание вектора с размерностью dimension.
         public Vector(int dimension)
@@ -98,9 +98,8 @@ namespace VectorTask
             if (Dimension < vector.Dimension)
             {
                 Vector temp = new Vector(VectorArray);
-                VectorArray = new double[vector.Dimension];
 
-                // Array.Resize<double>(ref vector, vector.Dimension);
+                Array.Resize(ref vector.VectorArray, vector.Dimension);
 
                 for (int i = 0; i < temp.Dimension; i++)
                 {
@@ -120,9 +119,8 @@ namespace VectorTask
             if (Dimension < vector.Dimension)
             {
                 Vector temp = new Vector(VectorArray);
-                VectorArray = new double[vector.Dimension];
 
-                // Array.Resize<double>(ref vector, vector.Dimension); - не работает
+                Array.Resize(ref vector.VectorArray, vector.Dimension); 
 
                 for (int i = 0; i < temp.Dimension; i++)
                 {

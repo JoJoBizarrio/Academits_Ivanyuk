@@ -81,6 +81,9 @@ namespace VectorTask
             Console.WriteLine($"Равны ли вектора: {vector4G} и {vector4E} => {vector4E.Equals(vector4G)}");
             Console.WriteLine();
 
+            Console.WriteLine("(4g) ХэшКод: " + vector4E.GetHashCode());
+            Console.WriteLine();
+
             // Блок 5
             Console.WriteLine("(5a) Статическое сложение двух векторов: ");
             Vector vectorsSum1 = Vector.GetSum(vector4E, vector4G);

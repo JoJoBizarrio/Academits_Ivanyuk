@@ -30,7 +30,8 @@ namespace VectorTask
         // (1b) Копировать из вектора в вектор.
         public Vector(Vector vector)
         {
-            VectorArray = new double[Dimension];
+            Dimension = vector.Dimension;
+            VectorArray = new double[vector.Dimension];
 
             Array.Copy(vector.VectorArray, VectorArray, vector.Dimension);
         }
@@ -118,19 +119,12 @@ namespace VectorTask
         {
             if (Dimension < vector.Dimension)
             {
-                Vector temp = new Vector(VectorArray);
-
-                Array.Resize(ref vector.VectorArray, vector.Dimension); 
-
-                for (int i = 0; i < temp.Dimension; i++)
-                {
-                    VectorArray[i] = temp.Dimension;
-                }
+                Array.Resize(ref VectorArray, vector.Dimension);
             }
 
             for (int i = 0; i < vector.Dimension; i++)
             {
-                VectorArray[i] -= vector.Dimension;
+                VectorArray[i] -= vector.VectorArray[i];
             }
         }
 
@@ -185,9 +179,24 @@ namespace VectorTask
         }
 
         // (4g) Возвращает true, если вектора одинаковой разммерности и компоненты равны. Иначе false.
-        public override bool Equals(object vector)
+        public override bool Equals(object obj)
         {
-            return base.Equals(vector);
+            if (obj == null || GetType() != obj.GetType() || ((Vector)obj).Dimension != Dimension)
+            {
+                return false;
+            }
+
+            Vector vector = (Vector)obj;
+
+            for (int i = 0; i < Dimension; i++)
+            {
+                if (vector.VectorArray[i] != VectorArray[i])
+                {
+                    return false;
+                }
+            }
+
+            return true;
         }
 
         // (4g) ХэшКод

@@ -231,7 +231,7 @@ namespace MatrixTask
             }
 
             result = new Vector(vector2);
-            result.Add(vector1);
+            result.Substract(vector1);
 
             return result;
         }

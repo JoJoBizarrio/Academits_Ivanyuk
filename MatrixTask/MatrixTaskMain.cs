@@ -29,22 +29,30 @@ namespace MatrixTask
             Console.WriteLine();
 
             // 2b. Получение и задание вектора-строки по индексу	
-            Console.WriteLine("Геттер строки:" + matrix3.GetRow(0));
+            Console.WriteLine("Геттер строки: " + matrix3.GetRow(0));
             Vector vector1 = new Vector(3);
             vector1.SetElement(0, 1);
             matrix3.SetRow(vector1, 0);
-            Console.WriteLine("Таже строка после сеттера:" + matrix3.GetRow(0));
+            Console.WriteLine("Таже строка после сеттера: " + matrix3.GetRow(0));
             Console.WriteLine();
 
             // 2с. Получение вектора-столбца по индексу 
             Console.WriteLine("Геттер столбца:" + matrix3.GetColumn(0));
+            Console.WriteLine();
 
             // 2d. Транспонирование
-            Console.WriteLine("транспонирование до :" + matrix3);
-            matrix3.Transpose();
-            Console.WriteLine("транспонирование после:" + matrix3);
+            //Console.WriteLine("транспонирование до: " + matrix3);
+            //matrix3.Transpose();
+            //Console.WriteLine("транспонирование после: " + matrix3);
 
+            // 2e.Умножение на скаляр
+            vector1.SetElement(1, 3.3);
+            matrix3.SetRow(vector1, 0);
+            Console.Write($"Матрица: {matrix3}\t");
+            matrix3.MultiplyByScalar(3);
+            Console.WriteLine("Умножениe на скаляр 3,3: " + matrix3);
 
+            //
             /*
             Matrix matrix1 = new Matrix(3, 2);
             Vector insert = new Vector(2);

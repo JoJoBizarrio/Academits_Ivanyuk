@@ -1,5 +1,5 @@
 ﻿using System;
-
+using System.Text;
 
 namespace MatrixTask
 {
@@ -119,31 +119,117 @@ namespace MatrixTask
             return matrixColumn;
         }
 
+        /*
         // 2d. Транспонирование матрицы
         public void Transpose()
         {
             Matrix temp = new Matrix(MatrixArray);
+            Matrix temp1 = new Matrix(temp.Column, temp.Row);
+            
 
-            Array.Resize(ref MatrixArray[0], Row);
-
-            for (int i = 1; i < Row; i++)
+            for (int i = 1; i < Column; i++)
             {
-                MatrixArray[i] = temp.GetColumn(i);
+                temp1.SetRow(i, temp.GetColumn(i));
+            }
+
+            Array.Resize(ref MatrixArray, Row);
+        }
+        */
+
+        // 2e.Умножение на скаляр
+        public void MultiplyByScalar(double scalar)
+        {
+            for (int i = 0; i < Row; i++)
+            {
+                MatrixArray[i].MultiplyByScalar(scalar);
             }
         }
 
-        // 2g
+        // 2g. toString определить так, чтобы результат получался в таком виде: {{ 1, 2 }, { 2, 3 }}
         public override string ToString()
         {
-            string information = "{ ";
+            StringBuilder matrixContent = new StringBuilder();
+            matrixContent.Append("{");
 
             foreach (Vector e in MatrixArray)
             {
-                information += e.ToString() + ", ";
+                matrixContent.Append(e + ", ");
             }
 
-            return information.Remove(information.Length - 2) + " }";
+            return matrixContent.Remove(matrixContent.Length - 2, 2).Append("}").ToString();
         }
 
+        // 2h. умножение матрицы на вектор
+        public Vector MultiplyByVector(Vector vector)
+        {
+            Vector result = new Vector(Row);
+
+            for (int i = 0; i < Row; i++)
+            {
+                result.SetElement(i, Vector.GetScalarMultiplication(MatrixArray[i], vector));
+            }
+
+            return result;
+        }
+
+        // 2i. Сложение матриц
+        public void Add(Matrix matrix)
+        {
+            for (int i = 0; i < Row; i++)
+            {
+                MatrixArray[i].Add(matrix.MatrixArray[i]);
+            }
+        }
+
+        // 2j. Вычитание матриц
+        public void Substract(Matrix matrix)
+        {
+            for (int i = 0; i < Row; i++)
+            {
+                MatrixArray[i].Substract(matrix.MatrixArray[i]);
+
+            }
+        }
+
+        // Статик сложение
+        public static Matrix GetSum(Matrix matrix1, Matrix matrix2)
+        {
+            Matrix result = new Matrix(matrix1);
+
+            result.Add(matrix2);
+
+            return result;
+        }
+
+        // Статик вычитание
+        public static Matrix GetDifference(Matrix matrix1, Matrix matrix2)
+        {
+            Matrix result = new Matrix(matrix1);
+
+            result.Substract(matrix2);
+
+            return result;
+        }
+
+        // статик умножение
+        public static Matrix GetMultiplication(Matrix matrix1, Matrix matrix2)
+        {
+            if (matrix1.Column != matrix2.Row)
+            {
+                throw new Exception("Empty");
+            }
+            Matrix result = new Matrix(matrix1.Row, matrix2.Column);
+
+            for (int i = 0; i < result.Row; i++)
+            {
+                for (int j = 0; j < result.Column; i++)
+                {
+                    double result1 = Vector.GetScalarMultiplication(matrix1.GetRow(i), matrix2.GetColumn(j));
+                    result.MatrixArray[i].SetElement(j, result1);
+                }
+            }
+
+            return result;
+        }
     }
 }

@@ -20,11 +20,6 @@ namespace VectorTask
 
             Dimension = dimension;
             VectorArray = new double[dimension];
-
-            for (int i = 0; i < dimension; i++)
-            {
-                VectorArray[i] = 0;
-            }
         }
 
         // (1b) Копировать из вектора в вектор.

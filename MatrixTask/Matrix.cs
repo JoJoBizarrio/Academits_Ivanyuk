@@ -9,7 +9,7 @@ namespace MatrixTask
 
         public int Column { get; }
 
-        private Vector[] MatrixArray;
+        internal Vector[] MatrixArray;
 
         // 1a. Matrix(n, m) – матрица нулей размера n*m
         public Matrix(int row, int column)

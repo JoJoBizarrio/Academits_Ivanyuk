@@ -8,7 +8,7 @@ namespace MatrixTask
     {
         public int Dimension { get; }
 
-        private double[] VectorArray;
+        internal double[] VectorArray;
 
         // (1a) Создание вектора с размерностью dimension.
         public Vector(int dimension)

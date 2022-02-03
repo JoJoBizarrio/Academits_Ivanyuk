@@ -188,11 +188,11 @@ namespace MatrixTask
         }
 
         // 2j. Вычитание матриц
-        public void Substract(Matrix matrix)
+        public void Subtract(Matrix matrix)
         {
             for (int i = 0; i < Row; i++)
             {
-                MatrixArray[i].Substract(matrix.MatrixArray[i]);
+                MatrixArray[i].Subtract(matrix.MatrixArray[i]);
 
             }
         }
@@ -212,7 +212,7 @@ namespace MatrixTask
         {
             Matrix result = new Matrix(matrix1);
 
-            result.Substract(matrix2);
+            result.Subtract(matrix2);
 
             return result;
         }
@@ -224,6 +224,7 @@ namespace MatrixTask
             {
                 throw new Exception("Empty");
             }
+
             Matrix result = new Matrix(matrix1.Row, matrix2.Column);
 
             for (int i = 0; i < result.Row; i++)

@@ -110,7 +110,7 @@ namespace MatrixTask
         }
 
         // (4b) Вычитание вектора из другого вектора.
-        public void Substract(Vector vector)
+        public void Subtract(Vector vector)
         {
             if (Dimension < vector.Dimension)
             {
@@ -226,12 +226,12 @@ namespace MatrixTask
             if (vector1.Dimension >= vector2.Dimension)
             {
                 result = new Vector(vector1);
-                result.Substract(vector2);
+                result.Subtract(vector2);
                 return result;
             }
 
             result = new Vector(vector2);
-            result.Substract(vector1);
+            result.Subtract(vector1);
 
             return result;
         }

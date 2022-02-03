@@ -13,8 +13,8 @@ namespace MatrixTask
             Matrix matrix2 = new Matrix(matrix1);
 
             // 1c. Matrix(double[][]) – из двумерного массива(в C# double[,])
-            double[,] array = { { 2, 3 }, { 4, 5 } };
-            matrix2 = new Matrix(array);
+            double[,] array1 = { { 2, 3 }, { 4, 5 } };
+            matrix2 = new Matrix(array1);
 
             // 1d. Matrix(Vector[]) – из массива векторов-строк
             Vector[] vectorsArray = new Vector[2];
@@ -55,77 +55,37 @@ namespace MatrixTask
             vector1.SetElement(1, 3.3);
             matrix3.SetRow(0, vector1);
             Console.WriteLine($"Матрица: {matrix3}\t");
+
             matrix3.MultiplyByScalar(3);
             Console.WriteLine("Умножениe на скаляр 3,3: " + matrix3);
-            /*
-            Matrix matrix1 = new Matrix(3, 2);
-            Vector insert = new Vector(2);
-            insert.GetElementChange(1, 0);
-            insert.GetElementChange(3, 1);
-            Console.WriteLine(matrix1.ToString());
+            Console.WriteLine();
 
-            matrix1.GetRowElementsChange(insert, 0);
-            matrix1.GetRowElementsChange(insert, 1);
-            matrix1.GetRowElementsChange(insert, 2);
+            // 2h. Умножение матрицы на вектор
+            double[] array2 = { 2, 3 };
+            Vector vector = new Vector(array2);
 
-            Console.WriteLine(matrix1.ToString());
+            double[,] array3 = { { 3, 2 }, { 6, 2 }, { 1, 10 } };
+            Matrix matrix4 = new Matrix(array3);
 
-            double[,] array = { { 5.5, 3.1, 0 }, { 9.4, 1.1, 0.5 } };
-            
-            matrix1.GetTranspose();
-            Console.WriteLine(matrix1.ToString());
-            
-            /*
-            Console.WriteLine(matrix1.GetSize());
-            Console.WriteLine(matrix1.GetRowsCount());
-            Console.WriteLine(matrix1.GetColumnsCount());
-            */
-            /*
-            Matrix matrix1 = new Matrix(3, 2);
-            Vector insert = new Vector(2);
-            insert.GetElementChange(1, 0);
-            insert.GetElementChange(3, 1);
-            Console.WriteLine(matrix1.ToString());
+            Console.WriteLine($"Вектор: {vector} и матрица: {matrix4}");
+            Console.WriteLine("После перемножения вектор * матрица = " + matrix4.MultiplyByVector(vector));
+            Console.WriteLine();
 
-            matrix1.GetRowElementsChange(insert, 0);
-            matrix1.GetRowElementsChange(insert, 1);
-            matrix1.GetRowElementsChange(insert, 2);
 
-            Console.WriteLine(matrix1.ToString());
+            // 2.i + 2j Add; Substract
+            double[,] array4 = { { 2, 3, 0 }, { 4, 5, 9.5 } };
+            matrix1 = new Matrix(array4);
+            Console.WriteLine("до операции: " + matrix1);
+            matrix1.Add(matrix1);
+            Console.WriteLine("Добавили такую же матрицу: " + matrix1);
+            matrix1.Subtract(matrix1);
+            Console.WriteLine("Отняли такую же матрицу: " + matrix1);
 
-            double[,] array = { { 5.5, 3.1, 0 }, { 9.4, 1.1, 0.5 } };
-            
-            matrix1.GetTranspose();
-            Console.WriteLine(matrix1.ToString());
-            
-            /*
-            Console.WriteLine(matrix1.GetSize());
-            Console.WriteLine(matrix1.GetRowsCount());
-            Console.WriteLine(matrix1.GetColumnsCount());
-            */
-            /*
-            Matrix matrix1 = new Matrix(3, 2);
-            Vector insert = new Vector(2);
-            insert.GetElementChange(1, 0);
-            insert.GetElementChange(3, 1);
-            Console.WriteLine(matrix1.ToString());
-
-            matrix1.GetRowElementsChange(insert, 0);
-            matrix1.GetRowElementsChange(insert, 1);
-            matrix1.GetRowElementsChange(insert, 2);
-
-            Console.WriteLine(matrix1.ToString());
-
-            double[,] array = { { 5.5, 3.1, 0 }, { 9.4, 1.1, 0.5 } };
-            
-            matrix1.GetTranspose();
-            Console.WriteLine(matrix1.ToString());
-            
-            /*
-            Console.WriteLine(matrix1.GetSize());
-            Console.WriteLine(matrix1.GetRowsCount());
-            Console.WriteLine(matrix1.GetColumnsCount());
-            */
+            // Стат метод сложения
+            Matrix matrix5 = Matrix.GetSum(matrix1, matrix1);
+            Matrix matrix6 = Matrix.GetSum(matrix1, matrix5);
+            Matrix matrix7 = Matrix.GetMultiplication(matrix5, matrix6);
+            Console.Write(matrix7);
         }
     }
 }

@@ -43,7 +43,6 @@ namespace MatrixTask
 
         }
 
-        /*
         // 1c. Matrix(double[][]) – из двумерного массива(в C# double[,])
         public Matrix(double[,] array)
         {
@@ -54,19 +53,23 @@ namespace MatrixTask
 
             Row = array.GetLength(0);
             Column = array.GetLength(1);
-            
-            MatrixArray = new Vector[Row];
 
-            double[,] oneDimensionArray = new double[0, array.Length];
-            array.CopyTo(oneDimensionArray, 0);
+            MatrixArray = new Vector[Row];
 
             for (int i = 0; i < Row; i++)
             {
                 MatrixArray[i] = new Vector(Column);
-                Array.ConstrainedCopy(array, i * Row, MatrixArray, i * Row, Row);
             }
+
+            for (int i = 0; i < Row; i++)
+            {
+                for (int j = 0; j < Column; j++)
+                {
+                    MatrixArray[i].SetElement(j, array[i, j]);
+                }
+            }
+              
         }
-        */
 
         // 1d. Matrix(Vector[]) – из массива векторов-строк 
         public Matrix(Vector[] vectorsArray)
@@ -80,17 +83,17 @@ namespace MatrixTask
         }
 
         // 2a. Получение размеров матрицы
-        public int GetElementsCount()
+        public int GetElements()
         {
             return Row * Column;
         }
 
-        public int GetRowsCount()
+        public int GetRows()
         {
             return Row;
         }
 
-        public int GetColumnsCount()
+        public int GetColumns()
         {
             return Column;
         }
@@ -101,7 +104,7 @@ namespace MatrixTask
             return MatrixArray[index];
         }
 
-        public void SetRow(Vector vector, int index)
+        public void SetRow(int index, Vector vector)
         {
             MatrixArray[index] = vector;
         }
@@ -119,22 +122,25 @@ namespace MatrixTask
             return matrixColumn;
         }
 
-        /*
         // 2d. Транспонирование матрицы
         public void Transpose()
         {
-            Matrix temp = new Matrix(MatrixArray);
-            Matrix temp1 = new Matrix(temp.Column, temp.Row);
-            
+            Matrix temp = new Matrix(Column, Row);
 
-            for (int i = 1; i < Column; i++)
+            for (int i = 0; i < Column; i++)
             {
-                temp1.SetRow(i, temp.GetColumn(i));
+                temp.MatrixArray[i] = GetColumn(i);
             }
 
-            Array.Resize(ref MatrixArray, Row);
+            MatrixArray = new Vector[Column];
+
+            for (int i = 0; i < Column; i++)
+            {
+                MatrixArray[i] = new Vector(Row);
+            }
+
+            Array.Copy(temp.MatrixArray, MatrixArray, Column);
         }
-        */
 
         // 2e.Умножение на скаляр
         public void MultiplyByScalar(double scalar)
@@ -191,7 +197,7 @@ namespace MatrixTask
             }
         }
 
-        // Статик сложение
+        // 3a. Статик сложение
         public static Matrix GetSum(Matrix matrix1, Matrix matrix2)
         {
             Matrix result = new Matrix(matrix1);
@@ -201,7 +207,7 @@ namespace MatrixTask
             return result;
         }
 
-        // Статик вычитание
+        // 3b. Статик вычитание
         public static Matrix GetDifference(Matrix matrix1, Matrix matrix2)
         {
             Matrix result = new Matrix(matrix1);
@@ -211,7 +217,7 @@ namespace MatrixTask
             return result;
         }
 
-        // статик умножение
+        // 3c. статик умножение
         public static Matrix GetMultiplication(Matrix matrix1, Matrix matrix2)
         {
             if (matrix1.Column != matrix2.Row)

@@ -45,7 +45,7 @@ namespace VectorTask
             Console.WriteLine(vector1C);
 
             Console.Write($"vector1B: из {vector1B } отнять {vector1A} => result: ");
-            vector1B.Substract(vector1A);
+            vector1B.Subtract(vector1A);
             Console.WriteLine(vector1B);
             Console.WriteLine();
 

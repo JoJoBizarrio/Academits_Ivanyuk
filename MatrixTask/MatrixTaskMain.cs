@@ -71,7 +71,6 @@ namespace MatrixTask
             Console.WriteLine("После перемножения вектор * матрица = " + matrix4.MultiplyByVector(vector));
             Console.WriteLine();
 
-
             // 2.i + 2j Add; Substract
             double[,] array4 = { { 2, 3, 0 }, { 4, 5, 9.5 } };
             matrix1 = new Matrix(array4);

@@ -86,13 +86,13 @@ namespace VectorTask
 
             // Блок 5
             Console.WriteLine("(5a) Статическое сложение двух векторов: ");
-            Vector vectorsSum1 = Vector.GetSum(vector4E, vector4G);
-            Console.WriteLine($"{vector4E} + {vector4G } = {vectorsSum1}");
+            Vector vectorsSum = Vector.GetSum(vector4E, vector4G);
+            Console.WriteLine($"{vector4E} + {vector4G } = {vectorsSum}");
             Console.WriteLine();
 
             Console.WriteLine("(5b) Статическое вычитание двух векторов: ");
-            Vector vectorsSum2 = Vector.GetDifference(vector4E, vector1B);
-            Console.WriteLine($"{vector4E} - {vector1B } = {vectorsSum2}"); 
+            Vector vectorsDifference = Vector.GetDifference(vector4E, vector1B);
+            Console.WriteLine($"{vector4E} - {vector1B } = {vectorsDifference}"); 
             Console.WriteLine();
 
             Console.WriteLine("(5c) Скалярное произведение: ");

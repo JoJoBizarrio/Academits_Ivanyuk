@@ -7,7 +7,10 @@ namespace VectorTask
     {
         private double[] VectorArray;
 
-        public int Dimension { get; }
+        public int Dimension
+        {
+            get { return VectorArray.Length; }
+        }
 
         // (1a) Создание вектора с размерностью dimension.
         public Vector(int dimension)
@@ -17,14 +20,12 @@ namespace VectorTask
                 throw new ArgumentException("Dimension have to be > 0", "dimension");
             }
 
-            Dimension = dimension;
             VectorArray = new double[dimension];
         }
 
         // (1b) Копировать из вектора в вектор.
         public Vector(Vector vector)
         {
-            Dimension = vector.Dimension;
             VectorArray = new double[vector.Dimension];
 
             Array.Copy(vector.VectorArray, VectorArray, vector.Dimension);
@@ -40,7 +41,6 @@ namespace VectorTask
                 throw new ArgumentException("Length of array have to be > 0", "array.Length");
             }
 
-            Dimension = arrayLength;
             VectorArray = new double[arrayLength];
 
             array.CopyTo(VectorArray, 0);
@@ -61,7 +61,6 @@ namespace VectorTask
                 throw new ArgumentException("Length of array have to be > 0", "array.Length");
             }
 
-            Dimension = arrayLength;
             VectorArray = new double[dimension];
 
             array.CopyTo(VectorArray, 0);
@@ -122,7 +121,7 @@ namespace VectorTask
             }
         }
 
-        // (4c) Умноженение на скялар
+        // (4c) Умножение на скаляр
         public void MultiplyByScalar(double scalar)
         {
             for (int i = 0; i < Dimension; i++)
@@ -175,16 +174,15 @@ namespace VectorTask
         // (4g) Возвращает true, если вектора одинаковой разммерности и компоненты равны. Иначе false.
         public override bool Equals(object obj)
         {
-            if (obj == null || GetType() != obj.GetType() || ((Vector)obj).Dimension != Dimension)
-            {
-                return false;
-            }
+            if (ReferenceEquals(obj, this)) return true;
+
+            if (ReferenceEquals(obj, null) || obj.GetType() != GetType()) return false;
 
             Vector vector = (Vector)obj;
 
             for (int i = 0; i < Dimension; i++)
             {
-                if (vector.VectorArray[i] != VectorArray[i])
+                if (VectorArray[i] != vector.VectorArray[i]  )
                 {
                     return false;
                 }
@@ -202,16 +200,7 @@ namespace VectorTask
         // (5a) Сложение двух векторов.
         public static Vector GetSum(Vector vector1, Vector vector2)
         {
-            Vector result;
-
-            if (vector1.Dimension >= vector2.Dimension)
-            {
-                result = new Vector(vector1);
-                result.Add(vector2);
-                return result;
-            }
-
-            result = new Vector(vector2);
+            Vector result = new Vector(vector2);
             result.Add(vector1);
 
             return result;
@@ -220,16 +209,7 @@ namespace VectorTask
         // (5b) Вычитание двух векторов.
         public static Vector GetDifference(Vector vector1, Vector vector2)
         {
-            Vector result;
-
-            if (vector1.Dimension >= vector2.Dimension)
-            {
-                result = new Vector(vector1);
-                result.Subtract(vector2);
-                return result;
-            }
-
-            result = new Vector(vector2);
+            Vector result = new Vector(vector2);
             result.Subtract(vector1);
 
             return result;

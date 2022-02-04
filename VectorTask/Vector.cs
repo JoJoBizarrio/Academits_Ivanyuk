@@ -182,7 +182,7 @@ namespace VectorTask
 
             for (int i = 0; i < Dimension; i++)
             {
-                if (VectorArray[i] != vector.VectorArray[i]  )
+                if (VectorArray[i] != vector.VectorArray[i])
                 {
                     return false;
                 }
@@ -194,7 +194,10 @@ namespace VectorTask
         // (4g) ХэшКод
         public override int GetHashCode()
         {
-            return base.GetHashCode();
+            int prime = 37;
+            int hash = 1;
+
+            return prime * hash + ((VectorArray != null ? VectorArray.GetHashCode() : 0));
         }
 
         // (5a) Сложение двух векторов.
@@ -218,16 +221,7 @@ namespace VectorTask
         // (5c) Скалярное произведение.
         public static double GetScalarMultiplication(Vector vector1, Vector vector2)
         {
-            int minDimension;
-
-            if (vector1.Dimension >= vector2.Dimension)
-            {
-                minDimension = vector2.Dimension;
-            }
-            else
-            {
-                minDimension = vector1.Dimension;
-            }
+            int minDimension = Math.Min(vector1.Dimension, vector2.Dimension);
 
             double result = 0;
 

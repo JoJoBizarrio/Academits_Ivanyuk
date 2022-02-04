@@ -1,14 +1,13 @@
 ﻿using System;
 using System.Text;
-using System.Collections;
 
 namespace VectorTask
 {
     internal class Vector
     {
-        public int Dimension { get; }
-
         private double[] VectorArray;
+
+        public int Dimension { get; }
 
         // (1a) Создание вектора с размерностью dimension.
         public Vector(int dimension)
@@ -231,7 +230,7 @@ namespace VectorTask
             }
 
             result = new Vector(vector2);
-            result.Add(vector1);
+            result.Subtract(vector1);
 
             return result;
         }

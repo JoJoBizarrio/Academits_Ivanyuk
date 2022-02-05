@@ -5,11 +5,11 @@ namespace VectorTask
 {
     internal class Vector
     {
-        private double[] VectorArray;
+        private double[] _components;
 
         public int Dimension
         {
-            get { return VectorArray.Length; }
+            get { return _components.Length; }
         }
 
         // (1a) Создание вектора с размерностью dimension.
@@ -17,33 +17,31 @@ namespace VectorTask
         {
             if (dimension <= 0)
             {
-                throw new ArgumentException("Dimension have to be > 0", "dimension");
+                throw new ArgumentException("Dimension have to be > 0", nameof(dimension));
             }
 
-            VectorArray = new double[dimension];
+            _components = new double[dimension];
         }
 
         // (1b) Копировать из вектора в вектор.
         public Vector(Vector vector)
         {
-            VectorArray = new double[vector.Dimension];
+            _components = new double[vector.Dimension];
 
-            Array.Copy(vector.VectorArray, VectorArray, vector.Dimension);
+            Array.Copy(vector._components, _components, vector.Dimension);
         }
 
         // (1c) Копирует значения из массива в вектор.
         public Vector(double[] array)
         {
-            int arrayLength = array.Length;
-
-            if (arrayLength <= 0)
+            if (array.Length == 0)
             {
-                throw new ArgumentException("Length of array have to be > 0", "array.Length");
+                throw new ArgumentException("Length of array have to be > 0", nameof(array.Length));
             }
 
-            VectorArray = new double[arrayLength];
+            _components = new double[array.Length];
 
-            array.CopyTo(VectorArray, 0);
+            array.CopyTo(_components, 0);
         }
 
         // (1d) Заполнение вектора значениями из массива. Если длина массива меньше dimension, то в остальных компонентах 0.
@@ -51,25 +49,20 @@ namespace VectorTask
         {
             if (dimension <= 0)
             {
-                throw new ArgumentException("Dimension have to be > 0", "dimension");
+                throw new ArgumentException("Dimension have to be > 0", nameof(dimension));
             }
 
-            int arrayLength = array.Length;
+            _components = new double[dimension];
 
-            if (dimension <= arrayLength)
-            {
-                throw new ArgumentException("Length of array have to be > 0", "array.Length");
-            }
+            int minDimension = Math.Min(dimension, array.Length);
 
-            VectorArray = new double[dimension];
-
-            array.CopyTo(VectorArray, 0);
+            Array.Copy(array, _components, minDimension);
         }
 
         // (2) Метод для получения размерности вектора.
         public int GetDimension()
         {
-            return VectorArray.Length;
+            return _components.Length;
         }
 
         // (3) Выдает компоненты вектора через запятую {1, 2, 3}.
@@ -78,7 +71,7 @@ namespace VectorTask
             StringBuilder vectorContent = new StringBuilder();
             vectorContent.Append("{");
 
-            foreach (double e in VectorArray)
+            foreach (double e in _components)
             {
                 vectorContent.Append($"{e:f1}, ");
             }
@@ -91,19 +84,16 @@ namespace VectorTask
         {
             if (Dimension < vector.Dimension)
             {
-                Vector temp = new Vector(VectorArray);
+                Vector temp = new Vector(_components);
 
-                Array.Resize(ref vector.VectorArray, vector.Dimension);
+                Array.Resize(ref _components, vector.Dimension);
 
-                for (int i = 0; i < temp.Dimension; i++)
-                {
-                    VectorArray[i] = temp.VectorArray[i];
-                }
+                temp._components.CopyTo(_components, 0);
             }
 
             for (int i = 0; i < vector.Dimension; i++)
             {
-                VectorArray[i] += vector.VectorArray[i];
+                _components[i] += vector._components[i];
             }
         }
 
@@ -112,12 +102,16 @@ namespace VectorTask
         {
             if (Dimension < vector.Dimension)
             {
-                Array.Resize(ref VectorArray, vector.Dimension);
+                Vector temp = new Vector(_components);
+
+                Array.Resize(ref _components, vector.Dimension);
+
+                temp._components.CopyTo(_components, 0);
             }
 
             for (int i = 0; i < vector.Dimension; i++)
             {
-                VectorArray[i] -= vector.VectorArray[i];
+                _components[i] -= vector._components[i];
             }
         }
 
@@ -126,7 +120,7 @@ namespace VectorTask
         {
             for (int i = 0; i < Dimension; i++)
             {
-                VectorArray[i] *= scalar;
+                _components[i] *= scalar;
             }
         }
 
@@ -141,9 +135,9 @@ namespace VectorTask
         {
             double sum = 0.0;
 
-            foreach (double e in VectorArray)
+            foreach (double e in _components)
             {
-                sum += Math.Pow(e, 2);
+                sum += e * e;
             }
 
             return Math.Sqrt(sum);
@@ -152,23 +146,23 @@ namespace VectorTask
         // (4f) Получение компоненты вектора по индексу.
         public double GetElement(int index)
         {
-            if (index >= Dimension || index < 0)
+            if (index < 0 || index >= Dimension)
             {
-                throw new ArgumentOutOfRangeException("index", index, "Index out of range.");
+                throw new ArgumentOutOfRangeException(nameof(index), index, "Index out of range.");
             }
 
-            return VectorArray[index];
+            return _components[index];
         }
 
         // (4f) Изменить компоненту вектора по индексу.
         public void SetElement(int index, double value)
         {
-            if (index >= Dimension || index < 0)
+            if (index < 0 || index >= Dimension)
             {
-                throw new ArgumentOutOfRangeException("index", index, "Index out of range.");
+                throw new ArgumentOutOfRangeException(nameof(index), index, "Index out of range.");
             }
 
-            VectorArray[index] = value;
+            _components[index] = value;
         }
 
         // (4g) Возвращает true, если вектора одинаковой разммерности и компоненты равны. Иначе false.
@@ -182,7 +176,7 @@ namespace VectorTask
 
             for (int i = 0; i < Dimension; i++)
             {
-                if (VectorArray[i] != vector.VectorArray[i])
+                if (_components[i] != vector._components[i])
                 {
                     return false;
                 }
@@ -195,9 +189,14 @@ namespace VectorTask
         public override int GetHashCode()
         {
             int prime = 37;
-            int hash = 1;
+            int hash = 11;
+            
+            foreach (double e in _components)
+            {
+                hash += hash * prime + e.GetHashCode();
+            }
 
-            return prime * hash + ((VectorArray != null ? VectorArray.GetHashCode() : 0));
+            return hash;
         }
 
         // (5a) Сложение двух векторов.
@@ -219,7 +218,7 @@ namespace VectorTask
         }
 
         // (5c) Скалярное произведение.
-        public static double GetScalarMultiplication(Vector vector1, Vector vector2)
+        public static double GetScalarProduct(Vector vector1, Vector vector2)
         {
             int minDimension = Math.Min(vector1.Dimension, vector2.Dimension);
 
@@ -227,7 +226,7 @@ namespace VectorTask
 
             for (int i = 0; i < minDimension; i++)
             {
-                result += vector1.VectorArray[i] * vector2.VectorArray[i];
+                result += vector1._components[i] * vector2._components[i];
             }
 
             return result;

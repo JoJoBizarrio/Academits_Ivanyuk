@@ -96,7 +96,7 @@ namespace VectorTask
             Console.WriteLine();
 
             Console.WriteLine("(5c) Скалярное произведение: ");
-            double vectorsMultiply = Vector.GetScalarMultiplication(vector4E, vector4G);
+            double vectorsMultiply = Vector.GetScalarProduct(vector4E, vector4G);
             Console.WriteLine($"{vector4E} * {vector4G} = {vectorsMultiply}");
             Console.WriteLine();
         }

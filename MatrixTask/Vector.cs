@@ -5,7 +5,7 @@ namespace MatrixTask
 {
     internal class Vector
     {
-        private double[] _components;
+        internal double[] _components;
 
         public int Dimension
         {

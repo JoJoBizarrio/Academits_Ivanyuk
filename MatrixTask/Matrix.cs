@@ -5,42 +5,45 @@ namespace MatrixTask
 {
     internal class Matrix
     {
-        public int Row { get; }
+        public int Row
+        {
+            get { return _vectors.Length; }
+        }
 
-        public int Column { get; }
+        public int Column
+        {
+            get { return _vectors[0].Dimension; }
+        }
 
-        internal Vector[] MatrixArray;
+        private Vector[] _vectors;
 
         // 1a. Matrix(n, m) – матрица нулей размера n*m
         public Matrix(int row, int column)
         {
-            if (row <= 0 || column <= 0)
+            if (row <= 0)
             {
-                throw new ArgumentOutOfRangeException("Row or colimn", "Sizes have to be > 0");
+                throw new ArgumentOutOfRangeException(nameof(row), "Count of rows have to be > 0");
             }
 
-            Row = row;
-            Column = column;
+            if (column <= 0)
+            {
+                throw new ArgumentOutOfRangeException(nameof(column), "Count of columns have to be > 0");
+            }
 
-            MatrixArray = new Vector[Row];
+            _vectors = new Vector[row];
 
             for (int i = 0; i < row; i++)
             {
-                MatrixArray[i] = new Vector(Column);
+                _vectors[i] = new Vector(column);
             }
-
         }
 
         // 1b. Matrix(Matrix) – конструктор копирования
         public Matrix(Matrix matrix)
         {
-            Row = matrix.Row;
-            Column = matrix.Column;
+            _vectors = new Vector[matrix.Row];
 
-            MatrixArray = new Vector[Row];
-
-            matrix.MatrixArray.CopyTo(MatrixArray, 0);
-
+            matrix._vectors.CopyTo(_vectors, 0);
         }
 
         // 1c. Matrix(double[][]) – из двумерного массива(в C# double[,])
@@ -48,38 +51,31 @@ namespace MatrixTask
         {
             if (array.Length == 0)
             {
-                throw new Exception("Empty array (array.Length = 0)");
+                throw new ArgumentOutOfRangeException(nameof(array.Length), "Empty array");
             }
 
-            Row = array.GetLength(0);
-            Column = array.GetLength(1);
+            _vectors = new Vector[array.GetLength(0)];
 
-            MatrixArray = new Vector[Row];
-
-            for (int i = 0; i < Row; i++)
+            for (int i = 0; i < array.GetLength(0); i++)
             {
-                MatrixArray[i] = new Vector(Column);
+                _vectors[i] = new Vector(array.GetLength(1));
             }
 
             for (int i = 0; i < Row; i++)
             {
                 for (int j = 0; j < Column; j++)
                 {
-                    MatrixArray[i].SetElement(j, array[i, j]);
+                    _vectors[i]._components[j] = array[i, j];
                 }
             }
-              
         }
 
         // 1d. Matrix(Vector[]) – из массива векторов-строк 
         public Matrix(Vector[] vectorsArray)
         {
-            Row = vectorsArray.GetLength(0);
-            Column = vectorsArray[0].Dimension;
+            _vectors = new Vector[Row];
 
-            MatrixArray = new Vector[Row];
-
-            vectorsArray.CopyTo(MatrixArray, 0);
+            vectorsArray.CopyTo(_vectors, 0);
         }
 
         // 2a. Получение размеров матрицы
@@ -101,12 +97,12 @@ namespace MatrixTask
         // 2b. Получение и задание вектора-строки по индексу	
         public Vector GetRow(int index)
         {
-            return MatrixArray[index];
+            return _vectors[index];
         }
 
         public void SetRow(int index, Vector vector)
         {
-            MatrixArray[index] = vector;
+            _vectors[index] = vector;
         }
 
         // 2c. Получение вектора-столбца по индексу
@@ -116,7 +112,7 @@ namespace MatrixTask
 
             for (int i = 0; i < Row; i++)
             {
-                matrixColumn.SetElement(i, MatrixArray[i].GetElement(index));
+                matrixColumn.SetElement(i, _vectors[i].GetElement(index));
             }
 
             return matrixColumn;
@@ -129,17 +125,17 @@ namespace MatrixTask
 
             for (int i = 0; i < Column; i++)
             {
-                temp.MatrixArray[i] = GetColumn(i);
+                temp._vectors[i] = GetColumn(i);
             }
 
-            MatrixArray = new Vector[Column];
+            _vectors = new Vector[Column];
 
             for (int i = 0; i < Column; i++)
             {
-                MatrixArray[i] = new Vector(Row);
+                _vectors[i] = new Vector(Row);
             }
 
-            Array.Copy(temp.MatrixArray, MatrixArray, Column);
+            Array.Copy(temp._vectors, _vectors, Column);
         }
 
         // 2e.Умножение на скаляр
@@ -147,7 +143,7 @@ namespace MatrixTask
         {
             for (int i = 0; i < Row; i++)
             {
-                MatrixArray[i].MultiplyByScalar(scalar);
+                _vectors[i].MultiplyByScalar(scalar);
             }
         }
 
@@ -157,7 +153,7 @@ namespace MatrixTask
             StringBuilder matrixContent = new StringBuilder();
             matrixContent.Append("{");
 
-            foreach (Vector e in MatrixArray)
+            foreach (Vector e in _vectors)
             {
                 matrixContent.Append(e + ", ");
             }
@@ -172,7 +168,7 @@ namespace MatrixTask
 
             for (int i = 0; i < Row; i++)
             {
-                result.SetElement(i, Vector.GetScalarMultiplication(MatrixArray[i], vector));
+                result.SetElement(i, Vector.GetScalarProduct(_vectors[i], vector));
             }
 
             return result;
@@ -183,7 +179,7 @@ namespace MatrixTask
         {
             for (int i = 0; i < Row; i++)
             {
-                MatrixArray[i].Add(matrix.MatrixArray[i]);
+                _vectors[i].Add(matrix._vectors[i]);
             }
         }
 
@@ -192,7 +188,7 @@ namespace MatrixTask
         {
             for (int i = 0; i < Row; i++)
             {
-                MatrixArray[i].Subtract(matrix.MatrixArray[i]);
+                _vectors[i].Subtract(matrix._vectors[i]);
 
             }
         }
@@ -231,8 +227,8 @@ namespace MatrixTask
             {
                 for (int j = 0; j < result.Column; i++)
                 {
-                    double result1 = Vector.GetScalarMultiplication(matrix1.GetRow(i), matrix2.GetColumn(j));
-                    result.MatrixArray[i].SetElement(j, result1);
+                    double result1 = Vector.GetScalarProduct(matrix1.GetRow(i), matrix2.GetColumn(j));
+                    result._vectors[i].SetElement(j, result1);
                 }
             }
 

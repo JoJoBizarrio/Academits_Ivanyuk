@@ -5,11 +5,11 @@ namespace MatrixTask
 {
     internal class Vector
     {
-        internal double[] _components;
+        internal double[] Components;
 
         public int Dimension
         {
-            get { return _components.Length; }
+            get { return Components.Length; }
         }
 
         // (1a) Создание вектора с размерностью dimension.
@@ -20,15 +20,15 @@ namespace MatrixTask
                 throw new ArgumentException("Dimension have to be > 0", nameof(dimension));
             }
 
-            _components = new double[dimension];
+            Components = new double[dimension];
         }
 
         // (1b) Копировать из вектора в вектор.
         public Vector(Vector vector)
         {
-            _components = new double[vector.Dimension];
+            Components = new double[vector.Dimension];
 
-            Array.Copy(vector._components, _components, vector.Dimension);
+            Array.Copy(vector.Components, Components, vector.Dimension);
         }
 
         // (1c) Копирует значения из массива в вектор.
@@ -39,9 +39,9 @@ namespace MatrixTask
                 throw new ArgumentException("Length of array have to be > 0", nameof(array.Length));
             }
 
-            _components = new double[array.Length];
+            Components = new double[array.Length];
 
-            array.CopyTo(_components, 0);
+            array.CopyTo(Components, 0);
         }
 
         // (1d) Заполнение вектора значениями из массива. Если длина массива меньше dimension, то в остальных компонентах 0.
@@ -52,17 +52,17 @@ namespace MatrixTask
                 throw new ArgumentException("Dimension have to be > 0", nameof(dimension));
             }
 
-            _components = new double[dimension];
+            Components = new double[dimension];
 
             int minDimension = Math.Min(dimension, array.Length);
 
-            Array.Copy(array, _components, minDimension);
+            Array.Copy(array, Components, minDimension);
         }
 
         // (2) Метод для получения размерности вектора.
         public int GetDimension()
         {
-            return _components.Length;
+            return Components.Length;
         }
 
         // (3) Выдает компоненты вектора через запятую {1, 2, 3}.
@@ -71,7 +71,7 @@ namespace MatrixTask
             StringBuilder vectorContent = new StringBuilder();
             vectorContent.Append("{");
 
-            foreach (double e in _components)
+            foreach (double e in Components)
             {
                 vectorContent.Append($"{e:f1}, ");
             }
@@ -84,16 +84,16 @@ namespace MatrixTask
         {
             if (Dimension < vector.Dimension)
             {
-                Vector temp = new Vector(_components);
+                Vector temp = new Vector(Components);
 
-                Array.Resize(ref _components, vector.Dimension);
+                Array.Resize(ref Components, vector.Dimension);
 
-                temp._components.CopyTo(_components, 0);
+                temp.Components.CopyTo(Components, 0);
             }
 
             for (int i = 0; i < vector.Dimension; i++)
             {
-                _components[i] += vector._components[i];
+                Components[i] += vector.Components[i];
             }
         }
 
@@ -102,16 +102,16 @@ namespace MatrixTask
         {
             if (Dimension < vector.Dimension)
             {
-                Vector temp = new Vector(_components);
+                Vector temp = new Vector(Components);
 
-                Array.Resize(ref _components, vector.Dimension);
+                Array.Resize(ref Components, vector.Dimension);
 
-                temp._components.CopyTo(_components, 0);
+                temp.Components.CopyTo(Components, 0);
             }
 
             for (int i = 0; i < vector.Dimension; i++)
             {
-                _components[i] -= vector._components[i];
+                Components[i] -= vector.Components[i];
             }
         }
 
@@ -120,7 +120,7 @@ namespace MatrixTask
         {
             for (int i = 0; i < Dimension; i++)
             {
-                _components[i] *= scalar;
+                Components[i] *= scalar;
             }
         }
 
@@ -135,7 +135,7 @@ namespace MatrixTask
         {
             double sum = 0.0;
 
-            foreach (double e in _components)
+            foreach (double e in Components)
             {
                 sum += e * e;
             }
@@ -151,7 +151,7 @@ namespace MatrixTask
                 throw new ArgumentOutOfRangeException(nameof(index), index, "Index out of range.");
             }
 
-            return _components[index];
+            return Components[index];
         }
 
         // (4f) Изменить компоненту вектора по индексу.
@@ -162,7 +162,7 @@ namespace MatrixTask
                 throw new ArgumentOutOfRangeException(nameof(index), index, "Index out of range.");
             }
 
-            _components[index] = value;
+            Components[index] = value;
         }
 
         // (4g) Возвращает true, если вектора одинаковой разммерности и компоненты равны. Иначе false.
@@ -176,7 +176,7 @@ namespace MatrixTask
 
             for (int i = 0; i < Dimension; i++)
             {
-                if (_components[i] != vector._components[i])
+                if (Components[i] != vector.Components[i])
                 {
                     return false;
                 }
@@ -191,7 +191,7 @@ namespace MatrixTask
             int prime = 37;
             int hash = 11;
 
-            foreach (double e in _components)
+            foreach (double e in Components)
             {
                 hash += hash * prime + e.GetHashCode();
             }
@@ -226,7 +226,7 @@ namespace MatrixTask
 
             for (int i = 0; i < minDimension; i++)
             {
-                result += vector1._components[i] * vector2._components[i];
+                result += vector1.Components[i] * vector2.Components[i];
             }
 
             return result;

@@ -53,6 +53,7 @@ namespace MatrixTask
 
             // 2e.Умножение на скаляр
             vector1.SetElement(1, 3.3);
+            Array.Resize(ref vector1.Components, 2);
             matrix3.SetRow(0, vector1);
             Console.WriteLine($"Матрица: {matrix3}\t");
 
@@ -71,20 +72,29 @@ namespace MatrixTask
             Console.WriteLine("После перемножения вектор * матрица = " + matrix4.MultiplyByVector(vector));
             Console.WriteLine();
 
+            // 2f. Вычисление определителя матрицы
+            double[,] array4 = { { 2, 1 }, { 10, 11 } };
+            Matrix matrix5 = new Matrix(array4);
+            Console.WriteLine("Детерминант: " + matrix5.GetDeterminant());
+            Console.WriteLine();
+
             // 2.i + 2j Add; Substract
-            double[,] array4 = { { 2, 3, 0 }, { 4, 5, 9.5 } };
-            matrix1 = new Matrix(array4);
+            double[,] array5 = { { 2, 3, 0 }, { 4, 5, 9.5 } };
+            matrix1 = new Matrix(array5);
             Console.WriteLine("до операции: " + matrix1);
             matrix1.Add(matrix1);
             Console.WriteLine("Добавили такую же матрицу: " + matrix1);
             matrix1.Subtract(matrix1);
             Console.WriteLine("Отняли такую же матрицу: " + matrix1);
 
-            // Стат метод сложения
-            Matrix matrix5 = Matrix.GetSum(matrix1, matrix1);
-            Matrix matrix6 = Matrix.GetSum(matrix1, matrix5);
-            Matrix matrix7 = Matrix.GetMultiplication(matrix5, matrix6);
-            Console.Write(matrix7);
+            // 3. Стат методы: сложение, вычитание, умножение 
+            Matrix matrix6 = Matrix.GetSum(matrix2, matrix2);
+            Matrix matrix7 = Matrix.GetDifference(matrix5, matrix6);
+            Matrix matrix8 = Matrix.GetProduct(matrix6, matrix7);
+
+            Console.WriteLine(matrix6);
+            Console.WriteLine(matrix7);
+            Console.WriteLine(matrix8);
         }
     }
 }

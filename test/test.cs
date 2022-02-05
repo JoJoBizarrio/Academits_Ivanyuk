@@ -11,4 +11,11 @@ Console.WriteLine(array2.GetLength(0));
 Console.WriteLine(array2.GetLength(1));
 Console.WriteLine(array2.Rank);
 
-double[,,] array3 = { { 1 }, { 2 } };
+
+
+double[,] array4 = { { 2, 1, 4 }, { 11, 11, 2 }, { 3, 5, 2 }, {2, 4, 7 } };
+
+Console.WriteLine();
+Console.WriteLine(array4.Rank);
+Console.WriteLine(array4.GetLength(0));
+Console.WriteLine(array4.GetLength(1));

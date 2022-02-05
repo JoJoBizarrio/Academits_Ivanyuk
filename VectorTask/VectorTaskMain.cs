@@ -92,13 +92,19 @@ namespace VectorTask
 
             Console.WriteLine("(5b) Статическое вычитание двух векторов: ");
             Vector vectorsDifference = Vector.GetDifference(vector4E, vector1B);
-            Console.WriteLine($"{vector4E} - {vector1B } = {vectorsDifference}"); 
+            Console.WriteLine($"{vector4E} - {vector1B } = {vectorsDifference}");
             Console.WriteLine();
 
             Console.WriteLine("(5c) Скалярное произведение: ");
-            double vectorsMultiply = Vector.GetScalarProduct(vector4E, vector4G);
-            Console.WriteLine($"{vector4E} * {vector4G} = {vectorsMultiply}");
+            double vectorsProduct = Vector.GetScalarProduct(vector4E, vector4G);
+            Console.WriteLine($"{vector4E} * {vector4G} = {vectorsProduct}");
             Console.WriteLine();
+
+
+            foreach (double e in vector4G)
+            {
+                Console.Write(e + "; ");
+            }
         }
     }
 }

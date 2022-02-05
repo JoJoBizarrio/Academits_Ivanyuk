@@ -1,9 +1,10 @@
 ﻿using System;
 using System.Text;
+using System.Collections;
 
 namespace VectorTask
 {
-    internal class Vector
+    internal class Vector : IEnumerable
     {
         private double[] _components;
 
@@ -11,6 +12,18 @@ namespace VectorTask
         {
             get { return _components.Length; }
         }
+
+        // Енумератор
+        IEnumerator IEnumerable.GetEnumerator()
+        {
+            return (IEnumerator)GetEnumerator();
+        }
+
+        public VectorEnumerator GetEnumerator()
+        {
+            return new VectorEnumerator(_components);
+        }
+        // конец Енумератора
 
         // (1a) Создание вектора с размерностью dimension.
         public Vector(int dimension)
@@ -230,6 +243,54 @@ namespace VectorTask
             }
 
             return result;
+        }
+
+        public class VectorEnumerator : IEnumerator
+        {
+            public double[] _components;
+
+            // Enumerators are positioned before the first element
+            // until the first MoveNext() call.
+            int position = -1;
+
+            public VectorEnumerator(double[] list)
+            {
+                _components = list;
+            }
+
+            public bool MoveNext()
+            {
+                position++;
+                return (position < _components.Length);
+            }
+
+            public void Reset()
+            {
+                position = -1;
+            }
+
+            object IEnumerator.Current
+            {
+                get
+                {
+                    return Current;
+                }
+            }
+
+            public double Current
+            {
+                get
+                {
+                    try
+                    {
+                        return _components[position];
+                    }
+                    catch (IndexOutOfRangeException)
+                    {
+                        throw new InvalidOperationException();
+                    }
+                }
+            }
         }
     }
 }

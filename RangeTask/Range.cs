@@ -13,29 +13,29 @@ namespace RangeTask
 
         public double To { get; set; }
 
+        // вместо ==4. Сделать метод для получения длины диапазона==, свойство:
+        public double Length
+        {
+            get { return To - From; }
+        }
+
+        // 2. Описать конструктор, при помощи которого заполняются поля
         public Range(double from, double to)
         {
             From = from;
             To = to;
         }
 
-        public Range(Range range1, Range range2)
-        {
-        }
-
-        public double GetLength()
-        {
-            return To - From;
-        }
-
-        public bool IsInside(double number)
+        // 5. Сделать метод isInside, который принимает вещественное число и возвращает boolean – результат проверки, принадлежит ли число диапазону: 
+        public bool IsInside(double number) 
         {
             return number >= From && number <= To;
         }
 
-        public Range GetIntersection(Range range)  // Получение интервала-пересечения двух интервалов. Если пересечения нет, выдать null.
-                                                   // Если есть, то выдать новый диапазон с соответствующими концами
+        public Range GetIntersection(Range range)  // Получение интервала-пересечения двух интервалов. Если пересечения нет, выдать null. Если есть, то выдать новый диапазон с соответствующими концами
         {
+            if ()
+
             if (range.IsInside(From) & range.IsInside(To))
             {
                 return new Range(From, To);

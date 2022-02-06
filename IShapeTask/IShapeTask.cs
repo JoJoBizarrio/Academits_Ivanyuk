@@ -6,7 +6,7 @@ namespace IShapeTask
     {
         double GetWidth();
 
-        double GetHeight();
+        double GetHeigth();
 
         double GetArea();
 

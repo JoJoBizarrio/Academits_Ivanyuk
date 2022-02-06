@@ -16,7 +16,7 @@ namespace IShapeTask
             return _sideSize;
         }
 
-        public double GetHeight()
+        public double GetHeigth()
         {
             return GetWidth();
         }

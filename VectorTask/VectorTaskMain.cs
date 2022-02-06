@@ -99,12 +99,6 @@ namespace VectorTask
             double vectorsProduct = Vector.GetScalarProduct(vector4E, vector4G);
             Console.WriteLine($"{vector4E} * {vector4G} = {vectorsProduct}");
             Console.WriteLine();
-
-
-            foreach (double e in vector4G)
-            {
-                Console.Write(e + "; ");
-            }
         }
     }
 }

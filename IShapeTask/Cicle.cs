@@ -2,18 +2,18 @@
 
 namespace IShapeTask
 {
-    internal class Square : IShape
+    internal class Cicle : IShape
     {
-        internal double SideSize;
+        internal double Radius;
 
-        public Square(double sideSize)
+        public Cicle(double radius)
         {
-            SideSize = sideSize;
+            Radius = radius;
         }
 
         public double GetWidth()
         {
-            return SideSize;
+            return 2 * Radius;
         }
 
         public double GetHeigth()
@@ -23,12 +23,12 @@ namespace IShapeTask
 
         public double GetArea()
         {
-            return SideSize * SideSize;
+            return Math.PI * Radius * Radius;
         }
 
         public double GetPerimeter()
         {
-            return 4 * SideSize;
+            return 2 * Math.PI * Radius;
         }
     }
 }

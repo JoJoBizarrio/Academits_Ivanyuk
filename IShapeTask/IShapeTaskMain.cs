@@ -27,7 +27,7 @@ namespace IShapeTask
             Square square1 = new Square(21);
             Square square2 = new Square(11);
 
-            Triangle triangle1 = new Triangle(0, 0, 21, 0, 11, 0);
+            Triangle triangle1 = new Triangle(0, 0, 21, 0, 0, 11);
             Triangle triangle2 = new Triangle(-13, 5, 2, 15, 1, 1);
 
             IShape[] shapesArray = new IShape[8];
@@ -45,6 +45,13 @@ namespace IShapeTask
             shapesArray[7] = triangle2;
 
             Console.WriteLine("MaxArea: " + GetMaxArea(shapesArray));
+
+            foreach (IShape e in shapesArray)
+            {
+                Console.WriteLine(e.GetArea());
+            }
+
+
         }
     }
 }

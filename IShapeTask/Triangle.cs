@@ -35,7 +35,7 @@ namespace IShapeTask
 
         public double GetArea()
         {
-            return 0.5 * Math.Abs((X2 - X1) * (Y3 - Y1) - (X3 - X1) * (Y2 - Y1));
+            return 0.5 * Math.Abs((X1 - X3) * (Y2 - Y3) - (X2 - X3) * (Y1 - Y3));
         }
 
         public double GetPerimeter()

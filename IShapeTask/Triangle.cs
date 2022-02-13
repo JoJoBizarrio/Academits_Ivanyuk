@@ -42,5 +42,10 @@ namespace IShapeTask
         {
             return Math.Sqrt((X1 - X2) * (X1 - X2) + (Y1 - Y2) * (Y1 - Y2)) + Math.Sqrt((X2 - X3) * (X2 - X3) + (Y2 - Y3) * (Y2 - Y3) + Math.Sqrt((X3 - X1) * (X3 - X1) + (Y3 - Y1) * (Y3 - Y1)));
         }
+
+        public override string ToString()
+        {
+            return $"Width: {GetWidth}, Heigth: {GetHeigth}, Area: {GetArea}, Perimetr: {GetPerimeter}";
+        }
     }
 }

@@ -30,5 +30,10 @@ namespace IShapeTask
         {
             return 2 * Math.PI * Radius;
         }
+
+        public override string ToString()
+        {
+            return $"Radius: {GetWidth}, Area: {GetArea}, Perimetr: {GetPerimeter}";
+        }
     }
 }

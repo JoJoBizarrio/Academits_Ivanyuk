@@ -30,5 +30,10 @@ namespace IShapeTask
         {
             return 4 * SideSize;
         }
+
+        public override string ToString()
+        {
+            return $"Size of side: {GetWidth}, Area: {GetArea}, Perimetr: {GetPerimeter}";
+        }
     }
 }

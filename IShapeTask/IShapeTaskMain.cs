@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections;
 
 namespace IShapeTask
 {
@@ -11,7 +12,10 @@ namespace IShapeTask
             for (int i = 0; i < shapesArray.Length; i++)
             {
                 areasArray[i] = shapesArray[i].GetArea();
+
+                Array.Sort(shapesArray, );
             }
+
 
             return areasArray.Max();
         }
@@ -50,8 +54,6 @@ namespace IShapeTask
             {
                 Console.WriteLine(e.GetArea());
             }
-
-
         }
     }
 }

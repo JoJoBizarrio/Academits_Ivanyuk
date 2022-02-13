@@ -33,5 +33,10 @@ namespace IShapeTask
         {
             return 2 * Width + 2 * Heigth;
         }
+
+        public override string ToString()
+        {
+            return $"Width: {GetWidth}, Heigth: {GetHeigth}, Area: {GetArea}, Perimetr: {GetPerimeter}";
+        }
     }
 }

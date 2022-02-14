@@ -12,10 +12,7 @@ namespace IShapeTask
             for (int i = 0; i < shapesArray.Length; i++)
             {
                 areasArray[i] = shapesArray[i].GetArea();
-
-                Array.Sort(shapesArray, );
             }
-
 
             return areasArray.Max();
         }

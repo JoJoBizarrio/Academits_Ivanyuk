@@ -45,7 +45,46 @@ namespace IShapeTask
 
         public override string ToString()
         {
-            return $"Width: {GetWidth}, Heigth: {GetHeigth}, Area: {GetArea}, Perimetr: {GetPerimeter}";
+            return $"Triangle. Coordinates: (({X1}, {Y1}), ({X2}, {Y2}), ({X3}, {Y3})), Width: {GetWidth}, Heigth: {GetHeigth}, Area: {GetArea}, Perimetr: {GetPerimeter}";
+        }
+
+        public override bool Equals(object obj)
+        {
+            if (ReferenceEquals(obj, this))
+            {
+                return true;
+            }
+
+            if (ReferenceEquals(obj, null) || obj.GetType() != GetType())
+            {
+                return false;
+            }
+
+            Triangle cicle = (Triangle)obj;
+
+            if (GetWidth() == cicle.GetHeigth() && GetArea() == cicle.GetArea())
+            {
+                return true;
+            }
+
+            return false;
+        }
+
+        public override int GetHashCode()
+        {
+            int hash = 1;
+            int prime = 31;
+
+            hash = prime * hash + X1.GetHashCode();
+            hash = prime * hash + Y1.GetHashCode();
+
+            hash = prime * hash + X2.GetHashCode();
+            hash = prime * hash + Y2.GetHashCode();
+
+            hash = prime * hash + X3.GetHashCode();
+            hash = prime * hash + Y3.GetHashCode();
+
+            return hash;
         }
     }
 }

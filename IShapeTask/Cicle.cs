@@ -33,7 +33,39 @@ namespace IShapeTask
 
         public override string ToString()
         {
-            return $"Radius: {GetWidth}, Area: {GetArea}, Perimetr: {GetPerimeter}";
+            return $"Cicle. Radius: {GetWidth}, Area: {GetArea}, Perimetr: {GetPerimeter}";
+        }
+
+        public override bool Equals(object obj)
+        {
+            if (ReferenceEquals(obj, this)) 
+            {
+                return true;
+            }
+
+            if (ReferenceEquals(obj, null) || obj.GetType() != GetType())
+            {
+                return false;
+            }
+
+            Cicle cicle = (Cicle)obj;
+
+            if (Radius == cicle.GetHeigth() && GetArea() == cicle.GetArea())
+            {
+                return true;
+            } 
+
+            return false;
+        }
+
+        public override int GetHashCode()
+        {
+            int hash = 1;
+            int prime = 31;
+
+            hash = prime * hash + Radius.GetHashCode();
+
+            return hash;
         }
     }
 }

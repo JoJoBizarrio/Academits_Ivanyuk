@@ -33,7 +33,39 @@ namespace IShapeTask
 
         public override string ToString()
         {
-            return $"Size of side: {GetWidth}, Area: {GetArea}, Perimetr: {GetPerimeter}";
+            return $"Square. Size of side: {GetWidth}, Area: {GetArea}, Perimetr: {GetPerimeter}";
+        }
+
+        public override bool Equals(object obj)
+        {
+            if (ReferenceEquals(obj, this))
+            {
+                return true;
+            }
+
+            if (ReferenceEquals(obj, null) || obj.GetType() != GetType())
+            {
+                return false;
+            }
+
+            Square square = (Square)obj;
+
+            if (SideSize == square.SideSize)
+            {
+                return true;
+            }
+
+            return false;
+        }
+
+        public override int GetHashCode()
+        {
+            int hash = 1;
+            int prime = 31;
+
+            hash = prime * hash + SideSize.GetHashCode();
+
+            return hash;
         }
     }
 }

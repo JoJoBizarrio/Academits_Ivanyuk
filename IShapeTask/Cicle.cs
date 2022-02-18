@@ -33,7 +33,7 @@ namespace IShapeTask
 
         public override string ToString()
         {
-            return $"Cicle. Radius: {GetWidth}, Area: {GetArea}, Perimetr: {GetPerimeter}";
+            return $"Cicle. Radius: {GetWidth()}, Area: {GetArea()}, Perimetr: {GetPerimeter()}";
         }
 
         public override bool Equals(object obj)

@@ -45,7 +45,7 @@ namespace IShapeTask
 
         public override string ToString()
         {
-            return $"Triangle. Coordinates: (({X1}, {Y1}), ({X2}, {Y2}), ({X3}, {Y3})), Width: {GetWidth}, Heigth: {GetHeigth}, Area: {GetArea}, Perimetr: {GetPerimeter}";
+            return $"Triangle. Coordinates: (({X1}, {Y1}), ({X2}, {Y2}), ({X3}, {Y3})), Width: {GetWidth()}, Heigth: {GetHeigth()}, Area: {GetArea()}, Perimetr: {GetPerimeter()}";
         }
 
         public override bool Equals(object obj)

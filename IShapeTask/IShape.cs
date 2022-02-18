@@ -11,8 +11,5 @@ namespace IShapeTask
         double GetArea();
 
         double GetPerimeter();
-
     }
 }
-
-   

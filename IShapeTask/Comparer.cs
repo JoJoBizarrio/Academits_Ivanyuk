@@ -3,13 +3,39 @@ using System.Collections.Generic;
 
 namespace IShapeTask
 {
-    internal class Comparer : IComparer<IShape>
+    public class ComparerAreas : IComparer<IShape>
     {
-        public int Compare(IShape x, IShape y)
+        public int Compare(IShape shape1, IShape shape2)
         {
+            if (shape1.GetArea() == shape2.GetArea())
+            {
+                return 0;
+            }
 
+            if (shape1.GetArea() < shape2.GetArea())
+            {
+                return -1;
+            }
 
-            throw new NotImplementedException();
+            return 1;
+        }
+    }
+
+    public class ComparerPerimeters : IComparer<IShape>
+    {
+        public int Compare(IShape shape1, IShape shape2)
+        {
+            if (shape1.GetPerimeter() == shape2.GetPerimeter())
+            {
+                return 0;
+            }
+
+            if (shape1.GetPerimeter() < shape2.GetPerimeter())
+            {
+                return -1;
+            }
+
+            return 1;
         }
     }
 }

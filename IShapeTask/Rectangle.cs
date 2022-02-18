@@ -36,7 +36,7 @@ namespace IShapeTask
 
         public override string ToString()
         {
-            return $"Rectangle. Width: {GetWidth}, Heigth: {GetHeigth}, Area: {GetArea}, Perimetr: {GetPerimeter}";
+            return $"Rectangle. Width: {GetWidth()}, Heigth: {GetHeigth()}, Area: {GetArea()}, Perimetr: {GetPerimeter()}";
         }
 
         public override bool Equals(object obj)

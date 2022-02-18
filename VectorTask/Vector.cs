@@ -3,21 +3,18 @@ using System.Text;
 
 namespace VectorTask
 {
-    internal class Vector
+    public class Vector
     {
         private double[] _components;
 
-        public int Dimension
-        {
-            get { return _components.Length; }
-        }
+        public int Dimension => _components.Length;
 
         // (1a) Создание вектора с размерностью dimension.
         public Vector(int dimension)
         {
             if (dimension <= 0)
             {
-                throw new ArgumentException("Dimension have to be > 0", nameof(dimension));
+                throw new ArgumentOutOfRangeException(nameof(dimension), dimension, "Dimension have to be > 0");
             }
 
             _components = new double[dimension];
@@ -36,7 +33,7 @@ namespace VectorTask
         {
             if (array.Length == 0)
             {
-                throw new ArgumentException("Length of array have to be > 0", nameof(array.Length));
+                throw new ArgumentOutOfRangeException(nameof(array.Length), array.Length, "Length of array have to be > 0");
             }
 
             _components = new double[array.Length];
@@ -49,7 +46,7 @@ namespace VectorTask
         {
             if (dimension <= 0)
             {
-                throw new ArgumentException("Dimension have to be > 0", nameof(dimension));
+                throw new ArgumentOutOfRangeException(nameof(dimension), dimension, "Dimension have to be > 0");
             }
 
             _components = new double[dimension];
@@ -84,11 +81,7 @@ namespace VectorTask
         {
             if (Dimension < vector.Dimension)
             {
-                Vector temp = new Vector(_components);
-
                 Array.Resize(ref _components, vector.Dimension);
-
-                temp._components.CopyTo(_components, 0);
             }
 
             for (int i = 0; i < vector.Dimension; i++)
@@ -102,11 +95,7 @@ namespace VectorTask
         {
             if (Dimension < vector.Dimension)
             {
-                Vector temp = new Vector(_components);
-
                 Array.Resize(ref _components, vector.Dimension);
-
-                temp._components.CopyTo(_components, 0);
             }
 
             for (int i = 0; i < vector.Dimension; i++)
@@ -146,9 +135,14 @@ namespace VectorTask
         // (4f) Получение компоненты вектора по индексу.
         public double GetElement(int index)
         {
-            if (index < 0 || index >= Dimension)
+            if (index < 0)
             {
-                throw new ArgumentOutOfRangeException(nameof(index), index, "Index out of range.");
+                throw new ArgumentOutOfRangeException(nameof(index), index, "Index less then zero.");
+            }
+
+            if (index >= Dimension)
+            {
+                throw new ArgumentOutOfRangeException(nameof(index), index, "Index more or equals then dimension of vector.");
             }
 
             return _components[index];
@@ -165,12 +159,18 @@ namespace VectorTask
             _components[index] = value;
         }
 
-        // (4g) Возвращает true, если вектора одинаковой разммерности и компоненты равны. Иначе false.
+        // (4g) Возвращает true, если вектора одинаковой размерности и компоненты равны. Иначе false.
         public override bool Equals(object obj)
         {
-            if (ReferenceEquals(obj, this)) return true;
-
-            if (ReferenceEquals(obj, null) || obj.GetType() != GetType()) return false;
+            if (ReferenceEquals(obj, this))
+            {
+                return true;
+            }
+                
+            if (ReferenceEquals(obj, null) || obj.GetType() != GetType())
+            {
+                return false;
+            }
 
             Vector vector = (Vector)obj;
 
@@ -189,30 +189,30 @@ namespace VectorTask
         public override int GetHashCode()
         {
             int prime = 37;
-            int hash = 11;
-            
+            int hash = 11021996;
+
             foreach (double e in _components)
             {
-                hash += hash * prime + e.GetHashCode();
+                hash = hash * prime + e.GetHashCode();
             }
 
             return hash;
         }
 
-        // (5a) Сложение двух векторов.
+        // (5a) Сложение двух векторов. vector1 + vector2
         public static Vector GetSum(Vector vector1, Vector vector2)
         {
-            Vector result = new Vector(vector2);
-            result.Add(vector1);
+            Vector result = new Vector(vector1);
+            result.Add(vector2);
 
             return result;
         }
 
-        // (5b) Вычитание двух векторов.
+        // (5b) Вычитание двух векторов. vector1 - vector2
         public static Vector GetDifference(Vector vector1, Vector vector2)
         {
-            Vector result = new Vector(vector2);
-            result.Subtract(vector1);
+            Vector result = new Vector(vector1);
+            result.Subtract(vector2);
 
             return result;
         }

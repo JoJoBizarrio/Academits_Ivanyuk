@@ -1,7 +1,7 @@
 ﻿using System;
 using System.Text;
 
-namespace MatrixTask
+namespace MatrixTaskTurnOff
 {
     internal class Vector
     {

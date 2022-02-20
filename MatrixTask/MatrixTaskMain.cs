@@ -1,4 +1,5 @@
 ﻿using System;
+using Vector = VectorTask.Vector;
 
 namespace MatrixTask
 {
@@ -27,9 +28,9 @@ namespace MatrixTask
             Matrix matrix3 = new Matrix(vectorsArray);
 
             // 2a. Получение размеров матрицы
-            Console.WriteLine("Кол-во элементов: " + matrix3.GetElements());
-            Console.WriteLine("Кол-во строк: " + matrix3.GetRows());
-            Console.WriteLine("Кол-во колонок: " + matrix3.GetColumns());
+            Console.WriteLine("Кол-во элементов: " + matrix3.ElementsCount);
+            Console.WriteLine("Кол-во строк: " + matrix3.RowsCount);
+            Console.WriteLine("Кол-во колонок: " + matrix3.ColumnsCount);
             Console.WriteLine();
 
             // 2b. Получение и задание вектора-строки по индексу	
@@ -51,11 +52,13 @@ namespace MatrixTask
             Console.WriteLine("транспонирование после: " + matrix3);
             Console.WriteLine();
 
+            /*
             // 2e.Умножение на скаляр
             vector1.SetElement(1, 3.3);
-            Array.Resize(ref vector1.Components, 2);
+            Array.Resize(ref vector1., 2);
             matrix3.SetRow(0, vector1);
             Console.WriteLine($"Матрица: {matrix3}\t");
+            */
 
             matrix3.MultiplyByScalar(3);
             Console.WriteLine("Умножениe на скаляр 3,3: " + matrix3);

@@ -7,9 +7,11 @@ namespace MatrixTask
     {
         private Vector[] _matrixRows;
 
-        public int Row => _matrixRows.Length;
+        public int RowsCount => _matrixRows.Length;
 
-        public int Column => _matrixRows[0].Dimension;
+        public int ColumnsCount => _matrixRows[0].Dimension;
+
+        public int ElementsCount => RowsCount * ColumnsCount;
 
         // 1a. Matrix(n, m) – матрица нулей размера n*m
         public Matrix(int rowsCount, int columnsCount)
@@ -35,9 +37,9 @@ namespace MatrixTask
         // 1b. Matrix(Matrix) – конструктор копирования
         public Matrix(Matrix matrix)
         {
-            _matrixRows = new Vector[matrix.Row];
+            _matrixRows = new Vector[matrix.RowsCount];
 
-            for (int i = 0; i < matrix.Row; i++)
+            for (int i = 0; i < matrix.RowsCount; i++)
             {
                 _matrixRows[i] = new Vector(matrix._matrixRows[i]);
             }
@@ -58,9 +60,9 @@ namespace MatrixTask
                 _matrixRows[i] = new Vector(array.GetLength(1));
             }
 
-            for (int i = 0; i < Row; i++)
+            for (int i = 0; i < RowsCount; i++)
             {
-                for (int j = 0; j < Column; j++)
+                for (int j = 0; j < ColumnsCount; j++)
                 {
                     _matrixRows[i].SetElement(j, array[i, j]);
                 }
@@ -76,7 +78,7 @@ namespace MatrixTask
             }
 
             _matrixRows = new Vector[vectorsArray.Length];
-            
+
             int[] vectorsLengths = new int[vectorsArray.Length];
 
             for (int i = 0; i < vectorsArray.Length; i++)
@@ -86,46 +88,63 @@ namespace MatrixTask
 
             int maxLength = vectorsLengths.Max();
 
-            for (int i = 0; i < Row; i++)
+            for (int i = 0; i < RowsCount; i++)
             {
                 _matrixRows[i] = new Vector(maxLength);
                 _matrixRows[i] = new Vector(vectorsArray[i]);
             }
         }
 
-        // 2a. Получение размеров матрицы
-        public int GetElements()
-        {
-            return Row * Column;
-        }
-
-        public int GetRows()
-        {
-            return Row;
-        }
-
-        public int GetColumns()
-        {
-            return Column;
-        }
-
         // 2b. Получение и задание вектора-строки по индексу	
         public Vector GetRow(int index)
         {
-            return _matrixRows[index];
+            if (index < 0)
+            {
+                throw new ArgumentOutOfRangeException(nameof(index), index, "Index have to more or euqal to 0.");
+            }
+
+            if (index >= RowsCount)
+            {
+                throw new ArgumentOutOfRangeException(nameof(index), index, "Index have to less count of rows.");
+            }
+
+            Vector vector = new Vector(_matrixRows[index]);
+
+            return vector;
         }
 
         public void SetRow(int index, Vector vector)
         {
-            _matrixRows[index] = vector;
+            if (index < 0)
+            {
+                throw new ArgumentOutOfRangeException(nameof(index), index, "Index have to more or euqal to 0.");
+            }
+
+            if (index >= RowsCount)
+            {
+                throw new ArgumentOutOfRangeException(nameof(index), index, "Index have to less count of rows.");
+            }
+
+            Vector temp = new Vector(vector);
+            _matrixRows[index] = temp;
         }
 
         // 2c. Получение вектора-столбца по индексу
         public Vector GetColumn(int index)
         {
-            Vector matrixColumn = new Vector(Row);
+            if (index < 0)
+            {
+                throw new ArgumentOutOfRangeException(nameof(index), index, "Index have to more or euqal to 0.");
+            }
 
-            for (int i = 0; i < Row; i++)
+            if (index >= ColumnsCount)
+            {
+                throw new ArgumentOutOfRangeException(nameof(index), index, "Index have to less count of columns.");
+            }
+
+            Vector matrixColumn = new Vector(RowsCount);
+
+            for (int i = 0; i < RowsCount; i++)
             {
                 matrixColumn.SetElement(i, _matrixRows[i].GetElement(index));
             }
@@ -136,27 +155,18 @@ namespace MatrixTask
         // 2d. Транспонирование матрицы
         public void Transpose()
         {
-            Matrix temp = new Matrix(Column, Row);
+            _matrixRows = new Vector[ColumnsCount];
 
-            for (int i = 0; i < Column; i++)
+            for (int i = 0; i < ColumnsCount; i++)
             {
-                temp._matrixRows[i] = GetColumn(i);
+                _matrixRows[i] = new Vector(GetColumn(i));
             }
-
-            _matrixRows = new Vector[Column];
-
-            for (int i = 0; i < temp.Column; i++)
-            {
-                _matrixRows[i] = new Vector(temp.Row);
-            }
-
-            Array.Copy(temp._matrixRows, _matrixRows, Column);
         }
 
         // 2e.Умножение на скаляр
         public void MultiplyByScalar(double scalar)
         {
-            for (int i = 0; i < Row; i++)
+            for (int i = 0; i < RowsCount; i++)
             {
                 _matrixRows[i].MultiplyByScalar(scalar);
             }
@@ -165,16 +175,16 @@ namespace MatrixTask
         // 2f. Вычисление определителя матрицы 
         public double GetDeterminant()
         {
-            if (Row != Column)
+            if (RowsCount != ColumnsCount)
             {
                 throw new Exception("Array isn't square matrix.");
             }
 
-            double[,] matrixArray = new double[Row, Column];
+            double[,] matrixArray = new double[RowsCount, ColumnsCount];
 
-            for (int i = 0; i < Row; i++)
+            for (int i = 0; i < RowsCount; i++)
             {
-                for (int j = 0; j < Column; j++)
+                for (int j = 0; j < ColumnsCount; j++)
                 {
                     matrixArray[i, j] = _matrixRows[i].GetElement(j);
                 }
@@ -183,15 +193,15 @@ namespace MatrixTask
             int swapsCount = 0;
             const double epsilon = 1.0e-10;
 
-            for (int i = 0; i < Row - 1; ++i)
+            for (int i = 0; i < RowsCount - 1; ++i)
             {
                 if (Math.Abs(matrixArray[i, i]) <= epsilon)
                 {
-                    for (int j = i + 1; j < Row; ++j)
+                    for (int j = i + 1; j < RowsCount; ++j)
                     {
                         if (Math.Abs(matrixArray[j, i]) > epsilon)
                         {
-                            for (int k = 0; k < Column; ++k)
+                            for (int k = 0; k < ColumnsCount; ++k)
                             {
                                 double temp = matrixArray[i, k];
                                 matrixArray[i, k] = matrixArray[j, k];
@@ -204,7 +214,7 @@ namespace MatrixTask
                     }
                 }
 
-                for (int j = i + 1; j < Row; ++j)
+                for (int j = i + 1; j < RowsCount; ++j)
                 {
                     if (Math.Abs(matrixArray[j, i]) <= epsilon)
                     {
@@ -213,7 +223,7 @@ namespace MatrixTask
 
                     double multiplicationFactor = matrixArray[j, i] / matrixArray[i, i];
 
-                    for (int k = 0; k < Row; ++k)
+                    for (int k = 0; k < RowsCount; ++k)
                     {
                         matrixArray[j, k] -= matrixArray[i, k] * multiplicationFactor;
                     }
@@ -222,7 +232,7 @@ namespace MatrixTask
 
             double determinant = matrixArray[0, 0];
 
-            for (int i = 1; i < Row; ++i)
+            for (int i = 1; i < RowsCount; ++i)
             {
                 determinant *= matrixArray[i, i];
             }
@@ -238,7 +248,7 @@ namespace MatrixTask
 
             foreach (Vector e in _matrixRows)
             {
-                matrixContent.Append(e + ", ");
+                matrixContent.Append($"{e:f1}, ");
             }
 
             return matrixContent.Remove(matrixContent.Length - 2, 2).Append('}').ToString();
@@ -247,9 +257,9 @@ namespace MatrixTask
         // 2h. умножение матрицы на вектор
         public Vector MultiplyByVector(Vector vector)
         {
-            Vector result = new Vector(Row);
+            Vector result = new Vector(RowsCount);
 
-            for (int i = 0; i < Row; i++)
+            for (int i = 0; i < RowsCount; i++)
             {
                 result.SetElement(i, Vector.GetScalarProduct(_matrixRows[i], vector));
             }
@@ -260,7 +270,7 @@ namespace MatrixTask
         // 2i. Сложение матриц
         public void Add(Matrix matrix)
         {
-            for (int i = 0; i < Row; i++)
+            for (int i = 0; i < RowsCount; i++)
             {
                 _matrixRows[i].Add(matrix._matrixRows[i]);
             }
@@ -269,7 +279,7 @@ namespace MatrixTask
         // 2j. Вычитание матриц
         public void Subtract(Matrix matrix)
         {
-            for (int i = 0; i < Row; i++)
+            for (int i = 0; i < RowsCount; i++)
             {
                 _matrixRows[i].Subtract(matrix._matrixRows[i]);
             }
@@ -298,16 +308,16 @@ namespace MatrixTask
         // 3c. статик умножение
         public static Matrix GetProduct(Matrix matrix1, Matrix matrix2)
         {
-            if (matrix1.Column != matrix2.Row)
+            if (matrix1.ColumnsCount != matrix2.RowsCount)
             {
-                throw new Exception("Empty");
+                throw new Exception("Column's count of matrix1 have to equal to row's count of matrix2");
             }
 
-            Matrix result = new Matrix(matrix1.Row, matrix2.Column);
+            Matrix result = new Matrix(matrix1.RowsCount, matrix2.ColumnsCount);
 
-            for (int i = 0; i < result.Row; i++)
+            for (int i = 0; i < result.RowsCount; i++)
             {
-                for (int j = 0; j < result.Column; j++)
+                for (int j = 0; j < result.ColumnsCount; j++)
                 {
                     result._matrixRows[i].SetElement(j, Vector.GetScalarProduct(matrix1.GetRow(i), matrix2.GetColumn(j)));
                 }

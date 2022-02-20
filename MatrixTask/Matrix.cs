@@ -83,7 +83,7 @@ namespace MatrixTask
 
             for (int i = 0; i < vectorsArray.Length; i++)
             {
-                vectorsLengths[i] = (int)vectorsArray[i].GetLength();
+                vectorsLengths[i] = (int)vectorsArray[i].Dimension;
             }
 
             int maxLength = vectorsLengths.Max();
@@ -155,11 +155,13 @@ namespace MatrixTask
         // 2d. Транспонирование матрицы
         public void Transpose()
         {
-            _matrixRows = new Vector[ColumnsCount];
+            int temmR = RowsCount;
 
             for (int i = 0; i < ColumnsCount; i++)
             {
-                _matrixRows[i] = new Vector(GetColumn(i));
+                Vector temp = new Vector(GetColumn(i));
+
+                Array.Resize(ref _matrixRows[i], RowsCount);
             }
         }
 

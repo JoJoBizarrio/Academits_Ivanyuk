@@ -139,7 +139,7 @@ namespace MatrixTask
 
             if (index >= ColumnsCount)
             {
-                throw new ArgumentOutOfRangeException(nameof(index), index, "Index have to less count of columns.");
+                throw new ArgumentOutOfRangeException(nameof(index), index, "Index have to less then count of columns.");
             }
 
             Vector matrixColumn = new Vector(RowsCount);
@@ -155,13 +155,18 @@ namespace MatrixTask
         // 2d. Транспонирование матрицы
         public void Transpose()
         {
-            int temmR = RowsCount;
+            Matrix temp = new Matrix(ColumnsCount, RowsCount);
 
             for (int i = 0; i < ColumnsCount; i++)
             {
-                Vector temp = new Vector(GetColumn(i));
+                temp._matrixRows[i] = GetColumn(i);
+            }
 
-                Array.Resize(ref _matrixRows[i], RowsCount);
+            _matrixRows = new Vector[ColumnsCount];
+
+            for (int i = 0; i < RowsCount; i++)
+            {
+                _matrixRows[i] = temp._matrixRows[i];
             }
         }
 

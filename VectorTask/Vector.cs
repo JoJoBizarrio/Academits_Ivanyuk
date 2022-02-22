@@ -174,6 +174,11 @@ namespace VectorTask
 
             Vector vector = (Vector)obj;
 
+            if (Dimension != vector.Dimension)
+            {
+                return false;
+            }
+
             for (int i = 0; i < Dimension; i++)
             {
                 if (_components[i] != vector._components[i])

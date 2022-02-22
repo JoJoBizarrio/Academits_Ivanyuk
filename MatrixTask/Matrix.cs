@@ -184,7 +184,7 @@ namespace MatrixTask
         {
             if (RowsCount != ColumnsCount)
             {
-                throw new Exception("Array isn't square matrix.");
+                throw new Exception("Matrix isn't square.");
             }
 
             double[,] matrixArray = new double[RowsCount, ColumnsCount];

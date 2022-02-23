@@ -10,9 +10,6 @@ namespace MatrixTask
             // 1a. Matrix(n, m) – матрица нулей размера n*m
             Matrix matrix1 = new Matrix(3, 2);
 
-            // 1b. Matrix(Matrix) – конструктор копирования
-            Matrix matrix2 = new Matrix(matrix1);
-
             // 1c. Matrix(double[][]) – из двумерного массива(в C# double[,])
             double[,] array1 = { { 2, 3 }, { 4, 5 } };
             matrix2 = new Matrix(array1);

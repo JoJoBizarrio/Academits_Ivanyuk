@@ -264,6 +264,11 @@ namespace MatrixTask
         // 2h. умножение матрицы на вектор
         public Vector MultiplyByVector(Vector vector)
         {
+            if (ColumnsCount != vector.Dimension)
+            {
+                throw new ArgumentException($"Count of columns (value: {ColumnsCount}) have to equal to dimension of vector (value: {vector.Dimension})");
+            }
+
             Vector result = new Vector(RowsCount);
 
             for (int i = 0; i < RowsCount; i++)
@@ -277,6 +282,16 @@ namespace MatrixTask
         // 2i. Сложение матриц
         public void Add(Matrix matrix)
         {
+            if (ColumnsCount != matrix.ColumnsCount)
+            {
+                throw new ArgumentException($"It isn't equal column's number of the matrix-argument (value: {matrix.ColumnsCount}) and matrix from which method is called (value: {ColumnsCount}).", nameof(ColumnsCount));
+            }
+
+            if (RowsCount != matrix.RowsCount)
+            {
+                throw new ArgumentException($"It isn't equal row's number of the matrix-argument (value: {matrix.RowsCount}) and matrix from which method is called (value: {RowsCount}).", nameof(RowsCount));
+            }
+
             for (int i = 0; i < RowsCount; i++)
             {
                 _matrixRows[i].Add(matrix._matrixRows[i]);
@@ -286,6 +301,16 @@ namespace MatrixTask
         // 2j. Вычитание матриц
         public void Subtract(Matrix matrix)
         {
+            if (ColumnsCount != matrix.ColumnsCount)
+            {
+                throw new ArgumentException($"It isn't equal column's number of the matrix-argument and matrix from which method is called.", nameof(ColumnsCount));
+            }
+
+            if (RowsCount != matrix.RowsCount)
+            {
+                throw new ArgumentException($"It isn't equal row's number of the matrix-argument and matrix from which method is called.", nameof(RowsCount));
+            }
+
             for (int i = 0; i < RowsCount; i++)
             {
                 _matrixRows[i].Subtract(matrix._matrixRows[i]);
@@ -295,6 +320,16 @@ namespace MatrixTask
         // 3a. Статик сложение
         public static Matrix GetSum(Matrix matrix1, Matrix matrix2)
         {
+            if (matrix1.ColumnsCount != matrix2.ColumnsCount)
+            {
+                throw new ArgumentException($"It isn't equal column's number of the matrix1 (value: {matrix1.ColumnsCount}) and the matrix2 (value: {matrix2.ColumnsCount}).", nameof(ColumnsCount));
+            }
+
+            if (matrix1.RowsCount != matrix2.RowsCount)
+            {
+                throw new ArgumentException($"It isn't equal row's number of the matrix1 (value: {matrix1.RowsCount}) and matrix2 (value: {matrix2.RowsCount}).", nameof(RowsCount));
+            }
+
             Matrix result = new Matrix(matrix1);
 
             result.Add(matrix2);
@@ -305,6 +340,16 @@ namespace MatrixTask
         // 3b. Статик вычитание
         public static Matrix GetDifference(Matrix matrix1, Matrix matrix2)
         {
+            if (matrix1.ColumnsCount != matrix2.ColumnsCount)
+            {
+                throw new ArgumentException($"It isn't equal column's number of the matrix1 (value: {matrix1.ColumnsCount}) and the matrix2 ((value: {matrix2.ColumnsCount})).");
+            }
+
+            if (matrix1.RowsCount != matrix2.RowsCount)
+            {
+                throw new ArgumentException($"It isn't equal row's number of the matrix1 () and matrix2.");
+            }
+
             Matrix result = new Matrix(matrix1);
 
             result.Subtract(matrix2);
@@ -317,7 +362,7 @@ namespace MatrixTask
         {
             if (matrix1.ColumnsCount != matrix2.RowsCount)
             {
-                throw new Exception("Column's count of matrix1 have to equal to row's count of matrix2");
+                throw new ArgumentException($"Column's count = {matrix1.ColumnsCount} of matrix1 have to equal to row's count = {matrix2.RowsCount} of matrix2.");
             }
 
             Matrix result = new Matrix(matrix1.RowsCount, matrix2.ColumnsCount);

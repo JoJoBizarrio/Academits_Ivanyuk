@@ -4,125 +4,75 @@ namespace RangeTask
 {
     public class Range
     {
-        public double From { get; set; }
+        private double _from { get; set; }
 
-        public double To { get; set; }
+        private double _to { get; set; }
 
         // вместо ==4. Сделать метод для получения длины диапазона==, свойство:
-        public double Length
-        {
-            get { return To - From; }
-        }
+        public double Length => _to - _from;
 
         // 2. Описать конструктор, при помощи которого заполняются поля
         public Range(double from, double to)
         {
-            From = from;
-            To = to;
+            _from = from;
+            _to = to;
         }
 
         // 5. Сделать метод isInside, который принимает вещественное число и возвращает boolean – результат проверки, принадлежит ли число диапазону: 
-        public bool IsInside(double number) 
+        public bool IsInside(double number)
         {
-            return number >= From && number <= To;
+            return number >= _from && number <= _to;
         }
 
-        public Range GetIntersection(Range range)  // Получение интервала-пересечения двух интервалов. Если пересечения нет, выдать null. Если есть, то выдать новый диапазон с соответствующими концами
+        public override string ToString()
         {
-            if ()
-
-            if (range.IsInside(From) & range.IsInside(To))
-            {
-                return new Range(From, To);
-            }
-
-            if (IsInside(range.From) & IsInside(range.To))
-            {
-                return new Range(range.From, range.To);
-            }
-
-            if (range.IsInside(From) & IsInside(range.To))
-            {
-                return new Range(From, range.To);
-            }
-
-            if (IsInside(range.From) & range.IsInside(To))
-            {
-                return new Range(range.From, To);
-            }
-
-            return null;
-        }
-        public void WriteRange()
-        {
-            Console.Write("( " + From + " ; " + To + " )");
+            return $"({_from}; {_to})";
         }
 
-        public void WriteLineRange()
+        // Получение интервала-пересечения двух интервалов. Если пересечения нет, выдать null. Если есть, то выдать новый диапазон с соответствующими концами
+        public Range GetIntersection(Range range)
         {
-            Console.WriteLine("( " + From + " ; " + To + " )");
+            if (_to < range._from || _from > range._to)
+            {
+                return null;
+            }
+
+            return new Range(Math.Max(_from, range._from), Math.Min(_to, range._to));
         }
 
-        public Range MergeWith(Range range) // Получение объединения двух интервалов. Может получиться 1 или 2 отдельных куска
-
+        // Получение объединения двух интервалов. Может получиться 1 или 2 отдельных куска.
+        public Range[] GetUnion(Range range)
         {
-            if (range.IsInside(From) & range.IsInside(To))
+            if (_to < range._from || _from > range._to)
             {
-                return new Range(range.From, range.To);
+                return new Range[]{
+                    new Range(_from, _to),
+                    new Range(range._from, range._to),
+                                  };
             }
 
-            if (IsInside(range.From) & IsInside(range.To))
-            {
-                return new Range(From, To);
-            }
-
-            if (range.IsInside(From) & IsInside(range.To))
-            {
-                return new Range(range.From, To);
-            }
-
-            if (IsInside(range.From) & range.IsInside(To))
-            {
-                return new Range(From, range.To);
-            }
-
-            Range range1 = new Range(range.From, range.To);
-            Range range2 = new Range(From, To);
-
-            return new Range(range1, range2);
+            return new Range[] { new Range(Math.Min(_from, range._from), Math.Max(_to, range._to)) };
         }
 
-        public Range Substract(Range range)  // Получение разности двух интервалов.
+        // Получение разности двух интервалов.
+        public Range[] GetSubtract(Range range)
         {
-            if (IsInside(range.From) & IsInside(range.To))
+            if (_to < range._from || _from > range._to)
             {
-                Range range1 = new Range(From, range.From);
-                Range range2 = new Range(range.To, To);
-
-                return new Range(range1, range2);
+                return new Range[] { new Range(_from, _to) }; // что будет если использовать: return new Range[] { this }; ?
             }
 
-            if (range.IsInside(From) & range.IsInside(To))
+            if (_from > range._from & _to < range._to)
             {
-                return new Range(0, 0);
+                return new Range[] { };
             }
 
-            if (IsInside(range.From) & !IsInside(range.To))
+            if (_from == range._from || _to == range._to)
             {
-                return new Range(From, range.From);
+                return new Range[] { new Range(Math.Max(_from, range._from), Math.Min(_to, range._to)) };
             }
 
-            if (!IsInside(range.From) & IsInside(range.To))
-            {
-                return new Range(range.To, To);
-            }
-
-            if (!IsInside(range.From) & !IsInside(range.To))
-            {
-                return new Range(From, To);
-            }
-
-            return null;
+            return new Range[] { new Range(_from, range._from), new Range(_to, range._to) };
         }
     }
 }

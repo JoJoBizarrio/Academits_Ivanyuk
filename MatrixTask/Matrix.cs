@@ -155,18 +155,13 @@ namespace MatrixTask
         // 2d. Транспонирование матрицы
         public void Transpose()
         {
-            Matrix temp = new Matrix(ColumnsCount, RowsCount);
-
-            for (int i = 0; i < ColumnsCount; i++)
-            {
-                temp._matrixRows[i] = GetColumn(i);
-            }
+            Matrix temp = new Matrix(_matrixRows);
 
             _matrixRows = new Vector[ColumnsCount];
 
-            for (int i = 0; i < RowsCount; i++)
+            for (int i = 0; i < temp.ColumnsCount; i++)
             {
-                _matrixRows[i] = temp._matrixRows[i];
+                _matrixRows[i] = temp.GetColumn(i);
             }
         }
 

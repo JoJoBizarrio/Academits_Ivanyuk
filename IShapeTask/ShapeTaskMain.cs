@@ -1,9 +1,6 @@
-﻿using System;
-using System.Collections;
-
-namespace IShapeTask
+﻿namespace IShapeFolder
 {
-    internal class IShapeTaskMain
+    internal class ShapeTaskMain
     {
         public static double GetMaxArea(IShape[] shapesArray)
         {

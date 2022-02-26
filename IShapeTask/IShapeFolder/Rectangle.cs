@@ -1,39 +1,40 @@
-﻿using System;
-
-namespace IShapeTask
+﻿namespace IShapeFolder
 {
-    internal class Square : IShape
+    internal class Rectangle : IShape
     {
-        internal double SideSize;
+        internal double Width;
 
-        public Square(double sideSize)
+        internal double Heigth;
+
+        public Rectangle(double width, double heigth)
         {
-            SideSize = sideSize;
+            Width = width;
+            Heigth = heigth;
         }
 
         public double GetWidth()
         {
-            return SideSize;
+            return Width;
         }
 
         public double GetHeigth()
         {
-            return GetWidth();
+            return Heigth;
         }
 
         public double GetArea()
         {
-            return SideSize * SideSize;
+            return Width * Heigth;
         }
 
         public double GetPerimeter()
         {
-            return 4 * SideSize;
+            return 2 * Width + 2 * Heigth;
         }
 
         public override string ToString()
         {
-            return $"Square. Size of side: {GetWidth()}, Area: {GetArea()}, Perimetr: {GetPerimeter()}";
+            return $"Rectangle. Width: {GetWidth()}, Heigth: {GetHeigth()}, Area: {GetArea()}, Perimetr: {GetPerimeter()}";
         }
 
         public override bool Equals(object obj)
@@ -48,9 +49,9 @@ namespace IShapeTask
                 return false;
             }
 
-            Square square = (Square)obj;
+            Rectangle rectangle = (Rectangle)obj;
 
-            if (SideSize == square.SideSize)
+            if (Width == rectangle.Width && Heigth == rectangle.Heigth)
             {
                 return true;
             }
@@ -63,8 +64,9 @@ namespace IShapeTask
             int hash = 1;
             int prime = 31;
 
-            hash = prime * hash + SideSize.GetHashCode();
-
+            hash = prime * hash + Width.GetHashCode();
+            hash = prime * hash + Heigth.GetHashCode();
+            
             return hash;
         }
     }

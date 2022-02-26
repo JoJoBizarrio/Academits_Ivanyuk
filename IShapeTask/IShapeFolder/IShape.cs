@@ -1,6 +1,4 @@
-﻿using System;
-
-namespace IShapeTask
+﻿namespace IShapeFolder
 {
     public interface IShape
     {

@@ -1,7 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-
-namespace IShapeTask
+﻿namespace IShapeFolder
 {
     public class ComparerAreas : IComparer<IShape>
     {

@@ -1,7 +1,5 @@
-﻿using System;
-
-namespace IShapeTask
-{
+﻿namespace IShapeFolder
+{ 
     internal class Triangle : IShape
     {
         internal double X1;

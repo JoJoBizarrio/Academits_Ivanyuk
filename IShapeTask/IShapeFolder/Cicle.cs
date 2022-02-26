@@ -1,42 +1,37 @@
-﻿using System;
-
-namespace IShapeTask
+﻿namespace IShapeFolder
 {
-    internal class Rectangle : IShape
+    internal class Cicle : IShape
     {
-        internal double Width;
+        internal double Radius;
 
-        internal double Heigth;
-
-        public Rectangle(double width, double heigth)
+        public Cicle(double radius)
         {
-            Width = width;
-            Heigth = heigth;
+            Radius = radius;
         }
 
         public double GetWidth()
         {
-            return Width;
+            return 2 * Radius;
         }
 
         public double GetHeigth()
         {
-            return Heigth;
+            return GetWidth();
         }
 
         public double GetArea()
         {
-            return Width * Heigth;
+            return Math.PI * Radius * Radius;
         }
 
         public double GetPerimeter()
         {
-            return 2 * Width + 2 * Heigth;
+            return 2 * Math.PI * Radius;
         }
 
         public override string ToString()
         {
-            return $"Rectangle. Width: {GetWidth()}, Heigth: {GetHeigth()}, Area: {GetArea()}, Perimetr: {GetPerimeter()}";
+            return $"Cicle. Radius: {GetWidth()}, Area: {GetArea()}, Perimetr: {GetPerimeter()}";
         }
 
         public override bool Equals(object obj)
@@ -51,9 +46,9 @@ namespace IShapeTask
                 return false;
             }
 
-            Rectangle rectangle = (Rectangle)obj;
+            Cicle cicle = (Cicle)obj;
 
-            if (Width == rectangle.Width && Heigth == rectangle.Heigth)
+            if (Radius == cicle.GetHeigth() && GetArea() == cicle.GetArea())
             {
                 return true;
             }
@@ -66,9 +61,8 @@ namespace IShapeTask
             int hash = 1;
             int prime = 31;
 
-            hash = prime * hash + Width.GetHashCode();
-            hash = prime * hash + Heigth.GetHashCode();
-            
+            hash = prime * hash + Radius.GetHashCode();
+
             return hash;
         }
     }

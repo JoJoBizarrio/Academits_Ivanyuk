@@ -1,19 +1,17 @@
-﻿using System;
-
-namespace IShapeTask
+﻿namespace IShapeFolder
 {
-    internal class Cicle : IShape
+    internal class Square : IShape
     {
-        internal double Radius;
+        internal double SideSize;
 
-        public Cicle(double radius)
+        public Square(double sideSize)
         {
-            Radius = radius;
+            SideSize = sideSize;
         }
 
         public double GetWidth()
         {
-            return 2 * Radius;
+            return SideSize;
         }
 
         public double GetHeigth()
@@ -23,22 +21,22 @@ namespace IShapeTask
 
         public double GetArea()
         {
-            return Math.PI * Radius * Radius;
+            return SideSize * SideSize;
         }
 
         public double GetPerimeter()
         {
-            return 2 * Math.PI * Radius;
+            return 4 * SideSize;
         }
 
         public override string ToString()
         {
-            return $"Cicle. Radius: {GetWidth()}, Area: {GetArea()}, Perimetr: {GetPerimeter()}";
+            return $"Square. Size of side: {GetWidth()}, Area: {GetArea()}, Perimetr: {GetPerimeter()}";
         }
 
         public override bool Equals(object obj)
         {
-            if (ReferenceEquals(obj, this)) 
+            if (ReferenceEquals(obj, this))
             {
                 return true;
             }
@@ -48,12 +46,12 @@ namespace IShapeTask
                 return false;
             }
 
-            Cicle cicle = (Cicle)obj;
+            Square square = (Square)obj;
 
-            if (Radius == cicle.GetHeigth() && GetArea() == cicle.GetArea())
+            if (SideSize == square.SideSize)
             {
                 return true;
-            } 
+            }
 
             return false;
         }
@@ -63,7 +61,7 @@ namespace IShapeTask
             int hash = 1;
             int prime = 31;
 
-            hash = prime * hash + Radius.GetHashCode();
+            hash = prime * hash + SideSize.GetHashCode();
 
             return hash;
         }

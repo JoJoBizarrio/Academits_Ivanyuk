@@ -1,4 +1,4 @@
-﻿namespace IShapeFolder
+﻿namespace IShapeTask
 {
     public class ComparerAreas : IComparer<IShape>
     {

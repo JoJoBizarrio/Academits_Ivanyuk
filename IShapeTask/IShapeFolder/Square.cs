@@ -1,17 +1,19 @@
-﻿namespace IShapeFolder
+﻿namespace IShapeTask
 {
     internal class Square : IShape
     {
-        internal double SideSize;
+        private double _sideLength;
+
+        public double SideLength { set => SideLength = value; }
 
         public Square(double sideSize)
         {
-            SideSize = sideSize;
+            _sideLength = sideSize;
         }
 
         public double GetWidth()
         {
-            return SideSize;
+            return _sideLength;
         }
 
         public double GetHeigth()
@@ -21,17 +23,17 @@
 
         public double GetArea()
         {
-            return SideSize * SideSize;
+            return _sideLength * _sideLength;
         }
 
         public double GetPerimeter()
         {
-            return 4 * SideSize;
+            return 4 * _sideLength;
         }
 
         public override string ToString()
         {
-            return $"Square. Size of side: {GetWidth()}, Area: {GetArea()}, Perimetr: {GetPerimeter()}";
+            return $"Square. Length of side: {_sideLength}, Area: {GetArea()}, Perimetr: {GetPerimeter()}";
         }
 
         public override bool Equals(object obj)
@@ -48,12 +50,7 @@
 
             Square square = (Square)obj;
 
-            if (SideSize == square.SideSize)
-            {
-                return true;
-            }
-
-            return false;
+            return _sideLength == square._sideLength ? true : false; 
         }
 
         public override int GetHashCode()
@@ -61,7 +58,7 @@
             int hash = 1;
             int prime = 31;
 
-            hash = prime * hash + SideSize.GetHashCode();
+            hash = prime * hash + _sideLength.GetHashCode();
 
             return hash;
         }

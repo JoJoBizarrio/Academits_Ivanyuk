@@ -4,9 +4,9 @@ namespace RangeTask
 {
     public class Range
     {
-        private double _from { get; set; }
+        private double _from;
 
-        private double _to { get; set; }
+        private double _to;
 
         // вместо ==4. Сделать метод для получения длины диапазона==, свойство:
         public double Length => _to - _from;
@@ -41,7 +41,7 @@ namespace RangeTask
         }
 
         // Получение объединения двух интервалов. Может получиться 1 или 2 отдельных куска.
-        public Range[] GetUnion(Range range)
+        public Range[] GetSum(Range range)
         {
             if (_to < range._from || _from > range._to)
             {
@@ -55,7 +55,7 @@ namespace RangeTask
         }
 
         // Получение разности двух интервалов.
-        public Range[] GetSubtract(Range range)
+        public Range[] GetDifference(Range range)
         {
             if (_to < range._from || _from > range._to)
             {

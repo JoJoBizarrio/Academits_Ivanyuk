@@ -2,16 +2,18 @@
 {
     internal class Cicle : IShape
     {
-        internal double Radius;
+        private double _radius;
+
+        public double Radius { set => _radius = value; }
 
         public Cicle(double radius)
         {
-            Radius = radius;
+            _radius = radius;
         }
 
         public double GetWidth()
         {
-            return 2 * Radius;
+            return 2 * _radius;
         }
 
         public double GetHeigth()
@@ -21,17 +23,17 @@
 
         public double GetArea()
         {
-            return Math.PI * Radius * Radius;
+            return Math.PI * _radius * _radius;
         }
 
         public double GetPerimeter()
         {
-            return 2 * Math.PI * Radius;
+            return 2 * Math.PI * _radius;
         }
 
         public override string ToString()
         {
-            return $"Cicle. Radius: {GetWidth()}, Area: {GetArea()}, Perimetr: {GetPerimeter()}";
+            return $"Cicle. Radius: {_radius}, Area: {GetArea()}, Perimetr: {GetPerimeter()}";
         }
 
         public override bool Equals(object obj)
@@ -48,12 +50,7 @@
 
             Cicle cicle = (Cicle)obj;
 
-            if (Radius == cicle.GetHeigth() && GetArea() == cicle.GetArea())
-            {
-                return true;
-            }
-
-            return false;
+            return _radius == cicle._radius ? true : false;
         }
 
         public override int GetHashCode()
@@ -61,7 +58,7 @@
             int hash = 1;
             int prime = 31;
 
-            hash = prime * hash + Radius.GetHashCode();
+            hash = prime * hash + _radius.GetHashCode();
 
             return hash;
         }

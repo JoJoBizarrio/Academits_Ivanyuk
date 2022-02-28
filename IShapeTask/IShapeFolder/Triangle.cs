@@ -46,8 +46,8 @@
         {
             // return $"Triangle. Coordinates: ({_point1}, {_point2},  {_point3}), Width: {GetWidth()}, Heigth: {GetHeigth()}, Area: {GetArea()}, Perimetr: {GetPerimeter()}"; // у меня все вмещается в экран, даже с комментарием.
             return $"Triangle. Coordinates: ({_point1}, {_point2},  {_point3}), " +
-                   $"Width: {GetWidth()}, Heigth: {GetHeigth()}, " +
-                   $"Area: {GetArea()}, Perimetr: {GetPerimeter()}";
+                   $"Width: {GetWidth():f1}, Heigth: {GetHeigth():f1}, " +
+                   $"Area: {GetArea():f1}, Perimetr: {GetPerimeter():f1}";
         }
 
         public override bool Equals(object obj)
@@ -80,7 +80,6 @@
 
             return hash;
         }
-
 
         /*
         private double _x1;

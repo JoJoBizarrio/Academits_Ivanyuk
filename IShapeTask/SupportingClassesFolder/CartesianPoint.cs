@@ -14,9 +14,20 @@
             _y = y;
         }
 
+        // чем отличаются две нижние функции? кроме того что статик он для всех объектов класса
+        public double GetDistance(CartesianPoint point)
+        {
+            return Math.Sqrt(Math.Pow((_x - point._x), 2) * Math.Pow((_y - point._y), 2)); // эта функция изменит координаты точки this ?
+        }
+
+        public static double GetDistance(CartesianPoint point1, CartesianPoint point2)
+        {
+            return Math.Sqrt(Math.Pow((point2._x - point1._x), 2) * Math.Pow((point2._y - point1._y), 2));
+        }
+
         public override string ToString()
         {
-            return $"({_x}, {_y})";
+            return $"({_x:f1}, {_y:f1})";
         }
 
         public override bool Equals(object obj)
@@ -45,17 +56,6 @@
             hash = prime * hash + _y.GetHashCode();
 
             return hash;
-        }
-
-        // чем отличаются две нижние функции? кроме того что статик он для всех объектов класса
-        public double GetDistance(CartesianPoint point)
-        {
-            return Math.Sqrt(Math.Pow((_x - point._x), 2) * Math.Pow((_y - point._y), 2)); // эта функция изменит координаты точки this ?
-        }
-
-        public static double GetDistance(CartesianPoint point1, CartesianPoint point2)
-        {
-            return Math.Sqrt(Math.Pow((point2._x - point1._x), 2) * Math.Pow((point2._y - point1._y), 2));
         }
     }
 }

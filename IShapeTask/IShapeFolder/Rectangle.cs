@@ -37,7 +37,7 @@
 
         public override string ToString()
         {
-            return $"Rectangle. Width: {_width}, Heigth: {_heigth}, Area: {GetArea()}, Perimetr: {GetPerimeter()}";
+            return $"Rectangle. Width: {_width:f1}, Heigth: {_heigth:f1}, Area: {GetArea():f1}, Perimetr: {GetPerimeter():f1}";
         }
 
         public override bool Equals(object obj)

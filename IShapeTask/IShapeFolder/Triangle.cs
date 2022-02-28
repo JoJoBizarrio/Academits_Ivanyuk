@@ -25,7 +25,7 @@
             return Math.Max(Math.Max(_point1.X, _point2.X), _point3.X) - Math.Min(Math.Min(_point1.X, _point2.X), _point3.X);
         }
 
-        public double GetHeigth()
+        public double GetHeight()
         {
             return Math.Max(Math.Max(_point1.Y, _point2.Y), _point3.Y) - Math.Min(Math.Min(_point1.Y, _point2.Y), _point3.Y);
         }
@@ -44,10 +44,10 @@
 
         public override string ToString()
         {
-            // return $"Triangle. Coordinates: ({_point1}, {_point2},  {_point3}), Width: {GetWidth()}, Heigth: {GetHeigth()}, Area: {GetArea()}, Perimetr: {GetPerimeter()}"; // у меня все вмещается в экран, даже с комментарием.
+            // return $"Triangle. Coordinates: ({_point1}, {_point2},  {_point3}), Width: {GetWidth()}, Height: {GetHeigth()}, Area: {GetArea()}, Perimeter: {GetPerimeter()}"; // вместе с комментарием у меня все помещается в экран.
             return $"Triangle. Coordinates: ({_point1}, {_point2},  {_point3}), " +
-                   $"Width: {GetWidth():f1}, Heigth: {GetHeigth():f1}, " +
-                   $"Area: {GetArea():f1}, Perimetr: {GetPerimeter():f1}";
+                   $"Width: {GetWidth():f1}, Height: {GetHeight():f1}, " +
+                   $"Area: {GetArea():f1}, Perimeter: {GetPerimeter():f1}";
         }
 
         public override bool Equals(object obj)

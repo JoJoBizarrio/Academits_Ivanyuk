@@ -1,12 +1,12 @@
 ﻿namespace IShapeTask
 {
-    internal class Cicle : IShape
+    internal class Circle : IShape
     {
         private double _radius;
 
         public double Radius { set => _radius = value; }
 
-        public Cicle(double radius)
+        public Circle(double radius)
         {
             _radius = radius;
         }
@@ -16,7 +16,7 @@
             return 2 * _radius;
         }
 
-        public double GetHeigth()
+        public double GetHeight()
         {
             return GetWidth();
         }
@@ -33,7 +33,7 @@
 
         public override string ToString()
         {
-            return $"Cicle. Radius: {_radius:f1}, Area: {GetArea():f1}, Perimetr: {GetPerimeter():f1}";
+            return $"Shape: Circle. Radius: {_radius:f1}, Area: {GetArea():f1}, Perimeter: {GetPerimeter():f1}";
         }
 
         public override bool Equals(object obj)
@@ -48,9 +48,9 @@
                 return false;
             }
 
-            Cicle cicle = (Cicle)obj;
+            Circle circle = (Circle)obj;
 
-            return _radius == cicle._radius ? true : false;
+            return _radius == circle._radius ? true : false;
         }
 
         public override int GetHashCode()

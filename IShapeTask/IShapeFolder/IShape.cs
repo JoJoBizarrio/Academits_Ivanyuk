@@ -4,7 +4,7 @@
     {
         double GetWidth();
 
-        double GetHeigth();
+        double GetHeight();
 
         double GetArea();
 

@@ -6,12 +6,12 @@
         {
             if (shapesArray.Length == 0)
             {
-                throw new ArgumentException($" Empty array: {nameof(shapesArray.Length)} = {shapesArray.Length} ");
+                throw new ArgumentException($"Empty array: {nameof(shapesArray.Length)} = {shapesArray.Length}");
             }
 
             Array.Sort(shapesArray, new FigureAreaComparer());
 
-            return shapesArray[^ 1];
+            return shapesArray[^1];
         }
 
         static void Main(string[] args)
@@ -19,7 +19,7 @@
             IShape[] shapesArray = new IShape[]
             {
                 new Rectangle(5, 13), new Rectangle(22, 8),
-                new Cicle(21), new Cicle(11),
+                new Circle(21), new Circle(11),
                 new Square(21), new Square(11),
                 new Triangle(0, 0, 21, 0, 0, 11), new Triangle(-13, 5, 2, 15, 1, 1)
             };

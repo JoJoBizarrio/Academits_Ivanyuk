@@ -43,6 +43,7 @@
             {
                 Console.WriteLine(e.GetPerimeter());
             }
+
         }
     }
 }

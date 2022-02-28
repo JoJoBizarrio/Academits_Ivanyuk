@@ -1,12 +1,17 @@
 ﻿namespace IShapeTask
-{ 
+{
     internal class ShapeTaskMain
     {
-        public static double GetMaxArea(IShape[] shapesArray)
+        public static IShape GetMaxArea(IShape[] shapesArray)
         {
-            Array.Sort(shapesArray, new ComparerAreas());
+            if (shapesArray.Length == 0)
+            {
+                throw new ArgumentException($" Empty array {nameof(shapesArray.Length)} = {shapesArray.Length} ");
+            }
 
-            return shapesArray[shapesArray.Length - 1].GetArea();
+            Array.Sort(shapesArray, new FigureAreaComparer());
+
+            return shapesArray[shapesArray.Length ^ 1].GetArea();
         }
 
         static void Main(string[] args)
@@ -29,7 +34,7 @@
 
             Console.WriteLine();
 
-            Array.Sort(shapesArray, new ComparerPerimeters());
+            Array.Sort(shapesArray, new FigurePerimeterComparer());
 
             Console.WriteLine("Second perimeters: " + shapesArray[6].GetPerimeter());
             Console.WriteLine();
@@ -38,6 +43,10 @@
             {
                 Console.WriteLine(e.GetPerimeter());
             }
+
+            IShape shape = new IShape[];
+
+            Console.WriteLine( GetMaxArea(shape));
         }
     }
 }

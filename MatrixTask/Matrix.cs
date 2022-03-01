@@ -50,7 +50,7 @@ namespace MatrixTask
         {
             if (array.Length == 0)
             {
-                throw new ArgumentOutOfRangeException(nameof(array.Length), "Empty array");
+                throw new ArgumentException($"Empty array {nameof(array.Length)} = {array.Length}");
             }
 
             _matrixRows = new Vector[array.GetLength(0)];
@@ -74,7 +74,7 @@ namespace MatrixTask
         {
             if (vectorsArray.Length == 0)
             {
-                throw new ArgumentOutOfRangeException(nameof(vectorsArray.Length), vectorsArray.Length, "Vector[] has length = 0");
+                throw new ArgumentException($"Empty vector. {nameof(vectorsArray.Length)} = {vectorsArray.Length}");
             }
 
             _matrixRows = new Vector[vectorsArray.Length];

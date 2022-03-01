@@ -47,7 +47,7 @@ namespace IShapeTask.IShapeFolder
         public override string ToString()
         {
             // return $"Triangle. Coordinates: ({_point1}, {_point2},  {_point3}), Width: {GetWidth()}, Height: {GetHeigth()}, Area: {GetArea()}, Perimeter: {GetPerimeter()}"; // у меня все помещается в экран.
-            return $"Triangle. Coordinates: ({_point1}, {_point2},  {_point3}), " +
+            return $"Shape: Triangle, Coordinates: ({_point1}, {_point2},  {_point3}), " +
                    $"Width: {GetWidth():f1}, Height: {GetHeight():f1}, " +
                    $"Area: {GetArea():f1}, Perimeter: {GetPerimeter():f1}";
         }

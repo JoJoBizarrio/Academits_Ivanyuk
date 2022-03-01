@@ -1,4 +1,8 @@
-﻿namespace IShapeTask
+﻿using IShapeTask.IShapeFolder;
+using IShapeTask.SupportingClassesFolder;
+
+
+namespace IShapeTask
 {
     internal class ShapeTaskMain
     {

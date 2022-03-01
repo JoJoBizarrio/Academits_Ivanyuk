@@ -1,4 +1,6 @@
-﻿namespace IShapeTask.IShapeFolder
+﻿using IShapeTask.SupportingClassesFolder;
+
+namespace IShapeTask.IShapeFolder
 {
     internal class Triangle : IShape
     {

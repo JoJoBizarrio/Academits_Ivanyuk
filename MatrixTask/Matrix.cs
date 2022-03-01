@@ -179,7 +179,7 @@ namespace MatrixTask
         {
             if (RowsCount != ColumnsCount)
             {
-                throw new Exception("Matrix isn't square.");
+                throw new Exception($"Matrix isn't square. {nameof(RowsCount)} = {RowsCount} isn't equal to {nameof(ColumnsCount)} = {ColumnsCount}");
             }
 
             double[,] matrixArray = new double[RowsCount, ColumnsCount];
@@ -205,9 +205,7 @@ namespace MatrixTask
                         {
                             for (int k = 0; k < ColumnsCount; ++k)
                             {
-                                double temp = matrixArray[i, k];
-                                matrixArray[i, k] = matrixArray[j, k];
-                                matrixArray[j, k] = temp;
+                                (matrixArray[i, k], matrixArray[j, k]) = (matrixArray[j, k], matrixArray[i, k]);
                             }
 
                             ++swapsCount;

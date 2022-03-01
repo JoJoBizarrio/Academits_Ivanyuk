@@ -1,4 +1,4 @@
-﻿namespace IShapeTask
+﻿namespace IShapeTask.SupportingClassesFolder
 {
     internal class CartesianPoint
     {

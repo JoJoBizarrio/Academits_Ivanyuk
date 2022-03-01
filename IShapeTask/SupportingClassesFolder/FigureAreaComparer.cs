@@ -1,4 +1,4 @@
-﻿namespace IShapeTask
+﻿namespace IShapeTask.SupportingClassesFolder
 {
     public class FigureAreaComparer : IComparer<IShape>
     {

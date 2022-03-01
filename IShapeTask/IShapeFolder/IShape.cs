@@ -1,4 +1,4 @@
-﻿namespace IShapeTask
+﻿namespace IShapeTask.IShapeFolder
 {
     public interface IShape
     {

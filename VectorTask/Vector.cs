@@ -66,14 +66,14 @@ namespace VectorTask
         public override string ToString()
         {
             StringBuilder vectorContent = new StringBuilder();
-            vectorContent.Append("{");
+            vectorContent.Append('{');
 
             foreach (double e in _components)
             {
                 vectorContent.Append($"{e:f1}, ");
             }
 
-            return vectorContent.Remove(vectorContent.Length - 2, 2).Append("}").ToString();
+            return vectorContent.Remove(vectorContent.Length - 2, 2).Append('}').ToString();
         }
 
         // (4a) Прибавление к вектору другого вектора.

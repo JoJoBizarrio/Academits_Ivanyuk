@@ -33,7 +33,7 @@
 
         public override string ToString()
         {
-            return $"Shape: Circle. Radius: {_radius:f1}, Area: {GetArea():f1}, Perimeter: {GetPerimeter():f1}";
+            return $"Shape: Circle, Radius: {_radius:f1}, Area: {GetArea():f1}, Perimeter: {GetPerimeter():f1}";
         }
 
         public override bool Equals(object obj)

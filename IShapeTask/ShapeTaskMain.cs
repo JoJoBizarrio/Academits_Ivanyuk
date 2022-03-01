@@ -1,7 +1,6 @@
 ﻿using IShapeTask.IShapeFolder;
 using IShapeTask.SupportingClassesFolder;
 
-
 namespace IShapeTask
 {
     internal class ShapeTaskMain
@@ -47,7 +46,6 @@ namespace IShapeTask
             {
                 Console.WriteLine(e.GetPerimeter());
             }
-
         }
     }
 }

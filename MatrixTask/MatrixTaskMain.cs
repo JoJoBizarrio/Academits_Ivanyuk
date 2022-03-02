@@ -1,18 +1,14 @@
-﻿using System;
-using Vector = VectorTask.Vector;
+﻿using VectorTask;
 
 namespace MatrixTask
 {
-    class MatrixTuskMain
+    class MatrixTaskMain
     {
         static void Main(string[] args)
         {
-            // 1a. Matrix(n, m) – матрица нулей размера n*m
-            Matrix matrix1 = new Matrix(3, 2);
-
             // 1c. Matrix(double[][]) – из двумерного массива(в C# double[,])
             double[,] array1 = { { 2, 3 }, { 4, 5 } };
-            Matrix matrix2 = new Matrix(array1);
+            Matrix matrix1 = new Matrix(array1);
 
             // 1d. Matrix(Vector[]) – из массива векторов-строк
             Vector[] vectorsArray = new Vector[2];
@@ -22,31 +18,31 @@ namespace MatrixTask
                 vectorsArray[i] = new Vector(3);
             }
 
-            Matrix matrix3 = new Matrix(vectorsArray);
+            Matrix matrix2 = new Matrix(vectorsArray);
 
             // 2a. Получение размеров матрицы
-            Console.WriteLine("Кол-во элементов: " + matrix3.ElementsCount);
-            Console.WriteLine("Кол-во строк: " + matrix3.RowsCount);
-            Console.WriteLine("Кол-во колонок: " + matrix3.ColumnsCount);
+            Console.WriteLine("Кол-во элементов: " + matrix2.ElementsCount);
+            Console.WriteLine("Кол-во строк: " + matrix2.RowsCount);
+            Console.WriteLine("Кол-во колонок: " + matrix2.ColumnsCount);
             Console.WriteLine();
 
             // 2b. Получение и задание вектора-строки по индексу	
-            Console.WriteLine("Геттер строки: " + matrix3.GetRow(0));
+            Console.WriteLine("Геттер строки: " + matrix2.GetRow(0));
             Vector vector1 = new Vector(3);
             vector1.SetElement(0, 1);
             matrix3.SetRow(0, vector1);
-            Console.WriteLine("Таже строка после сеттера: " + matrix3.GetRow(0));
+            Console.WriteLine("Таже строка после сеттера: " + matrix2.GetRow(0));
             Console.WriteLine();
 
             // 2с. Получение вектора-столбца по индексу 
-            Console.WriteLine("Геттер столбца:" + matrix3.GetColumn(0));
+            Console.WriteLine("Геттер столбца:" + matrix2.GetColumn(0));
             Console.WriteLine();
 
             // 2d. Транспонирование
             matrix3.SetRow(1, vector1);
-            Console.WriteLine("транспонирование до: " + matrix3);
+            Console.WriteLine("транспонирование до: " + matrix2);
             matrix3.Transpose();
-            Console.WriteLine("транспонирование после: " + matrix3);
+            Console.WriteLine("транспонирование после: " + matrix2);
             Console.WriteLine();
 
             /*
@@ -58,7 +54,7 @@ namespace MatrixTask
             */
 
             matrix3.MultiplyByScalar(3);
-            Console.WriteLine("Умножениe на скаляр 3,3: " + matrix3);
+            Console.WriteLine("Умножениe на скаляр 3,3: " + matrix2);
             Console.WriteLine();
 
             // 2h. Умножение матрицы на вектор
@@ -66,16 +62,16 @@ namespace MatrixTask
             Vector vector = new Vector(array2);
 
             double[,] array3 = { { 3, 2 }, { 6, 2 }, { 1, 10 } };
-            Matrix matrix4 = new Matrix(array3);
+            Matrix matrix3 = new Matrix(array3);
 
-            Console.WriteLine($"Вектор: {vector} и матрица: {matrix4}");
-            Console.WriteLine("После перемножения вектор * матрица = " + matrix4.MultiplyByVector(vector));
+            Console.WriteLine($"Вектор: {vector} и матрица: {matrix3}");
+            Console.WriteLine("После перемножения вектор * матрица = " + matrix3.MultiplyByVector(vector));
             Console.WriteLine();
 
             // 2f. Вычисление определителя матрицы
             double[,] array4 = { { 2, 1 }, { 10, 11 } };
-            Matrix matrix5 = new Matrix(array4);
-            Console.WriteLine("Детерминант: " + matrix5.GetDeterminant());
+            Matrix matrix4 = new Matrix(array4);
+            Console.WriteLine("Детерминант: " + matrix4.GetDeterminant());
             Console.WriteLine();
 
             // 2.i + 2j Add; Substract
@@ -88,13 +84,13 @@ namespace MatrixTask
             Console.WriteLine("Отняли такую же матрицу: " + matrix1);
 
             // 3. Стат методы: сложение, вычитание, умножение 
-            Matrix matrix6 = Matrix.GetSum(matrix2, matrix2);
-            Matrix matrix7 = Matrix.GetDifference(matrix5, matrix6);
-            Matrix matrix8 = Matrix.GetProduct(matrix6, matrix7);
+            Matrix matrix5 = Matrix.GetSum(matrix1, matrix1);
+            Matrix matrix6 = Matrix.GetDifference(matrix4, matrix5);
+            Matrix matrix7 = Matrix.GetProduct(matrix5, matrix6);
 
+            Console.WriteLine(matrix5);
             Console.WriteLine(matrix6);
             Console.WriteLine(matrix7);
-            Console.WriteLine(matrix8);
         }
     }
 }

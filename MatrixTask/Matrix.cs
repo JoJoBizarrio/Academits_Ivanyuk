@@ -5,38 +5,43 @@ namespace MatrixTask
 {
     internal class Matrix
     {
-        private Vector[] _matrixRows;
+        private Vector[] _rows;
 
-        public int RowsCount => _matrixRows.Length;
+        public int RowsCount => _rows.Length;
 
-        public int ColumnsCount => _matrixRows[0].Dimension;
+        public int ColumnsCount => _rows[0].Dimension;
 
         public int ElementsCount => RowsCount * ColumnsCount;
 
         // 1a. Matrix(n, m) – матрица нулей размера n*m
         public Matrix(int rowsCount, int columnsCount)
         {
-            if (rowsCount <= 0 || columnsCount <= 0)
+            if (rowsCount <= 0 )
             {
-                throw new ArgumentException($"Count of rows and columns must be > 0 ({nameof(rowsCount)} = {rowsCount}; {nameof(columnsCount)} = {columnsCount})");
+                throw new ArgumentException($"Count of rows must be > 0 ({nameof(rowsCount)} = {rowsCount}).");
             }
 
-            _matrixRows = new Vector[rowsCount];
+            if (columnsCount <= 0)
+            {
+                throw new ArgumentException($"Count of columns must be > 0 ({nameof(columnsCount)} = {columnsCount}).");
+            }
+
+            _rows = new Vector[rowsCount];
 
             for (int i = 0; i < rowsCount; i++)
             {
-                _matrixRows[i] = new Vector(columnsCount);
+                _rows[i] = new Vector(columnsCount);
             }
         }
 
         // 1b. Matrix(Matrix) – конструктор копирования
         public Matrix(Matrix matrix)
         {
-            _matrixRows = new Vector[matrix.RowsCount];
+            _rows = new Vector[matrix.RowsCount];
 
             for (int i = 0; i < matrix.RowsCount; i++)
             {
-                _matrixRows[i] = new Vector(matrix._matrixRows[i]);
+                _rows[i] = new Vector(matrix._rows[i]);
             }
         }
 
@@ -48,18 +53,18 @@ namespace MatrixTask
                 throw new ArgumentException($"Empty array ({nameof(array.Length)} = {array.Length}).");
             }
 
-            _matrixRows = new Vector[array.GetLength(0)];
+            _rows = new Vector[array.GetLength(0)];
 
             for (int i = 0; i < array.GetLength(0); i++)
             {
-                _matrixRows[i] = new Vector(array.GetLength(1));
+                _rows[i] = new Vector(array.GetLength(1));
             }
 
             for (int i = 0; i < RowsCount; i++)
             {
                 for (int j = 0; j < ColumnsCount; j++)
                 {
-                    _matrixRows[i].SetElement(j, array[i, j]);
+                    _rows[i].SetElement(j, array[i, j]);
                 }
             }
         }
@@ -72,7 +77,7 @@ namespace MatrixTask
                 throw new ArgumentException($"Empty vector ({nameof(vectorsArray.Length)} = {vectorsArray.Length}).");
             }
 
-            _matrixRows = new Vector[vectorsArray.Length];
+            _rows = new Vector[vectorsArray.Length];
 
             int[] vectorsLengths = new int[vectorsArray.Length];
 
@@ -85,8 +90,8 @@ namespace MatrixTask
 
             for (int i = 0; i < RowsCount; i++)
             {
-                _matrixRows[i] = new Vector(maxLength);
-                _matrixRows[i] = new Vector(vectorsArray[i]);
+                _rows[i] = new Vector(maxLength);
+                _rows[i] = new Vector(vectorsArray[i]);
             }
         }
 
@@ -98,9 +103,7 @@ namespace MatrixTask
                 throw new ArgumentException($"Argument ({nameof(index)} = {index}) out of range: [0; {RowsCount - 1}].");
             }
 
-            Vector vector = new Vector(_matrixRows[index]);
-
-            return vector;
+            return new Vector(_rows[index]);
         }
 
         public void SetRow(int index, Vector vector)
@@ -110,8 +113,7 @@ namespace MatrixTask
                 throw new ArgumentException($"Argument ({nameof(index)} = {index}) out of range: [0; {RowsCount - 1}].");
             }
 
-            Vector temp = new Vector(vector);
-            _matrixRows[index] = temp;
+            _rows[index] = vector;
         }
 
         // 2c. Получение вектора-столбца по индексу
@@ -126,7 +128,7 @@ namespace MatrixTask
 
             for (int i = 0; i < RowsCount; i++)
             {
-                matrixColumn.SetElement(i, _matrixRows[i].GetElement(index));
+                matrixColumn.SetElement(i, _rows[i].GetElement(index));
             }
 
             return matrixColumn;
@@ -135,14 +137,14 @@ namespace MatrixTask
         // 2d. Транспонирование матрицы
         public void Transpose()
         {
-            Matrix temp = new(_matrixRows);
+            Vector[] temp = new Vector[ColumnsCount];
 
-            _matrixRows = new Vector[ColumnsCount];
-
-            for (int i = 0; i < temp.ColumnsCount; i++)
+            for (int i = 0; i < ColumnsCount; i++)
             {
-                _matrixRows[i] = temp.GetColumn(i);
+                temp[i] = GetColumn(i);
             }
+
+            _rows = temp;
         }
 
         // 2e.Умножение на скаляр
@@ -150,7 +152,7 @@ namespace MatrixTask
         {
             for (int i = 0; i < RowsCount; i++)
             {
-                _matrixRows[i].MultiplyByScalar(scalar);
+                _rows[i].MultiplyByScalar(scalar);
             }
         }
 
@@ -159,7 +161,7 @@ namespace MatrixTask
         {
             if (RowsCount != ColumnsCount)
             {
-                throw new Exception($"Matrix isn't square. {nameof(RowsCount)} = {RowsCount} isn't equal to {nameof(ColumnsCount)} = {ColumnsCount}");
+                throw new InvalidOperationException($"Matrix isn't square. {nameof(RowsCount)} = {RowsCount} isn't equal to {nameof(ColumnsCount)} = {ColumnsCount}");
             }
 
             double[,] matrixArray = new double[RowsCount, ColumnsCount];
@@ -168,7 +170,7 @@ namespace MatrixTask
             {
                 for (int j = 0; j < ColumnsCount; j++)
                 {
-                    matrixArray[i, j] = _matrixRows[i].GetElement(j);
+                    matrixArray[i, j] = _rows[i].GetElement(j);
                 }
             }
 
@@ -226,9 +228,9 @@ namespace MatrixTask
             StringBuilder stringBuilder = new StringBuilder();
             stringBuilder.Append('{');
 
-            foreach (Vector e in _matrixRows)
+            foreach (Vector e in _rows)
             {
-                stringBuilder.Append($"{e:f1}, ");
+                stringBuilder.Append($"{e}, ");
             }
 
             return stringBuilder.Remove(stringBuilder.Length - 2, 2).Append('}').ToString();
@@ -246,72 +248,13 @@ namespace MatrixTask
 
             for (int i = 0; i < RowsCount; i++)
             {
-                result.SetElement(i, Vector.GetScalarProduct(_matrixRows[i], vector));
+                result.SetElement(i, Vector.GetScalarProduct(_rows[i], vector));
             }
 
             return result;
         }
 
-        // 2i. Сложение матриц
-        public void Add(Matrix matrix)
-        {
-            if (ColumnsCount != matrix.ColumnsCount)
-            {
-                throw new ArgumentException($"It isn't equal column's number of the matrix-argument (value: {matrix.ColumnsCount}) and matrix from which method is called (value: {ColumnsCount}).");
-            }
-
-            if (RowsCount != matrix.RowsCount)
-            {
-                throw new ArgumentException($"It isn't equal row's number of the matrix-argument (value: {matrix.RowsCount}) and matrix from which method is called (value: {RowsCount}).");
-            }
-
-            for (int i = 0; i < RowsCount; i++)
-            {
-                _matrixRows[i].Add(matrix._matrixRows[i]);
-            }
-        }
-
-        // 2j. Вычитание матриц
-        public void Subtract(Matrix matrix)
-        {
-            if (ColumnsCount != matrix.ColumnsCount)
-            {
-                throw new ArgumentException($"It isn't equal column's number of the matrix-argument and matrix from which method is called ({ColumnsCount} != {matrix.ColumnsCount}).");
-            }
-
-            if (RowsCount != matrix.RowsCount)
-            {
-                throw new ArgumentException($"It isn't equal row's number of the matrix-argument and matrix from which method is called ({ColumnsCount} != {matrix.ColumnsCount}.");
-            }
-
-            for (int i = 0; i < RowsCount; i++)
-            {
-                _matrixRows[i].Subtract(matrix._matrixRows[i]);
-            }
-        }
-
-        // 3a. Статик сложение
-        public static Matrix GetSum(Matrix matrix1, Matrix matrix2)
-        {
-            if (matrix1.ColumnsCount != matrix2.ColumnsCount)
-            {
-                throw new ArgumentException($"It isn't equal column's number of the {nameof(matrix1)} (value: {matrix1.ColumnsCount}) and the {nameof(matrix2)} (value: {matrix2.ColumnsCount}).");
-            }
-
-            if (matrix1.RowsCount != matrix2.RowsCount)
-            {
-                throw new ArgumentException($"It isn't equal row's number of the {nameof(matrix1)} (value: {matrix1.RowsCount}) and {nameof(matrix2)} (value: {matrix2.RowsCount}).");
-            }
-
-            Matrix result = new(matrix1);
-
-            result.Add(matrix2);
-
-            return result;
-        }
-
-        // 3b. Статик вычитание
-        public static Matrix GetDifference(Matrix matrix1, Matrix matrix2)
+        public static void СompareMatrixSizes(Matrix matrix1, Matrix matrix2)
         {
             if (matrix1.ColumnsCount != matrix2.ColumnsCount)
             {
@@ -322,9 +265,47 @@ namespace MatrixTask
             {
                 throw new ArgumentException($"It isn't equal row's number of the {nameof(matrix1)} (value: {matrix1.RowsCount}) and the {nameof(matrix2)} ((value: {matrix2.RowsCount})).");
             }
+        }
+
+        // 2i. Сложение матриц
+        public void Add(Matrix matrix)
+        {
+            СompareMatrixSizes(this, matrix);
+
+            for (int i = 0; i < RowsCount; i++)
+            {
+                _rows[i].Add(matrix._rows[i]);
+            }
+        }
+
+        // 2j. Вычитание матриц
+        public void Subtract(Matrix matrix)
+        {
+            СompareMatrixSizes(this, matrix);
+
+            for (int i = 0; i < RowsCount; i++)
+            {
+                _rows[i].Subtract(matrix._rows[i]);
+            }
+        }
+
+        // 3a. Статик сложение
+        public static Matrix GetSum(Matrix matrix1, Matrix matrix2)
+        {
+            СompareMatrixSizes(matrix1, matrix2);
+
+            Matrix result = new(matrix1);
+            result.Add(matrix2);
+
+            return result;
+        }
+
+        // 3b. Статик вычитание
+        public static Matrix GetDifference(Matrix matrix1, Matrix matrix2)
+        {
+            СompareMatrixSizes(matrix1, matrix2);
 
             Matrix result = new Matrix(matrix1);
-
             result.Subtract(matrix2);
 
             return result;
@@ -344,7 +325,7 @@ namespace MatrixTask
             {
                 for (int j = 0; j < result.ColumnsCount; j++)
                 {
-                    result._matrixRows[i].SetElement(j, Vector.GetScalarProduct(matrix1.GetRow(i), matrix2.GetColumn(j)));
+                    result._rows[i].SetElement(j, Vector.GetScalarProduct(matrix1._rows[i], matrix2.GetColumn(j)));
                 }
             }
 

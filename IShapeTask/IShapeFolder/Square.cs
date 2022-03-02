@@ -4,7 +4,7 @@
     {
         private double _sideLength;
 
-        public double SideLength { set => SideLength = value; }
+        public double SideLength { set => _sideLength = value; }
 
         public Square(double sideSize)
         {

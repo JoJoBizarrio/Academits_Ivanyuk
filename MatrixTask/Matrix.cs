@@ -16,14 +16,9 @@ namespace MatrixTask
         // 1a. Matrix(n, m) – матрица нулей размера n*m
         public Matrix(int rowsCount, int columnsCount)
         {
-            if (rowsCount <= 0)
+            if (rowsCount <= 0 || columnsCount <= 0)
             {
-                throw new ArgumentOutOfRangeException(nameof(rowsCount), rowsCount, "Count of rows have to be > 0");
-            }
-
-            if (columnsCount <= 0)
-            {
-                throw new ArgumentOutOfRangeException(nameof(columnsCount), columnsCount, "Count of columns have to be > 0");
+                throw new ArgumentException($"Count of rows and columns must be > 0 ({nameof(rowsCount)} = {rowsCount}; {nameof(columnsCount)} = {columnsCount})");
             }
 
             _matrixRows = new Vector[rowsCount];
@@ -50,7 +45,7 @@ namespace MatrixTask
         {
             if (array.Length == 0)
             {
-                throw new ArgumentException($"Empty array {nameof(array.Length)} = {array.Length}");
+                throw new ArgumentException($"Empty array ({nameof(array.Length)} = {array.Length}).");
             }
 
             _matrixRows = new Vector[array.GetLength(0)];
@@ -74,7 +69,7 @@ namespace MatrixTask
         {
             if (vectorsArray.Length == 0)
             {
-                throw new ArgumentException($"Empty vector. {nameof(vectorsArray.Length)} = {vectorsArray.Length}");
+                throw new ArgumentException($"Empty vector ({nameof(vectorsArray.Length)} = {vectorsArray.Length}).");
             }
 
             _matrixRows = new Vector[vectorsArray.Length];
@@ -98,14 +93,9 @@ namespace MatrixTask
         // 2b. Получение и задание вектора-строки по индексу	
         public Vector GetRow(int index)
         {
-            if (index < 0)
+            if (index < 0 || index >= RowsCount)
             {
-                throw new ArgumentOutOfRangeException(nameof(index), index, "Index have to more or euqal to 0.");
-            }
-
-            if (index >= RowsCount)
-            {
-                throw new ArgumentOutOfRangeException(nameof(index), index, "Index have to less count of rows.");
+                throw new ArgumentException($"Argument ({nameof(index)} = {index}) out of range: [0; {RowsCount - 1}].");
             }
 
             Vector vector = new Vector(_matrixRows[index]);
@@ -115,14 +105,9 @@ namespace MatrixTask
 
         public void SetRow(int index, Vector vector)
         {
-            if (index < 0)
+            if (index < 0 || index >= RowsCount)
             {
-                throw new ArgumentOutOfRangeException(nameof(index), index, "Index have to more or euqal to 0.");
-            }
-
-            if (index >= RowsCount)
-            {
-                throw new ArgumentOutOfRangeException(nameof(index), index, "Index have to less count of rows.");
+                throw new ArgumentException($"Argument ({nameof(index)} = {index}) out of range: [0; {RowsCount - 1}].");
             }
 
             Vector temp = new Vector(vector);
@@ -132,14 +117,9 @@ namespace MatrixTask
         // 2c. Получение вектора-столбца по индексу
         public Vector GetColumn(int index)
         {
-            if (index < 0)
+            if (index < 0 || index >= ColumnsCount)
             {
-                throw new ArgumentOutOfRangeException(nameof(index), index, "Index have to more or euqal to 0.");
-            }
-
-            if (index >= ColumnsCount)
-            {
-                throw new ArgumentOutOfRangeException(nameof(index), index, "Index have to less then count of columns.");
+                throw new ArgumentException($"Argument ({nameof(index)} = {index}) out of range: [0; {ColumnsCount - 1}].");
             }
 
             Vector matrixColumn = new Vector(RowsCount);
@@ -155,7 +135,7 @@ namespace MatrixTask
         // 2d. Транспонирование матрицы
         public void Transpose()
         {
-            Matrix temp = new Matrix(_matrixRows);
+            Matrix temp = new(_matrixRows);
 
             _matrixRows = new Vector[ColumnsCount];
 
@@ -243,15 +223,15 @@ namespace MatrixTask
         // 2g. toString определить так, чтобы результат получался в таком виде: {{ 1, 2 }, { 2, 3 }}
         public override string ToString()
         {
-            StringBuilder matrixContent = new StringBuilder();
-            matrixContent.Append('{');
+            StringBuilder stringBuilder = new StringBuilder();
+            stringBuilder.Append('{');
 
             foreach (Vector e in _matrixRows)
             {
-                matrixContent.Append($"{e:f1}, ");
+                stringBuilder.Append($"{e:f1}, ");
             }
 
-            return matrixContent.Remove(matrixContent.Length - 2, 2).Append('}').ToString();
+            return stringBuilder.Remove(stringBuilder.Length - 2, 2).Append('}').ToString();
         }
 
         // 2h. умножение матрицы на вектор
@@ -259,7 +239,7 @@ namespace MatrixTask
         {
             if (ColumnsCount != vector.Dimension)
             {
-                throw new ArgumentException($"Count of columns (value: {ColumnsCount}) have to equal to dimension of vector (value: {vector.Dimension})");
+                throw new ArgumentException($"Count of columns (value: {ColumnsCount}) must equal to dimension of vector (value: {vector.Dimension})");
             }
 
             Vector result = new Vector(RowsCount);
@@ -277,12 +257,12 @@ namespace MatrixTask
         {
             if (ColumnsCount != matrix.ColumnsCount)
             {
-                throw new ArgumentException($"It isn't equal column's number of the matrix-argument (value: {matrix.ColumnsCount}) and matrix from which method is called (value: {ColumnsCount}).", nameof(ColumnsCount));
+                throw new ArgumentException($"It isn't equal column's number of the matrix-argument (value: {matrix.ColumnsCount}) and matrix from which method is called (value: {ColumnsCount}).");
             }
 
             if (RowsCount != matrix.RowsCount)
             {
-                throw new ArgumentException($"It isn't equal row's number of the matrix-argument (value: {matrix.RowsCount}) and matrix from which method is called (value: {RowsCount}).", nameof(RowsCount));
+                throw new ArgumentException($"It isn't equal row's number of the matrix-argument (value: {matrix.RowsCount}) and matrix from which method is called (value: {RowsCount}).");
             }
 
             for (int i = 0; i < RowsCount; i++)
@@ -296,12 +276,12 @@ namespace MatrixTask
         {
             if (ColumnsCount != matrix.ColumnsCount)
             {
-                throw new ArgumentException($"It isn't equal column's number of the matrix-argument and matrix from which method is called.", nameof(ColumnsCount));
+                throw new ArgumentException($"It isn't equal column's number of the matrix-argument and matrix from which method is called ({ColumnsCount} != {matrix.ColumnsCount}).");
             }
 
             if (RowsCount != matrix.RowsCount)
             {
-                throw new ArgumentException($"It isn't equal row's number of the matrix-argument and matrix from which method is called.", nameof(RowsCount));
+                throw new ArgumentException($"It isn't equal row's number of the matrix-argument and matrix from which method is called ({ColumnsCount} != {matrix.ColumnsCount}.");
             }
 
             for (int i = 0; i < RowsCount; i++)
@@ -315,15 +295,15 @@ namespace MatrixTask
         {
             if (matrix1.ColumnsCount != matrix2.ColumnsCount)
             {
-                throw new ArgumentException($"It isn't equal column's number of the matrix1 (value: {matrix1.ColumnsCount}) and the matrix2 (value: {matrix2.ColumnsCount}).", nameof(ColumnsCount));
+                throw new ArgumentException($"It isn't equal column's number of the {nameof(matrix1)} (value: {matrix1.ColumnsCount}) and the {nameof(matrix2)} (value: {matrix2.ColumnsCount}).");
             }
 
             if (matrix1.RowsCount != matrix2.RowsCount)
             {
-                throw new ArgumentException($"It isn't equal row's number of the matrix1 (value: {matrix1.RowsCount}) and matrix2 (value: {matrix2.RowsCount}).", nameof(RowsCount));
+                throw new ArgumentException($"It isn't equal row's number of the {nameof(matrix1)} (value: {matrix1.RowsCount}) and {nameof(matrix2)} (value: {matrix2.RowsCount}).");
             }
 
-            Matrix result = new Matrix(matrix1);
+            Matrix result = new(matrix1);
 
             result.Add(matrix2);
 
@@ -335,12 +315,12 @@ namespace MatrixTask
         {
             if (matrix1.ColumnsCount != matrix2.ColumnsCount)
             {
-                throw new ArgumentException($"It isn't equal column's number of the matrix1 (value: {matrix1.ColumnsCount}) and the matrix2 ((value: {matrix2.ColumnsCount})).");
+                throw new ArgumentException($"It isn't equal column's number of the {nameof(matrix1)} (value: {matrix1.ColumnsCount}) and the {nameof(matrix2)} ((value: {matrix2.ColumnsCount})).");
             }
 
             if (matrix1.RowsCount != matrix2.RowsCount)
             {
-                throw new ArgumentException($"It isn't equal row's number of the matrix1 () and matrix2.");
+                throw new ArgumentException($"It isn't equal row's number of the {nameof(matrix1)} (value: {matrix1.RowsCount}) and the {nameof(matrix2)} ((value: {matrix2.RowsCount})).");
             }
 
             Matrix result = new Matrix(matrix1);
@@ -355,7 +335,7 @@ namespace MatrixTask
         {
             if (matrix1.ColumnsCount != matrix2.RowsCount)
             {
-                throw new ArgumentException($"Column's count = {matrix1.ColumnsCount} of matrix1 have to equal to row's count = {matrix2.RowsCount} of matrix2.");
+                throw new ArgumentException($"Column's count = {matrix1.ColumnsCount} of {nameof(matrix1)} must equal to row's count = {matrix2.RowsCount} of matrix2.");
             }
 
             Matrix result = new Matrix(matrix1.RowsCount, matrix2.ColumnsCount);

@@ -1,5 +1,4 @@
-﻿using System;
-using System.Text;
+﻿using System.Text;
 
 namespace VectorTask
 {
@@ -14,7 +13,7 @@ namespace VectorTask
         {
             if (dimension <= 0)
             {
-                throw new ArgumentOutOfRangeException(nameof(dimension), dimension, "Dimension have to be > 0");
+                throw new ArgumentException($"Dimension must be > 0 ({nameof(dimension)} = {dimension}).");
             }
 
             _components = new double[dimension];
@@ -33,7 +32,7 @@ namespace VectorTask
         {
             if (array.Length == 0)
             {
-                throw new ArgumentOutOfRangeException(nameof(array.Length), array.Length, "Length of array have to be > 0");
+                throw new ArgumentException($"Length of array must be > 0 ({nameof(array.Length)} = {array.Length}).");
             }
 
             _components = new double[array.Length];
@@ -46,7 +45,7 @@ namespace VectorTask
         {
             if (dimension <= 0)
             {
-                throw new ArgumentOutOfRangeException(nameof(dimension), dimension, "Dimension have to be > 0");
+                throw new ArgumentException($"Dimension must be > 0 ({nameof(dimension)} = {dimension}).");
             }
 
             _components = new double[dimension];
@@ -56,24 +55,18 @@ namespace VectorTask
             Array.Copy(array, _components, minDimension);
         }
 
-        // (2) Метод для получения размерности вектора.
-        public int GetDimension()
-        {
-            return _components.Length;
-        }
-
         // (3) Выдает компоненты вектора через запятую {1, 2, 3}.
         public override string ToString()
         {
-            StringBuilder vectorContent = new StringBuilder();
-            vectorContent.Append('{');
+            StringBuilder stringBuilder = new StringBuilder();
+            stringBuilder.Append('{');
 
             foreach (double e in _components)
             {
-                vectorContent.Append($"{e:f1}, ");
+                stringBuilder.Append($"{e:f1}, ");
             }
 
-            return vectorContent.Remove(vectorContent.Length - 2, 2).Append('}').ToString();
+            return stringBuilder.Remove(stringBuilder.Length - 2, 2).Append('}').ToString();
         }
 
         // (4a) Прибавление к вектору другого вектора.
@@ -135,14 +128,9 @@ namespace VectorTask
         // (4f) Получение компоненты вектора по индексу.
         public double GetElement(int index)
         {
-            if (index < 0)
+            if (index < 0 || index >= Dimension)
             {
-                throw new ArgumentOutOfRangeException(nameof(index), index, "Index less then zero.");
-            }
-
-            if (index >= Dimension)
-            {
-                throw new ArgumentOutOfRangeException(nameof(index), index, "Index more or equals then dimension of vector.");
+                throw new ArgumentException($"Argument ({nameof(index)} = {index}) out of range: [0; {Dimension - 1}].");
             }
 
             return _components[index];
@@ -153,7 +141,7 @@ namespace VectorTask
         {
             if (index < 0 || index >= Dimension)
             {
-                throw new ArgumentOutOfRangeException(nameof(index), index, "Index out of range.");
+                throw new ArgumentException($"Argument ({nameof(index)} = {index}) out of range: [0; {Dimension - 1}].");
             }
 
             _components[index] = value;

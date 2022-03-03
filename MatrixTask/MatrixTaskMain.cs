@@ -75,14 +75,7 @@ namespace MatrixTask
             matrix1.Subtract(matrix1);
             Console.WriteLine("Отняли такую же матрицу: " + matrix1);
 
-            // 3. Стат методы: сложение, вычитание, умножение 
-            Matrix matrix5 = Matrix.GetSum(matrix1, matrix1);
-            Matrix matrix6 = Matrix.GetDifference(matrix4, matrix5);
-            Matrix matrix7 = Matrix.GetProduct(matrix5, matrix6);
 
-            Console.WriteLine(matrix5);
-            Console.WriteLine(matrix6);
-            Console.WriteLine(matrix7);
         }
     }
 }

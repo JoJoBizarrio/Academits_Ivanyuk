@@ -18,12 +18,12 @@ namespace MatrixTask
         {
             if (rowsCount <= 0 )
             {
-                throw new ArgumentException($"Count of rows must be > 0 ({nameof(rowsCount)} = {rowsCount}).");
+                throw new ArgumentException($"Count of rows must be > 0 ({nameof(rowsCount)} = {rowsCount}).", nameof(rowsCount));
             }
 
             if (columnsCount <= 0)
             {
-                throw new ArgumentException($"Count of columns must be > 0 ({nameof(columnsCount)} = {columnsCount}).");
+                throw new ArgumentException($"Count of columns must be > 0 ({nameof(columnsCount)} = {columnsCount}).", nameof(columnsCount));
             }
 
             _rows = new Vector[rowsCount];
@@ -50,7 +50,7 @@ namespace MatrixTask
         {
             if (array.Length == 0)
             {
-                throw new ArgumentException($"Empty array ({nameof(array.Length)} = {array.Length}).");
+                throw new ArgumentException($"Empty array ({nameof(array.Length)} = {array.Length}).", nameof(array));
             }
 
             _rows = new Vector[array.GetLength(0)];
@@ -71,7 +71,7 @@ namespace MatrixTask
         {
             if (vectorsArray.Length == 0)
             {
-                throw new ArgumentException($"Empty vector ({nameof(vectorsArray.Length)} = {vectorsArray.Length}).");
+                throw new ArgumentException($"Empty vector ({nameof(vectorsArray.Length)} = {vectorsArray.Length}).", nameof(vectorsArray));
             }
 
             _rows = new Vector[vectorsArray.Length];
@@ -97,7 +97,7 @@ namespace MatrixTask
         {
             if (index < 0 || index >= RowsCount)
             {
-                throw new ArgumentException($"Argument ({nameof(index)} = {index}) out of range: [0; {RowsCount - 1}].");
+                throw new ArgumentException($"Argument ({nameof(index)} = {index}) out of range: [0; {RowsCount - 1}].", nameof(index));
             }
 
             return new Vector(_rows[index]);
@@ -107,7 +107,7 @@ namespace MatrixTask
         {
             if (index < 0 || index >= RowsCount)
             {
-                throw new ArgumentException($"Argument ({nameof(index)} = {index}) out of range: [0; {RowsCount - 1}].");
+                throw new ArgumentException($"Argument ({nameof(index)} = {index}) out of range: [0; {RowsCount - 1}].", nameof(index));
             }
 
             _rows[index] = vector;
@@ -118,7 +118,7 @@ namespace MatrixTask
         {
             if (index < 0 || index >= ColumnsCount)
             {
-                throw new ArgumentException($"Argument ({nameof(index)} = {index}) out of range: [0; {ColumnsCount - 1}].");
+                throw new ArgumentException($"Argument ({nameof(index)} = {index}) out of range: [0; {ColumnsCount - 1}].", nameof(index));
             }
 
             Vector matrixColumn = new Vector(RowsCount);
@@ -153,14 +153,8 @@ namespace MatrixTask
             }
         }
 
-        // 2f. Вычисление определителя матрицы 
-        public double GetDeterminant()
+        public double[,] ConvertToArray()
         {
-            if (RowsCount != ColumnsCount)
-            {
-                throw new InvalidOperationException($"Matrix isn't square. {nameof(RowsCount)} = {RowsCount} isn't equal to {nameof(ColumnsCount)} = {ColumnsCount}");
-            }
-
             double[,] matrixArray = new double[RowsCount, ColumnsCount];
 
             for (int i = 0; i < RowsCount; i++)
@@ -170,6 +164,19 @@ namespace MatrixTask
                     matrixArray[i, j] = _rows[i].GetElement(j);
                 }
             }
+
+            return matrixArray;
+        }
+
+        // 2f. Вычисление определителя матрицы 
+        public double GetDeterminant()
+        {
+            if (RowsCount != ColumnsCount)
+            {
+                throw new InvalidOperationException($"Matrix isn't square. {nameof(RowsCount)} = {RowsCount} isn't equal to {nameof(ColumnsCount)} = {ColumnsCount}");
+            }
+
+            double[,] matrixArray = ConvertToArray();
 
             int swapsCount = 0;
             const double epsilon = 1.0e-10;

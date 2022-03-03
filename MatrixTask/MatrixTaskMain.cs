@@ -44,15 +44,7 @@ namespace MatrixTask
             matrix2.Transpose();
             Console.WriteLine("транспонирование после: " + matrix2);
             Console.WriteLine();
-
             
-            // 2e.Умножение на скаляр
-            vector1.SetElement(1, 3.3);
-            Array.Resize(ref vector1., 2);
-            matrix2.SetRow(0, vector1);
-            Console.WriteLine($"Матрица: {matrix2}\t");
-            
-
             matrix2.MultiplyByScalar(3);
             Console.WriteLine("Умножениe на скаляр 3,3: " + matrix2);
             Console.WriteLine();

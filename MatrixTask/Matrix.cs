@@ -121,7 +121,7 @@ namespace MatrixTask
                 throw new ArgumentException($"Argument ({nameof(index)} = {index}) out of range: [0; {ColumnsCount - 1}].", nameof(index));
             }
 
-            Vector matrixColumn = new Vector(RowsCount);
+            Vector matrixColumn = new(RowsCount);
 
             for (int i = 0; i < RowsCount; i++)
             {
@@ -229,7 +229,7 @@ namespace MatrixTask
         // 2g. toString определить так, чтобы результат получался в таком виде: {{ 1, 2 }, { 2, 3 }}
         public override string ToString()
         {
-            StringBuilder stringBuilder = new StringBuilder();
+            StringBuilder stringBuilder = new();
             stringBuilder.Append('{');
 
             foreach (Vector e in _rows)
@@ -248,7 +248,7 @@ namespace MatrixTask
                 throw new ArgumentException($"Count of columns (value: {ColumnsCount}) must equal to dimension of vector (value: {vector.Dimension})");
             }
 
-            Vector result = new Vector(RowsCount);
+            Vector result = new(RowsCount);
 
             for (int i = 0; i < RowsCount; i++)
             {
@@ -309,7 +309,7 @@ namespace MatrixTask
         {
             СompareMatrixSizes(matrix1, matrix2);
 
-            Matrix result = new Matrix(matrix1);
+            Matrix result = new(matrix1);
             result.Subtract(matrix2);
 
             return result;
@@ -323,7 +323,7 @@ namespace MatrixTask
                 throw new ArgumentException($"Column's count = {matrix1.ColumnsCount} of {nameof(matrix1)} must equal to row's count = {matrix2.RowsCount} of matrix2.");
             }
 
-            Matrix result = new Matrix(matrix1.RowsCount, matrix2.ColumnsCount);
+            Matrix result = new(matrix1.RowsCount, matrix2.ColumnsCount);
 
             for (int i = 0; i < result.RowsCount; i++)
             {

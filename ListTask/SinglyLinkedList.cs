@@ -1,32 +1,39 @@
-﻿using System.Collections.Generic;
-
-namespace ListTask
+﻿namespace ListTask
 {
-    internal class ListItem<T>
+    internal class SinglyLinkedList<T>
     {
-        private T? _data;
-        private ListItem<T>? _next;
-        private ListItem<T>? _randomListItemElement;
+        private ListItem<T> _head;
+        private int _count;
 
-        public T Data { get => Data; set => _data = value; }
-        public ListItem<T>? Next = null!; // { get; set; }
-        public ListItem<T>? RandomListItemElement { get; }
-        
-        public ListItem(T data, ListItem<T> next)
+        public ListItem<T> Head { get => _head; set => _head = value; }
+
+        public int Count
         {
-            if (data is null)
+            get
             {
-                return;
+                for (ListItem<T> i = _head; i != null; i = i.Next)
+                {
+
+                }
             }
 
-            _data = data;
-            _next = next;
+           
         }
 
-        public ListItem(T data)
+        int count = 0;
+        int
+    // for ( ListItem<T> i = _head; i != null ; p = p.Next ) 
+    //  {
+    // Console.WriteLine p.Data
+
+
+
+
+    public int GetCapacity()
         {
-            _data = data;
+            return _count;
         }
+
 
 
     }
@@ -56,3 +63,4 @@ namespace ListTask
 •	Это достаточно сложно алгоритмически
 •	Generic’и
 */
+

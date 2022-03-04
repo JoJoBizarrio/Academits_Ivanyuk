@@ -44,15 +44,7 @@ namespace MatrixTask
             matrix2.Transpose();
             Console.WriteLine("транспонирование после: " + matrix2);
             Console.WriteLine();
-
             
-            // 2e.Умножение на скаляр
-            vector1.SetElement(1, 3.3);
-            Array.Resize(ref vector1., 2);
-            matrix2.SetRow(0, vector1);
-            Console.WriteLine($"Матрица: {matrix2}\t");
-            
-
             matrix2.MultiplyByScalar(3);
             Console.WriteLine("Умножениe на скаляр 3,3: " + matrix2);
             Console.WriteLine();
@@ -83,14 +75,7 @@ namespace MatrixTask
             matrix1.Subtract(matrix1);
             Console.WriteLine("Отняли такую же матрицу: " + matrix1);
 
-            // 3. Стат методы: сложение, вычитание, умножение 
-            Matrix matrix5 = Matrix.GetSum(matrix1, matrix1);
-            Matrix matrix6 = Matrix.GetDifference(matrix4, matrix5);
-            Matrix matrix7 = Matrix.GetProduct(matrix5, matrix6);
 
-            Console.WriteLine(matrix5);
-            Console.WriteLine(matrix6);
-            Console.WriteLine(matrix7);
         }
     }
 }

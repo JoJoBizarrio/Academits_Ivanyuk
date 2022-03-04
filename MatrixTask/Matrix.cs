@@ -16,7 +16,7 @@ namespace MatrixTask
         // 1a. Matrix(n, m) – матрица нулей размера n*m
         public Matrix(int rowsCount, int columnsCount)
         {
-            if (rowsCount <= 0 )
+            if (rowsCount <= 0)
             {
                 throw new ArgumentException($"Count of rows must be > 0 ({nameof(rowsCount)} = {rowsCount}).", nameof(rowsCount));
             }
@@ -76,19 +76,24 @@ namespace MatrixTask
 
             _rows = new Vector[vectorsArray.Length];
 
-            int[] vectorsLengths = new int[vectorsArray.Length];
+            int maxLength = vectorsArray[0].Dimension;
 
-            for (int i = 0; i < vectorsArray.Length; i++)
+            for (int i = 1; i < vectorsArray.Length; i++)
             {
-                vectorsLengths[i] = (int)vectorsArray[i].Dimension;
+                if (vectorsArray[i].Dimension > maxLength)
+                {
+                    maxLength = vectorsArray[i].Dimension;
+                }
             }
-
-            int maxLength = vectorsLengths.Max();
 
             for (int i = 0; i < RowsCount; i++)
             {
                 _rows[i] = new Vector(maxLength);
-                _rows[i] = new Vector(vectorsArray[i]);
+
+                for(int j = 0; j < vectorsArray[i].Dimension; j++)
+                {
+                    _rows[i].SetElement(j, vectorsArray[i].GetElement(j));
+                }
             }
         }
 
@@ -153,19 +158,20 @@ namespace MatrixTask
             }
         }
 
+        // вспомогательное для детерминанта
         public double[,] ConvertToArray()
         {
-            double[,] matrixArray = new double[RowsCount, ColumnsCount];
+            double[,] array = new double[RowsCount, ColumnsCount];
 
             for (int i = 0; i < RowsCount; i++)
             {
                 for (int j = 0; j < ColumnsCount; j++)
                 {
-                    matrixArray[i, j] = _rows[i].GetElement(j);
+                    array[i, j] = _rows[i].GetElement(j);
                 }
             }
 
-            return matrixArray;
+            return array;
         }
 
         // 2f. Вычисление определителя матрицы 
@@ -178,8 +184,8 @@ namespace MatrixTask
 
             double[,] matrixArray = ConvertToArray();
 
-            int swapsCount = 0;
             const double epsilon = 1.0e-10;
+            int swapsCount = 0;
 
             for (int i = 0; i < RowsCount - 1; ++i)
             {
@@ -258,7 +264,7 @@ namespace MatrixTask
             return result;
         }
 
-        public static void СompareMatrixSizes(Matrix matrix1, Matrix matrix2)
+        public static void СompareMatrixsSizes(Matrix matrix1, Matrix matrix2)
         {
             if (matrix1.ColumnsCount != matrix2.ColumnsCount)
             {
@@ -274,7 +280,7 @@ namespace MatrixTask
         // 2i. Сложение матриц
         public void Add(Matrix matrix)
         {
-            СompareMatrixSizes(this, matrix);
+            СompareMatrixsSizes(this, matrix);
 
             for (int i = 0; i < RowsCount; i++)
             {
@@ -285,7 +291,7 @@ namespace MatrixTask
         // 2j. Вычитание матриц
         public void Subtract(Matrix matrix)
         {
-            СompareMatrixSizes(this, matrix);
+            СompareMatrixsSizes(this, matrix);
 
             for (int i = 0; i < RowsCount; i++)
             {
@@ -296,7 +302,7 @@ namespace MatrixTask
         // 3a. Статик сложение
         public static Matrix GetSum(Matrix matrix1, Matrix matrix2)
         {
-            СompareMatrixSizes(matrix1, matrix2);
+            СompareMatrixsSizes(matrix1, matrix2);
 
             Matrix result = new(matrix1);
             result.Add(matrix2);
@@ -307,7 +313,7 @@ namespace MatrixTask
         // 3b. Статик вычитание
         public static Matrix GetDifference(Matrix matrix1, Matrix matrix2)
         {
-            СompareMatrixSizes(matrix1, matrix2);
+            СompareMatrixsSizes(matrix1, matrix2);
 
             Matrix result = new(matrix1);
             result.Subtract(matrix2);

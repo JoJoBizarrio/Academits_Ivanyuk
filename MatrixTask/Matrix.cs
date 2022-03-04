@@ -1,5 +1,5 @@
 ﻿using System.Text;
-using Vector = VectorTask.Vector;
+using VectorTask;
 
 namespace MatrixTask
 {

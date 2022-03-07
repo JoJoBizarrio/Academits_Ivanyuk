@@ -18,6 +18,8 @@ namespace ListTask
             list.InsertValueInBegin(1102);
             Console.WriteLine(list);
             Console.WriteLine(copyList);
+
+            Console.WriteLine(list.Head);
             ListItem<int> int2 = new(int1);
             
             Console.WriteLine(int1);
@@ -30,6 +32,7 @@ namespace ListTask
 
             list.Revert();
             Console.WriteLine(list);
+            Console.WriteLine(list.Head);
             */
         }
     }

@@ -1,58 +1,65 @@
 ﻿using System.Collections.Generic;
+using System;
 
 namespace ListTask
 {
     internal class ListItem<T>
     {
-        private T? _data;
+        private T _data;
         private ListItem<T>? _next;
-        private ListItem<T>? _randomListItemElement;
+        // private ListItem<T>? _randomListItem;
 
-        public T Data { get => Data; set => _data = value; }
-        public ListItem<T>? Next = null!; // { get; set; }
-        public ListItem<T>? RandomListItemElement { get; }
-        
-        public ListItem(T data, ListItem<T> next)
+        public T Data { get => _data; set => _data = value; }
+        public ListItem<T>? Next { get => _next; set => _next = value; }
+
+        // public ListItem<T>? RandomListItem { get => _randomListItem; }
+
+        public ListItem(T data, ListItem<T>? next)
         {
             if (data is null)
             {
-                return;
+                throw new ArgumentNullException(nameof(data), $"Argument {nameof(data)} could not null");
             }
 
             _data = data;
             _next = next;
         }
 
+        public ListItem(ref ListItem<T> head)
+        {
+            if (head.Data is null)
+            {
+                throw new ArgumentNullException(nameof(head), $"Argument {nameof(head)} could not null");
+            }
+
+            _next = head;
+        }
         public ListItem(T data)
         {
             _data = data;
+            _next = null;
         }
 
+        public ListItem(ListItem<T> listItem)
+        {
+            _data = listItem.Data;
+            _next = listItem.Next;
+        }
 
+        public ListItem<T>? GetNext()
+        {
+            return _next;
+        }
+
+        public void CopyTo(ListItem<T> destinationItem)
+        {
+            destinationItem.Data = _data;
+            destinationItem.Next = _next;
+        }
+
+        public override string ToString()
+        {
+            return _data.ToString();
+        }
     }
 }
-
-/*
-1. Сделать классы для односвязного списка и узла списка.
-Для эффективности сделайте поле для хранения длины списка.
-
-Надо реализовать методы:
-•	получение размера списка
-•	получение значение первого элемента
-•	получение/изменение значения по указанному индексу. 
-Изменение значения по индексу пусть выдает старое значение.
-•	удаление элемента по индексу, пусть выдает значение элемента
-•	вставка элемента в начало
-•	вставка элемента по индексу
-•	удаление узла по значению, пусть выдает true, если элемент был удален
-•	удаление первого элемента, пусть выдает значение элемента
-•	разворот списка за линейное время
-•	копирование списка
-
-2* (Эта задача просто для ознакомления, проверяться она не будет). Есть односвязный список, каждый элемент которого хранит дополнительную ссылку на произвольный элемент списка. Эта ссылка может быть и null.
-Надо создать копию этого списка, чтобы в копии эти произвольные ссылки ссылались на соответствующие элементы в копии.
-Чему научитесь:
-•	Понимание односвязных списков
-•	Это достаточно сложно алгоритмически
-•	Generic’и
-*/

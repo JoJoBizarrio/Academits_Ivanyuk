@@ -1,0 +1,7 @@
+﻿namespace ArrayListTask
+{
+    class ArrayListMain
+    {
+
+    }
+}

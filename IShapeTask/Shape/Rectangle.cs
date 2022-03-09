@@ -1,39 +1,40 @@
-﻿namespace IShapeTask.IShapeFolder
+﻿namespace IShapeTask.Shape
 {
-    internal class Circle : IShape
+    internal class Rectangle : IShape
     {
-        private double _radius;
+        public double Width { get; set; }
 
-        public double Radius { set => _radius = value; }
+        public double Height { get; set; }
 
-        public Circle(double radius)
+        public Rectangle(double width, double heigth)
         {
-            _radius = radius;
+            Width = width;
+            Height = heigth;
         }
 
         public double GetWidth()
         {
-            return 2 * _radius;
+            return Width;
         }
 
         public double GetHeight()
         {
-            return GetWidth();
+            return Height;
         }
 
         public double GetArea()
         {
-            return Math.PI * _radius * _radius;
+            return Width * Height;
         }
 
         public double GetPerimeter()
         {
-            return 2 * Math.PI * _radius;
+            return 2 * (Width + Height);
         }
 
         public override string ToString()
         {
-            return $"Shape: Circle, Radius: {_radius:f1}, Area: {GetArea():f1}, Perimeter: {GetPerimeter():f1}";
+            return $"Shape: Rectangle, Width: {Width:f1}, Height: {Height:f1}, Area: {GetArea():f1}, Perimeter: {GetPerimeter():f1}";
         }
 
         public override bool Equals(object obj)
@@ -48,9 +49,9 @@
                 return false;
             }
 
-            Circle circle = (Circle)obj;
+            Rectangle rectangle = (Rectangle)obj;
 
-            return _radius == circle._radius ? true : false;
+            return Width == rectangle.Width && Height == rectangle.Height;
         }
 
         public override int GetHashCode()
@@ -58,7 +59,8 @@
             int hash = 1;
             int prime = 31;
 
-            hash = prime * hash + _radius.GetHashCode();
+            hash = prime * hash + Width.GetHashCode();
+            hash = prime * hash + Height.GetHashCode();
 
             return hash;
         }

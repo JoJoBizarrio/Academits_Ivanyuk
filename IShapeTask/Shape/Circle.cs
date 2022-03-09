@@ -1,19 +1,17 @@
-﻿namespace IShapeTask.IShapeFolder
+﻿namespace IShapeTask.Shape
 {
     internal class Circle : IShape
     {
-        private double _radius;
-
-        public double Radius { set => _radius = value; }
+        public double Radius { get ; set; }
 
         public Circle(double radius)
         {
-            _radius = radius;
+            Radius = radius;
         }
 
         public double GetWidth()
         {
-            return 2 * _radius;
+            return 2 * Radius;
         }
 
         public double GetHeight()
@@ -23,17 +21,17 @@
 
         public double GetArea()
         {
-            return Math.PI * _radius * _radius;
+            return Math.PI * Radius * Radius;
         }
 
         public double GetPerimeter()
         {
-            return 2 * Math.PI * _radius;
+            return 2 * Math.PI * Radius;
         }
 
         public override string ToString()
         {
-            return $"Shape: Circle, Radius: {_radius:f1}, Area: {GetArea():f1}, Perimeter: {GetPerimeter():f1}";
+            return $"Shape: Circle, Radius: {Radius:f1}, Area: {GetArea():f1}, Perimeter: {GetPerimeter():f1}";
         }
 
         public override bool Equals(object obj)
@@ -50,7 +48,7 @@
 
             Circle circle = (Circle)obj;
 
-            return _radius == circle._radius ? true : false;
+            return Radius == circle.Radius;
         }
 
         public override int GetHashCode()
@@ -58,7 +56,7 @@
             int hash = 1;
             int prime = 31;
 
-            hash = prime * hash + _radius.GetHashCode();
+            hash = prime * hash + Radius.GetHashCode();
 
             return hash;
         }

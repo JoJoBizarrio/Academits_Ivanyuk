@@ -1,43 +1,40 @@
-﻿namespace IShapeTask.IShapeFolder
+﻿namespace IShapeTask.Shape
 {
     internal class Rectangle : IShape
     {
-        private double _width;
+        public double Width { get; set; }
 
-        private double _heigth;
-
-        public double Width { set => _width = value; }
-        public double Height { set => _heigth = value; }
-
+        public double Height { get; set; }
+      
         public Rectangle(double width, double heigth)
         {
-            _width = width;
-            _heigth = heigth;
+            Width = width;
+            Height = heigth;
         }
 
         public double GetWidth()
         {
-            return _width;
+            return Width;
         }
 
         public double GetHeight()
         {
-            return _heigth;
+            return Height;
         }
 
         public double GetArea()
         {
-            return _width * _heigth;
+            return Width * Height;
         }
 
         public double GetPerimeter()
         {
-            return 2 * (_width + _heigth);
+            return 2 * (Width + Height);
         }
 
         public override string ToString()
         {
-            return $"Shape: Rectangle, Width: {_width:f1}, Height: {_heigth:f1}, Area: {GetArea():f1}, Perimeter: {GetPerimeter():f1}";
+            return $"Shape: Rectangle, Width: {Width:f1}, Height: {Height:f1}, Area: {GetArea():f1}, Perimeter: {GetPerimeter():f1}";
         }
 
         public override bool Equals(object obj)
@@ -54,7 +51,7 @@
 
             Rectangle rectangle = (Rectangle)obj;
 
-            return _width == rectangle._width && _heigth == rectangle._heigth ? true : false;
+            return Width == rectangle.Width && Height == rectangle.Height;
         }
 
         public override int GetHashCode()
@@ -62,8 +59,8 @@
             int hash = 1;
             int prime = 31;
 
-            hash = prime * hash + _width.GetHashCode();
-            hash = prime * hash + _heigth.GetHashCode();
+            hash = prime * hash + Width.GetHashCode();
+            hash = prime * hash + Height.GetHashCode();
 
             return hash;
         }

@@ -19,7 +19,17 @@ namespace IShapeTask
 
         static void Main(string[] args)
         {
-            IShape[] shapesArray = { new Rectangle(5, 13), new Rectangle(22, 8), new Circle(21), new Circle(11), new Square(21), new Square(11), new Triangle(0, 0, 21, 0, 0, 11), new Triangle(-13, 5, 2, 15, 1, 1) };
+            IShape[] shapesArray =
+            {
+                new Rectangle(5, 13),
+                new Rectangle(22, 8),
+                new Circle(21),
+                new Circle(11),
+                new Square(21),
+                new Square(11),
+                new Triangle(0, 0, 21, 0, 0, 11),
+                new Triangle(-13, 5, 2, 15, 1, 1)
+            };
 
             Console.WriteLine("Shape with MaxArea: " + GetShapeWithMaxArea(shapesArray));
             Console.WriteLine();

@@ -49,6 +49,7 @@
             Square square = (Square)obj;
 
             return SideLength == square.SideLength;
+        }
 
         public override int GetHashCode()
         {

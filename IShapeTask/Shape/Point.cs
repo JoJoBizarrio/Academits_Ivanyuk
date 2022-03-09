@@ -2,32 +2,29 @@
 {
     internal class Point
     {
-        private double _x;
-        private double _y;
-
-        public double X { get => _x; set => _x = value; }
-        public double Y { get => _y; set => _y = value; }
+        public double X { get; set; }
+        public double Y { get; set; }
 
         public Point(double x, double y)
         {
-            _x = x;
-            _y = y;
+            X = x;
+            Y = y;
         }
 
         // чем отличаются две нижние функции? кроме того что статик он для всех объектов класса
         public double GetDistance(Point point)
         {
-            return Math.Sqrt(Math.Pow(_x - point._x, 2) * Math.Pow(_y - point._y, 2)); // эта функция изменит координаты точки this ?
+            return Math.Sqrt(Math.Pow(X - point.X, 2) * Math.Pow(Y - point.Y, 2)); // эта функция изменит координаты точки this ?
         }
 
         public static double GetDistance(Point point1, Point point2)
         {
-            return Math.Sqrt(Math.Pow((point2._x - point1._x), 2) * Math.Pow((point2._y - point1._y), 2));
+            return Math.Sqrt(Math.Pow((point2.X - point1.X), 2) * Math.Pow((point2.Y - point1.Y), 2));
         }
 
         public override string ToString()
         {
-            return $"({_x:f1}, {_y:f1})";
+            return $"({X:f1}, {Y:f1})";
         }
 
         public override bool Equals(object obj)
@@ -44,7 +41,7 @@
 
             Point cartesianPoint = (Point)obj;
 
-            return _x == cartesianPoint._x && _y == cartesianPoint._y;
+            return X == cartesianPoint.X && Y == cartesianPoint.Y;
         }
 
         public override int GetHashCode()
@@ -52,8 +49,8 @@
             int hash = 1;
             int prime = 11;
 
-            hash = prime * hash + _x.GetHashCode();
-            hash = prime * hash + _y.GetHashCode();
+            hash = prime * hash + X.GetHashCode();
+            hash = prime * hash + Y.GetHashCode();
 
             return hash;
         }

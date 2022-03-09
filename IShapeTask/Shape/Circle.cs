@@ -2,7 +2,7 @@
 {
     internal class Circle : IShape
     {
-        private double _radius;
+        public double Radius { get; set; }
 
         public Circle(double radius)
         {

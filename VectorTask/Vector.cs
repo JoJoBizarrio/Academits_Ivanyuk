@@ -13,7 +13,7 @@ namespace VectorTask
         {
             if (dimension <= 0)
             {
-                throw new ArgumentException($"Dimension must be > 0 ({nameof(dimension)} = {dimension}).");
+                throw new ArgumentException($"Dimension must be > 0 ({nameof(dimension)} = {dimension}).", nameof(dimension));
             }
 
             _components = new double[dimension];
@@ -32,7 +32,7 @@ namespace VectorTask
         {
             if (array.Length == 0)
             {
-                throw new ArgumentException($"Length of array must be > 0 ({nameof(array.Length)} = {array.Length}).");
+                throw new ArgumentException($"Length of array must be > 0 ({nameof(array.Length)} = {array.Length}).", nameof(array.Length));
             }
 
             _components = new double[array.Length];
@@ -45,7 +45,7 @@ namespace VectorTask
         {
             if (dimension <= 0)
             {
-                throw new ArgumentException($"Dimension must be > 0 ({nameof(dimension)} = {dimension}).");
+                throw new ArgumentException($"Dimension must be > 0 ({nameof(dimension)} = {dimension}).", nameof(dimension));
             }
 
             _components = new double[dimension];
@@ -130,7 +130,7 @@ namespace VectorTask
         {
             if (index < 0 || index >= Dimension)
             {
-                throw new ArgumentException($"Argument ({nameof(index)} = {index}) out of range: [0; {Dimension - 1}].");
+                throw new ArgumentOutOfRangeException(nameof(index), index, $"Argument out of range: [0; {Dimension - 1}].");
             }
 
             return _components[index];
@@ -141,7 +141,7 @@ namespace VectorTask
         {
             if (index < 0 || index >= Dimension)
             {
-                throw new ArgumentException($"Argument ({nameof(index)} = {index}) out of range: [0; {Dimension - 1}].");
+                throw new ArgumentOutOfRangeException(nameof(index), index, $"Argument out of range: [0; {Dimension - 1}].");
             }
 
             _components[index] = value;
@@ -154,7 +154,7 @@ namespace VectorTask
             {
                 return true;
             }
-                
+
             if (ReferenceEquals(obj, null) || obj.GetType() != GetType())
             {
                 return false;

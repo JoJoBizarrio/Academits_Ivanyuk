@@ -1,8 +1,8 @@
-﻿using IShapeTask.IShapeFolder;
+﻿using IShapeTask.Shape;
 
-namespace IShapeTask.SupportingClassesFolder
+namespace IShapeTask.Comparators
 {
-    public class FigureAreaComparer : IComparer<IShape>
+    public class ShapeAreaComparer : IComparer<IShape>
     {
         public int Compare(IShape shape1, IShape shape2)
         {

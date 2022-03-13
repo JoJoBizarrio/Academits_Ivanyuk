@@ -1,6 +1,6 @@
-﻿namespace ArrayListTask
+﻿namespace ListTask
 {
-    class ArrayListMain
+    class ListMain
     {
 
     }

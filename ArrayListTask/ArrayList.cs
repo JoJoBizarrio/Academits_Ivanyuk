@@ -43,31 +43,14 @@
 
         public void Insert(int index, T value)
         {
-            T[] temp = new T[_length - index];
+            T[] temp = new T[_length - index + 1];
 
-            Array.Copy(_items, index, temp, 0, _length - index + 1);
+            Array.Copy(_items, index + 1, temp, 0, _length - index + 1);
 
-            _items[index] = value;
-
-            Array.Copy(temp, 0, _items, index + 1, _length - index + 1);
-
-            _length += 1;
-        }
-
-        public void RemoveAt(int index)
+        public void Add(T value)
         {
-            int i = _length - index;
-            int j = index;
 
-            while (i > 0)
-            {
-                (_items[j]) = (_items[j+1]);
-
-                ++j;
-                --i;
-            }
-
-            _length -= 1;
+            for (int i = )
         }
 
 

@@ -43,16 +43,45 @@
 
         public void Insert(int index, T value)
         {
-            T[] temp = new T[_length - index + 1];
+            Array.Copy(_items, index, _items, _length + 1, _length - index + 1);
 
-            Array.Copy(_items, index + 1, temp, 0, _length - index + 1);
+            _items[index] = value;
+
+            Array.Copy(_items, _length + 1, _items, index + 1, _length - index + 1);
+
+            _length += 1;
+        }
+
+        public void RemoveAt(int index)
+        {
+            Array.Copy(_items, index + 1, _items, index, _length - index + 1);
+        }
 
         public void Add(T value)
         {
-
-            for (int i = )
+            _items[_length] = value;
+            _length++;
         }
 
+        public void Add(params T[] value)
+        {
+            for (int i = 0; i < value.Length; ++i)
+            {
+                Add(value[i]);
+            }
+        }
 
+        public void Clear()
+        {
+            if (_items.GetType() is bool)
+            {
+                for (int i = 0; i < _items.Length; i++)
+                {
+                    _items[i] = T;
+                }
+            }
+
+
+        }
     }
 }

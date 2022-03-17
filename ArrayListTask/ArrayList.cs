@@ -41,15 +41,25 @@
             return -1;
         }
 
-        public void Insert(int index, T value)
+        //public void Insert(int index, T value)
+        //{
+        //    Array.Copy(_items, index, _items, _length + 1, _length - index + 1);
+
+        //    _items[index] = value;
+
+        //    Array.Copy(_items, _length + 1, _items, index + 1, _length - index + 1);
+
+        //    _length += 1;
+        //}
+
+        //public void RemoveAt(int index)
+        //{
+        //    Array.Copy(_items, index + 1, _items, index, _length - index + 1);
+        //}
+
+        public void Add(T value)
         {
-            T[] temp = new T[_length - index + 1];
 
-            Array.Copy(_items, index + 1, temp, 0, _length - index + 1);
-
-            _items[index] = value;
-
-            for (int i = )
         }
     }
 }

@@ -73,15 +73,17 @@
 
         public void Clear()
         {
-            if (_items.GetType() is bool)
-            {
-                for (int i = 0; i < _items.Length; i++)
-                {
-                    _items[i] = T;
-                }
-            }
-
-
+            Array.Clear(_items);
         }
+
+        public void HandMadeClear()
+        {
+            for (int i = 0; i < _length; ++i)
+            {
+                _items[i] = default;
+            }
+        }
+
+
     }
 }

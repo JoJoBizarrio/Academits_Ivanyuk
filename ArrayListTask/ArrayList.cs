@@ -4,7 +4,9 @@
     {
         private T[] _items = new T[10];
         private int _length;
+        private int _modCount = 0;
 
+        public bool IsReadOnly { get; }  // что это и зачем?
         public int Count { get => _length; }
 
         public T this[int index]
@@ -49,26 +51,33 @@
 
             Array.Copy(_items, _length + 1, _items, index + 1, _length - index + 1);
 
-            _length += 1;
+            _length++;
+            _modCount++;
         }
 
         public void RemoveAt(int index)
         {
             Array.Copy(_items, index + 1, _items, index, _length - index + 1);
+            _modCount++;
         }
 
         public void Add(T value)
         {
             _items[_length] = value;
             _length++;
+            _modCount++;
         }
 
         public void Add(params T[] value)
         {
+            this.Expand();
+
             for (int i = 0; i < value.Length; ++i)
             {
                 Add(value[i]);
             }
+
+            _modCount++;
         }
 
         public void Clear()
@@ -76,11 +85,79 @@
             Array.Clear(_items);
         }
 
-        public void HandMadeClear()
+        //public void HandMadeClear()
+        //{
+        //    for (int i = 0; i < _length; ++i)
+        //    {
+        //        _items[i] = default;
+        //    }
+        //}
+
+        public bool Contains(T value)
         {
+            this.Expand();
+            return _items.Contains(value);
+        }
+
+        //public int HandMadeContains(T value)
+        //{
+        //    int count = 0;
+
+        //    foreach (T e in _items)
+        //    {
+        //        if (e.Equals(value))
+        //        {
+        //            count++;
+        //        }
+        //    }
+
+        //    return count;
+        //}
+
+        public bool Remove(T value)
+        {
+            this.Expand();
+
+            try
+            {
+                this.RemoveAt(this.IndexOf(value));
+                _length--;
+                return true;
+            }
+            catch
+            {
+                return false;
+            }
+        }
+
+        public void CopyTo(T[] arrayList, int index)
+        {
+            _items.CopyTo(arrayList, index);
+        }
+
+        public IEnumerator<T> GetEnumerator()
+        {
+            int modCount = _modCount;
+
             for (int i = 0; i < _length; ++i)
             {
-                _items[i] = default;
+                if (modCount == _modCount)
+                {
+                    yield return _items[i];
+                }
+            }
+        }
+
+        IEnumerator<T> IEnumerable<T>.GetEnumerator()
+        {
+            return GetEnumerator();
+        }
+
+        public void Expand()
+        {
+            if (_items.Length / 2 <= _length)
+            {
+                Array.Resize(ref _items, 4 * _length);
             }
         }
 

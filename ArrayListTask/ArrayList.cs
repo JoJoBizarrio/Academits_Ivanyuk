@@ -45,6 +45,8 @@
 
         public void Insert(int index, T value)
         {
+            this.Expand();
+
             Array.Copy(_items, index, _items, _length + 1, _length - index + 1);
 
             _items[index] = value;
@@ -63,6 +65,8 @@
 
         public void Add(T value)
         {
+            this.Expand();
+
             _items[_length] = value;
             _length++;
             _modCount++;
@@ -70,8 +74,6 @@
 
         public void Add(params T[] value)
         {
-            this.Expand();
-
             for (int i = 0; i < value.Length; ++i)
             {
                 Add(value[i]);
@@ -122,6 +124,7 @@
             {
                 this.RemoveAt(this.IndexOf(value));
                 _length--;
+                _modCount++;
                 return true;
             }
             catch
@@ -137,30 +140,31 @@
 
         public IEnumerator<T> GetEnumerator()
         {
+            _modCount = 0;
             int modCount = _modCount;
 
             for (int i = 0; i < _length; ++i)
             {
-                if (modCount == _modCount)
+                if (modCount != _modCount)
                 {
-                    yield return _items[i];
+                    throw new InvalidOperationException("list changed");
                 }
+
+                yield return _items[i];
             }
         }
 
         IEnumerator<T> IEnumerable<T>.GetEnumerator()
         {
-            return GetEnumerator();
+            return this.GetEnumerator();
         }
 
-        public void Expand()
+        private void Expand()
         {
-            if (_items.Length / 2 <= _length)
+            if (_items.Length / 3 <= _length)
             {
                 Array.Resize(ref _items, 4 * _length);
             }
         }
-
-
     }
 }

@@ -1,4 +1,6 @@
-﻿namespace ListTask
+﻿using System.Collections;
+
+namespace ListTask
 {
     internal class List<T> : IList<T>
     {
@@ -48,7 +50,7 @@
 
         public void Insert(int index, T value)
         {
-            if (index <= 0 ||index >= _length)
+            if (index <= 0 || index >= _length)
             {
                 throw new IndexOutOfRangeException($"fo {nameof(index)} = {index}");
             }
@@ -160,6 +162,16 @@
             {
                 Array.Resize(ref _items, (int)(_length / 0.9));
             }
+        }
+
+        IEnumerator IEnumerable.GetEnumerator()
+        {
+            throw new NotImplementedException();
+        }
+
+        public override string ToString()
+        {
+            return  $"{String.Join(", ", this)} + {String.}Capacity = {Capacity} + {String.Empty}Count = {Count} + {String.Empty}EmptyItems = {Capacity - Count}";
         }
 
         //public void HandMadeClear()

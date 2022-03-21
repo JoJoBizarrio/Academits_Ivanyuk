@@ -2,12 +2,13 @@
 {
     internal class List<T> : IList<T>
     {
-        private T[] _items = new T[10];
+        private T[] _items;
         private int _length;
         private int _modCount = 0;
 
         public bool IsReadOnly { get; }  // что это и зачем?
         public int Count { get => _length; }
+        public int Capacity { get => _items.Length; }
 
         public T this[int index]
         {
@@ -17,17 +18,19 @@
 
         public List()
         {
+            _items = new T[10];
             _length = 0;
         }
 
         public List(int count)
         {
-            _length = count;
-
-            if (count <= _items.Length)
+            if (count <= 0)
             {
-                Array.Resize(ref _items, count + count);
+                throw new ArgumentException($"fo {nameof(count)} = {count}");
             }
+
+            _items = new T[count];
+            _length = count;
         }
 
         public int IndexOf(T value)
@@ -45,13 +48,18 @@
 
         public void Insert(int index, T value)
         {
+            if (index <= 0 ||index >= _length)
+            {
+                throw new IndexOutOfRangeException($"fo {nameof(index)} = {index}");
+            }
+
             this.Expand();
 
-            Array.Copy(_items, index, _items, _length + 1, _length - index + 1);
+            Array.Copy(_items, index, _items, _length + 2, _length - index + 1);
 
             _items[index] = value;
 
-            Array.Copy(_items, _length + 1, _items, index + 1, _length - index + 1);
+            Array.Copy(_items, _length + 2, _items, index + 1, _length - index + 1);
 
             _length++;
             _modCount++;
@@ -59,7 +67,13 @@
 
         public void RemoveAt(int index)
         {
+            if (index <= 0 || index >= _length)
+            {
+                throw new IndexOutOfRangeException($"fo {nameof(index)} = {index}");
+            }
+
             Array.Copy(_items, index + 1, _items, index, _length - index + 1);
+            _length--;
             _modCount++;
         }
 
@@ -78,8 +92,6 @@
             {
                 Add(value[i]);
             }
-
-            _modCount++;
         }
 
         public void Clear()
@@ -87,34 +99,11 @@
             Array.Clear(_items);
         }
 
-        //public void HandMadeClear()
-        //{
-        //    for (int i = 0; i < _length; ++i)
-        //    {
-        //        _items[i] = default;
-        //    }
-        //}
-
         public bool Contains(T value)
         {
             this.Expand();
             return _items.Contains(value);
         }
-
-        //public int HandMadeContains(T value)
-        //{
-        //    int count = 0;
-
-        //    foreach (T e in _items)
-        //    {
-        //        if (e.Equals(value))
-        //        {
-        //            count++;
-        //        }
-        //    }
-
-        //    return count;
-        //}
 
         public bool Remove(T value)
         {
@@ -123,8 +112,6 @@
             try
             {
                 this.RemoveAt(this.IndexOf(value));
-                _length--;
-                _modCount++;
                 return true;
             }
             catch
@@ -147,7 +134,7 @@
             {
                 if (modCount != _modCount)
                 {
-                    throw new InvalidOperationException("list changed");
+                    throw new InvalidOperationException($"List changed. Step:{i}");
                 }
 
                 yield return _items[i];
@@ -166,5 +153,36 @@
                 Array.Resize(ref _items, 4 * _length);
             }
         }
+
+        public void TrimExcess()
+        {
+            if (_length / Capacity <= 0.9)
+            {
+                Array.Resize(ref _items, (int)(_length / 0.9));
+            }
+        }
+
+        //public void HandMadeClear()
+        //{
+        //    for (int i = 0; i < _length; ++i)
+        //    {
+        //        _items[i] = default;
+        //    }
+        //}
+
+        //public int HandMadeContains(T value)
+        //{
+        //    int count = 0;
+
+        //    foreach (T e in _items)
+        //    {
+        //        if (e.Equals(value))
+        //        {
+        //            count++;
+        //        }
+        //    }
+
+        //    return count;
+        //}
     }
 }

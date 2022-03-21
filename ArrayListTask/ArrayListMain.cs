@@ -1,4 +1,6 @@
-﻿namespace ListTask
+﻿using ListTask;
+
+namespace ListTask
 {
     class ListMain
     {

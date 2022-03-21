@@ -2,7 +2,7 @@
 {
     internal class List<T> : IList<T>
     {
-        private T[] _items;
+        public T[] _items;
         private int _length;
         private int _modCount = 0;
 
@@ -30,7 +30,7 @@
             }
 
             _items = new T[count];
-            _length = count;
+            _length = 0;
         }
 
         public int IndexOf(T value)

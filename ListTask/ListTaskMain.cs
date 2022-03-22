@@ -6,7 +6,6 @@ namespace ListTask
     {
         public static void Main(string[] args)
         {
-            /*
             SinglyLinkedList<int> list = new SinglyLinkedList<int>(3, 2, 3, 7, 11);
             Console.WriteLine(list);
 
@@ -17,6 +16,7 @@ namespace ListTask
 
             list.InsertValue(3, 5);
             Console.WriteLine(list);
+
             list.InsertValueInBegin(1102);
             Console.WriteLine(list);
             Console.WriteLine(copyList);
@@ -26,7 +26,6 @@ namespace ListTask
             list.Revert();
             Console.WriteLine(list);
             Console.WriteLine(list.Head);
-            */
         }
     }
 }

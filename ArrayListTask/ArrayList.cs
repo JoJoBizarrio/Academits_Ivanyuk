@@ -37,15 +37,7 @@ namespace ListTask
 
         public int IndexOf(T value)
         {
-            for (int i = 0; i < _length; i++)
-            {
-                if (_items[i].Equals(value))
-                {
-                    return i;
-                }
-            }
-
-            return -1;
+            return Array.IndexOf(_items, value);
         }
 
         public void Insert(int index, T value)
@@ -57,7 +49,8 @@ namespace ListTask
 
             this.Expand();
 
-            Array.Copy(_items, index, _items, _length + 2, _length - index + 1);
+            // вот такая реализация вставки не использутеся? то есть используем сам лист как буфер обмена но тогда capacity всегда должен быть в 2 раза больше длины массива:
+            Array.Copy(_items, index, _items, _length + 2, _length - index + 1); 
 
             _items[index] = value;
 
@@ -69,7 +62,7 @@ namespace ListTask
 
         public void RemoveAt(int index)
         {
-            if (index <= 0 || index >= _length)
+            if (index < 0 || index >= _length)
             {
                 throw new IndexOutOfRangeException($"fo {nameof(index)} = {index}");
             }
@@ -143,7 +136,7 @@ namespace ListTask
             }
         }
 
-        IEnumerator<T> IEnumerable<T>.GetEnumerator()
+        IEnumerator IEnumerable.GetEnumerator()
         {
             return this.GetEnumerator();
         }
@@ -152,7 +145,7 @@ namespace ListTask
         {
             if (_items.Length / 3 <= _length)
             {
-                Array.Resize(ref _items, 4 * _length);
+                Array.Resize(ref _items, 6 * _length);
             }
         }
 
@@ -164,37 +157,14 @@ namespace ListTask
             }
         }
 
-        IEnumerator IEnumerable.GetEnumerator()
-        {
-            throw new NotImplementedException();
-        }
-
         public override string ToString()
         {
-            return  $"{String.Join(", ", this)} + {String.}Capacity = {Capacity} + {String.Empty}Count = {Count} + {String.Empty}EmptyItems = {Capacity - Count}";
+            return $"{String.Join(", ", this)}.";
         }
 
-        //public void HandMadeClear()
-        //{
-        //    for (int i = 0; i < _length; ++i)
-        //    {
-        //        _items[i] = default;
-        //    }
-        //}
-
-        //public int HandMadeContains(T value)
-        //{
-        //    int count = 0;
-
-        //    foreach (T e in _items)
-        //    {
-        //        if (e.Equals(value))
-        //        {
-        //            count++;
-        //        }
-        //    }
-
-        //    return count;
-        //}
+        public string GetInformation()
+        {
+            return $"{String.Join(", ", this)}. \nCapacity = {Capacity} \nCount = {Count} \nEmptyItems = {Capacity - Count}\n";
+        }
     }
 }

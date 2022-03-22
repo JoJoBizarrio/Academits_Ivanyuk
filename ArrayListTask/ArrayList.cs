@@ -49,7 +49,7 @@ namespace ListTask
 
             this.Expand();
 
-            // вот такая реализация вставки не использутеся? то есть используем сам лист как буфер обмена но тогда capacity всегда должен быть в 2 раза больше длины:
+            // вот такая реализация вставки не использутеся? то есть используем сам лист как хранилище но тогда capacity всегда должен быть в 2 раза больше длины:
             Array.Copy(_items, index, _items, _length + 2, _length - index + 1);
 
             _items[index] = value;
@@ -164,7 +164,7 @@ namespace ListTask
 
         public string GetInformation()
         {
-            return $"{String.Join(", ", this)}. \nCapacity = {Capacity} \nCount = {Count} \nEmptyItems = {Capacity - Count}\n";
+            return $"{String.Join(", ", this)}. \nCapacity = {Capacity}; \nCount = {Count}; \nEmptyItems = {Capacity - Count};\n";
         }
     }
 }

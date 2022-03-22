@@ -9,7 +9,7 @@ namespace MatrixTask
             // 1c. Matrix(double[][]) – из двумерного массива(в C# double[,])
             double[,] array1 = { { 2, 3 }, { 4, 5 } };
             Matrix matrix1 = new Matrix(array1);
-            Console.Write(matrix1);
+            Console.WriteLine(matrix1);
 
             // 1d. Matrix(Vector[]) – из массива векторов-строк
             Vector[] vectorsArray = new Vector[2];

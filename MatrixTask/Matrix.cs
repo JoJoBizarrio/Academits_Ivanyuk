@@ -76,21 +76,21 @@ namespace MatrixTask
 
             _rows = new Vector[vectorsArray.Length];
 
-            int maxLength = vectorsArray[0].Dimension;
+            int maxDimension = vectorsArray[0].Dimension;
 
             for (int i = 1; i < vectorsArray.Length; i++)
             {
-                if (vectorsArray[i].Dimension > maxLength)
+                if (vectorsArray[i].Dimension > maxDimension)
                 {
-                    maxLength = vectorsArray[i].Dimension;
+                    maxDimension = vectorsArray[i].Dimension;
                 }
             }
 
             for (int i = 0; i < RowsCount; i++)
             {
-                _rows[i] = new Vector(maxLength);
+                _rows[i] = new Vector(maxDimension);
 
-                for(int j = 0; j < vectorsArray[i].Dimension; j++)
+                for (int j = 0; j < vectorsArray[i].Dimension; j++)
                 {
                     _rows[i].SetElement(j, vectorsArray[i].GetElement(j));
                 }
@@ -102,7 +102,7 @@ namespace MatrixTask
         {
             if (index < 0 || index >= RowsCount)
             {
-                throw new ArgumentException($"Argument ({nameof(index)} = {index}) out of range: [0; {RowsCount - 1}].", nameof(index));
+                throw new ArgumentOutOfRangeException(nameof(index), index, $"Argument out of range: [0; {RowsCount - 1}].");
             }
 
             return new Vector(_rows[index]);
@@ -112,10 +112,15 @@ namespace MatrixTask
         {
             if (index < 0 || index >= RowsCount)
             {
-                throw new ArgumentException($"Argument ({nameof(index)} = {index}) out of range: [0; {RowsCount - 1}].", nameof(index));
+                throw new ArgumentOutOfRangeException(nameof(index), index, $"Argument out of range: [0; {RowsCount - 1}].");
             }
 
-            _rows[index] = vector;
+            if (ColumnsCount != vector.Dimension)
+            {
+                throw new ArgumentException($"Length of vector isn't equal to columns count of matrix ({ColumnsCount} ≠ {vector.Dimension})", nameof(vector.Dimension));
+            }
+
+            _rows[index] = new Vector(vector);
         }
 
         // 2c. Получение вектора-столбца по индексу
@@ -123,7 +128,7 @@ namespace MatrixTask
         {
             if (index < 0 || index >= ColumnsCount)
             {
-                throw new ArgumentException($"Argument ({nameof(index)} = {index}) out of range: [0; {ColumnsCount - 1}].", nameof(index));
+                throw new ArgumentOutOfRangeException(nameof(index), index, $"Argument out of range: [0; {ColumnsCount - 1}].");
             }
 
             Vector matrixColumn = new(RowsCount);
@@ -139,14 +144,14 @@ namespace MatrixTask
         // 2d. Транспонирование матрицы
         public void Transpose()
         {
-            Vector[] temp = new Vector[ColumnsCount];
+            Vector[] newLines = new Vector[ColumnsCount];
 
             for (int i = 0; i < ColumnsCount; i++)
             {
-                temp[i] = GetColumn(i);
+                newLines[i] = GetColumn(i);
             }
 
-            _rows = temp;
+            _rows = newLines;
         }
 
         // 2e.Умножение на скаляр
@@ -251,7 +256,7 @@ namespace MatrixTask
         {
             if (ColumnsCount != vector.Dimension)
             {
-                throw new ArgumentException($"Count of columns (value: {ColumnsCount}) must equal to dimension of vector (value: {vector.Dimension})");
+                throw new ArgumentException($"Dimension of vector (value: {vector.Dimension}) must be equal to count of columns (value: {ColumnsCount}) ", nameof(vector.Dimension));
             }
 
             Vector result = new(RowsCount);
@@ -264,23 +269,23 @@ namespace MatrixTask
             return result;
         }
 
-        public static void СompareMatrixsSizes(Matrix matrix1, Matrix matrix2)
+        public static void СompareMatrixSizes(Matrix matrix1, Matrix matrix2)
         {
             if (matrix1.ColumnsCount != matrix2.ColumnsCount)
             {
-                throw new ArgumentException($"It isn't equal column's number of the {nameof(matrix1)} (value: {matrix1.ColumnsCount}) and the {nameof(matrix2)} ((value: {matrix2.ColumnsCount})).");
+                throw new ArgumentException($"It isn't equal column's count of the {nameof(matrix1)} (value: {matrix1.ColumnsCount}) and the {nameof(matrix2)} ((value: {matrix2.ColumnsCount})).");
             }
 
             if (matrix1.RowsCount != matrix2.RowsCount)
             {
-                throw new ArgumentException($"It isn't equal row's number of the {nameof(matrix1)} (value: {matrix1.RowsCount}) and the {nameof(matrix2)} ((value: {matrix2.RowsCount})).");
+                throw new ArgumentException($"It isn't equal row's count of the {nameof(matrix1)} (value: {matrix1.RowsCount}) and the {nameof(matrix2)} ((value: {matrix2.RowsCount})).");
             }
         }
 
         // 2i. Сложение матриц
         public void Add(Matrix matrix)
         {
-            СompareMatrixsSizes(this, matrix);
+            СompareMatrixSizes(this, matrix);
 
             for (int i = 0; i < RowsCount; i++)
             {
@@ -291,7 +296,7 @@ namespace MatrixTask
         // 2j. Вычитание матриц
         public void Subtract(Matrix matrix)
         {
-            СompareMatrixsSizes(this, matrix);
+            СompareMatrixSizes(this, matrix);
 
             for (int i = 0; i < RowsCount; i++)
             {
@@ -302,7 +307,7 @@ namespace MatrixTask
         // 3a. Статик сложение
         public static Matrix GetSum(Matrix matrix1, Matrix matrix2)
         {
-            СompareMatrixsSizes(matrix1, matrix2);
+            СompareMatrixSizes(matrix1, matrix2);
 
             Matrix result = new(matrix1);
             result.Add(matrix2);
@@ -313,7 +318,7 @@ namespace MatrixTask
         // 3b. Статик вычитание
         public static Matrix GetDifference(Matrix matrix1, Matrix matrix2)
         {
-            СompareMatrixsSizes(matrix1, matrix2);
+            СompareMatrixSizes(matrix1, matrix2);
 
             Matrix result = new(matrix1);
             result.Subtract(matrix2);

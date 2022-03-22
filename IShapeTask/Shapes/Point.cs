@@ -3,6 +3,7 @@
     internal class Point
     {
         public double X { get; set; }
+
         public double Y { get; set; }
 
         public Point(double x, double y)
@@ -11,15 +12,9 @@
             Y = y;
         }
 
-        // чем отличаются две нижние функции? кроме того что статик он для всех объектов класса
-        public double GetDistance(Point point)
-        {
-            return Math.Sqrt(Math.Pow(X - point.X, 2) * Math.Pow(Y - point.Y, 2)); // эта функция изменит координаты точки this ?
-        }
-
         public static double GetDistance(Point point1, Point point2)
         {
-            return Math.Sqrt(Math.Pow((point2.X - point1.X), 2) * Math.Pow((point2.Y - point1.Y), 2));
+            return Math.Sqrt(Math.Pow(point2.X - point1.X, 2) + Math.Pow(point2.Y - point1.Y, 2));
         }
 
         public override string ToString()
@@ -39,9 +34,9 @@
                 return false;
             }
 
-            Point cartesianPoint = (Point)obj;
+            Point point = (Point)obj;
 
-            return X == cartesianPoint.X && Y == cartesianPoint.Y;
+            return X == point.X && Y == point.Y;
         }
 
         public override int GetHashCode()

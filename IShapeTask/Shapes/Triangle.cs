@@ -61,11 +61,11 @@
                 return false;
             }
 
-            Triangle cicle = (Triangle)obj;
+            Triangle triangle = (Triangle)obj;
 
-            return _point1.Equals(cicle._point1) &
-                   _point2.Equals(cicle._point2) &
-                   _point3.Equals(cicle._point3);
+            return _point1.Equals(triangle._point1) &&
+                   _point2.Equals(triangle._point2) &&
+                   _point3.Equals(triangle._point3);
         }
 
         public override int GetHashCode()

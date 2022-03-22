@@ -26,8 +26,6 @@ namespace ListTask
 
             listTest.Add(3, 4, 2, 3, 4);
             Console.WriteLine(listTest.GetInformation());
-
-            
         }
     }
 }

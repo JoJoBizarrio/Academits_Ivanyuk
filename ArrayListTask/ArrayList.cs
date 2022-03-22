@@ -28,7 +28,7 @@ namespace ListTask
         {
             if (count <= 0)
             {
-                throw new ArgumentException($"fo {nameof(count)} = {count}");
+                throw new ArgumentException($"Count mast be > 0 {nameof(count)} = {count}", nameof(count));
             }
 
             _items = new T[count];
@@ -44,13 +44,13 @@ namespace ListTask
         {
             if (index <= 0 || index >= _length)
             {
-                throw new IndexOutOfRangeException($"fo {nameof(index)} = {index}");
+                throw new ArgumentOutOfRangeException(nameof(index), index, $"Argument out of range: [0, {_length - 1}]");
             }
 
             this.Expand();
 
             // вот такая реализация вставки не использутеся? то есть используем сам лист как буфер обмена но тогда capacity всегда должен быть в 2 раза больше длины массива:
-            Array.Copy(_items, index, _items, _length + 2, _length - index + 1); 
+            Array.Copy(_items, index, _items, _length + 2, _length - index + 1);
 
             _items[index] = value;
 
@@ -62,9 +62,9 @@ namespace ListTask
 
         public void RemoveAt(int index)
         {
-            if (index < 0 || index >= _length)
+            if (index <= 0 || index >= _length)
             {
-                throw new IndexOutOfRangeException($"fo {nameof(index)} = {index}");
+                throw new ArgumentOutOfRangeException(nameof(index), index, $"Argument out of range: [0, {_length - 1}]");
             }
 
             Array.Copy(_items, index + 1, _items, index, _length - index + 1);

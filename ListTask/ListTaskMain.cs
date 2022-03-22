@@ -12,7 +12,6 @@ namespace ListTask
             SinglyLinkedList<int> copyList = list.Copy();
 
             Console.WriteLine(list);
-            ListItem<int> int1 = new(5);
 
             list.InsertValue(3, 5);
             Console.WriteLine(list);

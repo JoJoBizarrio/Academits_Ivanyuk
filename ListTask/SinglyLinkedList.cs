@@ -14,13 +14,8 @@ namespace ListTask
         // получение размера списка
         public int Count => _count;
 
-        public SinglyLinkedList(T data)
-        {
-            if (data is null)
-            {
-                throw new ArgumentNullException(nameof(data), $"Argument {nameof(data)} could not null");
-            }
-
+        public SinglyLinkedList(T? data)
+        {       
             ListItem<T> firstItem = new(data, null);
             _head = new ListItem<T>(ref firstItem);
             _count++;
@@ -30,7 +25,7 @@ namespace ListTask
         {
             if (data.Length == 0)
             {
-                throw new ArgumentException($"Empty array {nameof(data.Length)}", nameof(data.Length));
+                throw new ArgumentException($"Empty array {nameof(data.Length)} = {data.Length}.", nameof(data.Length));
             }
 
             ListItem<T> item = new(data[0], null);
@@ -97,13 +92,8 @@ namespace ListTask
         }
 
         // вставка элемента в начало
-        public void InsertValueInBegin(T data)
+        public void InsertValueInBegin(T? data)
         {
-            if (data is null)
-            {
-                throw new ArgumentNullException(nameof(data), $"Argument {nameof(data)} could not null");
-            }
-
             _count++;
             ListItem<T> item = new(data, _head.Next);
             _head.Next = item;
@@ -121,10 +111,10 @@ namespace ListTask
 
             if (index < _count)
             {
-                item.Next = GetListItem(index);
+                item.Next = GetListItem(index + 1);
             }
 
-            GetListItem(index - 1).Next = item;
+            GetListItem(index).Next = item;
 
             _count++;
         }
@@ -132,6 +122,11 @@ namespace ListTask
         // удаление узла по значению, пусть выдает true, если элемент был удален
         public bool RemoveItem(int index)
         {
+            if (index < 0 || index >= 0)
+            {
+                throw new ArgumentOutOfRangeException(nameof(index), index, $"Argument out of range: [0; {_count - 1}].");
+            }
+
             GetListItem(index - 1).Next = GetListItem(index + 1);
             return true;
         }
@@ -193,7 +188,5 @@ namespace ListTask
 
             return stringBuilder.ToString();
         }
-
-     
     }
 }

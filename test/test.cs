@@ -19,3 +19,5 @@ Console.WriteLine();
 Console.WriteLine(array4.Rank);
 Console.WriteLine(array4.GetLength(0));
 Console.WriteLine(array4.GetLength(1));
+
+Console.WriteLine(3.2.GetHashCode());

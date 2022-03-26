@@ -1,9 +1,14 @@
 ﻿namespace TreeTask
 {
-    class TreeTaskMain
+    internal class TreeTask<T>
     {
-        static void Main(string[] args)
+        private TreeNode<T> root;
+
+        private TreeNode<T> treeNode;
+
+        public TreeTask(params T[] array)
         {
+            
 
         }
     }

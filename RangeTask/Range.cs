@@ -1,4 +1,4 @@
-﻿using System;
+﻿using System.Text;
 
 namespace RangeTask
 {
@@ -8,7 +8,7 @@ namespace RangeTask
 
         private double _to;
 
-        // вместо ==4. Сделать метод для получения длины диапазона==, свойство:
+        // вместо {4. Сделать метод для получения длины диапазона}, свойство:
         public double Length => _to - _from;
 
         // 2. Описать конструктор, при помощи которого заполняются поля
@@ -24,10 +24,7 @@ namespace RangeTask
             return number >= _from && number <= _to;
         }
 
-        public override string ToString()
-        {
-            return $"({_from}; {_to})";
-        }
+       
 
         // Получение интервала-пересечения двух интервалов. Если пересечения нет, выдать null. Если есть, то выдать новый диапазон с соответствующими концами
         public Range GetIntersection(Range range)
@@ -73,6 +70,28 @@ namespace RangeTask
             }
 
             return new Range[] { new Range(_from, range._from), new Range(_to, range._to) };
+        }
+
+        public override string ToString()
+        {
+            return $"({_from}; {_to})";
+        }
+
+        public static string ToString(Range[] range)
+        {
+            StringBuilder stringBuilder = new();
+
+            foreach (Range e in range)
+            {
+                stringBuilder.Append(e);
+            }
+
+            if (stringBuilder.ToString() == string.Empty)
+            {
+                return "Lack of range";
+            }
+
+            return stringBuilder.ToString();
         }
     }
 }

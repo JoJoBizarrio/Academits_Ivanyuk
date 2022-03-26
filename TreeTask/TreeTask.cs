@@ -8,7 +8,6 @@
 
         public TreeTask(params T[] array)
         {
-            
 
         }
     }

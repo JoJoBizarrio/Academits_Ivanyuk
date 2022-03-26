@@ -31,18 +31,20 @@ namespace RangeTask
 
             Console.WriteLine();
 
-            Console.WriteLine(range1.GetSum(range2));
-            Console.WriteLine(range1.GetSum(range3));
-            Console.WriteLine(range1.GetSum(range4));
-            Console.WriteLine(range1.GetSum(range5));
-            Console.WriteLine(range1.GetSum(range6));
+            Console.WriteLine("Check sum");
+            Console.WriteLine(Range.ToString(range1.GetSum(range2)));
+            Console.WriteLine(Range.ToString(range1.GetSum(range3)));
+            Console.WriteLine(Range.ToString(range1.GetSum(range4)));
+            Console.WriteLine(Range.ToString(range1.GetSum(range5)));
+            Console.WriteLine(Range.ToString(range1.GetSum(range6)));
 
             Console.WriteLine();
 
-            Console.WriteLine(range1.GetDifference(range3));
-            Console.WriteLine(range1.GetDifference(range4));
-            Console.WriteLine(range1.GetDifference(range5));
-            Console.WriteLine(range1.GetDifference(range6));
+            Console.WriteLine("Check difference");
+            Console.WriteLine(Range.ToString(range1.GetDifference(range3)));
+            Console.WriteLine(Range.ToString(range1.GetDifference(range4)));
+            Console.WriteLine(Range.ToString(range1.GetDifference(range5)));
+            Console.WriteLine(Range.ToString(range1.GetDifference(range6)));
         }
     }
 }

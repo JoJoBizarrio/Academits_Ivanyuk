@@ -1,4 +1,4 @@
-﻿namespace IShapeTask.Shape
+﻿namespace IShapeTask.Shapes
 {
     internal class Point
     {

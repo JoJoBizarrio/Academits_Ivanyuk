@@ -1,4 +1,4 @@
-﻿namespace IShapeTask.Shape
+﻿namespace IShapeTask.Shapes
 {
     internal class Rectangle : IShape
     {
@@ -6,10 +6,10 @@
 
         public double Height { get; set; }
       
-        public Rectangle(double width, double heigth)
+        public Rectangle(double width, double height)
         {
             Width = width;
-            Height = heigth;
+            Height = height;
         }
 
         public double GetWidth()

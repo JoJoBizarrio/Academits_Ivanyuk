@@ -23,15 +23,13 @@ namespace RangeTask
             Range range6 = new Range(40, 50);   // не пересекаются
 
             Console.WriteLine();
-
             Console.WriteLine(range1.GetIntersection(range3));
             Console.WriteLine(range1.GetIntersection(range4));
             Console.WriteLine(range1.GetIntersection(range5));
             Console.WriteLine(range1.GetIntersection(range6));
 
             Console.WriteLine();
-
-            Console.WriteLine("Check sum");
+            Console.WriteLine("Check sum:");
             Console.WriteLine(Range.ToString(range1.GetSum(range2)));
             Console.WriteLine(Range.ToString(range1.GetSum(range3)));
             Console.WriteLine(Range.ToString(range1.GetSum(range4)));
@@ -39,8 +37,7 @@ namespace RangeTask
             Console.WriteLine(Range.ToString(range1.GetSum(range6)));
 
             Console.WriteLine();
-
-            Console.WriteLine("Check difference");
+            Console.WriteLine("Check difference:");
             Console.WriteLine(Range.ToString(range1.GetDifference(range3)));
             Console.WriteLine(Range.ToString(range1.GetDifference(range4)));
             Console.WriteLine(Range.ToString(range1.GetDifference(range5)));

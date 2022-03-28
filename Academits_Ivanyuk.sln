@@ -21,9 +21,11 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "ArrayListTask", "ArrayListT
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "HashTableTask", "HashTableTask\HashTableTask.csproj", "{0E43136A-DB03-4EF5-88F6-305AB3C91E22}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TreeTask", "TreeTask\TreeTask.csproj", "{B4E7A5A1-8541-4D36-A042-CBCA6BC77036}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "TreeTask", "TreeTask\TreeTask.csproj", "{B4E7A5A1-8541-4D36-A042-CBCA6BC77036}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ArrayListHomeTask", "ArrayListHome\ArrayListHomeTask.csproj", "{B039251E-FE2D-4FB1-9C16-B863D8C083B7}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "ArrayListHomeTask", "ArrayListHome\ArrayListHomeTask.csproj", "{B039251E-FE2D-4FB1-9C16-B863D8C083B7}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "LambdaTask", "lambdaTask\LambdaTask.csproj", "{3188A38D-4D71-468B-BBEB-4A3E43A45D98}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -75,6 +77,10 @@ Global
 		{B039251E-FE2D-4FB1-9C16-B863D8C083B7}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{B039251E-FE2D-4FB1-9C16-B863D8C083B7}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{B039251E-FE2D-4FB1-9C16-B863D8C083B7}.Release|Any CPU.Build.0 = Release|Any CPU
+		{3188A38D-4D71-468B-BBEB-4A3E43A45D98}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{3188A38D-4D71-468B-BBEB-4A3E43A45D98}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{3188A38D-4D71-468B-BBEB-4A3E43A45D98}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{3188A38D-4D71-468B-BBEB-4A3E43A45D98}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

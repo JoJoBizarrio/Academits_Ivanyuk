@@ -41,9 +41,9 @@ namespace MatrixTask
 
             // 2d. Транспонирование
             matrix2.SetRow(1, vector1);
-            Console.WriteLine("транспонирование до: " + matrix2);
+            Console.WriteLine("Транспонирование до: " + matrix2);
             matrix2.Transpose();
-            Console.WriteLine("транспонирование после: " + matrix2);
+            Console.WriteLine("Транспонирование после: " + matrix2);
             Console.WriteLine();
 
             matrix2.MultiplyByScalar(3);

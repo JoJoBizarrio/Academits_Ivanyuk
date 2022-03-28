@@ -139,7 +139,7 @@ namespace HashTableTask
                     info.Append($"{e}; ");
                 }
 
-                info.Append("\n");
+                info.Append('\n');
             }
 
             return info.ToString();

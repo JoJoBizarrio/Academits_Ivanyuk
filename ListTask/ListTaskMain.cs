@@ -13,7 +13,7 @@ namespace ListTask
 
             Console.WriteLine(list);
 
-            list.InsertValue(3, 5);
+            list.Insert(3, 5);
             Console.WriteLine(list);
 
             list.InsertFirst(1102);

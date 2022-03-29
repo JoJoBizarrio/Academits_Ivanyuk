@@ -12,7 +12,12 @@
 
         public TreeNode<T>? Right { get => _right; set => _right = value; }
 
-
+        public TreeNode(T? data)
+        {
+            _data = data;
+            _left = null;
+            _right = null;
+        }
         //public TreeNode<T> GetLeftChild()
         //{
         //    return _left;

@@ -49,8 +49,6 @@ namespace LambdaTask
             //Г) при помощи группировки получить Map , в котором ключи имена, а значения средний возраст
             Dictionary<string, List<Person>> personsByName = people.GroupBy(x => x.Name).ToDictionary(x => x.Key, x => x.ToList());
 
-            Console.WriteLine(String.Join(", ", personsByName));
-
             //Д) получить людей, возраст которых от 20 до 45, вывести в консоль их имена в порядке убывания возраста
             var peopleBetween20and45 = people.Where(x => x.Age >= 20 && x.Age <= 45 ).OrderByDescending(x => x.Age);
 

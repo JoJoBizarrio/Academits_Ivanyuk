@@ -1,27 +1,7 @@
-﻿using System.Linq;
-using LambdaTask;
-
-namespace LambdaTask
+﻿namespace LambdaTask
 {
     class LambdaTask
     {
-        //public delegate bool Predicate<T>(T value);
-
-        //public static List<T> Filter<T>(List<T> list, Predicate<T> f)
-        //{
-        //    List<T> result = new List<T>();
-
-        //    foreach (T e in list)
-        //    {
-        //        if (f(e))
-        //        {
-        //            result.Add(e);
-        //        }
-        //    }
-
-        //    return result;
-        //}
-
         static void Main(string[] randomName)
         {
             Person person1 = new("Misha", 15);

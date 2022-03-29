@@ -35,9 +35,9 @@ namespace LambdaTask
             List<Person> people = new() { person1, person2, person3, person4, person5, person6, person7 };
 
             //А) получить список уникальных имен + Б) вывести список уникальных имен в формате:
-            var peopleNames = people.Select(x => x.Name);
+            var peopleNames = people.Select(x => x.Name).Distinct();
 
-            Console.WriteLine("Имена: " + String.Join(", ", peopleNames.Distinct()));
+            Console.WriteLine("Имена: " + String.Join(", ", peopleNames));
 
             //В) получить список людей младше 18, посчитать для них средний возраст
 

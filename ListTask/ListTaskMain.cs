@@ -16,15 +16,15 @@ namespace ListTask
             list.InsertValue(3, 5);
             Console.WriteLine(list);
 
-            list.InsertValueInBegin(1102);
+            list.InsertFirst(1102);
             Console.WriteLine(list);
             Console.WriteLine(copyList);
 
-            Console.WriteLine(list.Head);
+            Console.WriteLine(list.GetFirst());
 
             list.Revert();
             Console.WriteLine(list);
-            Console.WriteLine(list.Head);
+            Console.WriteLine(list.GetFirst());
         }
     }
 }

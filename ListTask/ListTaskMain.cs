@@ -6,7 +6,7 @@ namespace ListTask
     {
         public static void Main(string[] args)
         {
-            SinglyLinkedList<int> list = new SinglyLinkedList<int>(3, 2, 3, 7, 11);
+            SinglyLinkedList<int> list = new(3, 2, 3, 7, 11);
             Console.WriteLine(list);
 
             SinglyLinkedList<int> copyList = list.Copy();

@@ -25,6 +25,7 @@ namespace ListTask
             if (dataset.Length == 0)
             {
                 new SinglyLinkedList<T>();
+                return;
             }
 
             _head = new ListItem<T>(dataset[0]);
@@ -47,17 +48,18 @@ namespace ListTask
         // вставка элемента в начало
         public void InsertFirst(T data)
         {
-            ListItem<T> item = new(data, _head.Next);
-            _head.Next = item;
+            ListItem<T> oldHead = _head;
+            _head = new ListItem<T>(data, oldHead);
             Count++;
         }
 
         // удаление первого элемента, пусть выдает значение элемента
         public T RemoveFirst()
         {
-            T removedData = _head.Data;
-            _head.Next = GetListItem(1);
-            return removedData;
+            T removed = _head.Data;
+            _head = _head.Next;
+
+            return removed;
         }
 
         // получение/изменение значения по указанному индексу.
@@ -85,20 +87,18 @@ namespace ListTask
         // вставка элемента по индексу
         public void Insert(int index, T data)
         {
+            CheckIndex(index);
+
             if (index == 0)
             {
                 InsertFirst(data);
+                return;
             }
 
             ListItem<T> insertedItem = new(data, null);
             ListItem<T> item = GetListItem(index);
 
-
-            if (index < Count)
-            {
-                insertedItem.Next = item.Next;
-            }
-
+            insertedItem.Next = item.Next;
             item.Next = insertedItem;
 
             Count++;
@@ -147,8 +147,31 @@ namespace ListTask
         // разворот списка за линейное время
         public void Revert()
         {
-            Revert(0, Count - 1);
-            // _head.Next = GetListItem(_count - 1);
+            if (_head.Next == null)
+            {
+                return;
+            }
+
+            ListItem<T> item1 = _head;
+            ListItem<T> item2 = _head.Next;
+
+            for (ListItem<T> counter = _head.Next.Next; counter != null; counter = counter.Next)
+            {
+                item2.Next = item1;
+                item1 = item2;
+                item2 = counter;
+
+                if (counter.Next == null)
+                {
+                    counter.Next = item2;
+                    _head = counter;
+                    return;
+                }
+            }
+
+            item2.Next = item1;
+            item1.Next = null;
+            _head = item2;
         }
 
         private void Revert(int index1, int index2)
@@ -169,14 +192,16 @@ namespace ListTask
         // Копирование списка
         public SinglyLinkedList<T> Copy()
         {
-            T[] array = new T[Count];
+            SinglyLinkedList<T> listCopy = new(_head.Data);
+            ListItem<T> itemCopy = listCopy._head;
 
-            for (int i = 0; i < Count; i++)
+            for (ListItem<T> item = _head.Next; item != null; item = item.Next)
             {
-                array[i] = GetData(i);
+                itemCopy.Next = new ListItem<T>(item.Data);
+                itemCopy = itemCopy.Next;
             }
 
-            return new SinglyLinkedList<T>(array);
+            return listCopy;
         }
 
         private void CheckIndex(int index)
@@ -203,18 +228,10 @@ namespace ListTask
             return item;
         }
 
-        // вспомогательное: возвращает ячейку по индексу в виде item
-        private ListItem<T> GetListItem(T data)
-        {
-            
-
-            return null;
-        }
-
         // вспомогательное
         public override string ToString()
         {
-            StringBuilder stringBuilder = new StringBuilder();
+            StringBuilder stringBuilder = new();
             int i = 1;
 
             for (ListItem<T> item = _head.Next; item != null; item = item.Next)

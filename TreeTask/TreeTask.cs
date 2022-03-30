@@ -104,8 +104,6 @@ namespace TreeTask
             TreeNode<T> next = _root;
             TreeNode<T> parent;
 
-            
-
             while (true)
             {
                 bool previoslyLeft = false;
@@ -206,10 +204,10 @@ namespace TreeTask
                 return;
             }
 
+            TreeNode<T> treeNode = _root.Right;
+
             while (true)
             {
-                TreeNode<T> treeNode = _root.Right;
-
                 if (treeNode.Left == null)
                 {
                     treeNode.Left = _root.Left;

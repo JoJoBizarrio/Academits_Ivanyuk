@@ -11,7 +11,7 @@ namespace ListTask
 
         public SinglyLinkedList()
         {
-            _head = new ListItem<T>(default, null);
+            _head = new ListItem<T>(default);
         }
 
         public SinglyLinkedList(T data)
@@ -22,12 +22,6 @@ namespace ListTask
 
         public SinglyLinkedList(params T[] dataset)
         {
-            if (dataset.Length == 0)
-            {
-                new SinglyLinkedList<T>();
-                return;
-            }
-
             _head = new ListItem<T>(dataset[0]);
             Count = dataset.Length;
             ListItem<T> item = _head;
@@ -42,6 +36,11 @@ namespace ListTask
         // получение значение первого элемента
         public T GetFirst()
         {
+            if (Count == 0)
+            {
+                throw new ArgumentNullException("Empty list.");
+            }
+
             return _head.Data;
         }
 
@@ -56,8 +55,14 @@ namespace ListTask
         // удаление первого элемента, пусть выдает значение элемента
         public T RemoveFirst()
         {
+            if (Count == 0)
+            {
+                throw new ArgumentNullException("Empty list.");
+            }
+
             T removed = _head.Data;
             _head = _head.Next;
+            Count--;
 
             return removed;
         }
@@ -65,6 +70,8 @@ namespace ListTask
         // получение/изменение значения по указанному индексу.
         public T GetData(int index)
         {
+            CheckIndex(index);
+
             if (index == 0)
             {
                 return GetFirst();
@@ -75,6 +82,8 @@ namespace ListTask
 
         public void SetData(int index, T data)
         {
+            CheckIndex(index);
+
             if (index == 0)
             {
                 _head.Data = data;
@@ -107,7 +116,7 @@ namespace ListTask
         // удаление элемента по индексу, пусть выдает значение элемента
         public T RemoveItem(int index)
         {
-            this.CheckIndex(index);
+            CheckIndex(index);
 
             ListItem<T> listItem = GetListItem(index - 1);
 
@@ -134,6 +143,7 @@ namespace ListTask
                 if (item.Data.Equals(data))
                 {
                     previoslyItem.Next = item.Next;
+                    Count--;
                     return true;
                 }
 
@@ -154,8 +164,10 @@ namespace ListTask
 
             ListItem<T> item1 = _head;
             ListItem<T> item2 = _head.Next;
+            ListItem<T> counter = _head.Next.Next;
+            item1.Next = null;
 
-            for (ListItem<T> counter = _head.Next.Next; counter != null; counter = counter.Next)
+            for (; counter != null; counter = counter.Next)
             {
                 item2.Next = item1;
                 item1 = item2;
@@ -163,30 +175,14 @@ namespace ListTask
 
                 if (counter.Next == null)
                 {
-                    counter.Next = item2;
-                    _head = counter;
+                    item2.Next = item1;
+                    _head = item2;
                     return;
                 }
             }
 
             item2.Next = item1;
-            item1.Next = null;
             _head = item2;
-        }
-
-        private void Revert(int index1, int index2)
-        {
-            if (index2 - index1 <= 0)
-            {
-                return;
-            }
-
-            T temp1 = GetData(index1);
-            T temp2 = GetData(index2);
-            SetData(index2, temp1);
-            SetData(index1, temp2);
-
-            Revert(++index1, --index2);
         }
 
         // Копирование списка
@@ -201,6 +197,8 @@ namespace ListTask
                 itemCopy = itemCopy.Next;
             }
 
+            listCopy.Count = Count;
+
             return listCopy;
         }
 
@@ -212,11 +210,10 @@ namespace ListTask
             }
         }
 
-
-        // вспомогательное: возвращает ячейку по индексу в виде item
+        // вспомогательное: возвращает ячейку по индексу в виде ListItem<T>
         private ListItem<T> GetListItem(int index)
         {
-            this.CheckIndex(index);
+            CheckIndex(index);
 
             ListItem<T> item = _head;
 
@@ -232,15 +229,20 @@ namespace ListTask
         public override string ToString()
         {
             StringBuilder stringBuilder = new();
-            int i = 1;
+            stringBuilder.Append('[');
 
-            for (ListItem<T> item = _head.Next; item != null; item = item.Next)
+            if (_head == null)
             {
-                stringBuilder.Append($"{i}item = {item}; ");
-                ++i;
+                return stringBuilder.Append(']').ToString();
             }
 
-            return stringBuilder.ToString();
+            for (ListItem<T> item = _head; item != null; item = item.Next)
+            {
+                stringBuilder.Append(item.Data);
+                stringBuilder.Append(", ");
+            }
+
+            return stringBuilder.Remove(stringBuilder.Length - 2, 2).Append(']').ToString();
         }
     }
 }

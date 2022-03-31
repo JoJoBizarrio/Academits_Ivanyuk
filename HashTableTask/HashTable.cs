@@ -5,39 +5,33 @@ namespace HashTableTask
 {
     internal class HashTable<T> : ICollection<T>
     {
-        private List<T>[] _items { get; }
+        private List<T>[] _lists;
 
-        public int Count => _items.Length;
+        public int Count { get; private set; }
 
-        public bool IsReadOnly { get; }
+        public int Capacity => _lists.Length;
 
-        public int ElementsCount
+        public bool IsReadOnly => false;
+
+        private int ModCount { get; set; }
+
+        private HashTable()
         {
-            get
-            {
-                int elementsCount = 0;
-
-                for (int i = 0; i < Count; ++i)
-                {
-                    elementsCount += _items[i].Count;
-                }
-
-                return elementsCount;
-            }
+            _lists = new List<T>[0];
         }
 
         public HashTable(int length)
         {
             if (length <= 0)
             {
-                throw new ArgumentOutOfRangeException(nameof(length), length, "Argument must be more zero");
+                throw new ArgumentOutOfRangeException(nameof(length), length, "Argument must be greater then zero");
             }
 
-            _items = new List<T>[length];
+            _lists = new List<T>[length];
 
             for (int i = 0; i < length; ++i)
             {
-                _items[i] = new List<T>(10);
+                _lists[i] = new List<T>(10);
             }
         }
 
@@ -50,22 +44,25 @@ namespace HashTableTask
 
             int index = Math.Abs(item.GetHashCode()) % Count;
 
-            _items[index].Add(item);
+            _lists[index].Add(item);
+            Count++;
         }
 
         public void Clear()
         {
             for (int i = 0; i < Count; ++i)
             {
-                _items[i].Clear();
+                _lists[i].Clear();
             }
+
+            Count = default;
         }
 
         public bool Contains(T item)
         {
             for (int i = 0; i < Count; ++i)
             {
-                if (_items[i].Contains(item))
+                if (_lists[i].Contains(item))
                 {
                     return true;
                 }
@@ -79,9 +76,10 @@ namespace HashTableTask
         {
             for (int i = 0; i < Count; ++i)
             {
-                if (_items[i].IndexOf(item) >= 0)
+                if (_lists[i].IndexOf(item) >= 0)
                 {
-                    return _items[i].Remove(item);
+                    Count--;
+                    return _lists[i].Remove(item);
                 }
             }
 
@@ -90,7 +88,7 @@ namespace HashTableTask
 
         public void CopyTo(T[] array, int arrayIndex)
         {
-            if (array.Length - arrayIndex < ElementsCount)
+            if (array.Length - arrayIndex < Count)
             {
                 throw new ArgumentException("Array is too small or Array index is too big");
             }
@@ -99,9 +97,9 @@ namespace HashTableTask
 
             for (int i = 0; i < Count; ++i)
             {
-                _items[i].CopyTo(array, startIndex);
+                _lists[i].CopyTo(array, startIndex);
 
-                startIndex += _items[i].Count;
+                startIndex += _lists[i].Count;
             }
         }
 
@@ -109,40 +107,40 @@ namespace HashTableTask
         {
             for (int i = 0; i < Count; ++i)
             {
-                for (int j = 0; j < _items[i].Count; ++j)
+                for (int j = 0; j < _lists[i].Count; ++j)
                 {
-                    yield return _items[i][j];
+                    yield return _lists[i][j];
                 }
             }
         }
 
         IEnumerator IEnumerable.GetEnumerator()
         {
-            return this.GetEnumerator();
+            return GetEnumerator();
         }
 
         public override string ToString()
         {
-            StringBuilder info = new();
+            StringBuilder stringBuilder = new();
 
             for (int i = 0; i < Count; ++i)
             {
-                if (_items[i].Count == 0)
+                if (_lists[i].Count == 0)
                 {
                     continue;
                 }
 
-                info.Append($"List {i}: ");
+                stringBuilder.Append($"List {i}: ");
 
-                foreach (T e in _items[i])
+                foreach (T e in _lists[i])
                 {
-                    info.Append($"{e}; ");
+                    stringBuilder.Append($"{e}; ");
                 }
 
-                info.Append('\n');
+                stringBuilder.Append(Environment.NewLine);
             }
 
-            return info.ToString();
+            return stringBuilder.ToString();
         }
     }
 }

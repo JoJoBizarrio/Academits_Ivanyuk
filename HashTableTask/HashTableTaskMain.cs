@@ -13,11 +13,11 @@
 
             Console.WriteLine(ht);
 
-            int[] array1 = new int[10];
+            int[] array1 = new int[100];
 
             ht.CopyTo(array1, 3);
 
-            Console.WriteLine(String.Join(",", array1));
+            Console.WriteLine(string.Join(", ", array1));
             Console.WriteLine();
 
             foreach (int e in ht)

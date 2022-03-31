@@ -120,7 +120,6 @@ namespace ListTask
 
             RemoveAt(index);
             return true;
-
         }
 
         public void CopyTo(T[] arrayList, int index)
@@ -149,9 +148,6 @@ namespace ListTask
         {
             return GetEnumerator();
         }
-
-
-
         public void TrimExcess()
         {
             if ((double)Count / (double)Capacity <= 0.9)

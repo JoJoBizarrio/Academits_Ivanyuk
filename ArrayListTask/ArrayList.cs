@@ -1,135 +1,144 @@
 ﻿using System.Collections;
+using System.Text;
 
 namespace ListTask
 {
     internal class List<T> : IList<T>
     {
-        public T[] _items;
-        private int _length;
-        private int _modCount = 0;
+        private T[] _items;
 
-        public bool IsReadOnly { get; }  // что это и зачем?
-        public int Count { get => _length; }
-        public int Capacity { get => _items.Length; }
+        private const int DefaultCapacity = 10;
+
+        private int ModCount { get; set; }
+
+        public bool IsReadOnly => false;
+
+        public int Count { get; private set; }
+
+        public int Capacity
+        {
+            get => _items.Length;
+
+            set
+            {
+                if (value <= Count)
+                {
+                    throw new ArgumentException($"Capacity = {value} must be more Count {Count}");
+                }
+
+                Array.Resize(ref _items, value);
+            }
+        }
 
         public T this[int index]
         {
-            get { return _items[index]; }
-            set { _items[index] = value; }
+            get { CheckIndex(index); return _items[index]; }
+            set { CheckIndex(index); _items[index] = value; ModCount++; }
         }
 
         public List()
         {
-            _items = new T[10];
-            _length = 0;
+            _items = new T[DefaultCapacity];
         }
 
-        public List(int count)
+        public List(int capacity)
         {
-            if (count <= 0)
+            if (capacity < 0)
             {
-                throw new ArgumentException($"Count mast be > 0 {nameof(count)} = {count}", nameof(count));
+                throw new ArgumentException($"Count must be > 0 {nameof(capacity)} = {capacity}", nameof(capacity));
             }
 
-            _items = new T[count];
-            _length = 0;
+            _items = new T[capacity];
         }
 
-        public int IndexOf(T value)
+        public int IndexOf(T item)
         {
-            return Array.IndexOf(_items, value);
+            return Array.IndexOf(_items, item, 0, Count);
         }
 
-        public void Insert(int index, T value)
+        public void Insert(int index, T item)
         {
-            if (index <= 0 || index >= _length)
+            CheckIndex(index);
+
+            if (Capacity - 1 <= Count)
             {
-                throw new ArgumentOutOfRangeException(nameof(index), index, $"Argument out of range: [0, {_length - 1}]");
+                Expand();
             }
 
-            this.Expand();
+            Array.Copy(_items, index, _items, index + 1, Count - index + 1);
 
-            // вот такая реализация вставки не использутеся? то есть используем сам лист как хранилище но тогда capacity всегда должен быть в 2 раза больше длины:
-            Array.Copy(_items, index, _items, _length + 2, _length - index + 1);
+            _items[index] = item;
 
-            _items[index] = value;
+            Count++;
+            ModCount++;
+        }
 
-            Array.Copy(_items, _length + 2, _items, index + 1, _length - index + 1);
+        public void Add(T item)
+        {
+            if (Capacity - 1 <= Count)
+            {
+                Expand();
+            }
 
-            _length++;
-            _modCount++;
+            Insert(Count, item);
         }
 
         public void RemoveAt(int index)
         {
-            if (index <= 0 || index >= _length)
-            {
-                throw new ArgumentOutOfRangeException(nameof(index), index, $"Argument out of range: [0, {_length - 1}]");
-            }
+            CheckIndex(index);
 
-            Array.Copy(_items, index + 1, _items, index, _length - index + 1);
-            _length--;
-            _modCount++;
+            Array.Copy(_items, index + 1, _items, index, Count - index + 1);
+            Count--;
+            ModCount++;
         }
 
-        public void Add(T value)
+        public void Add(params T[] item)
         {
-            this.Expand();
-
-            _items[_length] = value;
-            _length++;
-            _modCount++;
-        }
-
-        public void Add(params T[] value)
-        {
-            for (int i = 0; i < value.Length; ++i)
+            for (int i = 0; i < item.Length; ++i)
             {
-                Add(value[i]);
+                Add(item[i]);
             }
         }
 
         public void Clear()
         {
-            Array.Clear(_items);
+            Array.Clear(_items, 0, Count);
+            Count = 0;
+            ModCount++;
         }
 
-        public bool Contains(T value)
-        {
-            this.Expand();
-            return _items.Contains(value);
-        }
+        public bool Contains(T item) =>  IndexOf(item) >= 0;
 
-        public bool Remove(T value)
+        public bool Remove(T item)
         {
-            this.Expand();
+            int index = IndexOf(item);
 
-            try
-            {
-                this.RemoveAt(this.IndexOf(value));
-                return true;
-            }
-            catch
+            if (index < 0)
             {
                 return false;
             }
+
+            RemoveAt(index);
+            return true;
+
         }
 
         public void CopyTo(T[] arrayList, int index)
         {
-            _items.CopyTo(arrayList, index);
+            CheckIndex(index);
+
+            Array.Copy(_items, index, arrayList, 0, Count - index + 1);
         }
 
         public IEnumerator<T> GetEnumerator()
         {
-            _modCount = 0;
-            int modCount = _modCount;
+            int currentModCount = ModCount;
 
-            for (int i = 0; i < _length; ++i)
+            for (int i = 0; i < Count; ++i)
             {
-                if (modCount != _modCount)
+                if (currentModCount != ModCount)
                 {
-                    throw new InvalidOperationException($"List changed. Step:{i}");
+                    throw new InvalidOperationException($"List changed.");
                 }
 
                 yield return _items[i];
@@ -138,33 +147,61 @@ namespace ListTask
 
         IEnumerator IEnumerable.GetEnumerator()
         {
-            return this.GetEnumerator();
+            return GetEnumerator();
         }
 
-        private void Expand()
-        {
-            if (_items.Length / 3 <= _length)
-            {
-                Array.Resize(ref _items, 6 * _length);
-            }
-        }
+
 
         public void TrimExcess()
         {
-            if (_length / Capacity <= 0.9)
+            if ((double)Count / (double)Capacity <= 0.9)
             {
-                Array.Resize(ref _items, (int)(_length / 0.9));
+                Array.Resize(ref _items, Count);
             }
         }
 
         public override string ToString()
         {
-            return $"{String.Join(", ", this)}.";
+            StringBuilder stringBuilder = new();
+
+            stringBuilder.Append('[');
+            stringBuilder.Append(string.Join(", ", this));
+            stringBuilder.Remove(stringBuilder.Length - 2, 2).Append(']');
+
+            return stringBuilder.ToString();
         }
 
         public string GetInformation()
         {
-            return $"{String.Join(", ", this)}. \nCapacity = {Capacity}; \nCount = {Count}; \nEmptyItems = {Capacity - Count};\n";
+            return $"{string.Join(", ", this)}. {Environment.NewLine}Capacity = {Capacity}; {Environment.NewLine}Count = {Count}; " +
+                   $"{Environment.NewLine}EmptyItems = {Capacity - Count};{Environment.NewLine}";
+        }
+
+        private void CheckIndex(int index)
+        {
+            if (index < 0 || index >= Count)
+            {
+                throw new ArgumentOutOfRangeException(nameof(index), index, $"Index out of range: [0, {Count - 1}]");
+            }
+        }
+
+        //private void CheckCapacity()
+        //{
+        //    if (Capacity - 1 <= Count)
+        //    {
+        //        Expand();
+        //    }
+        //}
+
+        private void Expand()
+        {
+            if (Capacity == 0)
+            {
+                Array.Resize(ref _items, DefaultCapacity);
+                return;
+            }
+
+            Array.Resize(ref _items, 2 * Count);
         }
     }
 }

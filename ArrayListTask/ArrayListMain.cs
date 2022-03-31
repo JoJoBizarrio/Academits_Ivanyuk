@@ -1,6 +1,4 @@
-﻿using ListTask;
-
-namespace ListTask
+﻿namespace ListTask
 {
     class ListMain
     {

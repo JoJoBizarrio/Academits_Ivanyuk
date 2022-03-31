@@ -1,7 +1,7 @@
 ﻿namespace ListTask
 {
     partial class ListItem<T> // как спрятать класс, сделать его узкодоступным, то есть чтобы класс ListItem мог видеть только SinglyLinkedList. Может ли в этом помочь partial ?
-                              // спрятать класс я хочу исходя из того что ListItem является внутренней реализацией SinglyLinkedList. Правилен ли мой ход мысли? 
+                              // спрятать класс хочу исходя из того что ListItem является внутренней реализацией SinglyLinkedList. Правилен ли мой ход мысли? 
     {
         public T Data { get; set; }
         public ListItem<T> Next { get; set; }
@@ -16,10 +16,5 @@
             Data = data;
             Next = next;
         }
-
-        //public ListItem<T>? GetNext()
-        //{
-        //    return _next;
-        //}
     }
 }

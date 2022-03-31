@@ -153,7 +153,6 @@ namespace ListTask
             return false;
         }
 
-
         // разворот списка за линейное время
         public void Revert()
         {

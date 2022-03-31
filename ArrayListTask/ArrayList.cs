@@ -51,6 +51,25 @@ namespace ListTask
             _items = new T[capacity];
         }
 
+        public List(params T[] items)
+        {
+            _items = new T[2 * items.Length];
+
+            for (int i = 0; i < items.Length; i++)
+            {
+                _items[i] = items[i];
+            }
+
+            Count = items.Length;
+
+            //int i = 0;
+            //foreach (T e in items)
+            //{
+            //    _items[i] = e;
+            //    i++;
+            //}
+        }
+
         public int IndexOf(T item)
         {
             return Array.IndexOf(_items, item, 0, Count);
@@ -87,17 +106,10 @@ namespace ListTask
         {
             CheckIndex(index);
 
-            Array.Copy(_items, index + 1, _items, index, Count - index + 1);
+            Array.Copy(_items, index + 1, _items, index, Count - index);
+            Array.Clear(_items, Count, 1);
             Count--;
             ModCount++;
-        }
-
-        public void Add(params T[] item)
-        {
-            for (int i = 0; i < item.Length; ++i)
-            {
-                Add(item[i]);
-            }
         }
 
         public void Clear()
@@ -150,7 +162,7 @@ namespace ListTask
         }
         public void TrimExcess()
         {
-            if ((double)Count / (double)Capacity <= 0.9)
+            if ((double)Count / (double)Capacity  <= 0.9)
             {
                 Array.Resize(ref _items, Count);
             }
@@ -162,22 +174,22 @@ namespace ListTask
 
             stringBuilder.Append('[');
             stringBuilder.Append(string.Join(", ", this));
-            stringBuilder.Remove(stringBuilder.Length - 2, 2).Append(']');
+            stringBuilder.Append(']');
 
             return stringBuilder.ToString();
         }
 
         public string GetInformation()
         {
-            return $"{string.Join(", ", this)}. {Environment.NewLine}Capacity = {Capacity}; {Environment.NewLine}Count = {Count}; " +
-                   $"{Environment.NewLine}EmptyItems = {Capacity - Count};{Environment.NewLine}";
+            return $"{ToString()}; {Environment.NewLine}Capacity = {Capacity}; {Environment.NewLine}Count = {Count}; " +
+                   $"{Environment.NewLine}EmptyItems = {Capacity - Count}.{Environment.NewLine}";
         }
 
         private void CheckIndex(int index)
         {
-            if (index < 0 || index >= Count)
+            if (index < 0 || index > Count)
             {
-                throw new ArgumentOutOfRangeException(nameof(index), index, $"Index out of range: [0, {Count - 1}]");
+                throw new ArgumentOutOfRangeException(nameof(index), index, $"Index out of range: [0, {Count}]");
             }
         }
 

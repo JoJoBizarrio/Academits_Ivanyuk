@@ -9,10 +9,7 @@ namespace ListTask
 
         public int Count { get; private set; }
 
-        public SinglyLinkedList()
-        {
-            _head = new ListItem<T>(default);
-        }
+        public SinglyLinkedList() { }
 
         public SinglyLinkedList(T data)
         {
@@ -70,25 +67,25 @@ namespace ListTask
         // получение/изменение значения по указанному индексу.
         public T GetData(int index)
         {
-            CheckIndex(index);
-
             if (index == 0)
             {
                 return GetFirst();
             }
+
+            CheckIndex(index);
 
             return GetListItem(index).Data;
         }
 
         public void SetData(int index, T data)
         {
-            CheckIndex(index);
-
             if (index == 0)
             {
                 _head.Data = data;
                 return;
             }
+
+            CheckIndex(index);
 
             GetListItem(index).Data = data;
         }
@@ -96,13 +93,13 @@ namespace ListTask
         // вставка элемента по индексу
         public void Insert(int index, T data)
         {
-            CheckIndex(index);
-
             if (index == 0)
             {
                 InsertFirst(data);
                 return;
             }
+
+            CheckIndex(index);
 
             ListItem<T> insertedItem = new(data, null);
             ListItem<T> item = GetListItem(index);
@@ -116,6 +113,11 @@ namespace ListTask
         // удаление элемента по индексу, пусть выдает значение элемента
         public T RemoveItem(int index)
         {
+            if (index == 0)
+            {
+                return RemoveFirst();
+            }
+
             CheckIndex(index);
 
             ListItem<T> listItem = GetListItem(index - 1);
@@ -163,25 +165,30 @@ namespace ListTask
 
             ListItem<T> item1 = _head;
             ListItem<T> item2 = _head.Next;
-            ListItem<T> counter = _head.Next.Next;
-            item1.Next = null;
 
-            for (; counter != null; counter = counter.Next)
+            if (_head.Next.Next == null)
             {
+                item1.Next = null;
                 item2.Next = item1;
-                item1 = item2;
-                item2 = counter;
+                _head = item2;
+            }
+            else
+            {
+                ListItem<T> counter = _head.Next.Next;
+                item1.Next = null;
 
-                if (counter.Next == null)
+                while (counter != null)
                 {
                     item2.Next = item1;
-                    _head = item2;
-                    return;
-                }
-            }
+                    item1 = item2;
+                    item2 = counter;
 
-            item2.Next = item1;
-            _head = item2;
+                    counter = counter.Next;
+                }
+
+                item2.Next = item1;
+                _head = item2;
+            }
         }
 
         // Копирование списка
@@ -230,15 +237,23 @@ namespace ListTask
             StringBuilder stringBuilder = new();
             stringBuilder.Append('[');
 
-            if (_head == null)
+            if (Count == 0)
             {
                 return stringBuilder.Append(']').ToString();
             }
 
             for (ListItem<T> item = _head; item != null; item = item.Next)
             {
-                stringBuilder.Append(item.Data);
-                stringBuilder.Append(", ");
+                if (item == null)
+                {
+                    stringBuilder.Append("null");
+                    stringBuilder.Append(", ");
+                }
+                else
+                {
+                    stringBuilder.Append(item.Data);
+                    stringBuilder.Append(", ");
+                }
             }
 
             return stringBuilder.Remove(stringBuilder.Length - 2, 2).Append(']').ToString();

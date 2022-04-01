@@ -37,7 +37,7 @@ namespace HashTableTask
                 return 0;
             }
 
-            return Math.Abs(item.GetHashCode()) % Capacity;
+            return Math.Abs(item.GetHashCode()) % Capacity; 
         }
 
         public void Add(T item)

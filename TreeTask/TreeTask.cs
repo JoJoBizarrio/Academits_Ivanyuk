@@ -2,18 +2,22 @@
 
 namespace TreeTask
 {
-    internal class TreeTask<T> : IComparable<T>
+    internal class TreeTask<T> 
     {
         private TreeNode<T> _root;
-        private int _count = 0;
 
-        public int Count { get => _count; }
+        public int Count { get; private set; }
 
+        public TreeTask()
+        {
+            _root = new TreeNode<T>();
+            Count++;
+        }
 
         public TreeTask(T root)
         {
             _root = new TreeNode<T>(root);
-            _count++;
+            Count++;
         }
 
         public void Add(T data)
@@ -27,7 +31,7 @@ namespace TreeTask
                     if (next.Left == null)
                     {
                         next.Left = new TreeNode<T>(data);
-                        _count++;
+                        Count++;
                         break;
                     }
                     else
@@ -40,7 +44,7 @@ namespace TreeTask
                     if (next.Right == null)
                     {
                         next.Right = new TreeNode<T>(data);
-                        _count++;
+                        Count++;
                         break;
                     }
                     else
@@ -107,6 +111,10 @@ namespace TreeTask
             while (true)
             {
                 bool previoslyLeft = false;
+
+                if (next.CompareTo(data) < 0) { }
+                if (DataComparer<IComparable<T>>.Comparer(data, next.Data) < 0)
+
 
                 if (data < next.Data)
                 {
@@ -218,11 +226,6 @@ namespace TreeTask
                     treeNode = treeNode.Left;
                 }
             }
-        }
-
-        public int CompareTo(T? x)
-        {
-            return base.Comparer.
         }
     }
 }

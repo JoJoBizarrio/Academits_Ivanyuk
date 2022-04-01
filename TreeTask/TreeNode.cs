@@ -1,22 +1,28 @@
 ﻿namespace TreeTask
 {
-    internal class TreeNode<T>
+    internal class TreeNode<T> : DataComparer<T> where T : IComparable<T>
     {
-        private T? _data;
-        private TreeNode<T>? _left;
-        private TreeNode<T>? _right;
+        public T? Data { get; set; }
 
-        public T? Data { get => _data; set => _data = value; }
+        public TreeNode<T>? Left { get; set; }
 
-        public TreeNode<T>? Left { get => _left; set => _left = value; }
+        public TreeNode<T>? Right { get; set; }
 
-        public TreeNode<T>? Right { get => _right; set => _right = value; }
+        public TreeNode() { }
 
         public TreeNode(T? data)
         {
-            _data = data;
-            _left = null;
-            _right = null;
+            Data = data;
+        }
+
+        public int CompareTo(T x)
+        {
+            return Comparer(x);
+        }
+
+        public static int Comparer(T x, T y)
+        {
+            return DataComparer<T>.Comparer(x, y);
         }
         //public TreeNode<T> GetLeftChild()
         //{

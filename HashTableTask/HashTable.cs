@@ -17,7 +17,7 @@ namespace HashTableTask
 
         private HashTable()
         {
-            _lists = new List<T>[0];
+            _lists = Array.Empty<List<T>>();
         }
 
         public HashTable(int length)
@@ -28,45 +28,53 @@ namespace HashTableTask
             }
 
             _lists = new List<T>[length];
+        }
 
-            for (int i = 0; i < length; ++i)
+        private int GetHashIndex(T item)
+        {
+            if (item == null)
             {
-                _lists[i] = new List<T>(10);
+                return 0;
             }
+
+            return Math.Abs(item.GetHashCode()) % Capacity;
         }
 
         public void Add(T item)
         {
-            if (item == null)
-            {
-                throw new ArgumentNullException("Argument is null");
-            }
+            int index = GetHashIndex(item);
 
-            int index = Math.Abs(item.GetHashCode()) % Count;
+            if (_lists[index] == null)
+            {
+                _lists[index] = new List<T>();
+            }
 
             _lists[index].Add(item);
             Count++;
+            ModCount++;
         }
 
         public void Clear()
         {
-            for (int i = 0; i < Count; ++i)
+            for (int i = 0; i < Capacity; ++i)
             {
+                if (_lists[i] == null)
+                {
+                    continue;
+                }
+
                 _lists[i].Clear();
             }
 
             Count = default;
+            ModCount++;
         }
 
         public bool Contains(T item)
         {
-            for (int i = 0; i < Count; ++i)
+            if (_lists[GetHashIndex(item)].Contains(item))
             {
-                if (_lists[i].Contains(item))
-                {
-                    return true;
-                }
-
+                return true;
             }
 
             return false;
@@ -74,13 +82,13 @@ namespace HashTableTask
 
         public bool Remove(T item)
         {
-            for (int i = 0; i < Count; ++i)
+            int index = GetHashIndex(item);
+
+            if (_lists[index].IndexOf(item) >= 0)
             {
-                if (_lists[i].IndexOf(item) >= 0)
-                {
-                    Count--;
-                    return _lists[i].Remove(item);
-                }
+                Count--;
+                ModCount++;
+                return _lists[index].Remove(item);
             }
 
             return false;
@@ -88,15 +96,31 @@ namespace HashTableTask
 
         public void CopyTo(T[] array, int arrayIndex)
         {
+            if (array == null)
+            {
+                throw new ArgumentNullException($"{nameof(array)} is {null}");
+            }
+
+            if (arrayIndex < 0 || arrayIndex > array.Length)
+            {
+                throw new ArgumentOutOfRangeException(nameof(arrayIndex), arrayIndex, $"Index is out of range: [0; {array.Length - 1}]");
+            }
+
             if (array.Length - arrayIndex < Count)
             {
-                throw new ArgumentException("Array is too small or Array index is too big");
+                throw new ArgumentException($"The count of elements in the source Collection<T> is greater than the available space from the position specified " +
+                                            $"by {nameof(arrayIndex)} (= {arrayIndex}) to the end of the destination {nameof(array)}.");
             }
 
             int startIndex = arrayIndex;
 
-            for (int i = 0; i < Count; ++i)
+            for (int i = 0; i < Capacity; ++i)
             {
+                if (_lists[i] == null)
+                {
+                    continue;
+                }
+
                 _lists[i].CopyTo(array, startIndex);
 
                 startIndex += _lists[i].Count;
@@ -105,11 +129,21 @@ namespace HashTableTask
 
         public IEnumerator<T> GetEnumerator()
         {
-            for (int i = 0; i < Count; ++i)
+            int currentModCount = ModCount;
+
+            for (int i = 0; i < Capacity; ++i)
             {
-                for (int j = 0; j < _lists[i].Count; ++j)
+                if (_lists[i] != null)
                 {
-                    yield return _lists[i][j];
+                    foreach (T e in _lists[i])
+                    {
+                        if (currentModCount != ModCount)
+                        {
+                            throw new InvalidOperationException("HashTable changed.");
+                        }
+
+                        yield return e;
+                    }
                 }
             }
         }
@@ -123,20 +157,24 @@ namespace HashTableTask
         {
             StringBuilder stringBuilder = new();
 
-            for (int i = 0; i < Count; ++i)
+            for (int i = 0; i < Capacity; ++i)
             {
-                if (_lists[i].Count == 0)
+                if (_lists[i] == null || _lists[i].Count == 0)
                 {
                     continue;
                 }
 
-                stringBuilder.Append($"List {i}: ");
+                stringBuilder.Append("List ");
+                stringBuilder.Append(i);
+                stringBuilder.Append(": ");
 
                 foreach (T e in _lists[i])
                 {
-                    stringBuilder.Append($"{e}; ");
+                    stringBuilder.Append(e);
+                    stringBuilder.Append(", ");
                 }
 
+                stringBuilder.Replace(", ", ".", stringBuilder.Length - 2, 2);
                 stringBuilder.Append(Environment.NewLine);
             }
 

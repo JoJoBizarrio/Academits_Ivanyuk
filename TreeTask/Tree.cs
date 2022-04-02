@@ -5,7 +5,7 @@ namespace TreeTask
     internal class Tree<T> where T : IComparable<T>
     {
         private TreeNode<T> _root; // этот вопроситеный знак означает что _root допускает что переменная может принять null. То есть псевдо-null. Правилньо понимаю?
-                                    // Как переменные с вопросит знаком связаны вот с этой функцией <Nullable>disable</Nullable>. Это одно и тоже?
+                                   // Как переменные с вопросит знаком связаны вот с этой функцией <Nullable>disable</Nullable>. Это одно и тоже?
 
         public int Count { get; private set; }
 
@@ -185,12 +185,16 @@ namespace TreeTask
                 if (isLeftTurn)
                 {
                     deletedNodeParent.Left = null;
+                    Count--;
+
                     return true;
                 }
 
                 if (!isLeftTurn)
                 {
                     deletedNodeParent.Right = null;
+                    Count--;
+
                     return true;
                 }
             }
@@ -201,12 +205,16 @@ namespace TreeTask
                 if (isLeftTurn)
                 {
                     deletedNodeParent.Left = deletedNode.Right;
+                    Count--;
+
                     return true;
                 }
 
                 if (!isLeftTurn)
                 {
                     deletedNodeParent.Right = deletedNode.Right;
+                    Count--;
+
                     return true;
                 }
             }
@@ -217,12 +225,16 @@ namespace TreeTask
                 if (isLeftTurn)
                 {
                     deletedNodeParent.Left = deletedNode.Left;
+                    Count--;
+
                     return true;
                 }
 
                 if (!isLeftTurn)
                 {
                     deletedNodeParent.Right = deletedNode.Left;
+                    Count--;
+
                     return true;
                 }
             }
@@ -245,7 +257,7 @@ namespace TreeTask
                 }
                 else
                 {
-                    minRightBranchParent.Left = minRightBranch.Right; // если есть соединили 
+                    minRightBranchParent.Left = minRightBranch.Right; // если есть ребенок соединили 
                 }
 
                 if (isLeftTurn) // смотрим куда идет поворот после родителя удаляемого нода
@@ -263,6 +275,8 @@ namespace TreeTask
                 deletedNode.Left = null; // зануляем удаляемый нод
                 deletedNode.Right = null;
                 deletedNode = null;
+                Count--;
+
                 return true;
             }
 
@@ -280,6 +294,8 @@ namespace TreeTask
             deletedNode.Left = null; // зануляем удаляемый нод
             deletedNode.Right = null;
             deletedNode = null;
+            Count--;
+
             return true;
         }
 
@@ -287,19 +303,25 @@ namespace TreeTask
         {
             if (_root.Left == null & _root.Right == null)
             {
-                _root.Data = default;
+                _root = null;
+                Count--;
+
                 return;
             }
 
             if (_root.Left == null)
             {
                 _root = _root.Right;
+                Count--;
+
                 return;
             }
 
             if (_root.Right == null)
             {
                 _root = _root.Left;
+                Count--;
+
                 return;
             }
 
@@ -311,6 +333,7 @@ namespace TreeTask
                 {
                     treeNode.Left = _root.Left;
                     _root = treeNode; // в данном случае затираются старые _root.Left and _root.Right и сборщик их убирет или нужно вручную занулить их перед присваиванием?
+                    Count--;
 
                     return;
                 }

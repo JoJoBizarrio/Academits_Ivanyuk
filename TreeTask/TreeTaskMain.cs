@@ -22,7 +22,12 @@
             treeTest.HasData(7);
             Console.WriteLine(treeTest.WidthBypass());
 
-            treeTest.Remove(3);
+            treeTest.Add(15);
+            treeTest.Add(17);
+            Console.WriteLine(treeTest.WidthBypass());
+            Console.WriteLine(treeTest.DeepBypass());
+
+            treeTest.Remove(14);
             Console.WriteLine(treeTest.WidthBypass());
             Console.WriteLine(treeTest.DeepBypass());
 

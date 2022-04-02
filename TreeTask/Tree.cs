@@ -4,19 +4,20 @@ namespace TreeTask
 {
     internal class Tree<T> where T : IComparable<T>
     {
-        private TreeNode<T>? _root;
+        private TreeNode<T> _root; // этот вопроситеный знак означает что _root допускает что переменная может принять null. То есть псевдо-null. Правилньо понимаю?
+                                    // Как переменные с вопросит знаком связаны вот с этой функцией <Nullable>disable</Nullable>. Это одно и тоже?
 
         public int Count { get; private set; }
 
         public Tree() { }
 
-        public Tree(T? root)
+        public Tree(T root)
         {
             _root = new TreeNode<T>(root);
             Count++;
         }
 
-        public void Add(T? data)
+        public void Add(T data)
         {
             if (_root == null)
             {
@@ -25,11 +26,11 @@ namespace TreeTask
                 return;
             }
 
-            TreeNode<T>? treeNode = _root;
+            TreeNode<T> treeNode = _root;
 
             while (true)
             {
-                if (data.CompareTo(treeNode.Data) > 0)
+                if (data.CompareTo(treeNode.Data) < 0)
                 {
                     if (treeNode.Left == null)
                     {
@@ -60,7 +61,7 @@ namespace TreeTask
 
         public bool HasData(T data) => GetTreeNode(data) != null;
 
-        private TreeNode<T>? GetTreeNode(T data)
+        private TreeNode<T> GetTreeNode(T data)
         {
             if (_root == null)
             {
@@ -75,7 +76,7 @@ namespace TreeTask
                 {
                     return treeNode;
                 }
-                else if (data.CompareTo(treeNode.Data) > 0)
+                else if (data.CompareTo(treeNode.Data) < 0)
                 {
                     if (treeNode.Left == null)
                     {
@@ -100,7 +101,7 @@ namespace TreeTask
             }
         }
 
-        private TreeNode<T>? GetTreeNodeParent(T data)
+        private TreeNode<T> GetTreeNodeParent(T data)
         {
             if (_root == null)
             {
@@ -121,7 +122,7 @@ namespace TreeTask
                 {
                     return treeNodeParent; // нету такого исхода когда данная переменная не присвоена если не присваивать на 116
                 }
-                else if (data.CompareTo(treeNode.Data) > 0)
+                else if (data.CompareTo(treeNode.Data) < 0)
                 {
                     if (treeNode.Left == null)
                     {
@@ -158,17 +159,17 @@ namespace TreeTask
                 return true;
             }
 
-            TreeNode<T>? deletedNodeParent = GetTreeNodeParent(data);
-            
+            TreeNode<T> deletedNodeParent = GetTreeNodeParent(data);
+
             if (deletedNodeParent == null)
             {
                 return false;
             }
 
-            TreeNode<T>? deletedNode;
+            TreeNode<T> deletedNode;
             bool isLeftTurn = false;
 
-            if (data.CompareTo(deletedNodeParent.Data) > 0)
+            if (data.CompareTo(deletedNodeParent.Data) < 0)
             {
                 deletedNode = deletedNodeParent.Left;
                 isLeftTurn = true;
@@ -226,7 +227,7 @@ namespace TreeTask
                 }
             }
 
-            // отсутсвие отсутствия (2 ребенка)
+            // 2 ребенка
             TreeNode<T> minRightBranch = deletedNode.Right;
             TreeNode<T> minRightBranchParent = deletedNode;
 
@@ -309,6 +310,8 @@ namespace TreeTask
                 if (treeNode.Left == null)
                 {
                     treeNode.Left = _root.Left;
+                    _root = treeNode; // в данном случае затираются старые _root.Left and _root.Right и сборщик их убирет или нужно вручную занулить их перед присваиванием?
+
                     return;
                 }
                 else
@@ -334,7 +337,7 @@ namespace TreeTask
             stringBuilder.Append("[");
 
             Queue<TreeNode<T>> queue = new();
-            queue.Append(_root);
+            queue.Enqueue(_root);
 
             TreeNode<T> treeNode;
 
@@ -344,15 +347,15 @@ namespace TreeTask
 
                 stringBuilder.Append(treeNode.Data);
                 stringBuilder.Append(", ");
-                
+
                 if (treeNode.Left != null)
                 {
-                    queue.Append(treeNode.Left);
+                    queue.Enqueue(treeNode.Left);
                 }
 
                 if (treeNode.Right != null)
                 {
-                    queue.Append(treeNode.Right);
+                    queue.Enqueue(treeNode.Right);
                 }
             }
 
@@ -369,66 +372,57 @@ namespace TreeTask
             stringBuilder.Append("[");
 
             Stack<TreeNode<T>> stack = new();
-            stack.Append(_root);
-
-            if (_root.Left != null)
-            {
-                stack.Append(_root.Left);
-            }
-
-            if (_root.Right != null)
-            {
-                stack.Append(_root.Right);
-            }
-
             TreeNode<T> treeNode;
+
+            stack.Push(_root);
 
             while (stack.Count != 0)
             {
-                treeNode = stack.First();
+                treeNode = stack.Pop();
 
                 stringBuilder.Append(treeNode.Data);
                 stringBuilder.Append(", ");
 
                 if (treeNode.Right != null)
                 {
-                    stack.Append(treeNode.Right);
+                    stack.Push(treeNode.Right);
                 }
 
                 if (treeNode.Left != null)
                 {
-                    stack.Append(treeNode.Left);
+                    stack.Push(treeNode.Left);
                 }
             }
 
-            stringBuilder.Replace(", ", "]", stringBuilder.Length - 3, 3);
+            stringBuilder.Replace(", ", "]", stringBuilder.Length - 2, 2);
 
             return stringBuilder.ToString();
         }
 
-        public string DeepRecursiveBypass(TreeNode<T> treeNode) 
+        public void DeepRecursiveBypass()
         {
-            StringBuilder stringBuilder = new();
+            Console.Write(_root.Data);
+            Console.Write("  ");
+            DeepRecursiveBypass(_root);
+        }
 
-            stringBuilder.Append(treeNode.Data);
-            stringBuilder.Append(", ");
 
-            List<TreeNode<T>?> list = new List<TreeNode<T>?> { treeNode.Left, treeNode.Right };
+        private void DeepRecursiveBypass(TreeNode<T> treeNode)
+        {
+            List<TreeNode<T>> list = new List<TreeNode<T>> { treeNode.Left, treeNode.Right };
 
-            foreach (TreeNode<T>? e in list)
+            foreach (TreeNode<T> e in list)
             {
                 if (e == null)
                 {
                     continue;
                 }
 
+                Console.Write(e.Data);
+                Console.Write("  ");
+
                 DeepRecursiveBypass(e);
             }
-
-            stringBuilder.Insert(0, '[');
-            stringBuilder.Replace(", ", "]", stringBuilder.Length - 3, 3);
-
-            return stringBuilder.ToString();
         }
     }
 }

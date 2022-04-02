@@ -1,4 +1,4 @@
-﻿using System.Collections.Generic;
+﻿using System.Text;
 
 namespace TreeTask
 {
@@ -10,13 +10,13 @@ namespace TreeTask
 
         public Tree() { }
 
-        public Tree(T root)
+        public Tree(T? root)
         {
             _root = new TreeNode<T>(root);
             Count++;
         }
 
-        public void Add(T data)
+        public void Add(T? data)
         {
             if (_root == null)
             {
@@ -25,7 +25,7 @@ namespace TreeTask
                 return;
             }
 
-            TreeNode<T> treeNode = _root;
+            TreeNode<T>? treeNode = _root;
 
             while (true)
             {
@@ -113,13 +113,13 @@ namespace TreeTask
             }
 
             TreeNode<T> treeNode = _root;
-            TreeNode<T> treeNodeParent = _root; // поскольку компилятор ругается на 122 строке если не присвоить переменную пришлось присвоить.
+            TreeNode<T> treeNodeParent = _root; // поскольку компилятор ругается на 122 строке если не присвоить переменную в этом месте пришлось присвоить.
 
             while (true)
             {
                 if (data.CompareTo(treeNode.Data) == 0)
                 {
-                    return treeNodeParent; // нету такого исхода когда данная переменная не присвоена
+                    return treeNodeParent; // нету такого исхода когда данная переменная не присвоена если не присваивать на 116
                 }
                 else if (data.CompareTo(treeNode.Data) > 0)
                 {
@@ -148,158 +148,7 @@ namespace TreeTask
             }
         }
 
-        //public bool RemoveAt(T data)
-        //{
-        //    CheckFirst();
-
-        //    if (data.Equals(_root.Data))
-        //    {
-        //        RemoveFirst();
-        //        return true;
-        //    }
-
-        //    TreeNode<T> treeNode = _root;
-        //    TreeNode<T> deletedNodeParent;
-        //    bool isLeftTurn = false;
-
-        //    while (data.CompareTo(treeNode.Data) != 0)
-        //    {
-        //        isLeftTurn = false;
-
-        //        if (data.CompareTo(treeNode.Data) > 0)
-        //        {
-        //            if (treeNode.Left == null)
-        //            {
-        //                return false;
-        //            }
-        //            else
-        //            {
-        //                isLeftTurn = true;
-        //                deletedNodeParent = treeNode;
-        //                treeNode = treeNode.Left;
-        //            }
-        //        }
-        //        else
-        //        {
-        //            if (treeNode.Right == null)
-        //            {
-        //                return false;
-        //            }
-        //            else
-        //            {
-        //                deletedNodeParent = treeNode;
-        //                treeNode = treeNode.Right;
-        //            }
-        //        }
-        //    }
-
-        //    TreeNode<T> deletedNode = treeNode;
-
-        //    // нет детей
-        //    if (deletedNode.Left == null && deletedNode.Right == null)
-        //    {
-        //        if (isLeftTurn)
-        //        {
-        //            deletedNodeParent.Left = null; // нету такого исхода где данная переменная в этом месте не будет присвоена
-        //            return true;
-        //        }
-
-        //        if (!isLeftTurn)
-        //        {
-        //            deletedNodeParent.Right = null;
-        //            return true;
-        //        }
-        //    }
-
-        //    // нет левого
-        //    if (treeNode.Left == null)
-        //    {
-        //        if (isLeftTurn)
-        //        {
-        //            deletedNodeParent.Left = treeNode.Right;
-        //            return true;
-        //        }
-
-        //        if (!isLeftTurn)
-        //        {
-        //            deletedNodeParent.Right = treeNode.Right;
-        //            return true;
-        //        }
-        //    }
-
-        //    // нет правого
-        //    if (treeNode.Right == null)
-        //    {
-        //        if (isLeftTurn)
-        //        {
-        //            deletedNodeParent.Left = treeNode.Left;
-        //            return true;
-        //        }
-
-        //        if (!isLeftTurn)
-        //        {
-        //            deletedNodeParent.Right = treeNode.Left;
-        //            return true;
-        //        }
-        //    }
-
-        //    // отсутсвие отсутствия (2 ребенка)
-        //    TreeNode<T> minRightBranch = deletedNode.Right;
-        //    TreeNode<T> minRightBranchParent = deletedNode;
-
-        //    if (minRightBranch.Left != null)
-        //    {
-        //        while (minRightBranch.Left != null)
-        //        {
-        //            minRightBranchParent = minRightBranch;
-        //            minRightBranch = minRightBranch.Left;
-        //        }
-
-        //        if (minRightBranch.Right == null) 
-        //        {
-        //            minRightBranchParent.Left = null; // занулили родителя левого правой ветки
-        //        }
-        //        else
-        //        {
-        //            minRightBranchParent.Left = minRightBranch.Right; // если есть соединили 
-        //        }
-
-        //        if (isLeftTurn) // смотрим куда идет поворот после родителя удаляемого нода
-        //        {
-        //            deletedNodeParent.Left = minRightBranch; // перенаправили ссылку родителя удаляемого на минамльного левого
-        //        }
-        //        else
-        //        {
-        //            deletedNodeParent.Right = minRightBranch;
-        //        }
-
-        //        minRightBranch.Left = deletedNode.Left; // минимальный левый принимает ссылки детей от удаляемого
-        //        minRightBranch.Right = deletedNode.Right;
-
-        //        deletedNode.Left = null; // зануляем удаляемый нод
-        //        deletedNode.Right = null;
-        //        deletedNode = null;
-        //        return true;
-        //    }
-
-        //    if (isLeftTurn) 
-        //    {
-        //        deletedNodeParent.Left = deletedNode.Right;
-        //    }
-        //    else
-        //    {
-        //        deletedNodeParent.Right = deletedNode.Right;
-        //    }
-
-        //    deletedNode.Right.Left = deletedNode.Left;
-
-        //    deletedNode.Left = null; // зануляем удаляемый нод
-        //    deletedNode.Right = null;
-        //    deletedNode = null;
-        //    return true;
-        //}
-
-        public bool RemoveAt(T data)
+        public bool Remove(T data)
         {
             CheckFirst();
 
@@ -309,14 +158,14 @@ namespace TreeTask
                 return true;
             }
 
-            TreeNode<T> deletedNodeParent = GetTreeNodeParent(data);
+            TreeNode<T>? deletedNodeParent = GetTreeNodeParent(data);
             
             if (deletedNodeParent == null)
             {
                 return false;
             }
 
-            TreeNode<T> deletedNode;
+            TreeNode<T>? deletedNode;
             bool isLeftTurn = false;
 
             if (data.CompareTo(deletedNodeParent.Data) > 0)
@@ -475,6 +324,111 @@ namespace TreeTask
             {
                 throw new NullReferenceException($"Tree {this} is empty.");
             }
+        }
+
+        public string WidthBypass()
+        {
+            CheckFirst();
+
+            StringBuilder stringBuilder = new();
+            stringBuilder.Append("[");
+
+            Queue<TreeNode<T>> queue = new();
+            queue.Append(_root);
+
+            TreeNode<T> treeNode;
+
+            while (queue.Count != 0)
+            {
+                treeNode = queue.Dequeue();
+
+                stringBuilder.Append(treeNode.Data);
+                stringBuilder.Append(", ");
+                
+                if (treeNode.Left != null)
+                {
+                    queue.Append(treeNode.Left);
+                }
+
+                if (treeNode.Right != null)
+                {
+                    queue.Append(treeNode.Right);
+                }
+            }
+
+            stringBuilder.Replace(", ", "]", stringBuilder.Length - 3, 3);
+
+            return stringBuilder.ToString();
+        }
+
+        public string DeepBypass()
+        {
+            CheckFirst();
+
+            StringBuilder stringBuilder = new();
+            stringBuilder.Append("[");
+
+            Stack<TreeNode<T>> stack = new();
+            stack.Append(_root);
+
+            if (_root.Left != null)
+            {
+                stack.Append(_root.Left);
+            }
+
+            if (_root.Right != null)
+            {
+                stack.Append(_root.Right);
+            }
+
+            TreeNode<T> treeNode;
+
+            while (stack.Count != 0)
+            {
+                treeNode = stack.First();
+
+                stringBuilder.Append(treeNode.Data);
+                stringBuilder.Append(", ");
+
+                if (treeNode.Right != null)
+                {
+                    stack.Append(treeNode.Right);
+                }
+
+                if (treeNode.Left != null)
+                {
+                    stack.Append(treeNode.Left);
+                }
+            }
+
+            stringBuilder.Replace(", ", "]", stringBuilder.Length - 3, 3);
+
+            return stringBuilder.ToString();
+        }
+
+        public string DeepRecursiveBypass(TreeNode<T> treeNode) 
+        {
+            StringBuilder stringBuilder = new();
+
+            stringBuilder.Append(treeNode.Data);
+            stringBuilder.Append(", ");
+
+            List<TreeNode<T>?> list = new List<TreeNode<T>?> { treeNode.Left, treeNode.Right };
+
+            foreach (TreeNode<T>? e in list)
+            {
+                if (e == null)
+                {
+                    continue;
+                }
+
+                DeepRecursiveBypass(e);
+            }
+
+            stringBuilder.Insert(0, '[');
+            stringBuilder.Replace(", ", "]", stringBuilder.Length - 3, 3);
+
+            return stringBuilder.ToString();
         }
     }
 }

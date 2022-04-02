@@ -2,19 +2,15 @@
 
 namespace TreeTask
 {
-    internal class TreeTask<T> 
+    internal class Tree<T> where T : IComparable<T>
     {
-        private TreeNode<T> _root;
+        private TreeNode<T>? _root;
 
         public int Count { get; private set; }
 
-        public TreeTask()
-        {
-            _root = new TreeNode<T>();
-            Count++;
-        }
+        public Tree() { }
 
-        public TreeTask(T root)
+        public Tree(T root)
         {
             _root = new TreeNode<T>(root);
             Count++;
@@ -22,76 +18,83 @@ namespace TreeTask
 
         public void Add(T data)
         {
-            TreeNode<T> next = _root;
+            if (_root == null)
+            {
+                _root = new TreeNode<T>(data);
+                Count++;
+                return;
+            }
+
+            TreeNode<T> treeNode = _root;
 
             while (true)
             {
-                if (data < next.Data)
+                if (data.CompareTo(treeNode.Data) > 0)
                 {
-                    if (next.Left == null)
+                    if (treeNode.Left == null)
                     {
-                        next.Left = new TreeNode<T>(data);
+                        treeNode.Left = new TreeNode<T>(data);
                         Count++;
-                        break;
+                        return;
                     }
                     else
                     {
-                        next = next.Left;
+                        treeNode = treeNode.Left;
                     }
                 }
                 else
                 {
-                    if (next.Right == null)
+                    if (treeNode.Right == null)
                     {
-                        next.Right = new TreeNode<T>(data);
+                        treeNode.Right = new TreeNode<T>(data);
                         Count++;
-                        break;
+                        return;
                     }
                     else
                     {
-                        next = next.Right;
+                        treeNode = treeNode.Right;
                     }
                 }
             }
         }
 
-        public bool HasData(T data)
-        {
-            TreeNode<T>? treeNode = GetTreeNode(data);
-
-            return treeNode != null;
-        }
+        public bool HasData(T data) => GetTreeNode(data) != null;
 
         private TreeNode<T>? GetTreeNode(T data)
         {
-            TreeNode<T> next = _root;
+            if (_root == null)
+            {
+                throw new InvalidOperationException($"Tree {this} is empty.");
+            }
+
+            TreeNode<T> treeNode = _root;
 
             while (true)
             {
-                if (data == next.Data)
+                if (data.CompareTo(treeNode.Data) == 0)
                 {
-                    return next;
+                    return treeNode;
                 }
-                else if (data < next.Data)
+                else if (data.CompareTo(treeNode.Data) > 0)
                 {
-                    if (next.Left == null)
+                    if (treeNode.Left == null)
                     {
                         return null;
                     }
                     else
                     {
-                        next = next.Left;
+                        treeNode = treeNode.Left;
                     }
                 }
                 else
                 {
-                    if (next.Right == null)
+                    if (treeNode.Right == null)
                     {
                         return null;
                     }
                     else
                     {
-                        next = next.Right;
+                        treeNode = treeNode.Right;
                     }
                 }
             }
@@ -99,52 +102,50 @@ namespace TreeTask
 
         public bool RemoveAt(T data)
         {
-            if (_root.Data == data)
+            CheckFirst();
+
+            if (data.Equals(_root.Data))
             {
-                RemoveRoot();
-                return true;                
+                RemoveFirst();
+                return true;
             }
 
-            TreeNode<T> next = _root;
+            TreeNode<T> treeNode = _root;
             TreeNode<T> parent;
 
             while (true)
             {
                 bool previoslyLeft = false;
 
-                TreeNode<T> dataNode = new TreeNode<T>(data);
-                if (data.CompareTo(next.Data) < 0)
-
-
-                if (data < next.Data)
+                if (data.CompareTo(treeNode.Data) > 0)
                 {
-                    if (next.Left == null)
+                    if (treeNode.Left == null)
                     {
                         return false;
                     }
                     else
                     {
                         previoslyLeft = true;
-                        parent = next;
-                        next = next.Left;
+                        parent = treeNode;
+                        treeNode = treeNode.Left;
                     }
                 }
                 else
                 {
-                    if (next.Right == null)
+                    if (treeNode.Right == null)
                     {
                         return false;
                     }
                     else
                     {
-                        parent = next;
-                        next = next.Right;
+                        parent = treeNode;
+                        treeNode = treeNode.Right;
                     }
                 }
 
-                if (data == next.Data)
+                if (data.CompareTo(treeNode.Data) == 0)
                 {
-                    if (next.Left == null && next.Right == null)
+                    if (treeNode.Left == null && treeNode.Right == null)
                     {
                         if (previoslyLeft)
                         {
@@ -157,34 +158,34 @@ namespace TreeTask
                             parent.Right = null;
                             return true;
                         }
-                    } 
+                    }
 
-                    if (next.Left != null && next.Right == null)
+                    if (treeNode.Left != null && treeNode.Right == null)
                     {
                         if (previoslyLeft)
                         {
-                            parent.Left = next.Left;
+                            parent.Left = treeNode.Left;
                             return true;
                         }
 
                         if (!previoslyLeft)
                         {
-                            parent.Right = next.Left;
+                            parent.Right = treeNode.Left;
                             return true;
                         }
                     }
 
-                    if (next.Left == null && next.Right != null)
+                    if (treeNode.Left == null && treeNode.Right != null)
                     {
                         if (previoslyLeft)
                         {
-                            parent.Left = next.Right;
+                            parent.Left = treeNode.Right;
                             return true;
                         }
 
                         if (!previoslyLeft)
                         {
-                            parent.Right = next.Right;
+                            parent.Right = treeNode.Right;
                             return true;
                         }
                     }
@@ -192,7 +193,7 @@ namespace TreeTask
             }
         }
 
-        public void RemoveRoot()
+        private void RemoveFirst()
         {
             if (_root.Left == null & _root.Right == null)
             {
@@ -200,15 +201,15 @@ namespace TreeTask
                 return;
             }
 
-            if (_root.Left != null && _root.Right == null)
+            if (_root.Left == null)
             {
-                _root = _root.Left;
+                _root = _root.Right;
                 return;
             }
 
-            if (_root.Left == null && _root.Right != null)
+            if (_root.Right == null)
             {
-                _root = _root.Right;
+                _root = _root.Left;
                 return;
             }
 
@@ -225,6 +226,14 @@ namespace TreeTask
                 {
                     treeNode = treeNode.Left;
                 }
+            }
+        }
+
+        private void CheckFirst()
+        {
+            if (_root == null)
+            {
+                throw new NullReferenceException($"Tree {this} is empty.");
             }
         }
     }

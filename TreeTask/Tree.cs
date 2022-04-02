@@ -4,8 +4,7 @@ namespace TreeTask
 {
     internal class Tree<T> where T : IComparable<T>
     {
-        private TreeNode<T> _root; // этот вопроситеный знак означает что _root допускает что переменная может принять null. То есть псевдо-null. Правилньо понимаю?
-                                   // Как переменные с вопросит знаком связаны вот с этой функцией <Nullable>disable</Nullable>. Это одно и тоже?
+        private TreeNode<T> _root; 
 
         public int Count { get; private set; }
 

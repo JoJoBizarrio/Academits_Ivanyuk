@@ -112,8 +112,8 @@ namespace TreeTask
             {
                 bool previoslyLeft = false;
 
-                if (next.CompareTo(data) < 0) { }
-                if (DataComparer<IComparable<T>>.Comparer(data, next.Data) < 0)
+                TreeNode<T> dataNode = new TreeNode<T>(data);
+                if (data.CompareTo(next.Data) < 0)
 
 
                 if (data < next.Data)

@@ -1,17 +1,18 @@
 ﻿namespace TreeTask
 {
-    internal class DataComparer<T> where T : IComparable<T>
+    internal class DataComparer<T> : IComparable
     {
-        T obj;
-
-       public int Comparer(T other)
+        public int CompareTo(object? x)
         {
-            return obj.CompareTo(other);
+            Comparison<T> comparison = new Comparison<T>();
+
+            return ;
         }
 
-        public static int Comparer(T x, T y)
-        {
-            return x.CompareTo(y);
-        }
+
+        //public static int Comparer(T x, T y)
+        //{
+        //    return x.CompareTo(y);
+        //}
     }
 }

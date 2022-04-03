@@ -29,7 +29,7 @@ namespace RangeTask
         // Получение интервала-пересечения двух интервалов. Если пересечения нет, выдать null. Если есть, то выдать новый диапазон с соответствующими концами
         public Range GetIntersection(Range range)
         {
-            if (To < range.From || From > range.To)
+            if (To <= range.From || From >= range.To)
             {
                 return new Range();
             }
@@ -62,7 +62,7 @@ namespace RangeTask
 
             if (From >= range.From & To <= range.To)
             {
-                return new Range[default];
+                return Array.Empty<Range>();
             }
 
             if (From == range.From)

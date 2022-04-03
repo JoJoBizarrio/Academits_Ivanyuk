@@ -21,6 +21,7 @@
             Range range6 = new Range(40, 50);   // не пересекаются
             Range range7 = new Range(-10, 40);
             Range range8 = new Range(-10, 10);
+            Range range9 = new Range(-20, -10);
 
             Console.WriteLine();
             Console.WriteLine("Check intersection:");
@@ -30,6 +31,7 @@
             Console.WriteLine($"{range1} and {range6}: " + range1.GetIntersection(range6));
             Console.WriteLine($"{range1} and {range7}: " + range1.GetIntersection(range7));
             Console.WriteLine($"{range1} and {range8}: " + range1.GetIntersection(range8));
+            Console.WriteLine($"{range1} and {range9}: " + range1.GetIntersection(range9));
 
             Console.WriteLine();
             Console.WriteLine("Check sum:");

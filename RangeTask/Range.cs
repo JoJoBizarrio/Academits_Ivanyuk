@@ -53,7 +53,7 @@ namespace RangeTask
         }
 
         // Получение разности двух интервалов.
-        public Range[] GetDifference(Range range)
+        public Range[] GetDifference(Range range) // пытался упростить, не получилось
         {
             if (To <= range.From || From >= range.To)
             {

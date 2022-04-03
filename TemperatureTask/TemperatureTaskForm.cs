@@ -83,7 +83,19 @@ namespace TemperatureTask
 
         }
 
+        private void toKelvin_CheckedChanged(object sender, EventArgs e)
+        {
 
+        }
 
+        private void toCelcius_CheckedChanged(object sender, EventArgs e)
+        {
+
+        }
+
+        private void toFarengeit_CheckedChanged(object sender, EventArgs e)
+        {
+
+        }
     }
 }

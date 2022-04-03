@@ -38,6 +38,9 @@
             this.label2 = new System.Windows.Forms.Label();
             this.label3 = new System.Windows.Forms.Label();
             this.label4 = new System.Windows.Forms.Label();
+            this.toKelvin = new System.Windows.Forms.RadioButton();
+            this.toCelcius = new System.Windows.Forms.RadioButton();
+            this.toFarengeit = new System.Windows.Forms.RadioButton();
             this.SuspendLayout();
             // 
             // textBox1
@@ -131,11 +134,50 @@
             this.label4.TabIndex = 12;
             this.label4.Text = "=>\r\n\r\n=>\r\n\r\n=>\r\n";
             // 
+            // toKelvin
+            // 
+            this.toKelvin.AutoSize = true;
+            this.toKelvin.Location = new System.Drawing.Point(31, 175);
+            this.toKelvin.Name = "toKelvin";
+            this.toKelvin.Size = new System.Drawing.Size(88, 24);
+            this.toKelvin.TabIndex = 13;
+            this.toKelvin.TabStop = true;
+            this.toKelvin.Text = "to Kelvin";
+            this.toKelvin.UseVisualStyleBackColor = true;
+            this.toKelvin.CheckedChanged += new System.EventHandler(this.toKelvin_CheckedChanged);
+            // 
+            // toCelcius
+            // 
+            this.toCelcius.AutoSize = true;
+            this.toCelcius.Location = new System.Drawing.Point(141, 175);
+            this.toCelcius.Name = "toCelcius";
+            this.toCelcius.Size = new System.Drawing.Size(90, 24);
+            this.toCelcius.TabIndex = 14;
+            this.toCelcius.TabStop = true;
+            this.toCelcius.Text = "toCelcius";
+            this.toCelcius.UseVisualStyleBackColor = true;
+            this.toCelcius.CheckedChanged += new System.EventHandler(this.toCelcius_CheckedChanged);
+            // 
+            // toFarengeit
+            // 
+            this.toFarengeit.AutoSize = true;
+            this.toFarengeit.Location = new System.Drawing.Point(256, 175);
+            this.toFarengeit.Name = "toFarengeit";
+            this.toFarengeit.Size = new System.Drawing.Size(109, 24);
+            this.toFarengeit.TabIndex = 15;
+            this.toFarengeit.TabStop = true;
+            this.toFarengeit.Text = "to Farengeit";
+            this.toFarengeit.UseVisualStyleBackColor = true;
+            this.toFarengeit.CheckedChanged += new System.EventHandler(this.toFarengeit_CheckedChanged);
+            // 
             // TemperatureTaskForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 20F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(785, 552);
+            this.Controls.Add(this.toFarengeit);
+            this.Controls.Add(this.toCelcius);
+            this.Controls.Add(this.toKelvin);
             this.Controls.Add(this.label4);
             this.Controls.Add(this.label3);
             this.Controls.Add(this.label2);
@@ -167,5 +209,8 @@
         private Label label2;
         private Label label3;
         private Label label4;
+        private RadioButton toKelvin;
+        private RadioButton toCelcius;
+        private RadioButton toFarengeit;
     }
 }

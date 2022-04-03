@@ -40,7 +40,7 @@ namespace RangeTask
         // Получение объединения двух интервалов. Может получиться 1 или 2 отдельных куска.
         public Range[] GetUnion(Range range)
         {
-            if (To <= range.From || From >= range.To)
+            if (To < range.From || From > range.To)
             {
                 return new Range[]
                 {

@@ -14,7 +14,7 @@ namespace TemperatureTask
 
         private void textBox1_TextChanged(object sender, EventArgs e)
         {
-            if (textBox1.Enabled)
+            if (ConvertButton.Enabled)
             {
                 textBox4_TextChanged(sender, e);
             }
@@ -37,22 +37,30 @@ namespace TemperatureTask
 
         private void textBox4_TextChanged(object sender, EventArgs e)
         {
-            if (radioButton1.Enabled)
+            bool click = false;
+            ConvertButton.Enabled = false;
+
+            if (textBox1.Text == "-")
             {
-                if (string.IsNullOrEmpty(textBox1.Text))
-                {
-                    textBox1.Text = Convert.ToString(0);
-                    textBox1.SelectionStart = 1;
-                }
+                return;
+            }
 
-                //int index = textBox1.Text.LastIndexOf('.');
+            if (string.IsNullOrEmpty(textBox1.Text))
+            {
+                textBox1.Text = Convert.ToString(0);
+                textBox1.SelectionStart = 1;
+            }
 
-                //if (index >= 0)
-                //{
-                //    textBox1.Text = textBox1.Text.Remove(index);
-                //    textBox1.SelectionStart = textBox1.TextLength;
-                //}
+            //int index = textBox1.Text.LastIndexOf('.');
 
+            //if (index >= 0)
+            //{
+            //    textBox1.Text = textBox1.Text.Remove(index);
+            //    textBox1.SelectionStart = textBox1.TextLength;
+            //}
+
+            if (toKelvin.Enabled)
+            {
                 try // а тут надо это использовать? одну ошибку с нулем я обработал. но тут еще проблемы: с точкой/запятой, с несколькими запятыми. Все вручную обрабатывать чтоли? 
                 {
                     double celsius = Convert.ToDouble(textBox1.Text);
@@ -61,11 +69,17 @@ namespace TemperatureTask
                 catch { MessageBox.Show("Something wrong..."); }
             }
 
-            if (radioButton4.Enabled)
-            {
+            //if (toFarengeit.Enabled)
+            //{
+            //    try // а тут надо это использовать? одну ошибку с нулем я обработал. но тут еще проблемы: с точкой/запятой, с несколькими запятыми. Все вручную обрабатывать чтоли? 
+            //    {
+            //        double celsius = Convert.ToDouble(textBox1.Text);
+            //        textBox4.Text = Convert.ToString(celsius + 32.0);
+            //    }
+            //    catch { MessageBox.Show("Something wrong..."); }
+            //}
 
-            }
-            
+            // textBox4.Text = textBox1.Text;
         }
 
         private void textBox5_TextChanged(object sender, EventArgs e)
@@ -94,6 +108,11 @@ namespace TemperatureTask
         }
 
         private void toFarengeit_CheckedChanged(object sender, EventArgs e)
+        {
+
+        }
+
+        private void ConvertButton_Click(object sender, EventArgs e)
         {
 
         }

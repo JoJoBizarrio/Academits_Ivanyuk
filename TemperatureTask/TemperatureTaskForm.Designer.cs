@@ -41,6 +41,7 @@
             this.toKelvin = new System.Windows.Forms.RadioButton();
             this.toCelcius = new System.Windows.Forms.RadioButton();
             this.toFarengeit = new System.Windows.Forms.RadioButton();
+            this.ConvertButton = new System.Windows.Forms.Button();
             this.SuspendLayout();
             // 
             // textBox1
@@ -137,6 +138,7 @@
             // toKelvin
             // 
             this.toKelvin.AutoSize = true;
+            this.toKelvin.Checked = true;
             this.toKelvin.Location = new System.Drawing.Point(31, 175);
             this.toKelvin.Name = "toKelvin";
             this.toKelvin.Size = new System.Drawing.Size(88, 24);
@@ -153,7 +155,6 @@
             this.toCelcius.Name = "toCelcius";
             this.toCelcius.Size = new System.Drawing.Size(90, 24);
             this.toCelcius.TabIndex = 14;
-            this.toCelcius.TabStop = true;
             this.toCelcius.Text = "toCelcius";
             this.toCelcius.UseVisualStyleBackColor = true;
             this.toCelcius.CheckedChanged += new System.EventHandler(this.toCelcius_CheckedChanged);
@@ -165,16 +166,26 @@
             this.toFarengeit.Name = "toFarengeit";
             this.toFarengeit.Size = new System.Drawing.Size(109, 24);
             this.toFarengeit.TabIndex = 15;
-            this.toFarengeit.TabStop = true;
             this.toFarengeit.Text = "to Farengeit";
             this.toFarengeit.UseVisualStyleBackColor = true;
             this.toFarengeit.CheckedChanged += new System.EventHandler(this.toFarengeit_CheckedChanged);
+            // 
+            // ConvertButton
+            // 
+            this.ConvertButton.Location = new System.Drawing.Point(31, 217);
+            this.ConvertButton.Name = "ConvertButton";
+            this.ConvertButton.Size = new System.Drawing.Size(94, 29);
+            this.ConvertButton.TabIndex = 16;
+            this.ConvertButton.Text = "Convert";
+            this.ConvertButton.UseVisualStyleBackColor = true;
+            this.ConvertButton.Click += new System.EventHandler(this.ConvertButton_Click);
             // 
             // TemperatureTaskForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 20F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(785, 552);
+            this.Controls.Add(this.ConvertButton);
             this.Controls.Add(this.toFarengeit);
             this.Controls.Add(this.toCelcius);
             this.Controls.Add(this.toKelvin);
@@ -212,5 +223,6 @@
         private RadioButton toKelvin;
         private RadioButton toCelcius;
         private RadioButton toFarengeit;
+        private Button ConvertButton;
     }
 }

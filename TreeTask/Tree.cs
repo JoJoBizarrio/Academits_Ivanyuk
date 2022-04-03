@@ -428,7 +428,6 @@ namespace TreeTask
             DeepRecursiveBypass(_root);
         }
 
-
         private void DeepRecursiveBypass(TreeNode<T> treeNode)
         {
             List<TreeNode<T>> list = new List<TreeNode<T>> { treeNode.Left, treeNode.Right };

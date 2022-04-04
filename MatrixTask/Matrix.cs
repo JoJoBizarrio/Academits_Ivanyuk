@@ -97,7 +97,7 @@ namespace MatrixTask
             }
         }
 
-        // 2b. Получение и задание вектора-строки по индексу	
+        // 2b. Получение вектора-строки по индексу	
         public Vector GetRow(int index)
         {
             if (index < 0 || index >= RowsCount)
@@ -108,6 +108,7 @@ namespace MatrixTask
             return new Vector(_rows[index]);
         }
 
+        // 2b. Присвоение вектора-строки по индексу	
         public void SetRow(int index, Vector vector)
         {
             if (index < 0 || index >= RowsCount)
@@ -245,7 +246,8 @@ namespace MatrixTask
 
             foreach (Vector e in _rows)
             {
-                stringBuilder.Append($"{e}, ");
+                stringBuilder.Append(e);
+                stringBuilder.Append(", ");
             }
 
             return stringBuilder.Remove(stringBuilder.Length - 2, 2).Append('}').ToString();
@@ -261,9 +263,12 @@ namespace MatrixTask
 
             Vector result = new(RowsCount);
 
-            for (int i = 0; i < RowsCount; i++)
+            int i = 0;
+            
+            foreach (Vector e in _rows)
             {
-                result.SetElement(i, Vector.GetScalarProduct(_rows[i], vector));
+                result.SetElement(i, Vector.GetScalarProduct(e, vector));
+                ++i;
             }
 
             return result;

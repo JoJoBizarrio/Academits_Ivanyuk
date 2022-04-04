@@ -17,6 +17,7 @@ namespace TemperatureTask
 
         private void ConvertButton_Click(object sender, EventArgs e)
         {
+            // из цельсий 
             if (!string.IsNullOrEmpty(CelciusBox.Text))
             {
                 if (CelciusBox.Text.Contains('.'))
@@ -54,6 +55,7 @@ namespace TemperatureTask
                 }
             }
 
+            // из кельвин
             if (!string.IsNullOrEmpty(KelvinBox.Text))
             {
                 if (KelvinBox.Text.Contains('.'))
@@ -97,6 +99,7 @@ namespace TemperatureTask
                 }
             }
 
+            // из фаренгейт
             if (!string.IsNullOrEmpty(FarengeitBox.Text))
             {
                 if (FarengeitBox.Text.Contains('.'))
@@ -139,6 +142,7 @@ namespace TemperatureTask
                 }
             }
         }
+
         public static void ErrorMessageAboutInvalidValue()
         {
             MessageBox.Show($"You entered an invalid value.");

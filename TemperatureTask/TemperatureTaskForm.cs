@@ -6,7 +6,7 @@ namespace TemperatureTask
     {
         public const double KelvinConversionFactor = 273.15;
         public const double FarengeitConversionFactor = 32;
-        public const double ConversionMultiplier = 5 / 9;
+        public const double ConversionMultiplier = 5.0 / 9;
 
         public TemperatureTaskForm()
         {
@@ -15,54 +15,9 @@ namespace TemperatureTask
             ConvertButton.Click += ConvertButton_Click;
         }
 
-        private void textBox1_TextChanged(object sender, EventArgs e)
-        {
-
-        }
-
-        private void textBox2_TextChanged(object sender, EventArgs e)
-        {
-
-        }
-
-        private void textBox3_TextChanged(object sender, EventArgs e)
-        {
-
-        }
-
-        private void textBox4_TextChanged(object sender, EventArgs e)
-        {
-
-        }
-
-        private void textBox5_TextChanged(object sender, EventArgs e)
-        {
-
-        }
-
-        private void textBox6_TextChanged(object sender, EventArgs e)
-        {
-
-        }
-
-        private void toKelvin_CheckedChanged(object sender, EventArgs e)
-        {
-
-        }
-
-        private void toCelcius_CheckedChanged(object sender, EventArgs e)
-        {
-
-        }
-
-        private void toFarengeit_CheckedChanged(object sender, EventArgs e)
-        {
-
-        }
-
         private void ConvertButton_Click(object sender, EventArgs e)
         {
-            if (!string.IsNullOrEmpty(CelciusBox.Text) && CelciusBox.Text != ConvertedCelciusBox.Text)
+            if (!string.IsNullOrEmpty(CelciusBox.Text))
             {
                 if (CelciusBox.Text.Contains('.'))
                 {
@@ -71,7 +26,7 @@ namespace TemperatureTask
 
                 if (Double.TryParse(CelciusBox.Text, out double celsius))
                 {
-                    if (toKelvin.Checked)
+                    if (toKelvinaLabel.Checked)
                     {
                         double converted = celsius + KelvinConversionFactor;
 
@@ -84,7 +39,7 @@ namespace TemperatureTask
                             ConvertedCelciusBox.Text = Convert.ToString(converted);
                         }
                     }
-                    else if (toFarengeit.Checked)
+                    else if (toFarengeitLabel.Checked)
                     {
                         ConvertedCelciusBox.Text = Convert.ToString(celsius + FarengeitConversionFactor);
                     }
@@ -99,7 +54,7 @@ namespace TemperatureTask
                 }
             }
 
-            if (!string.IsNullOrEmpty(KelvinBox.Text) && KelvinBox.Text != ConvertedKelvinBox.Text)
+            if (!string.IsNullOrEmpty(KelvinBox.Text))
             {
                 if (KelvinBox.Text.Contains('.'))
                 {
@@ -108,7 +63,7 @@ namespace TemperatureTask
 
                 if (Double.TryParse(KelvinBox.Text, out double kelvins))
                 {
-                    if (toCelcius.Checked)
+                    if (toCelciusLabel.Checked)
                     {
                         if (kelvins < 0)
                         {
@@ -119,12 +74,17 @@ namespace TemperatureTask
                             ConvertedKelvinBox.Text = Convert.ToString(kelvins - KelvinConversionFactor);
                         }
                     }
-                    else if (toFarengeit.Checked)
+                    else if (toFarengeitLabel.Checked)
                     {
-                        ConvertedKelvinBox.Text = Convert.ToString((kelvins - KelvinConversionFactor) * Math.Pow(ConversionMultiplier, -1) + FarengeitConversionFactor);
+                        double converted = (kelvins - KelvinConversionFactor) * Math.Pow(ConversionMultiplier, -1) + FarengeitConversionFactor;
                         // Math.Pow(ConversionMultiplier, -1) - тут так сделал по сложному дабы было умножение.
                         // можно убрать Pow и сделать деление но тогда надо переименовать ConversionMultiplier,
                         // а переименовывать его в FarengeitConversionFactor2 не хочу поскольку тогда он сильно сливаетс€ с первым.
+                        converted = Math.Round(converted, 2, MidpointRounding.AwayFromZero);
+
+                        ConvertedKelvinBox.Text = Convert.ToString(converted); 
+                        // вообще вместо создани€ переменной все можно запихать в Convert.ToString().  ак лучше сделать?
+                        //  огда есть перенна€ смотритьс€ и читаетс€ лучше но переменна€ по факту нигде не используетс€.
                     }
                     else
                     {
@@ -137,7 +97,7 @@ namespace TemperatureTask
                 }
             }
 
-            if (!string.IsNullOrEmpty(FarengeitBox.Text) && FarengeitBox.Text != ConvertedFarengeitBox.Text)
+            if (!string.IsNullOrEmpty(FarengeitBox.Text))
             {
                 if (FarengeitBox.Text.Contains('.'))
                 {
@@ -146,14 +106,18 @@ namespace TemperatureTask
 
                 if (Double.TryParse(FarengeitBox.Text, out double farengeits))
                 {
-                    if (toCelcius.Checked)
+                    if (toCelciusLabel.Checked)
                     {
-                        ConvertedFarengeitBox.Text = Convert.ToString((farengeits - FarengeitConversionFactor) * ConversionMultiplier);
+                        double converted = (farengeits - FarengeitConversionFactor) * ConversionMultiplier;
+                        converted = Math.Round(converted, 2, MidpointRounding.AwayFromZero);
+
+                        ConvertedFarengeitBox.Text = Convert.ToString(converted);
                     }
-                    else if (toKelvin.Checked)
+                    else if (toKelvinaLabel.Checked)
                     {
-                        double converted = (farengeits - FarengeitConversionFactor) * ConversionMultiplier + KelvinConversionFactor; 
-                        // а можно называть переменные прилагатлеьными? или лучше всегда привдоить к сущесвтителньому? converted => convetedValue
+                        double converted = (farengeits - FarengeitConversionFactor) * ConversionMultiplier + KelvinConversionFactor;
+                        converted = Math.Round(converted, 2, MidpointRounding.AwayFromZero);
+                        // а можно называть переменные прилагательными? или лучше всегда приводить к существительным? converted => convetedValue
 
                         if (converted < 0)
                         {

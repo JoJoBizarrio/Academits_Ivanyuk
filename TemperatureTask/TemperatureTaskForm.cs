@@ -2,6 +2,7 @@ namespace TemperatureTask
 {
     public partial class TemperatureTaskForm : Form
     {
+        public const double Epsilon = 1.0e-10;
         public const double KelvinConversionFactor = 273.15;
         public const double FarengeitConversionFactor = 32;
         public const double ConversionMultiplier = 5.0 / 9;
@@ -23,13 +24,13 @@ namespace TemperatureTask
                     CelciusBox.Text = CelciusBox.Text.Replace('.', ',');
                 }
 
-                if (Double.TryParse(CelciusBox.Text, out double celsius))
+                if (double.TryParse(CelciusBox.Text, out double celsius))
                 {
                     if (toKelvinaRadioButton.Checked)
                     {
                         double converted = celsius + KelvinConversionFactor;
 
-                        if (converted < 0)
+                        if (converted < Epsilon)
                         {
                             ErrorMessageAboutKelvinScale();
                         }
@@ -61,9 +62,9 @@ namespace TemperatureTask
                     KelvinBox.Text = KelvinBox.Text.Replace('.', ',');
                 }
 
-                if (Double.TryParse(KelvinBox.Text, out double kelvins))
+                if (double.TryParse(KelvinBox.Text, out double kelvins))
                 {
-                    if (kelvins < 0)
+                    if (kelvins < Epsilon)
                     {
                         ErrorMessageAboutKelvinScale();
                     }
@@ -105,7 +106,7 @@ namespace TemperatureTask
                     FarengeitBox.Text = FarengeitBox.Text.Replace('.', ',');
                 }
 
-                if (Double.TryParse(FarengeitBox.Text, out double farengeits))
+                if (double.TryParse(FarengeitBox.Text, out double farengeits))
                 {
                     if (toCelciusRadioButton.Checked)
                     {
@@ -120,7 +121,7 @@ namespace TemperatureTask
                         converted = Math.Round(converted, 2, MidpointRounding.AwayFromZero);
                         // а можно называть переменные прилагательными? или лучше всегда приводить к существительным? converted => convetedValue
 
-                        if (converted < 0)
+                        if (converted < Epsilon)
                         {
                             ErrorMessageAboutKelvinScale();
                         }

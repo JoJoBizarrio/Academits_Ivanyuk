@@ -5,7 +5,7 @@
         static void Main(string[] args)
         {
             // 1. Прочитать в список все строки из файла
-            string path = "C:\\Users\\koniv\\source\\repos\\Academits_Ivanyuk\\ArrayListHome\\textToList.txt";
+            string path = "..\\net6.0\\textToList.txt";
 
             if (!File.Exists(path))
             {

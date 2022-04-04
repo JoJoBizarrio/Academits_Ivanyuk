@@ -14,7 +14,9 @@ namespace TemperatureTask
             ConvertButton.Click += ConvertButton_Click;
         }
 
-        private void ConvertButton_Click(object sender, EventArgs e)
+        private void ConvertButton_Click(object sender, EventArgs e) // вот эта функция является Контроллером?
+                                                                     // представением яявляется боксы которые выводят информацию после нажаия кнопки convert?
+                                                                     // а моделью будет являтся боксы которые принимают данные от пользователя
         {
             // из цельсий 
             if (!string.IsNullOrEmpty(CelciusBox.Text))

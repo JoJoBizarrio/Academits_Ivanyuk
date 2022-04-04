@@ -1,5 +1,3 @@
-using System.Globalization;
-
 namespace TemperatureTask
 {
     public partial class TemperatureTaskForm : Form

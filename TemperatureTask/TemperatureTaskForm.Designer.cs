@@ -38,9 +38,9 @@
             this.KelvinLabel = new System.Windows.Forms.Label();
             this.FarengeitLabel = new System.Windows.Forms.Label();
             this.ConvertSymbolsLabel = new System.Windows.Forms.Label();
-            this.toKelvinaLabel = new System.Windows.Forms.RadioButton();
-            this.toCelciusLabel = new System.Windows.Forms.RadioButton();
-            this.toFarengeitLabel = new System.Windows.Forms.RadioButton();
+            this.toKelvinaRadioButton = new System.Windows.Forms.RadioButton();
+            this.toCelciusRadioButton = new System.Windows.Forms.RadioButton();
+            this.toFarengeitRadioButton = new System.Windows.Forms.RadioButton();
             this.ConvertButton = new System.Windows.Forms.Button();
             this.SuspendLayout();
             // 
@@ -137,43 +137,43 @@
             this.ConvertSymbolsLabel.TabIndex = 12;
             this.ConvertSymbolsLabel.Text = "=>\r\n\r\n=>\r\n\r\n=>\r\n";
             // 
-            // toKelvinaLabel
+            // toKelvinaRadioButton
             // 
-            this.toKelvinaLabel.AutoSize = true;
-            this.toKelvinaLabel.Checked = true;
-            this.toKelvinaLabel.Font = new System.Drawing.Font("Consolas", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
-            this.toKelvinaLabel.Location = new System.Drawing.Point(14, 122);
-            this.toKelvinaLabel.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
-            this.toKelvinaLabel.Name = "toKelvinaLabel";
-            this.toKelvinaLabel.Size = new System.Drawing.Size(88, 18);
-            this.toKelvinaLabel.TabIndex = 13;
-            this.toKelvinaLabel.TabStop = true;
-            this.toKelvinaLabel.Text = "to Kelvin";
-            this.toKelvinaLabel.UseVisualStyleBackColor = true;
+            this.toKelvinaRadioButton.AutoSize = true;
+            this.toKelvinaRadioButton.Checked = true;
+            this.toKelvinaRadioButton.Font = new System.Drawing.Font("Consolas", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
+            this.toKelvinaRadioButton.Location = new System.Drawing.Point(14, 122);
+            this.toKelvinaRadioButton.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
+            this.toKelvinaRadioButton.Name = "toKelvinaRadioButton";
+            this.toKelvinaRadioButton.Size = new System.Drawing.Size(88, 18);
+            this.toKelvinaRadioButton.TabIndex = 13;
+            this.toKelvinaRadioButton.TabStop = true;
+            this.toKelvinaRadioButton.Text = "to Kelvin";
+            this.toKelvinaRadioButton.UseVisualStyleBackColor = true;
             // 
-            // toCelciusLabel
+            // toCelciusRadioButton
             // 
-            this.toCelciusLabel.AutoSize = true;
-            this.toCelciusLabel.Font = new System.Drawing.Font("Consolas", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
-            this.toCelciusLabel.Location = new System.Drawing.Point(108, 122);
-            this.toCelciusLabel.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
-            this.toCelciusLabel.Name = "toCelciusLabel";
-            this.toCelciusLabel.Size = new System.Drawing.Size(95, 18);
-            this.toCelciusLabel.TabIndex = 14;
-            this.toCelciusLabel.Text = "to Celcius";
-            this.toCelciusLabel.UseVisualStyleBackColor = true;
+            this.toCelciusRadioButton.AutoSize = true;
+            this.toCelciusRadioButton.Font = new System.Drawing.Font("Consolas", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
+            this.toCelciusRadioButton.Location = new System.Drawing.Point(108, 122);
+            this.toCelciusRadioButton.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
+            this.toCelciusRadioButton.Name = "toCelciusRadioButton";
+            this.toCelciusRadioButton.Size = new System.Drawing.Size(95, 18);
+            this.toCelciusRadioButton.TabIndex = 14;
+            this.toCelciusRadioButton.Text = "to Celcius";
+            this.toCelciusRadioButton.UseVisualStyleBackColor = true;
             // 
-            // toFarengeitLabel
+            // toFarengeitRadioButton
             // 
-            this.toFarengeitLabel.AutoSize = true;
-            this.toFarengeitLabel.Font = new System.Drawing.Font("Consolas", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
-            this.toFarengeitLabel.Location = new System.Drawing.Point(209, 122);
-            this.toFarengeitLabel.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
-            this.toFarengeitLabel.Name = "toFarengeitLabel";
-            this.toFarengeitLabel.Size = new System.Drawing.Size(109, 18);
-            this.toFarengeitLabel.TabIndex = 15;
-            this.toFarengeitLabel.Text = "to Farengeit";
-            this.toFarengeitLabel.UseVisualStyleBackColor = true;
+            this.toFarengeitRadioButton.AutoSize = true;
+            this.toFarengeitRadioButton.Font = new System.Drawing.Font("Consolas", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
+            this.toFarengeitRadioButton.Location = new System.Drawing.Point(209, 122);
+            this.toFarengeitRadioButton.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
+            this.toFarengeitRadioButton.Name = "toFarengeitRadioButton";
+            this.toFarengeitRadioButton.Size = new System.Drawing.Size(109, 18);
+            this.toFarengeitRadioButton.TabIndex = 15;
+            this.toFarengeitRadioButton.Text = "to Farengeit";
+            this.toFarengeitRadioButton.UseVisualStyleBackColor = true;
             // 
             // ConvertButton
             // 
@@ -193,9 +193,9 @@
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(334, 212);
             this.Controls.Add(this.ConvertButton);
-            this.Controls.Add(this.toFarengeitLabel);
-            this.Controls.Add(this.toCelciusLabel);
-            this.Controls.Add(this.toKelvinaLabel);
+            this.Controls.Add(this.toFarengeitRadioButton);
+            this.Controls.Add(this.toCelciusRadioButton);
+            this.Controls.Add(this.toKelvinaRadioButton);
             this.Controls.Add(this.ConvertSymbolsLabel);
             this.Controls.Add(this.FarengeitLabel);
             this.Controls.Add(this.KelvinLabel);
@@ -230,9 +230,9 @@
         private Label KelvinLabel;
         private Label FarengeitLabel;
         private Label ConvertSymbolsLabel;
-        private RadioButton toKelvinaLabel;
-        private RadioButton toCelciusLabel;
-        private RadioButton toFarengeitLabel;
+        private RadioButton toKelvinaRadioButton;
+        private RadioButton toCelciusRadioButton;
+        private RadioButton toFarengeitRadioButton;
         private Button ConvertButton;
     }
 }

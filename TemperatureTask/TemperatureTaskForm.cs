@@ -26,7 +26,7 @@ namespace TemperatureTask
 
                 if (Double.TryParse(CelciusBox.Text, out double celsius))
                 {
-                    if (toKelvinaLabel.Checked)
+                    if (toKelvinaRadioButton.Checked)
                     {
                         double converted = celsius + KelvinConversionFactor;
 
@@ -39,7 +39,7 @@ namespace TemperatureTask
                             ConvertedCelciusBox.Text = Convert.ToString(converted);
                         }
                     }
-                    else if (toFarengeitLabel.Checked)
+                    else if (toFarengeitRadioButton.Checked)
                     {
                         ConvertedCelciusBox.Text = Convert.ToString(celsius + FarengeitConversionFactor);
                     }
@@ -63,32 +63,32 @@ namespace TemperatureTask
 
                 if (Double.TryParse(KelvinBox.Text, out double kelvins))
                 {
-                    if (toCelciusLabel.Checked)
+                    if (kelvins < 0)
                     {
-                        if (kelvins < 0)
-                        {
-                            ErrorMessageAboutKelvinScale();
-                        }
-                        else
-                        {
-                            ConvertedKelvinBox.Text = Convert.ToString(kelvins - KelvinConversionFactor);
-                        }
-                    }
-                    else if (toFarengeitLabel.Checked)
-                    {
-                        double converted = (kelvins - KelvinConversionFactor) * Math.Pow(ConversionMultiplier, -1) + FarengeitConversionFactor;
-                        // Math.Pow(ConversionMultiplier, -1) - тут так сделал по сложному дабы было умножение.
-                        // можно убрать Pow и сделать деление но тогда надо переименовать ConversionMultiplier,
-                        // а переименовывать его в FarengeitConversionFactor2 не хочу поскольку тогда он сильно сливается с первым.
-                        converted = Math.Round(converted, 2, MidpointRounding.AwayFromZero);
-
-                        ConvertedKelvinBox.Text = Convert.ToString(converted); 
-                        // вообще вместо создания переменной все можно запихать в Convert.ToString(). Как лучше сделать?
-                        // Когда есть перенная смотриться и читается лучше но переменная по факту нигде не используется.
+                        ErrorMessageAboutKelvinScale();
                     }
                     else
                     {
-                        ConvertedKelvinBox.Text = KelvinBox.Text;
+                        if (toCelciusRadioButton.Checked)
+                        {
+                            ConvertedKelvinBox.Text = Convert.ToString(kelvins - KelvinConversionFactor);
+                        }
+                        else if (toFarengeitRadioButton.Checked)
+                        {
+                            double converted = (kelvins - KelvinConversionFactor) * Math.Pow(ConversionMultiplier, -1) + FarengeitConversionFactor;
+                            // Math.Pow(ConversionMultiplier, -1) - тут так сделал по сложному дабы было умножение.
+                            // можно убрать Pow и сделать деление но тогда надо переименовать ConversionMultiplier,
+                            // а переименовывать его в FarengeitConversionFactor2 не хочу поскольку тогда он сильно сливается с первым.
+                            converted = Math.Round(converted, 2, MidpointRounding.AwayFromZero);
+
+                            ConvertedKelvinBox.Text = Convert.ToString(converted);
+                            // вообще вместо создания переменной все можно запихать в Convert.ToString(). Как лучше сделать?
+                            // Когда есть перенная смотриться и читается лучше но переменная по факту нигде не используется.
+                        }
+                        else
+                        {
+                            ConvertedKelvinBox.Text = KelvinBox.Text;
+                        }
                     }
                 }
                 else
@@ -106,14 +106,14 @@ namespace TemperatureTask
 
                 if (Double.TryParse(FarengeitBox.Text, out double farengeits))
                 {
-                    if (toCelciusLabel.Checked)
+                    if (toCelciusRadioButton.Checked)
                     {
                         double converted = (farengeits - FarengeitConversionFactor) * ConversionMultiplier;
                         converted = Math.Round(converted, 2, MidpointRounding.AwayFromZero);
 
                         ConvertedFarengeitBox.Text = Convert.ToString(converted);
                     }
-                    else if (toKelvinaLabel.Checked)
+                    else if (toKelvinaRadioButton.Checked)
                     {
                         double converted = (farengeits - FarengeitConversionFactor) * ConversionMultiplier + KelvinConversionFactor;
                         converted = Math.Round(converted, 2, MidpointRounding.AwayFromZero);

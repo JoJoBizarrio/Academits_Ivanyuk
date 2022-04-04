@@ -50,12 +50,19 @@
 
             for (int i = 0; i < integerNumbersList.Count; ++i)
             {
-                for (int j = integerNumbersList.Count - 1; j > i; --j)
+                bool isRepeat = false;
+
+                for (int j = 0; j < list3WithoutRepeats.Count; ++j)
                 {
-                    if (list3WithoutRepeats[i] == list3WithoutRepeats[j])
+                    if (integerNumbersList[i] == list3WithoutRepeats[j])
                     {
-                        list3WithoutRepeats.RemoveAt(j);
+                        isRepeat = true;
                     }
+                }
+
+                if (!isRepeat)
+                {
+                    list3WithoutRepeats.Add(integerNumbersList[i]);
                 }
             }
 

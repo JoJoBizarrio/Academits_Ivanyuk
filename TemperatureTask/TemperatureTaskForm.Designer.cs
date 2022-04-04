@@ -207,7 +207,6 @@
             this.Controls.Add(this.KelvinBox);
             this.Controls.Add(this.CelciusBox);
             this.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
-            this.MaximumSize = new System.Drawing.Size(350, 250);
             this.MinimumSize = new System.Drawing.Size(350, 250);
             this.Name = "TemperatureTaskForm";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;

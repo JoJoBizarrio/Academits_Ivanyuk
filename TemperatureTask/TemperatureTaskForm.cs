@@ -4,6 +4,10 @@ namespace TemperatureTask
 {
     public partial class TemperatureTaskForm : Form
     {
+        public const double KelvinConversionFactor = 273.15;
+        public const double FarengeitConversionFactor = 32;
+        public const double ConversionMultiplier = 5 / 9;
+
         public TemperatureTaskForm()
         {
             InitializeComponent();
@@ -58,80 +62,126 @@ namespace TemperatureTask
 
         private void ConvertButton_Click(object sender, EventArgs e)
         {
-            if (!string.IsNullOrEmpty(textBox1.Text))
+            if (!string.IsNullOrEmpty(CelciusBox.Text) && CelciusBox.Text != ConvertedCelciusBox.Text)
             {
-                if (textBox1.Text.IndexOf('.') >= 0)
+                if (CelciusBox.Text.Contains('.'))
                 {
-                    textBox1.Text = textBox1.Text.Replace('.', ',');
+                    CelciusBox.Text = CelciusBox.Text.Replace('.', ',');
                 }
 
-                if (toKelvin.Checked)
+                if (Double.TryParse(CelciusBox.Text, out double celsius))
                 {
-                    if (Double.TryParse(textBox1.Text, out double celsius))
+                    if (toKelvin.Checked)
                     {
-                        textBox4.Text = Convert.ToString(celsius + 273.15);
+                        double converted = celsius + KelvinConversionFactor;
+
+                        if (converted < 0)
+                        {
+                            ErrorMessageAboutKelvinScale();
+                        }
+                        else
+                        {
+                            ConvertedCelciusBox.Text = Convert.ToString(converted);
+                        }
+                    }
+                    else if (toFarengeit.Checked)
+                    {
+                        ConvertedCelciusBox.Text = Convert.ToString(celsius + FarengeitConversionFactor);
                     }
                     else
                     {
-                        ErrorMessageAboutInvalidValue();
-                    }
-                }
-                else if (toFarengeit.Checked)
-                {
-                    if (Double.TryParse(textBox1.Text, out double celsius))
-                    {
-                        textBox4.Text = Convert.ToString(celsius + 32);
-                    }
-                    else
-                    {
-                        ErrorMessageAboutInvalidValue();
+                        ConvertedCelciusBox.Text = CelciusBox.Text;
                     }
                 }
                 else
                 {
-                    textBox4.Text = textBox1.Text;
+                    ErrorMessageAboutInvalidValue();
                 }
             }
 
-            if (!string.IsNullOrEmpty(textBox2.Text))
+            if (!string.IsNullOrEmpty(KelvinBox.Text) && KelvinBox.Text != ConvertedKelvinBox.Text)
             {
-                if (textBox2.Text.IndexOf('.') >= 0)
+                if (KelvinBox.Text.Contains('.'))
                 {
-                    textBox2.Text = textBox2.Text.Replace('.', ',');
+                    KelvinBox.Text = KelvinBox.Text.Replace('.', ',');
                 }
 
-                if (toKelvin.Checked)
+                if (Double.TryParse(KelvinBox.Text, out double kelvins))
                 {
-                    if (Double.TryParse(textBox1.Text, out double celsius))
+                    if (toCelcius.Checked)
                     {
-                        textBox4.Text = Convert.ToString(celsius + 273.15);
+                        if (kelvins < 0)
+                        {
+                            ErrorMessageAboutKelvinScale();
+                        }
+                        else
+                        {
+                            ConvertedKelvinBox.Text = Convert.ToString(kelvins - KelvinConversionFactor);
+                        }
+                    }
+                    else if (toFarengeit.Checked)
+                    {
+                        ConvertedKelvinBox.Text = Convert.ToString((kelvins - KelvinConversionFactor) * Math.Pow(ConversionMultiplier, -1) + FarengeitConversionFactor);
+                        // Math.Pow(ConversionMultiplier, -1) - тут так сделал по сложному дабы было умножение.
+                        // можно убрать Pow и сделать деление но тогда надо переименовать ConversionMultiplier,
+                        // а переименовывать его в FarengeitConversionFactor2 не хочу поскольку тогда он сильно сливается с первым.
                     }
                     else
                     {
-                        ErrorMessageAboutInvalidValue();
-                    }
-                }
-                else if (toFarengeit.Checked)
-                {
-                    if (Double.TryParse(textBox1.Text, out double celsius))
-                    {
-                        textBox4.Text = Convert.ToString(celsius + 32);
-                    }
-                    else
-                    {
-                        ErrorMessageAboutInvalidValue();
+                        ConvertedKelvinBox.Text = KelvinBox.Text;
                     }
                 }
                 else
                 {
-                    textBox4.Text = textBox1.Text;
+                    ErrorMessageAboutInvalidValue();
+                }
+            }
+
+            if (!string.IsNullOrEmpty(FarengeitBox.Text) && FarengeitBox.Text != ConvertedFarengeitBox.Text)
+            {
+                if (FarengeitBox.Text.Contains('.'))
+                {
+                    FarengeitBox.Text = FarengeitBox.Text.Replace('.', ',');
+                }
+
+                if (Double.TryParse(FarengeitBox.Text, out double farengeits))
+                {
+                    if (toCelcius.Checked)
+                    {
+                        ConvertedFarengeitBox.Text = Convert.ToString((farengeits - FarengeitConversionFactor) * ConversionMultiplier);
+                    }
+                    else if (toKelvin.Checked)
+                    {
+                        double converted = (farengeits - FarengeitConversionFactor) * ConversionMultiplier + KelvinConversionFactor; 
+                        // а можно называть переменные прилагатлеьными? или лучше всегда привдоить к сущесвтителньому? converted => convetedValue
+
+                        if (converted < 0)
+                        {
+                            ErrorMessageAboutKelvinScale();
+                        }
+                        else
+                        {
+                            ConvertedFarengeitBox.Text = Convert.ToString(converted);
+                        }
+                    }
+                    else
+                    {
+                        ConvertedFarengeitBox.Text = FarengeitBox.Text;
+                    }
+                }
+                else
+                {
+                    ErrorMessageAboutInvalidValue();
                 }
             }
         }
-
         public static void ErrorMessageAboutInvalidValue()
         {
             MessageBox.Show($"You entered an invalid value.");
+        }
+        public static void ErrorMessageAboutKelvinScale()
+        {
+            MessageBox.Show($"The Kelvin scale is absolute and cannot go below zero.");
         }
     }
 }

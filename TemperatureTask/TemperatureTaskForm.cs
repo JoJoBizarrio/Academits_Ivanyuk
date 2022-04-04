@@ -146,11 +146,11 @@ namespace TemperatureTask
 
         public static void ErrorMessageAboutInvalidValue()
         {
-            MessageBox.Show($"You entered an invalid value.");
+            MessageBox.Show($"You entered an invalid value.", "Error");
         }
         public static void ErrorMessageAboutKelvinScale()
         {
-            MessageBox.Show($"The Kelvin scale is absolute and cannot go below zero.");
+            MessageBox.Show($"The Kelvin scale is absolute and cannot go below zero.", "Error");
         }
     }
 }

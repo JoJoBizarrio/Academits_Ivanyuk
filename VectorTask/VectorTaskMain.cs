@@ -97,6 +97,8 @@
             double vectorsProduct = Vector.GetScalarProduct(vector4E, vector4G);
             Console.WriteLine($"{vector4E} * {vector4G} = {vectorsProduct}");
             Console.WriteLine();
+
+            double d = vector1C[1];
         }
     }
 }

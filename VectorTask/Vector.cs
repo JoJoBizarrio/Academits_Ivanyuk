@@ -8,6 +8,12 @@ namespace VectorTask
 
         public int Dimension => _components.Length;
 
+        public double this[int index]
+        {
+            get { CheckIndex(index); return _components[index]; }
+            set { CheckIndex(index); _components[index] = value; }
+        }
+
         // (1a) Создание вектора с размерностью dimension.
         public Vector(int dimension)
         {
@@ -223,6 +229,14 @@ namespace VectorTask
             }
 
             return result;
+        }
+
+        public void CheckIndex(int index)
+        {
+            if (index < 0 || index >= Dimension)
+            {
+                throw new ArgumentOutOfRangeException(nameof(index), index, $"Argument out of range: [0; {Dimension - 1}].");
+            }
         }
     }
 }

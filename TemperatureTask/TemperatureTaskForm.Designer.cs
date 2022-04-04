@@ -46,7 +46,7 @@
             // 
             // CelciusBox
             // 
-            this.CelciusBox.Location = new System.Drawing.Point(100, 25);
+            this.CelciusBox.Location = new System.Drawing.Point(96, 19);
             this.CelciusBox.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.CelciusBox.Name = "CelciusBox";
             this.CelciusBox.Size = new System.Drawing.Size(70, 23);
@@ -54,7 +54,7 @@
             // 
             // KelvinBox
             // 
-            this.KelvinBox.Location = new System.Drawing.Point(100, 53);
+            this.KelvinBox.Location = new System.Drawing.Point(96, 47);
             this.KelvinBox.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.KelvinBox.Name = "KelvinBox";
             this.KelvinBox.Size = new System.Drawing.Size(70, 23);
@@ -62,7 +62,7 @@
             // 
             // FarengeitBox
             // 
-            this.FarengeitBox.Location = new System.Drawing.Point(100, 80);
+            this.FarengeitBox.Location = new System.Drawing.Point(96, 74);
             this.FarengeitBox.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.FarengeitBox.Name = "FarengeitBox";
             this.FarengeitBox.Size = new System.Drawing.Size(70, 23);
@@ -71,7 +71,7 @@
             // ConvertedCelciusBox
             // 
             this.ConvertedCelciusBox.Enabled = false;
-            this.ConvertedCelciusBox.Location = new System.Drawing.Point(233, 25);
+            this.ConvertedCelciusBox.Location = new System.Drawing.Point(229, 19);
             this.ConvertedCelciusBox.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.ConvertedCelciusBox.Name = "ConvertedCelciusBox";
             this.ConvertedCelciusBox.ReadOnly = true;
@@ -81,7 +81,7 @@
             // ConvertedKelvinBox
             // 
             this.ConvertedKelvinBox.Enabled = false;
-            this.ConvertedKelvinBox.Location = new System.Drawing.Point(233, 53);
+            this.ConvertedKelvinBox.Location = new System.Drawing.Point(229, 47);
             this.ConvertedKelvinBox.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.ConvertedKelvinBox.Name = "ConvertedKelvinBox";
             this.ConvertedKelvinBox.ReadOnly = true;
@@ -91,7 +91,7 @@
             // ConvertedFarengeitBox
             // 
             this.ConvertedFarengeitBox.Enabled = false;
-            this.ConvertedFarengeitBox.Location = new System.Drawing.Point(233, 83);
+            this.ConvertedFarengeitBox.Location = new System.Drawing.Point(229, 77);
             this.ConvertedFarengeitBox.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.ConvertedFarengeitBox.Name = "ConvertedFarengeitBox";
             this.ConvertedFarengeitBox.ReadOnly = true;
@@ -102,7 +102,7 @@
             // 
             this.CelciusLabel.AutoSize = true;
             this.CelciusLabel.Font = new System.Drawing.Font("Consolas", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
-            this.CelciusLabel.Location = new System.Drawing.Point(38, 29);
+            this.CelciusLabel.Location = new System.Drawing.Point(34, 23);
             this.CelciusLabel.Name = "CelciusLabel";
             this.CelciusLabel.Size = new System.Drawing.Size(63, 14);
             this.CelciusLabel.TabIndex = 6;
@@ -112,7 +112,7 @@
             // 
             this.KelvinLabel.AutoSize = true;
             this.KelvinLabel.Font = new System.Drawing.Font("Consolas", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
-            this.KelvinLabel.Location = new System.Drawing.Point(45, 57);
+            this.KelvinLabel.Location = new System.Drawing.Point(41, 51);
             this.KelvinLabel.Name = "KelvinLabel";
             this.KelvinLabel.Size = new System.Drawing.Size(56, 14);
             this.KelvinLabel.TabIndex = 7;
@@ -122,7 +122,7 @@
             // 
             this.FarengeitLabel.AutoSize = true;
             this.FarengeitLabel.Font = new System.Drawing.Font("Consolas", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
-            this.FarengeitLabel.Location = new System.Drawing.Point(24, 87);
+            this.FarengeitLabel.Location = new System.Drawing.Point(20, 81);
             this.FarengeitLabel.Name = "FarengeitLabel";
             this.FarengeitLabel.Size = new System.Drawing.Size(77, 14);
             this.FarengeitLabel.TabIndex = 11;
@@ -131,7 +131,7 @@
             // ConvertSymbolsLabel
             // 
             this.ConvertSymbolsLabel.AutoSize = true;
-            this.ConvertSymbolsLabel.Location = new System.Drawing.Point(189, 27);
+            this.ConvertSymbolsLabel.Location = new System.Drawing.Point(185, 21);
             this.ConvertSymbolsLabel.Name = "ConvertSymbolsLabel";
             this.ConvertSymbolsLabel.Size = new System.Drawing.Size(23, 75);
             this.ConvertSymbolsLabel.TabIndex = 12;
@@ -142,7 +142,7 @@
             this.toKelvinaRadioButton.AutoSize = true;
             this.toKelvinaRadioButton.Checked = true;
             this.toKelvinaRadioButton.Font = new System.Drawing.Font("Consolas", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
-            this.toKelvinaRadioButton.Location = new System.Drawing.Point(14, 122);
+            this.toKelvinaRadioButton.Location = new System.Drawing.Point(15, 118);
             this.toKelvinaRadioButton.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.toKelvinaRadioButton.Name = "toKelvinaRadioButton";
             this.toKelvinaRadioButton.Size = new System.Drawing.Size(88, 18);
@@ -155,7 +155,7 @@
             // 
             this.toCelciusRadioButton.AutoSize = true;
             this.toCelciusRadioButton.Font = new System.Drawing.Font("Consolas", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
-            this.toCelciusRadioButton.Location = new System.Drawing.Point(108, 122);
+            this.toCelciusRadioButton.Location = new System.Drawing.Point(109, 118);
             this.toCelciusRadioButton.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.toCelciusRadioButton.Name = "toCelciusRadioButton";
             this.toCelciusRadioButton.Size = new System.Drawing.Size(95, 18);
@@ -167,7 +167,7 @@
             // 
             this.toFarengeitRadioButton.AutoSize = true;
             this.toFarengeitRadioButton.Font = new System.Drawing.Font("Consolas", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
-            this.toFarengeitRadioButton.Location = new System.Drawing.Point(209, 122);
+            this.toFarengeitRadioButton.Location = new System.Drawing.Point(210, 118);
             this.toFarengeitRadioButton.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.toFarengeitRadioButton.Name = "toFarengeitRadioButton";
             this.toFarengeitRadioButton.Size = new System.Drawing.Size(109, 18);

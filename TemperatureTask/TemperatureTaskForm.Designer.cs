@@ -46,92 +46,97 @@
             // 
             // textBox1
             // 
-            this.textBox1.Location = new System.Drawing.Point(132, 32);
+            this.textBox1.Location = new System.Drawing.Point(100, 25);
+            this.textBox1.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.textBox1.Name = "textBox1";
-            this.textBox1.Size = new System.Drawing.Size(80, 27);
+            this.textBox1.Size = new System.Drawing.Size(70, 23);
             this.textBox1.TabIndex = 0;
             this.textBox1.TextChanged += new System.EventHandler(this.textBox1_TextChanged);
             // 
             // textBox2
             // 
-            this.textBox2.Location = new System.Drawing.Point(132, 69);
+            this.textBox2.Location = new System.Drawing.Point(100, 53);
+            this.textBox2.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.textBox2.Name = "textBox2";
-            this.textBox2.Size = new System.Drawing.Size(80, 27);
+            this.textBox2.Size = new System.Drawing.Size(70, 23);
             this.textBox2.TabIndex = 1;
             this.textBox2.TextChanged += new System.EventHandler(this.textBox2_TextChanged);
             // 
             // textBox3
             // 
-            this.textBox3.Location = new System.Drawing.Point(132, 105);
+            this.textBox3.Location = new System.Drawing.Point(100, 80);
+            this.textBox3.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.textBox3.Name = "textBox3";
-            this.textBox3.Size = new System.Drawing.Size(80, 27);
+            this.textBox3.Size = new System.Drawing.Size(70, 23);
             this.textBox3.TabIndex = 2;
             this.textBox3.TextChanged += new System.EventHandler(this.textBox3_TextChanged);
             // 
             // textBox4
             // 
             this.textBox4.Enabled = false;
-            this.textBox4.Location = new System.Drawing.Point(285, 32);
+            this.textBox4.Location = new System.Drawing.Point(233, 25);
+            this.textBox4.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.textBox4.Name = "textBox4";
             this.textBox4.ReadOnly = true;
-            this.textBox4.Size = new System.Drawing.Size(80, 27);
+            this.textBox4.Size = new System.Drawing.Size(70, 23);
             this.textBox4.TabIndex = 5;
             this.textBox4.TextChanged += new System.EventHandler(this.textBox4_TextChanged);
             // 
             // textBox5
             // 
             this.textBox5.Enabled = false;
-            this.textBox5.Location = new System.Drawing.Point(285, 69);
+            this.textBox5.Location = new System.Drawing.Point(233, 53);
+            this.textBox5.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.textBox5.Name = "textBox5";
             this.textBox5.ReadOnly = true;
-            this.textBox5.Size = new System.Drawing.Size(80, 27);
+            this.textBox5.Size = new System.Drawing.Size(70, 23);
             this.textBox5.TabIndex = 4;
             this.textBox5.TextChanged += new System.EventHandler(this.textBox5_TextChanged);
             // 
             // textBox6
             // 
             this.textBox6.Enabled = false;
-            this.textBox6.Location = new System.Drawing.Point(285, 109);
+            this.textBox6.Location = new System.Drawing.Point(233, 83);
+            this.textBox6.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.textBox6.Name = "textBox6";
             this.textBox6.ReadOnly = true;
-            this.textBox6.Size = new System.Drawing.Size(80, 27);
+            this.textBox6.Size = new System.Drawing.Size(70, 23);
             this.textBox6.TabIndex = 3;
             this.textBox6.TextChanged += new System.EventHandler(this.textBox6_TextChanged);
             // 
             // label1
             // 
             this.label1.AutoSize = true;
-            this.label1.Location = new System.Drawing.Point(64, 39);
+            this.label1.Location = new System.Drawing.Point(40, 30);
             this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(55, 20);
+            this.label1.Size = new System.Drawing.Size(45, 15);
             this.label1.TabIndex = 6;
             this.label1.Text = "Celcius";
-            this.label1.Click += new System.EventHandler(this.label1_Click);
             // 
             // label2
             // 
             this.label2.AutoSize = true;
-            this.label2.Location = new System.Drawing.Point(70, 76);
+            this.label2.Location = new System.Drawing.Point(45, 58);
             this.label2.Name = "label2";
-            this.label2.Size = new System.Drawing.Size(49, 20);
+            this.label2.Size = new System.Drawing.Size(39, 15);
             this.label2.TabIndex = 7;
             this.label2.Text = "Kelvin";
             // 
             // label3
             // 
             this.label3.AutoSize = true;
-            this.label3.Location = new System.Drawing.Point(49, 112);
+            this.label3.Location = new System.Drawing.Point(27, 85);
             this.label3.Name = "label3";
-            this.label3.Size = new System.Drawing.Size(70, 20);
+            this.label3.Size = new System.Drawing.Size(56, 15);
             this.label3.TabIndex = 11;
             this.label3.Text = "Farengeit";
             // 
             // label4
             // 
             this.label4.AutoSize = true;
-            this.label4.Location = new System.Drawing.Point(234, 35);
+            this.label4.Location = new System.Drawing.Point(189, 27);
             this.label4.Name = "label4";
-            this.label4.Size = new System.Drawing.Size(29, 100);
+            this.label4.Size = new System.Drawing.Size(23, 75);
             this.label4.TabIndex = 12;
             this.label4.Text = "=>\r\n\r\n=>\r\n\r\n=>\r\n";
             // 
@@ -139,9 +144,10 @@
             // 
             this.toKelvin.AutoSize = true;
             this.toKelvin.Checked = true;
-            this.toKelvin.Location = new System.Drawing.Point(31, 175);
+            this.toKelvin.Location = new System.Drawing.Point(27, 124);
+            this.toKelvin.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.toKelvin.Name = "toKelvin";
-            this.toKelvin.Size = new System.Drawing.Size(88, 24);
+            this.toKelvin.Size = new System.Drawing.Size(71, 19);
             this.toKelvin.TabIndex = 13;
             this.toKelvin.TabStop = true;
             this.toKelvin.Text = "to Kelvin";
@@ -151,9 +157,10 @@
             // toCelcius
             // 
             this.toCelcius.AutoSize = true;
-            this.toCelcius.Location = new System.Drawing.Point(141, 175);
+            this.toCelcius.Location = new System.Drawing.Point(123, 124);
+            this.toCelcius.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.toCelcius.Name = "toCelcius";
-            this.toCelcius.Size = new System.Drawing.Size(90, 24);
+            this.toCelcius.Size = new System.Drawing.Size(74, 19);
             this.toCelcius.TabIndex = 14;
             this.toCelcius.Text = "toCelcius";
             this.toCelcius.UseVisualStyleBackColor = true;
@@ -162,9 +169,10 @@
             // toFarengeit
             // 
             this.toFarengeit.AutoSize = true;
-            this.toFarengeit.Location = new System.Drawing.Point(256, 175);
+            this.toFarengeit.Location = new System.Drawing.Point(224, 124);
+            this.toFarengeit.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.toFarengeit.Name = "toFarengeit";
-            this.toFarengeit.Size = new System.Drawing.Size(109, 24);
+            this.toFarengeit.Size = new System.Drawing.Size(88, 19);
             this.toFarengeit.TabIndex = 15;
             this.toFarengeit.Text = "to Farengeit";
             this.toFarengeit.UseVisualStyleBackColor = true;
@@ -172,9 +180,10 @@
             // 
             // ConvertButton
             // 
-            this.ConvertButton.Location = new System.Drawing.Point(31, 217);
+            this.ConvertButton.Location = new System.Drawing.Point(123, 168);
+            this.ConvertButton.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.ConvertButton.Name = "ConvertButton";
-            this.ConvertButton.Size = new System.Drawing.Size(94, 29);
+            this.ConvertButton.Size = new System.Drawing.Size(82, 22);
             this.ConvertButton.TabIndex = 16;
             this.ConvertButton.Text = "Convert";
             this.ConvertButton.UseVisualStyleBackColor = true;
@@ -182,9 +191,9 @@
             // 
             // TemperatureTaskForm
             // 
-            this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 20F);
+            this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 15F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(785, 552);
+            this.ClientSize = new System.Drawing.Size(334, 212);
             this.Controls.Add(this.ConvertButton);
             this.Controls.Add(this.toFarengeit);
             this.Controls.Add(this.toCelcius);
@@ -199,10 +208,13 @@
             this.Controls.Add(this.textBox3);
             this.Controls.Add(this.textBox2);
             this.Controls.Add(this.textBox1);
+            this.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
+            this.MaximumSize = new System.Drawing.Size(350, 250);
+            this.MinimumSize = new System.Drawing.Size(350, 250);
             this.Name = "TemperatureTaskForm";
-            this.Text = "Converter\'s temperature ";
-            this.Load += new System.EventHandler(this.TemperatureTaskForm_Load);
-            this.Click += new System.EventHandler(this.TemperatureTaskForm_Click);
+            this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
+            this.Text = "Temperature\'s converter";
+            this.WindowState = System.Windows.Forms.FormWindowState.Minimized;
             this.ResumeLayout(false);
             this.PerformLayout();
 

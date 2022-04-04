@@ -5,55 +5,61 @@
         static void Main(string[] args)
         {
             // 1. Прочитать в список все строки из файла
-            List<string> list1 = new();
+            string path = "C:\\Users\\koniv\\source\\repos\\Academits_Ivanyuk\\ArrayListHome\\textToList.txt";
 
-            using (StreamReader reader = new StreamReader("C:\\Users\\koniv\\source\\repos\\Academits_Ivanyuk\\ArrayListHome\\textToList.txt"))
+            if (!File.Exists(path))
             {
-                string currentLine;
-
-                while ((currentLine = reader.ReadLine()) != null)
+                Console.WriteLine("Ошибка: файл не найден.");
+            }
+            else
+            {
+                using (StreamReader reader = new StreamReader(path))
                 {
-                    list1.Add(currentLine);
+                    List<string> datasetByFile = new();
+
+                    string currentLine;
+
+                    while ((currentLine = reader.ReadLine()) != null)
+                    {
+                        datasetByFile.Add(currentLine);
+                    }
+
+                    Console.WriteLine(string.Join(", ", datasetByFile));
                 }
             }
 
-            Console.WriteLine(String.Join(", ", list1));
-
             //================================================================
             // 2. Есть список из целых чисел. Удалить из него все четные числа. В этой задаче новый список создавать нельзя
-            List<int> list2 = new() { 4, 3, 5, 15, 22, 12 };
+            List<int> integerNumbersList = new() { 15, 13, 15, 3, 2, 15, 14, 14, 13, 15, 7, 8, 9, 7, 11 };
 
-            for (int i = 0; i < list2.Count; ++i)
+            for (int i = 0; i < integerNumbersList.Count; ++i)
             {
-                if (list2[i] % 2 == 0)
+                if (integerNumbersList[i] % 2 == 0)
                 {
-                    list2.RemoveAt(i);
+                    integerNumbersList.RemoveAt(i);
                     --i;
                 }
             }
 
-            Console.WriteLine(String.Join(", ", list2));
+            Console.WriteLine(string.Join(", ", integerNumbersList));
 
             //===================================================================
-            // 3. Есть список из целых чисел, в нём некоторые числа могут  повторяться.
+            // 3. Есть список из целых чисел, в нём некоторые числа могут повторяться.
             // Надо создать новый список, в котором будут элементы первого списка в таком же порядке, но без повторений.
-            List<int> list3 = new() { 15, 13, 15, 3, 2, 15, 14, 14, 13, 15 };
+            List<int> list3WithoutRepeats = new();
 
-            List<int> list3withoutRepeats = new(list3);
-
-            for (int i = 0; i < list3withoutRepeats.Count; ++i)
+            for (int i = 0; i < integerNumbersList.Count; ++i)
             {
-                for (int j = list3withoutRepeats.Count - 1; j > i; --j)
+                for (int j = integerNumbersList.Count - 1; j > i; --j)
                 {
-                    if (list3withoutRepeats[i] == list3withoutRepeats[j])
+                    if (list3WithoutRepeats[i] == list3WithoutRepeats[j])
                     {
-                        list3withoutRepeats.RemoveAt(j);
+                        list3WithoutRepeats.RemoveAt(j);
                     }
                 }
             }
 
-            Console.WriteLine(String.Join(", ", list3withoutRepeats));
-
+            Console.WriteLine(string.Join(", ", list3WithoutRepeats));
         }
     }
 }

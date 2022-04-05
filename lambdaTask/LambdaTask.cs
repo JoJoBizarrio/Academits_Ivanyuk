@@ -2,37 +2,59 @@
 {
     class LambdaTask
     {
-        static void Main(string[] randomName)
+        static void Main()
         {
-            Person person1 = new("Misha", 15);
-            Person person2 = new("Sasha", 20);
-            Person person3 = new("Lex", 17);
-            Person person4 = new("Lutor", 44);
-            Person person5 = new("Saitama", 25);
-            Person person6 = new("Misha", 23);
-            Person person7 = new("Sasha", 76);
-
-            List<Person> people = new() { person1, person2, person3, person4, person5, person6, person7 };
+            List<Person> people = new()
+            {
+                new("Misha", 15),
+                new("Sasha", 20),
+                new("Lex", 17),
+                new("Lutor", 44),
+                new("Saitama", 25),
+                new("Misha", 23),
+                new("Sasha", 76)
+            };
 
             //А) получить список уникальных имен + Б) вывести список уникальных имен в формате:
-            var peopleNames = people.Select(x => x.Name).Distinct();
+            var namesFilter = people
+                .Select(x => x.Name)
+                .Distinct();
 
-            Console.WriteLine("Имена: " + String.Join(", ", peopleNames));
+            var peopleNames = namesFilter.ToList();
+
+            Console.WriteLine("Имена: " + string.Join(", ", peopleNames));
+            Console.WriteLine();
 
             //В) получить список людей младше 18, посчитать для них средний возраст
+            var peopleWithAgeLess18Filter = people
+                .Where(x => x.Age < 18);
 
-            var peopleLess18 = people.Where(x => x.Age < 18).Select(x => x);
-            var average = peopleLess18.Average(x => x.Age);
+            var peopleWithAgeLess18 = peopleWithAgeLess18Filter.ToList();
+            var average = peopleWithAgeLess18.Average(x => x.Age);
 
-            Console.WriteLine($"Имена: {String.Join(", ", peopleLess18) } \tСредний возраст: {average}");
+            Console.WriteLine($"Имена: {string.Join(", ", peopleWithAgeLess18.Select(x => x.Name)) }\tСредний возраст: {average}");
+            Console.WriteLine();
 
             //Г) при помощи группировки получить Map , в котором ключи имена, а значения средний возраст
-            Dictionary<string, List<Person>> personsByName = people.GroupBy(x => x.Name).ToDictionary(x => x.Key, x => x.ToList());
+            var personsByNameFilter = people
+                .GroupBy(x => x.Name)
+                .ToDictionary(x => x.Key, x => x
+                                                .ToList()
+                                                .Average(x => x.Age))
+                .ToList();
+
+            var personsByName = personsByNameFilter;
+
+            Console.WriteLine(string.Join(", ", personsByName));
+            Console.WriteLine();
 
             //Д) получить людей, возраст которых от 20 до 45, вывести в консоль их имена в порядке убывания возраста
-            var peopleBetween20and45 = people.Where(x => x.Age >= 20 && x.Age <= 45 ).OrderByDescending(x => x.Age);
+            var peopleWithAgeBetween20And45Filter = people
+                .Where(x => x.Age >= 20 && x.Age <= 45)
+                .OrderByDescending(x => x.Age)
+                .Select(x => x.Name);
 
-            Console.WriteLine(String.Join(", ", peopleBetween20and45));
+            Console.WriteLine(string.Join(", ", peopleWithAgeBetween20And45Filter));
         }
     }
 }

@@ -28,16 +28,45 @@ namespace GraphTask
             }
         }
 
-        public string WidthBypass()
+        public string BypassByWidth()
         {
             NullifyDiagonal();
 
-
+            return "empty";
         }
 
-        public string DeepBypass()
+        public string BypassByDeep()
         {
+            NullifyDiagonal();
 
+            StringBuilder stringBuilder = new StringBuilder();
+            Queue<int> queue = new Queue<int>();
+            bool[] visited = new bool[PeeksCount];
+
+            stringBuilder.Append('[');
+            queue.Enqueue(0);
+
+            while (queue.Count > 0)
+            {
+                int peekNumber = queue.Dequeue();
+                stringBuilder.Append(peekNumber);
+                stringBuilder.Append(", ");
+
+                for (int i = 0; i < PeeksCount; ++i)
+                {
+                    if (!visited[i] && _graph[peekNumber, i] > 0)
+                    {
+                        queue.Enqueue(i);   
+                    }
+                }
+
+                visited[peekNumber] = true;
+            }
+
+            stringBuilder.Remove(stringBuilder.Length - 2, 2);
+            stringBuilder.Append(']');
+
+            return stringBuilder.ToString();   
         }
 
         private void CheckRowIndex(int index)

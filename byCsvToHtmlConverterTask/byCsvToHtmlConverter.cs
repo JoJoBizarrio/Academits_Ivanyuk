@@ -14,19 +14,24 @@
                 using StreamWriter writer = new StreamWriter(HtmlPath);
 
                 char[] currentRow;
-                char cellSeparator = ',';
-                char specificSymbolsDesignator = '"';
-                bool isCellStartWithRowBreak = false;
-                bool isCellContinuationWithRowBreak = false;
-                bool isCellEndWithRowBreak = false;
+
+                //bool isCellStartWithRowBreak = false;
+                //bool isCellContinuationWithRowBreak = false;
+                //bool isCellEndWithRowBreak = false;
 
                 writer.WriteLine("<table>");
 
                 while ((currentRow = reader.ReadLine().ToCharArray()) != null)
                 {
+                    char cellSeparator = ',';
+                    char specificSymbolsDesignator = '"';
+
                     foreach (char e in currentRow)
                     {
 
                     }
                 }
+            }
+        }
+    }
 }

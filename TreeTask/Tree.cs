@@ -351,7 +351,7 @@ namespace TreeTask
             }
         }
 
-        public string WidthBypass()
+        public string BypassInWidth()
         {
             CheckFirst();
 
@@ -386,7 +386,7 @@ namespace TreeTask
             return stringBuilder.ToString();
         }
 
-        public string DeepBypass()
+        public string BypassInDeep()
         {
             CheckFirst();
 
@@ -421,14 +421,14 @@ namespace TreeTask
             return stringBuilder.ToString();
         }
 
-        public void DeepRecursiveBypass()
+        public void BypassInRecursiveDeep()
         {
             Console.Write(_root.Data);
             Console.Write("  ");
-            DeepRecursiveBypass(_root);
+            BypassInRecursiveDeep(_root);
         }
 
-        private void DeepRecursiveBypass(TreeNode<T> treeNode)
+        private void BypassInRecursiveDeep(TreeNode<T> treeNode)
         {
             List<TreeNode<T>> list = new List<TreeNode<T>> { treeNode.Left, treeNode.Right };
 
@@ -442,7 +442,7 @@ namespace TreeTask
                 Console.Write(e.Data);
                 Console.Write("  ");
 
-                DeepRecursiveBypass(e);
+                BypassInRecursiveDeep(e);
             }
         }
     }

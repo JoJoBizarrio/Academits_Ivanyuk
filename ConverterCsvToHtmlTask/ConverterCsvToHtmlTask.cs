@@ -6,8 +6,7 @@
         {
             if (!File.Exists(csvPath))
             {
-                Console.WriteLine("File(s) .csv doesn't exist.");
-                return;
+                throw new FileNotFoundException("File .csv doesn't exist.");
             }
 
             if (!File.Exists(htmlPath))
@@ -46,8 +45,6 @@
 
             while ((currentLine = reader.ReadLine()) != null)
             {
-                currentLineArray = currentLine.ToCharArray();
-
                 if (!isCellWithRowBreakOrSpecificSymbols)
                 {
                     writer.WriteLine($"{"<tr>",7}");
@@ -57,6 +54,8 @@
                 {
                     writer.Write("<br/>");
                 }
+
+                currentLineArray = currentLine.ToCharArray();
 
                 for (int i = 0; i < currentLineArray.Length; ++i)
                 {
@@ -122,9 +121,7 @@
 
         static void Main()
         {
-            ConvertCsvToHtml("C:\\Users\\User\\source\\repos\\Academits_Ivanyuk\\byCsvToHtmlConverterTask\\CSV.txt", "C:\\Users\\User\\source\\repos\\Academits_Ivanyuk\\byCsvToHtmlConverterTask\\html.txt");
+
         }
     }
 }
-
-

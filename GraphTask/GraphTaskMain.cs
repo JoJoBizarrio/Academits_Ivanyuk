@@ -14,6 +14,7 @@
             graph.ConnectPeeks(2, 6);
 
             Console.WriteLine(graph.BypassByDeep());
+            Console.WriteLine(graph.BypassByWidth());
         }
     }
 }

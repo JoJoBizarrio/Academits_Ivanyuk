@@ -32,13 +32,6 @@ namespace GraphTask
         {
             NullifyDiagonal();
 
-            return "empty";
-        }
-
-        public string BypassByDeep()
-        {
-            NullifyDiagonal();
-
             StringBuilder stringBuilder = new StringBuilder();
             Queue<int> queue = new Queue<int>();
             bool[] visited = new bool[PeeksCount];
@@ -56,7 +49,7 @@ namespace GraphTask
                 {
                     if (!visited[i] && _graph[peekNumber, i] > 0)
                     {
-                        queue.Enqueue(i);   
+                        queue.Enqueue(i);
                     }
                 }
 
@@ -66,7 +59,41 @@ namespace GraphTask
             stringBuilder.Remove(stringBuilder.Length - 2, 2);
             stringBuilder.Append(']');
 
-            return stringBuilder.ToString();   
+            return stringBuilder.ToString();
+        }
+
+        public string BypassByDeep()
+        {
+            NullifyDiagonal();
+
+            StringBuilder stringBuilder = new StringBuilder();
+            Stack<int> stack = new Stack<int>();
+            bool[] visited = new bool[PeeksCount];
+
+            stringBuilder.Append('[');
+            stack.Push(0);
+
+            while (stack.Count > 0)
+            {
+                int peekNumber = stack.Pop();
+                stringBuilder.Append(peekNumber);
+                stringBuilder.Append(", ");
+
+                for (int i = PeeksCount - 1; i >= 0; --i)
+                {
+                    if (!visited[i] && _graph[peekNumber, i] > 0)
+                    {
+                        stack.Push(i);
+                    }
+                }
+
+                visited[peekNumber] = true;
+            }
+
+            stringBuilder.Remove(stringBuilder.Length - 2, 2);
+            stringBuilder.Append(']');
+
+            return stringBuilder.ToString();
         }
 
         private void CheckRowIndex(int index)

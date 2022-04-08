@@ -5,11 +5,10 @@ namespace ListTask
 {
     internal class List<T> : IList<T>
     {
-        private T[] _items;
-
         private const int DefaultCapacity = 10;
 
-        private int ModCount { get; set; }
+        private T[] _items;
+        private int _modCount;
 
         public bool IsReadOnly => false;
 
@@ -21,9 +20,14 @@ namespace ListTask
 
             set
             {
-                if (value <= Count)
+                if (value < Count)
                 {
-                    throw new ArgumentException($"Capacity = {value} must be more Count {Count}");
+                    throw new ArgumentException($"Capacity = {value} must be greater than count = {Count}.");
+                }
+
+                if (value == Count)
+                {
+                    return;
                 }
 
                 Array.Resize(ref _items, value);
@@ -32,8 +36,20 @@ namespace ListTask
 
         public T this[int index]
         {
-            get { CheckIndex(index); return _items[index]; }
-            set { CheckIndex(index); _items[index] = value; ModCount++; }
+            get
+            {
+                CheckIndex(index);
+
+                return _items[index];
+            }
+
+            set
+            {
+                CheckIndex(index);
+
+                _items[index] = value;
+                _modCount++;
+            }
         }
 
         public List()
@@ -45,7 +61,7 @@ namespace ListTask
         {
             if (capacity < 0)
             {
-                throw new ArgumentException($"Count must be > 0 {nameof(capacity)} = {capacity}", nameof(capacity));
+                throw new ArgumentException($"Capacity must be > 0 {nameof(capacity)} = {capacity}.", nameof(capacity));
             }
 
             _items = new T[capacity];
@@ -53,21 +69,16 @@ namespace ListTask
 
         public List(params T[] items)
         {
-            _items = new T[2 * items.Length];
-
-            for (int i = 0; i < items.Length; i++)
+            if (items.Length == 0)
             {
-                _items[i] = items[i];
+                throw new ArgumentException("Empty array.");
             }
 
-            Count = items.Length;
+            _items = new T[2 * items.Length];
 
-            //int i = 0;
-            //foreach (T e in items)
-            //{
-            //    _items[i] = e;
-            //    i++;
-            //}
+            Array.Copy(items, _items, items.Length);
+
+            Count = items.Length;
         }
 
         public int IndexOf(T item)
@@ -77,28 +88,26 @@ namespace ListTask
 
         public void Insert(int index, T item)
         {
-            CheckIndex(index);
+            if (index < 0 || index > Count)
+            {
+                throw new ArgumentOutOfRangeException(nameof(index), index, $"Index out of range: [0, {Count}].");
+            }
 
-            if (Capacity - 1 <= Count)
+            if (Capacity == Count)
             {
                 Expand();
             }
 
-            Array.Copy(_items, index, _items, index + 1, Count - index + 1);
+            Array.Copy(_items, index, _items, index + 1, Count - index);
 
             _items[index] = item;
 
             Count++;
-            ModCount++;
+            _modCount++;
         }
 
         public void Add(T item)
         {
-            if (Capacity - 1 <= Count)
-            {
-                Expand();
-            }
-
             Insert(Count, item);
         }
 
@@ -107,19 +116,19 @@ namespace ListTask
             CheckIndex(index);
 
             Array.Copy(_items, index + 1, _items, index, Count - index);
-            Array.Clear(_items, Count, 1);
+            Array.Clear(_items, Count - 1, 1);
             Count--;
-            ModCount++;
+            _modCount++;
         }
 
         public void Clear()
         {
             Array.Clear(_items, 0, Count);
             Count = 0;
-            ModCount++;
+            _modCount++;
         }
 
-        public bool Contains(T item) =>  IndexOf(item) >= 0;
+        public bool Contains(T item) => IndexOf(item) >= 0;
 
         public bool Remove(T item)
         {
@@ -134,20 +143,34 @@ namespace ListTask
             return true;
         }
 
-        public void CopyTo(T[] arrayList, int index)
+        public void CopyTo(T[] array, int index)
         {
-            CheckIndex(index);
+            if (index < 0 || index >= array.Length)
+            {
+                throw new ArgumentOutOfRangeException(nameof(index), index, $"Index out of range: [0, {Count - 1}].");
+            }
 
-            Array.Copy(_items, index, arrayList, 0, Count - index + 1);
+            if (array == null)
+            {
+                throw new ArgumentNullException("Array is null.");
+            }
+
+            if (Count > array.Length - index)
+            {
+                throw new ArgumentException($"The number of elements in the source list ({nameof(_items)}) is greater than the available space " +
+                                            $"from the position specified by index (= {index}) to the end of the destination {nameof(array)} ({nameof(array.Length)} = {array.Length}).");
+            }
+
+            Array.Copy(_items, 0, array, index, Count);
         }
 
         public IEnumerator<T> GetEnumerator()
         {
-            int currentModCount = ModCount;
+            int initialModCount = _modCount;
 
             for (int i = 0; i < Count; ++i)
             {
-                if (currentModCount != ModCount)
+                if (initialModCount != _modCount)
                 {
                     throw new InvalidOperationException($"List changed.");
                 }
@@ -160,9 +183,10 @@ namespace ListTask
         {
             return GetEnumerator();
         }
+
         public void TrimExcess()
         {
-            if ((double)Count / (double)Capacity  <= 0.9)
+            if ((double)Count / (double)Capacity <= 0.9)
             {
                 Array.Resize(ref _items, Count);
             }
@@ -170,11 +194,22 @@ namespace ListTask
 
         public override string ToString()
         {
+            if (Count == 0)
+            {
+                return "[]";
+            }
+
             StringBuilder stringBuilder = new();
 
             stringBuilder.Append('[');
-            stringBuilder.Append(string.Join(", ", this));
-            stringBuilder.Append(']');
+
+            foreach (T e in this)
+            {
+                stringBuilder.Append(e);
+                stringBuilder.Append(", ");
+            }
+            
+            stringBuilder.Replace(", " , "]", stringBuilder.Length - 2, 2);
 
             return stringBuilder.ToString();
         }
@@ -187,29 +222,21 @@ namespace ListTask
 
         private void CheckIndex(int index)
         {
-            if (index < 0 || index > Count)
+            if (index < 0 || index >= Count)
             {
-                throw new ArgumentOutOfRangeException(nameof(index), index, $"Index out of range: [0, {Count}]");
+                throw new ArgumentOutOfRangeException(nameof(index), index, $"Index out of range: [0, {Count - 1}].");
             }
         }
-
-        //private void CheckCapacity()
-        //{
-        //    if (Capacity - 1 <= Count)
-        //    {
-        //        Expand();
-        //    }
-        //}
 
         private void Expand()
         {
             if (Capacity == 0)
             {
-                Array.Resize(ref _items, DefaultCapacity);
+                Capacity = DefaultCapacity;
                 return;
             }
 
-            Array.Resize(ref _items, 2 * Count);
+            Capacity = 2 * Count;
         }
     }
 }

@@ -51,7 +51,7 @@
             //Console.WriteLine(stringList.GetInformation());
 
             //listTest.RemoveAt(0);
-            //listTest.RemoveAt(listTest.Count -1);
+            //listTest.RemoveAt(listTest.Count - 1);
             //listTest.RemoveAt(listTest.Count / 2);
             //Console.WriteLine(listTest.GetInformation());
             //listTest.RemoveAt(listTest.Count / 2);

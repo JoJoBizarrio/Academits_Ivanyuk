@@ -196,7 +196,7 @@ namespace ListTask
         {
             if ((double)Count / (double)Capacity <= 0.9)
             {
-                Array.Resize(ref _items, Count);
+                Capacity = Count;
             }
         }
 

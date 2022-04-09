@@ -115,14 +115,22 @@ namespace ListTask
         {
             CheckIndex(index);
 
-            Array.Copy(_items, index + 1, _items, index, Count - index);
-            Array.Clear(_items, Count - 1, 1);
+            Array.Copy(_items, index + 1, _items, index, Count - index - 1);
+            _items[^1] = default; // 1) это является занулением? я не понимаю как занулить ссылку вручную.
+                                  // 2) вот если будет int[] то там будет ноль после дефолта, но ссылка будет все еще активна. Правильно понимаю?
+                                  // ref _items[^1] = null; это тоже не работает. без ref аналогично. 
+
             Count--;
             _modCount++;
         }
 
         public void Clear()
         {
+            if (Count == 0)
+            {
+                return;
+            }
+
             Array.Clear(_items, 0, Count);
             Count = 0;
             _modCount++;
@@ -208,8 +216,8 @@ namespace ListTask
                 stringBuilder.Append(e);
                 stringBuilder.Append(", ");
             }
-            
-            stringBuilder.Replace(", " , "]", stringBuilder.Length - 2, 2);
+
+            stringBuilder.Replace(", ", "]", stringBuilder.Length - 2, 2);
 
             return stringBuilder.ToString();
         }

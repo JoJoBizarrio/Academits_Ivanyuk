@@ -90,5 +90,13 @@ namespace MinesweeperTask
         {
 
         }
+
+        public void Open(Minesweeper minesweeper, int x, int y)
+        {
+            if (minesweeper.MinesweeperArrayRepresentation[x, y] == 0)
+            {
+
+            }
+        }
     }
 }

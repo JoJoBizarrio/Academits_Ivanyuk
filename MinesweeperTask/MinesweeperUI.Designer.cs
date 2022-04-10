@@ -30,7 +30,7 @@
         {
             this.components = new System.ComponentModel.Container();
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(MinesweeperUI));
-            this.menuStrip1 = new System.Windows.Forms.MenuStrip();
+            this.MenuStrip = new System.Windows.Forms.MenuStrip();
             this.gameToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.toolStripMenuItem2 = new System.Windows.Forms.ToolStripMenuItem();
             this.toolStripMenuItem3 = new System.Windows.Forms.ToolStripMenuItem();
@@ -43,24 +43,24 @@
             this.tableLayoutPanel2 = new System.Windows.Forms.TableLayoutPanel();
             this.MineCountLabel = new System.Windows.Forms.Label();
             this.FieldTableLayoutPanel = new System.Windows.Forms.TableLayoutPanel();
-            this.menuStrip1.SuspendLayout();
+            this.MenuStrip.SuspendLayout();
             this.tableLayoutPanel1.SuspendLayout();
             this.tableLayoutPanel2.SuspendLayout();
             this.SuspendLayout();
             // 
-            // menuStrip1
+            // MenuStrip
             // 
-            this.menuStrip1.ImageScalingSize = new System.Drawing.Size(20, 20);
-            this.menuStrip1.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.MenuStrip.ImageScalingSize = new System.Drawing.Size(20, 20);
+            this.MenuStrip.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.gameToolStripMenuItem,
             this.highScoresToolStripMenuItem,
             this.aboutToolStripMenuItem});
-            this.menuStrip1.Location = new System.Drawing.Point(0, 0);
-            this.menuStrip1.Name = "menuStrip1";
-            this.menuStrip1.Size = new System.Drawing.Size(1036, 28);
-            this.menuStrip1.TabIndex = 2;
-            this.menuStrip1.Text = "menuStrip1";
-            this.menuStrip1.ItemClicked += new System.Windows.Forms.ToolStripItemClickedEventHandler(this.menuStrip1_ItemClicked);
+            this.MenuStrip.Location = new System.Drawing.Point(0, 0);
+            this.MenuStrip.Name = "MenuStrip";
+            this.MenuStrip.Size = new System.Drawing.Size(1049, 28);
+            this.MenuStrip.TabIndex = 2;
+            this.MenuStrip.Text = "menuStrip1";
+            this.MenuStrip.ItemClicked += new System.Windows.Forms.ToolStripItemClickedEventHandler(this.menuStrip1_ItemClicked);
             // 
             // gameToolStripMenuItem
             // 
@@ -127,7 +127,7 @@
             this.tableLayoutPanel1.RowCount = 2;
             this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 89.45749F));
             this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 10.54252F));
-            this.tableLayoutPanel1.Size = new System.Drawing.Size(1036, 509);
+            this.tableLayoutPanel1.Size = new System.Drawing.Size(1049, 509);
             this.tableLayoutPanel1.TabIndex = 4;
             // 
             // tableLayoutPanel2
@@ -141,7 +141,7 @@
             this.tableLayoutPanel2.Name = "tableLayoutPanel2";
             this.tableLayoutPanel2.RowCount = 1;
             this.tableLayoutPanel2.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 100F));
-            this.tableLayoutPanel2.Size = new System.Drawing.Size(1030, 48);
+            this.tableLayoutPanel2.Size = new System.Drawing.Size(1043, 48);
             this.tableLayoutPanel2.TabIndex = 0;
             // 
             // MineCountLabel
@@ -150,13 +150,14 @@
             this.MineCountLabel.Dock = System.Windows.Forms.DockStyle.Fill;
             this.MineCountLabel.Location = new System.Drawing.Point(3, 0);
             this.MineCountLabel.Name = "MineCountLabel";
-            this.MineCountLabel.Size = new System.Drawing.Size(509, 48);
+            this.MineCountLabel.Size = new System.Drawing.Size(515, 48);
             this.MineCountLabel.TabIndex = 0;
             this.MineCountLabel.Text = "000";
             this.MineCountLabel.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
             // 
             // FieldTableLayoutPanel
             // 
+            this.FieldTableLayoutPanel.BackColor = System.Drawing.SystemColors.ScrollBar;
             this.FieldTableLayoutPanel.CellBorderStyle = System.Windows.Forms.TableLayoutPanelCellBorderStyle.Inset;
             this.FieldTableLayoutPanel.ColumnCount = 9;
             this.FieldTableLayoutPanel.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 11.11111F));
@@ -181,23 +182,23 @@
             this.FieldTableLayoutPanel.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 11.11111F));
             this.FieldTableLayoutPanel.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 11.11111F));
             this.FieldTableLayoutPanel.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 11.11111F));
-            this.FieldTableLayoutPanel.Size = new System.Drawing.Size(1030, 449);
+            this.FieldTableLayoutPanel.Size = new System.Drawing.Size(1043, 449);
             this.FieldTableLayoutPanel.TabIndex = 1;
             // 
             // MinesweeperUI
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 20F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(1036, 537);
+            this.ClientSize = new System.Drawing.Size(1049, 537);
             this.Controls.Add(this.tableLayoutPanel1);
-            this.Controls.Add(this.menuStrip1);
+            this.Controls.Add(this.MenuStrip);
             this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
-            this.MainMenuStrip = this.menuStrip1;
+            this.MainMenuStrip = this.MenuStrip;
             this.Name = "MinesweeperUI";
             this.Text = "Minesweeper";
             this.Load += new System.EventHandler(this.MinesweeperUI_Load);
-            this.menuStrip1.ResumeLayout(false);
-            this.menuStrip1.PerformLayout();
+            this.MenuStrip.ResumeLayout(false);
+            this.MenuStrip.PerformLayout();
             this.tableLayoutPanel1.ResumeLayout(false);
             this.tableLayoutPanel2.ResumeLayout(false);
             this.tableLayoutPanel2.PerformLayout();
@@ -207,7 +208,7 @@
         }
 
         #endregion
-        private MenuStrip menuStrip1;
+        private MenuStrip MenuStrip;
         private ToolStripMenuItem gameToolStripMenuItem;
         private ToolStripMenuItem toolStripMenuItem2;
         private ToolStripMenuItem toolStripMenuItem3;

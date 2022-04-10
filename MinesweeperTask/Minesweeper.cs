@@ -1,6 +1,6 @@
 ﻿namespace MinesweeperTask
 {
-    internal class Minesweeper
+    public class Minesweeper
     {
         public int[,] MinesweeperArrayRepresentation { get; set; }
 
@@ -92,7 +92,7 @@
                             continue;
                         }
 
-                        
+                        MinesweeperUI.
                         //TODO: открыть array[x,y];
                         OpenCell(minesweeper, x + i, y + j);
                     }

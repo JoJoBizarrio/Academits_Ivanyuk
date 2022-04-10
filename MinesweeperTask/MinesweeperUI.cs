@@ -26,11 +26,6 @@ namespace MinesweeperTask
 
             //Draw lines to screen.
             e.Graphics.DrawLines(pen, points);
-
-            ;
-
-
-
         } 
 
         private void button1_Click(object sender, EventArgs e)
@@ -53,12 +48,6 @@ namespace MinesweeperTask
 
         }
 
-        private void tableLayoutPanel1_Paint(object sender, PaintEventArgs e)
-        {
-            //tableLayoutPanel1.Size = new Size(100, 100);
-            
-        }
-
         private void MinesweeperUI_Load(object sender, EventArgs e)
         {
             TableLayoutPanel tableLayoutPanel = new TableLayoutPanel();
@@ -69,11 +58,6 @@ namespace MinesweeperTask
             tableLayoutPanel.CreateControl();
             tableLayoutPanel.Show();
             tableLayoutPanel.Enabled = true;
-        }
-
-        private void button2_Click(object sender, EventArgs e)
-        {
-           
         }
 
         //private void button1_MouseDown(object sender, MouseEventArgs e)
@@ -97,27 +81,12 @@ namespace MinesweeperTask
         //    }
         //}
 
-        private void toolStrip1_ItemClicked(object sender, ToolStripItemClickedEventArgs e)
-        {
-
-        }
-
-        private void toolStripLabel1_Click(object sender, EventArgs e)
-        {
-
-        }
-
         private void menuStrip1_ItemClicked(object sender, ToolStripItemClickedEventArgs e)
         {
 
         }
 
         private void toolStripMenuItem3_Click(object sender, EventArgs e)
-        {
-
-        }
-
-        private void GameFieldFlowLayoutPanel_Paint(object sender, PaintEventArgs e)
         {
 
         }

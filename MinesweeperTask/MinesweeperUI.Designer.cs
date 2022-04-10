@@ -152,7 +152,7 @@
             this.MineCountLabel.Name = "MineCountLabel";
             this.MineCountLabel.Size = new System.Drawing.Size(509, 48);
             this.MineCountLabel.TabIndex = 0;
-            this.MineCountLabel.Text = "label1";
+            this.MineCountLabel.Text = "000";
             this.MineCountLabel.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
             // 
             // FieldTableLayoutPanel

@@ -13,9 +13,9 @@ namespace MinesweeperTask
             ApplicationConfiguration.Initialize();
             Application.Run(new MinesweeperUI());
 
+           Minesweeper minesweeper = new Minesweeper(9, 9, 10, 10);
 
 
-            
         }
 
        

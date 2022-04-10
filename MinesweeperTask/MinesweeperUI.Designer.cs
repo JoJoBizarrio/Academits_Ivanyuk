@@ -28,17 +28,19 @@
         /// </summary>
         private void InitializeComponent()
         {
-            this.components = new System.ComponentModel.Container();
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(MinesweeperUI));
             this.MenuStrip = new System.Windows.Forms.MenuStrip();
-            this.gameToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.toolStripMenuItem2 = new System.Windows.Forms.ToolStripMenuItem();
-            this.toolStripMenuItem3 = new System.Windows.Forms.ToolStripMenuItem();
-            this.exitToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.highScoresToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.aboutToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.aboutToolStripMenuItem1 = new System.Windows.Forms.ToolStripMenuItem();
-            this.timer1 = new System.Windows.Forms.Timer(this.components);
+            this.GameToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.NewGameToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.easyToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.mediumToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.highToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.expertToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.CustomGameToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.ExitToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.HighScoresToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.ReferenceToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.AboutToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.tableLayoutPanel1 = new System.Windows.Forms.TableLayoutPanel();
             this.tableLayoutPanel2 = new System.Windows.Forms.TableLayoutPanel();
             this.MineCountLabel = new System.Windows.Forms.Label();
@@ -52,9 +54,9 @@
             // 
             this.MenuStrip.ImageScalingSize = new System.Drawing.Size(20, 20);
             this.MenuStrip.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
-            this.gameToolStripMenuItem,
-            this.highScoresToolStripMenuItem,
-            this.aboutToolStripMenuItem});
+            this.GameToolStripMenuItem,
+            this.HighScoresToolStripMenuItem,
+            this.ReferenceToolStripMenuItem});
             this.MenuStrip.Location = new System.Drawing.Point(0, 0);
             this.MenuStrip.Name = "MenuStrip";
             this.MenuStrip.Size = new System.Drawing.Size(542, 28);
@@ -62,58 +64,84 @@
             this.MenuStrip.Text = "menuStrip1";
             this.MenuStrip.ItemClicked += new System.Windows.Forms.ToolStripItemClickedEventHandler(this.menuStrip1_ItemClicked);
             // 
-            // gameToolStripMenuItem
+            // GameToolStripMenuItem
             // 
-            this.gameToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
-            this.toolStripMenuItem2,
-            this.toolStripMenuItem3,
-            this.exitToolStripMenuItem});
-            this.gameToolStripMenuItem.Name = "gameToolStripMenuItem";
-            this.gameToolStripMenuItem.Size = new System.Drawing.Size(62, 24);
-            this.gameToolStripMenuItem.Text = "Game";
+            this.GameToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.NewGameToolStripMenuItem,
+            this.CustomGameToolStripMenuItem,
+            this.ExitToolStripMenuItem});
+            this.GameToolStripMenuItem.Name = "GameToolStripMenuItem";
+            this.GameToolStripMenuItem.Size = new System.Drawing.Size(62, 24);
+            this.GameToolStripMenuItem.Text = "Game";
             // 
-            // toolStripMenuItem2
+            // NewGameToolStripMenuItem
             // 
-            this.toolStripMenuItem2.Name = "toolStripMenuItem2";
-            this.toolStripMenuItem2.Size = new System.Drawing.Size(184, 26);
-            this.toolStripMenuItem2.Text = "New game";
+            this.NewGameToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.easyToolStripMenuItem,
+            this.mediumToolStripMenuItem,
+            this.highToolStripMenuItem,
+            this.expertToolStripMenuItem});
+            this.NewGameToolStripMenuItem.Name = "NewGameToolStripMenuItem";
+            this.NewGameToolStripMenuItem.Size = new System.Drawing.Size(224, 26);
+            this.NewGameToolStripMenuItem.Text = "New game";
             // 
-            // toolStripMenuItem3
+            // easyToolStripMenuItem
             // 
-            this.toolStripMenuItem3.Name = "toolStripMenuItem3";
-            this.toolStripMenuItem3.Size = new System.Drawing.Size(184, 26);
-            this.toolStripMenuItem3.Text = "Custom game";
-            this.toolStripMenuItem3.Click += new System.EventHandler(this.toolStripMenuItem3_Click);
+            this.easyToolStripMenuItem.Name = "easyToolStripMenuItem";
+            this.easyToolStripMenuItem.Size = new System.Drawing.Size(147, 26);
+            this.easyToolStripMenuItem.Text = "Easy";
             // 
-            // exitToolStripMenuItem
+            // mediumToolStripMenuItem
             // 
-            this.exitToolStripMenuItem.Name = "exitToolStripMenuItem";
-            this.exitToolStripMenuItem.Size = new System.Drawing.Size(184, 26);
-            this.exitToolStripMenuItem.Text = "Exit";
+            this.mediumToolStripMenuItem.Name = "mediumToolStripMenuItem";
+            this.mediumToolStripMenuItem.Size = new System.Drawing.Size(147, 26);
+            this.mediumToolStripMenuItem.Text = "Medium";
             // 
-            // highScoresToolStripMenuItem
+            // highToolStripMenuItem
             // 
-            this.highScoresToolStripMenuItem.Name = "highScoresToolStripMenuItem";
-            this.highScoresToolStripMenuItem.Size = new System.Drawing.Size(100, 24);
-            this.highScoresToolStripMenuItem.Text = "High scores";
+            this.highToolStripMenuItem.Name = "highToolStripMenuItem";
+            this.highToolStripMenuItem.Size = new System.Drawing.Size(147, 26);
+            this.highToolStripMenuItem.Text = "High";
             // 
-            // aboutToolStripMenuItem
+            // expertToolStripMenuItem
             // 
-            this.aboutToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
-            this.aboutToolStripMenuItem1});
-            this.aboutToolStripMenuItem.Name = "aboutToolStripMenuItem";
-            this.aboutToolStripMenuItem.Size = new System.Drawing.Size(89, 24);
-            this.aboutToolStripMenuItem.Text = "Reference";
+            this.expertToolStripMenuItem.Name = "expertToolStripMenuItem";
+            this.expertToolStripMenuItem.Size = new System.Drawing.Size(147, 26);
+            this.expertToolStripMenuItem.Text = "Expert";
             // 
-            // aboutToolStripMenuItem1
+            // CustomGameToolStripMenuItem
             // 
-            this.aboutToolStripMenuItem1.Name = "aboutToolStripMenuItem1";
-            this.aboutToolStripMenuItem1.Size = new System.Drawing.Size(133, 26);
-            this.aboutToolStripMenuItem1.Text = "About";
+            this.CustomGameToolStripMenuItem.Name = "CustomGameToolStripMenuItem";
+            this.CustomGameToolStripMenuItem.Size = new System.Drawing.Size(224, 26);
+            this.CustomGameToolStripMenuItem.Text = "Custom game";
+            this.CustomGameToolStripMenuItem.Click += new System.EventHandler(this.CustomGameToolStripMenuItem_Click);
             // 
-            // timer1
+            // ExitToolStripMenuItem
             // 
-            this.timer1.Enabled = true;
+            this.ExitToolStripMenuItem.Name = "ExitToolStripMenuItem";
+            this.ExitToolStripMenuItem.Size = new System.Drawing.Size(224, 26);
+            this.ExitToolStripMenuItem.Text = "Exit";
+            this.ExitToolStripMenuItem.Click += new System.EventHandler(this.ExitToolStripMenuItem_Click);
+            // 
+            // HighScoresToolStripMenuItem
+            // 
+            this.HighScoresToolStripMenuItem.Name = "HighScoresToolStripMenuItem";
+            this.HighScoresToolStripMenuItem.Size = new System.Drawing.Size(100, 24);
+            this.HighScoresToolStripMenuItem.Text = "High scores";
+            // 
+            // ReferenceToolStripMenuItem
+            // 
+            this.ReferenceToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.AboutToolStripMenuItem});
+            this.ReferenceToolStripMenuItem.Name = "ReferenceToolStripMenuItem";
+            this.ReferenceToolStripMenuItem.Size = new System.Drawing.Size(89, 24);
+            this.ReferenceToolStripMenuItem.Text = "Reference";
+            // 
+            // AboutToolStripMenuItem
+            // 
+            this.AboutToolStripMenuItem.Name = "AboutToolStripMenuItem";
+            this.AboutToolStripMenuItem.Size = new System.Drawing.Size(133, 26);
+            this.AboutToolStripMenuItem.Text = "About";
             // 
             // tableLayoutPanel1
             // 
@@ -221,17 +249,20 @@
 
         #endregion
         private MenuStrip MenuStrip;
-        private ToolStripMenuItem gameToolStripMenuItem;
-        private ToolStripMenuItem toolStripMenuItem2;
-        private ToolStripMenuItem toolStripMenuItem3;
-        private ToolStripMenuItem exitToolStripMenuItem;
-        private ToolStripMenuItem highScoresToolStripMenuItem;
-        private ToolStripMenuItem aboutToolStripMenuItem;
-        private ToolStripMenuItem aboutToolStripMenuItem1;
-        private System.Windows.Forms.Timer timer1;
+        private ToolStripMenuItem GameToolStripMenuItem;
+        private ToolStripMenuItem NewGameToolStripMenuItem;
+        private ToolStripMenuItem CustomGameToolStripMenuItem;
+        private ToolStripMenuItem ExitToolStripMenuItem;
+        private ToolStripMenuItem HighScoresToolStripMenuItem;
+        private ToolStripMenuItem ReferenceToolStripMenuItem;
+        private ToolStripMenuItem AboutToolStripMenuItem;
         private TableLayoutPanel tableLayoutPanel1;
         private TableLayoutPanel tableLayoutPanel2;
         private Label MineCountLabel;
         private TableLayoutPanel FieldTableLayoutPanel;
+        private ToolStripMenuItem easyToolStripMenuItem;
+        private ToolStripMenuItem mediumToolStripMenuItem;
+        private ToolStripMenuItem highToolStripMenuItem;
+        private ToolStripMenuItem expertToolStripMenuItem;
     }
 }

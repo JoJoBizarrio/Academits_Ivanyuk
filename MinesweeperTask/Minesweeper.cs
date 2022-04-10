@@ -4,6 +4,8 @@
     {
         public int[,] MinesweeperArrayRepresentation { get; set; }
 
+        public Button[,] Buttons { get; set; }
+
         public Point[] MinesCoorditanes { get; private set; }
 
         public int[,] LockedButtons { get; set; }
@@ -73,6 +75,23 @@
                             MinesweeperArrayRepresentation[x + j, y + k] += 1;
                         }
                     }
+                }
+            }
+
+            Buttons = new Button[sizeX, sizeY];
+
+            for (int i = 0; i < SizeX; ++i)
+            {
+                for (int j = 0; j < SizeY; ++j)
+                {
+                    Buttons[i, j] = new Button();
+                    Buttons[i, j].Height = 40;
+                    Buttons[i, j].Width = 40;
+                    Buttons[i, j].Margin = Padding.Empty;
+                    //Image mineImage = Image.FromFile("..\\mine.png");
+                    //minesweeper.Buttons[i ,j] .BackgroundImage = mineImage;
+                    Buttons[i, j].BackgroundImageLayout = ImageLayout.Stretch;
+                    Buttons[i, j].Dock = DockStyle.Fill;
                 }
             }
         }

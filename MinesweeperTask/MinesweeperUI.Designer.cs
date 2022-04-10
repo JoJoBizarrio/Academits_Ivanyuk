@@ -28,14 +28,15 @@
         /// </summary>
         private void InitializeComponent()
         {
+            this.components = new System.ComponentModel.Container();
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(MinesweeperUI));
             this.MenuStrip = new System.Windows.Forms.MenuStrip();
             this.GameToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.NewGameToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.easyToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.mediumToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.highToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.expertToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.EasyDifficultyToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.MediumDifficultyToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.HighDifficultyToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.ExpertDifficultyToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.CustomGameToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.ExitToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.HighScoresToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
@@ -45,6 +46,7 @@
             this.tableLayoutPanel2 = new System.Windows.Forms.TableLayoutPanel();
             this.MineCountLabel = new System.Windows.Forms.Label();
             this.FieldTableLayoutPanel = new System.Windows.Forms.TableLayoutPanel();
+            this.timer1 = new System.Windows.Forms.Timer(this.components);
             this.MenuStrip.SuspendLayout();
             this.tableLayoutPanel1.SuspendLayout();
             this.tableLayoutPanel2.SuspendLayout();
@@ -77,49 +79,50 @@
             // NewGameToolStripMenuItem
             // 
             this.NewGameToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
-            this.easyToolStripMenuItem,
-            this.mediumToolStripMenuItem,
-            this.highToolStripMenuItem,
-            this.expertToolStripMenuItem});
+            this.EasyDifficultyToolStripMenuItem,
+            this.MediumDifficultyToolStripMenuItem,
+            this.HighDifficultyToolStripMenuItem,
+            this.ExpertDifficultyToolStripMenuItem});
             this.NewGameToolStripMenuItem.Name = "NewGameToolStripMenuItem";
-            this.NewGameToolStripMenuItem.Size = new System.Drawing.Size(224, 26);
+            this.NewGameToolStripMenuItem.Size = new System.Drawing.Size(184, 26);
             this.NewGameToolStripMenuItem.Text = "New game";
             // 
-            // easyToolStripMenuItem
+            // EasyDifficultyToolStripMenuItem
             // 
-            this.easyToolStripMenuItem.Name = "easyToolStripMenuItem";
-            this.easyToolStripMenuItem.Size = new System.Drawing.Size(147, 26);
-            this.easyToolStripMenuItem.Text = "Easy";
+            this.EasyDifficultyToolStripMenuItem.Name = "EasyDifficultyToolStripMenuItem";
+            this.EasyDifficultyToolStripMenuItem.Size = new System.Drawing.Size(147, 26);
+            this.EasyDifficultyToolStripMenuItem.Text = "Easy";
+            this.EasyDifficultyToolStripMenuItem.Click += new System.EventHandler(this.EasyDifficultyToolStripMenuItem_Click);
             // 
-            // mediumToolStripMenuItem
+            // MediumDifficultyToolStripMenuItem
             // 
-            this.mediumToolStripMenuItem.Name = "mediumToolStripMenuItem";
-            this.mediumToolStripMenuItem.Size = new System.Drawing.Size(147, 26);
-            this.mediumToolStripMenuItem.Text = "Medium";
+            this.MediumDifficultyToolStripMenuItem.Name = "MediumDifficultyToolStripMenuItem";
+            this.MediumDifficultyToolStripMenuItem.Size = new System.Drawing.Size(147, 26);
+            this.MediumDifficultyToolStripMenuItem.Text = "Medium";
             // 
-            // highToolStripMenuItem
+            // HighDifficultyToolStripMenuItem
             // 
-            this.highToolStripMenuItem.Name = "highToolStripMenuItem";
-            this.highToolStripMenuItem.Size = new System.Drawing.Size(147, 26);
-            this.highToolStripMenuItem.Text = "High";
+            this.HighDifficultyToolStripMenuItem.Name = "HighDifficultyToolStripMenuItem";
+            this.HighDifficultyToolStripMenuItem.Size = new System.Drawing.Size(147, 26);
+            this.HighDifficultyToolStripMenuItem.Text = "High";
             // 
-            // expertToolStripMenuItem
+            // ExpertDifficultyToolStripMenuItem
             // 
-            this.expertToolStripMenuItem.Name = "expertToolStripMenuItem";
-            this.expertToolStripMenuItem.Size = new System.Drawing.Size(147, 26);
-            this.expertToolStripMenuItem.Text = "Expert";
+            this.ExpertDifficultyToolStripMenuItem.Name = "ExpertDifficultyToolStripMenuItem";
+            this.ExpertDifficultyToolStripMenuItem.Size = new System.Drawing.Size(147, 26);
+            this.ExpertDifficultyToolStripMenuItem.Text = "Expert";
             // 
             // CustomGameToolStripMenuItem
             // 
             this.CustomGameToolStripMenuItem.Name = "CustomGameToolStripMenuItem";
-            this.CustomGameToolStripMenuItem.Size = new System.Drawing.Size(224, 26);
+            this.CustomGameToolStripMenuItem.Size = new System.Drawing.Size(184, 26);
             this.CustomGameToolStripMenuItem.Text = "Custom game";
             this.CustomGameToolStripMenuItem.Click += new System.EventHandler(this.CustomGameToolStripMenuItem_Click);
             // 
             // ExitToolStripMenuItem
             // 
             this.ExitToolStripMenuItem.Name = "ExitToolStripMenuItem";
-            this.ExitToolStripMenuItem.Size = new System.Drawing.Size(224, 26);
+            this.ExitToolStripMenuItem.Size = new System.Drawing.Size(184, 26);
             this.ExitToolStripMenuItem.Text = "Exit";
             this.ExitToolStripMenuItem.Click += new System.EventHandler(this.ExitToolStripMenuItem_Click);
             // 
@@ -218,7 +221,7 @@
             this.FieldTableLayoutPanel.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 11.11111F));
             this.FieldTableLayoutPanel.Size = new System.Drawing.Size(502, 501);
             this.FieldTableLayoutPanel.TabIndex = 1;
-            this.FieldTableLayoutPanel.Paint += new System.Windows.Forms.PaintEventHandler(this.FieldTableLayoutPanel_Paint);
+            this.FieldTableLayoutPanel.MouseDown += new System.Windows.Forms.MouseEventHandler(this.FieldTableLayoutPanel_MouseDown);
             // 
             // MinesweeperUI
             // 
@@ -235,7 +238,6 @@
             this.Name = "MinesweeperUI";
             this.Text = "Minesweeper";
             this.WindowState = System.Windows.Forms.FormWindowState.Minimized;
-            this.Load += new System.EventHandler(this.MinesweeperUI_Load);
             this.MenuStrip.ResumeLayout(false);
             this.MenuStrip.PerformLayout();
             this.tableLayoutPanel1.ResumeLayout(false);
@@ -260,9 +262,10 @@
         private TableLayoutPanel tableLayoutPanel2;
         private Label MineCountLabel;
         private TableLayoutPanel FieldTableLayoutPanel;
-        private ToolStripMenuItem easyToolStripMenuItem;
-        private ToolStripMenuItem mediumToolStripMenuItem;
-        private ToolStripMenuItem highToolStripMenuItem;
-        private ToolStripMenuItem expertToolStripMenuItem;
+        private ToolStripMenuItem EasyDifficultyToolStripMenuItem;
+        private ToolStripMenuItem MediumDifficultyToolStripMenuItem;
+        private ToolStripMenuItem HighDifficultyToolStripMenuItem;
+        private ToolStripMenuItem ExpertDifficultyToolStripMenuItem;
+        private System.Windows.Forms.Timer timer1;
     }
 }

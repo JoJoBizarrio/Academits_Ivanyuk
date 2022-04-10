@@ -48,13 +48,10 @@
                 }
             }
 
-            int x;
-            int y;
-
             for (int i = 0; i < MinesCount; ++i)
             {
-                x = MinesCoorditanes[i].X;
-                y = MinesCoorditanes[i].Y;
+                int x = MinesCoorditanes[i].X;
+                int y = MinesCoorditanes[i].Y;
 
                 for (int j = -1; j <= 1; ++j)
                 {
@@ -85,6 +82,8 @@
                 for (int j = 0; j < SizeY; ++j)
                 {
                     Buttons[i, j] = new Button();
+                    Buttons[i, j].Text = MinesweeperArrayRepresentation[i, j].ToString();
+                    Buttons[i, j].TextImageRelation = TextImageRelation.TextBeforeImage;
                     Buttons[i, j].Height = 40;
                     Buttons[i, j].Width = 40;
                     Buttons[i, j].Margin = Padding.Empty;
@@ -92,6 +91,7 @@
                     //minesweeper.Buttons[i ,j] .BackgroundImage = mineImage;
                     Buttons[i, j].BackgroundImageLayout = ImageLayout.Stretch;
                     Buttons[i, j].Dock = DockStyle.Fill;
+                    
                 }
             }
         }

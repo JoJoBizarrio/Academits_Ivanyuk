@@ -92,7 +92,6 @@
                             continue;
                         }
 
-                        MinesweeperUI.
                         //TODO: открыть array[x,y];
                         OpenCell(minesweeper, x + i, y + j);
                     }

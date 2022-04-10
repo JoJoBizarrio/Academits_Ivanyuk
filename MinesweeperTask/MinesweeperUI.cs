@@ -6,8 +6,17 @@ namespace MinesweeperTask
         {
             InitializeComponent();
 
-            TableLayoutPanel tableLayoutPanel = new TableLayoutPanel();
-
+            // FieldTableLayoutPanel.ColumnStyles.Add(new Button());
+            
+            Button button12314 = new Button();
+            FieldTableLayoutPanel.SetColumn(button12314, 1);
+            FieldTableLayoutPanel.Controls.Add(button12314, 1, 1);
+            button12314.Dock = DockStyle.Fill;
+            button12314.BackColor = FieldTableLayoutPanel.BackColor;
+            Image mineImage = Image.FromFile("..\\mine.png");
+            button12314.BackgroundImage = mineImage;
+            button12314.BackgroundImageLayout = ImageLayout.Stretch;
+            button12314.Enabled = false;
         }
 
         public void DrawLinesPoint(PaintEventArgs e)

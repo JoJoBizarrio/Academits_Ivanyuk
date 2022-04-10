@@ -13,11 +13,7 @@ namespace MinesweeperTask
             ApplicationConfiguration.Initialize();
             Application.Run(new MinesweeperUI());
 
-            Point[] points =
-            {
-                new Point(10, 20),
-                new Point(10, 40)
-            };
+
 
             
         }

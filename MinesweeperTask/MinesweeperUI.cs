@@ -6,7 +6,6 @@ namespace MinesweeperTask
         {
             InitializeComponent();
 
-            button1.Click += button1_Click;
             TableLayoutPanel tableLayoutPanel = new TableLayoutPanel();
 
         }
@@ -74,33 +73,29 @@ namespace MinesweeperTask
 
         private void button2_Click(object sender, EventArgs e)
         {
-
+           
         }
 
-        private void button1_MouseDown(object sender, MouseEventArgs e)
-        {
-            Image mineImage = Image.FromFile("..\\mine.png");
-            Image flagImage = Image.FromFile("..\\flag.png");
-
-            
-                
-            
+        //private void button1_MouseDown(object sender, MouseEventArgs e)
+        //{
+        //    Image mineImage = Image.FromFile("..\\mine.png");
+        //    Image flagImage = Image.FromFile("..\\flag.png");
                 
 
-            if (e.Button == MouseButtons.Right)
-            {
-                button1.BackgroundImage = flagImage;
-                button1.BackgroundImageLayout = ImageLayout.Stretch;
-                button1.Text = "";
-            }
+        //    if (e.Button == MouseButtons.Right)
+        //    {
+        //        button1.BackgroundImage = flagImage;
+        //        button1.BackgroundImageLayout = ImageLayout.Stretch;
+        //        button1.Text = "";
+        //    }
 
-            if (button1.BackgroundImage.Size != flagImage.Size & e.Button == MouseButtons.Left)
-            {
-                button1.BackgroundImage = mineImage;
-                button1.BackgroundImageLayout = ImageLayout.Stretch;
-                button1.Text = "";
-            }
-        }
+        //    if (button1.BackgroundImage.Size != flagImage.Size & e.Button == MouseButtons.Left)
+        //    {
+        //        button1.BackgroundImage = mineImage;
+        //        button1.BackgroundImageLayout = ImageLayout.Stretch;
+        //        button1.Text = "";
+        //    }
+        //}
 
         private void toolStrip1_ItemClicked(object sender, ToolStripItemClickedEventArgs e)
         {
@@ -118,6 +113,11 @@ namespace MinesweeperTask
         }
 
         private void toolStripMenuItem3_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void GameFieldFlowLayoutPanel_Paint(object sender, PaintEventArgs e)
         {
 
         }

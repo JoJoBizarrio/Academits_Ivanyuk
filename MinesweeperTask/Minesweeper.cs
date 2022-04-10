@@ -6,6 +6,8 @@
 
         public Point[] MinesCoorditanes { get; private set; }
 
+        public int[,] LockedButtons { get; set; }
+
         public int MinutesCount { get; private set; }
 
         public int MinesCount { get; private set; }
@@ -17,6 +19,7 @@
         public Minesweeper(int sizeX, int sizeY, int minesCount, int minutesCount)
         {
             MinesweeperArrayRepresentation = new int[sizeX, sizeY];
+            LockedButtons = new int[sizeX, sizeY];
             MinesCoorditanes = new Point[minesCount];
 
             MinesCount = minesCount;

@@ -1,5 +1,3 @@
-using System.Drawing;
-
 namespace MinesweeperTask
 {
     internal static class MinesweeperMain

@@ -7,6 +7,8 @@ namespace MinesweeperTask
             InitializeComponent();
 
             button1.Click += button1_Click;
+            TableLayoutPanel tableLayoutPanel = new TableLayoutPanel();
+
         }
 
         public void DrawLinesPoint(PaintEventArgs e)
@@ -26,6 +28,7 @@ namespace MinesweeperTask
             //Draw lines to screen.
             e.Graphics.DrawLines(pen, points);
 
+            ;
 
 
 
@@ -47,8 +50,6 @@ namespace MinesweeperTask
             tableLayoutPanel.ColumnCount = 9;
             tableLayoutPanel.CellBorderStyle = TableLayoutPanelCellBorderStyle.Single;
             tableLayoutPanel.BackColor = Color.Black ;
-            tableLayoutPanel.CreateControl();
-            tableLayoutPanel.Show();
             tableLayoutPanel.Enabled = true;
 
         }
@@ -99,6 +100,26 @@ namespace MinesweeperTask
                 button1.BackgroundImageLayout = ImageLayout.Stretch;
                 button1.Text = "";
             }
+        }
+
+        private void toolStrip1_ItemClicked(object sender, ToolStripItemClickedEventArgs e)
+        {
+
+        }
+
+        private void toolStripLabel1_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void menuStrip1_ItemClicked(object sender, ToolStripItemClickedEventArgs e)
+        {
+
+        }
+
+        private void toolStripMenuItem3_Click(object sender, EventArgs e)
+        {
+
         }
     }
 }

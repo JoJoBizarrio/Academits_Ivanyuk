@@ -106,11 +106,6 @@ namespace VectorTask
         // (4c) Умножение на скаляр
         public void MultiplyByScalar(double scalar)
         {
-            foreach (int e in _components)
-            {
-                _components[e] *=  scalar;
-            }
-
             for (int i = 0; i < Dimension; i++)
             {
                 _components[i] *= scalar;

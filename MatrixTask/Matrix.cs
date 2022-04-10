@@ -158,9 +158,9 @@ namespace MatrixTask
         // 2e.Умножение на скаляр
         public void MultiplyByScalar(double scalar)
         {
-            for (int i = 0; i < RowsCount; i++)
+            foreach (Vector e in _rows)
             {
-                _rows[i].MultiplyByScalar(scalar);
+                e.MultiplyByScalar(scalar);
             }
         }
 

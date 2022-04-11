@@ -9,7 +9,9 @@ namespace ListTask
 
         public int Count { get; private set; }
 
-        public SinglyLinkedList() { }
+        public SinglyLinkedList()
+        {
+        }
 
         public SinglyLinkedList(T data)
         {
@@ -17,54 +19,59 @@ namespace ListTask
             Count++;
         }
 
-        public SinglyLinkedList(params T[] dataset)
+        public SinglyLinkedList(params T[] array)
         {
-            _head = new ListItem<T>(dataset[0]);
-            Count = dataset.Length;
+            if (array.Length == 0)
+            {
+                new SinglyLinkedList<T>();
+                return;
+            }
+
+            _head = new ListItem<T>(array[0]);
+            Count = array.Length;
             ListItem<T> item = _head;
 
-            for (int i = 1; i < dataset.Length; i++)
+            for (int i = 1; i < array.Length; i++)
             {
-                item.Next = new(dataset[i]);
+                item.Next = new(array[i]);
                 item = item.Next;
             }
         }
 
-        // получение значение первого элемента
+        // Получение значение первого элемента
         public T GetFirst()
         {
             if (Count == 0)
             {
-                throw new ArgumentNullException("Empty list.");
+                throw new InvalidOperationException("Empty list.");
             }
 
             return _head.Data;
         }
 
-        // вставка элемента в начало
+        // Вставка элемента в начало
         public void InsertFirst(T data)
         {
-            ListItem<T> oldHead = _head;
-            _head = new ListItem<T>(data, oldHead);
+            _head = new ListItem<T>(data, _head);
             Count++;
         }
 
-        // удаление первого элемента, пусть выдает значение элемента
+        // Удаление первого элемента, пусть выдает значение элемента
         public T RemoveFirst()
         {
             if (Count == 0)
             {
-                throw new ArgumentNullException("Empty list.");
+                throw new InvalidOperationException("Empty list.");
             }
 
-            T removed = _head.Data;
+            T removedValue = _head.Data;
             _head = _head.Next;
             Count--;
 
-            return removed;
+            return removedValue;
         }
 
-        // получение/изменение значения по указанному индексу.
+        // Получение/изменение значения по указанному индексу.
         public T GetData(int index)
         {
             if (index == 0)
@@ -79,20 +86,24 @@ namespace ListTask
 
         public void SetData(int index, T data)
         {
-            if (index == 0)
-            {
-                _head.Data = data;
-                return;
-            }
-
             CheckIndex(index);
 
             GetListItem(index).Data = data;
         }
 
-        // вставка элемента по индексу
+        // Вставка элемента по индексу
         public void Insert(int index, T data)
         {
+            if (_head == null)
+            {
+                throw new InvalidOperationException("List empty.");
+            }
+
+            if (index < 0 || index > Count)
+            {
+                throw new ArgumentOutOfRangeException(nameof(index), index, $"Index is out of range: [0, {Count}].");
+            }
+
             if (index == 0)
             {
                 InsertFirst(data);
@@ -101,61 +112,70 @@ namespace ListTask
 
             CheckIndex(index);
 
-            ListItem<T> insertedItem = new(data, null);
-            ListItem<T> item = GetListItem(index);
+            ListItem<T> item = GetListItem(index - 1);
+            ListItem<T> insertedItem = new(data, item.Next);
 
-            insertedItem.Next = item.Next;
             item.Next = insertedItem;
 
             Count++;
         }
 
-        // удаление элемента по индексу, пусть выдает значение элемента
-        public T RemoveItem(int index)
+        // Удаление элемента по индексу, пусть выдает значение элемента
+        public T RemoveAt(int index)
         {
+            if (_head == null)
+            {
+                throw new InvalidOperationException("List empty.");
+            }
+
+            CheckIndex(index);
+
             if (index == 0)
             {
                 return RemoveFirst();
             }
 
-            CheckIndex(index);
+            ListItem<T> previousItem = GetListItem(index - 1);
 
-            ListItem<T> listItem = GetListItem(index - 1);
-
-            T removed = listItem.Next.Data;
-            listItem.Next = listItem.Next.Next;
+            T removedItem = previousItem.Next.Data;
+            previousItem.Next = previousItem.Next.Next;
 
             Count--;
-            return removed;
+            return removedItem;
         }
-
-        //удаление узла по значению, пусть выдает true, если элемент был удален
-        public bool RemoveItem(T data)
+         
+        // Удаление узла по значению, пусть выдает true, если элемент был удален
+        public bool Remove(T data)
         {
+            if (_head == null)
+            {
+                throw new InvalidOperationException("List empty.");
+            }
+
             if (_head.Data.Equals(data))
             {
                 RemoveFirst();
                 return true;
             }
 
-            ListItem<T> previoslyItem = _head;
+            ListItem<T> previousItem = _head;
 
             for (ListItem<T> item = _head.Next; item != null; item = item.Next)
             {
                 if (item.Data.Equals(data))
                 {
-                    previoslyItem.Next = item.Next;
+                    previousItem.Next = item.Next;
                     Count--;
                     return true;
                 }
 
-                previoslyItem = item;
+                previousItem = item;
             }
 
             return false;
         }
 
-        // разворот списка за линейное время
+        // Разворот списка за линейное время
         public void Revert()
         {
             if (_head.Next == null)
@@ -216,7 +236,7 @@ namespace ListTask
             }
         }
 
-        // вспомогательное: возвращает ячейку по индексу в виде ListItem<T>
+        // Вспомогательное: возвращает ячейку по индексу в виде ListItem<T>
         private ListItem<T> GetListItem(int index)
         {
             CheckIndex(index);
@@ -231,7 +251,7 @@ namespace ListTask
             return item;
         }
 
-        // вспомогательное
+        // Вспомогательное
         public override string ToString()
         {
             StringBuilder stringBuilder = new();

@@ -19,7 +19,7 @@ namespace TemperatureTask
 
         public static double GetConvertedCelsiusToFahrenheit(double celsius)
         {
-            return celsius + FarengeitConversionFactor;
+            return celsius * 9.0 / 5 + FarengeitConversionFactor;
         }
 
         public static double GetConvertedKelvinToCelsius(double kelvin)

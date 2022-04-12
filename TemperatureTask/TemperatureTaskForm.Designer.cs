@@ -28,35 +28,35 @@
         /// </summary>
         private void InitializeComponent()
         {
-            this.InitialValueBox = new System.Windows.Forms.TextBox();
-            this.ConvertedValueBox = new System.Windows.Forms.TextBox();
+            this.InputBox = new System.Windows.Forms.TextBox();
+            this.OutputBox = new System.Windows.Forms.TextBox();
             this.ConvertButton = new System.Windows.Forms.Button();
             this.ConvertSymbolsLabel = new System.Windows.Forms.Label();
             this.tableLayoutPanel1 = new System.Windows.Forms.TableLayoutPanel();
             this.tableLayoutPanel2 = new System.Windows.Forms.TableLayoutPanel();
-            this.FromComboBox = new System.Windows.Forms.ComboBox();
-            this.ToComboBox = new System.Windows.Forms.ComboBox();
+            this.ConvertFromComboBox = new System.Windows.Forms.ComboBox();
+            this.ConvertToComboBox = new System.Windows.Forms.ComboBox();
             this.tableLayoutPanel1.SuspendLayout();
             this.tableLayoutPanel2.SuspendLayout();
             this.SuspendLayout();
             // 
-            // InitialValueBox
+            // InputBox
             // 
-            this.InitialValueBox.Anchor = System.Windows.Forms.AnchorStyles.Right;
-            this.InitialValueBox.Location = new System.Drawing.Point(40, 8);
-            this.InitialValueBox.Name = "InitialValueBox";
-            this.InitialValueBox.Size = new System.Drawing.Size(100, 27);
-            this.InitialValueBox.TabIndex = 0;
+            this.InputBox.Anchor = System.Windows.Forms.AnchorStyles.None;
+            this.InputBox.Location = new System.Drawing.Point(3, 8);
+            this.InputBox.Name = "InputBox";
+            this.InputBox.Size = new System.Drawing.Size(137, 27);
+            this.InputBox.TabIndex = 0;
             // 
-            // ConvertedValueBox
+            // OutputBox
             // 
-            this.ConvertedValueBox.Anchor = System.Windows.Forms.AnchorStyles.Left;
-            this.ConvertedValueBox.Enabled = false;
-            this.ConvertedValueBox.Location = new System.Drawing.Point(217, 8);
-            this.ConvertedValueBox.Name = "ConvertedValueBox";
-            this.ConvertedValueBox.ReadOnly = true;
-            this.ConvertedValueBox.Size = new System.Drawing.Size(100, 27);
-            this.ConvertedValueBox.TabIndex = 5;
+            this.OutputBox.Anchor = System.Windows.Forms.AnchorStyles.Left;
+            this.OutputBox.Enabled = false;
+            this.OutputBox.Location = new System.Drawing.Point(217, 8);
+            this.OutputBox.Name = "OutputBox";
+            this.OutputBox.ReadOnly = true;
+            this.OutputBox.Size = new System.Drawing.Size(137, 27);
+            this.OutputBox.TabIndex = 5;
             // 
             // ConvertButton
             // 
@@ -85,9 +85,9 @@
             this.tableLayoutPanel1.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 40F));
             this.tableLayoutPanel1.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 20F));
             this.tableLayoutPanel1.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 40F));
-            this.tableLayoutPanel1.Controls.Add(this.InitialValueBox, 0, 0);
+            this.tableLayoutPanel1.Controls.Add(this.InputBox, 0, 0);
             this.tableLayoutPanel1.Controls.Add(this.ConvertSymbolsLabel, 1, 0);
-            this.tableLayoutPanel1.Controls.Add(this.ConvertedValueBox, 2, 0);
+            this.tableLayoutPanel1.Controls.Add(this.OutputBox, 2, 0);
             this.tableLayoutPanel1.Location = new System.Drawing.Point(12, 12);
             this.tableLayoutPanel1.Name = "tableLayoutPanel1";
             this.tableLayoutPanel1.RowCount = 1;
@@ -101,8 +101,8 @@
             this.tableLayoutPanel2.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 40F));
             this.tableLayoutPanel2.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 20F));
             this.tableLayoutPanel2.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 40F));
-            this.tableLayoutPanel2.Controls.Add(this.FromComboBox, 0, 0);
-            this.tableLayoutPanel2.Controls.Add(this.ToComboBox, 2, 0);
+            this.tableLayoutPanel2.Controls.Add(this.ConvertFromComboBox, 0, 0);
+            this.tableLayoutPanel2.Controls.Add(this.ConvertToComboBox, 2, 0);
             this.tableLayoutPanel2.Location = new System.Drawing.Point(12, 61);
             this.tableLayoutPanel2.Name = "tableLayoutPanel2";
             this.tableLayoutPanel2.RowCount = 1;
@@ -110,31 +110,31 @@
             this.tableLayoutPanel2.Size = new System.Drawing.Size(358, 42);
             this.tableLayoutPanel2.TabIndex = 17;
             // 
-            // FromComboBox
+            // ConvertFromComboBox
             // 
-            this.FromComboBox.FormattingEnabled = true;
-            this.FromComboBox.Items.AddRange(new object[] {
+            this.ConvertFromComboBox.FormattingEnabled = true;
+            this.ConvertFromComboBox.Items.AddRange(new object[] {
             "Celsius",
             "Kelvin",
             "Fahrenheit"});
-            this.FromComboBox.Location = new System.Drawing.Point(3, 3);
-            this.FromComboBox.Name = "FromComboBox";
-            this.FromComboBox.Size = new System.Drawing.Size(137, 28);
-            this.FromComboBox.TabIndex = 1;
-            this.FromComboBox.Text = "From";
+            this.ConvertFromComboBox.Location = new System.Drawing.Point(3, 3);
+            this.ConvertFromComboBox.Name = "ConvertFromComboBox";
+            this.ConvertFromComboBox.Size = new System.Drawing.Size(137, 28);
+            this.ConvertFromComboBox.TabIndex = 1;
+            this.ConvertFromComboBox.Text = "Convert from";
             // 
-            // ToComboBox
+            // ConvertToComboBox
             // 
-            this.ToComboBox.FormattingEnabled = true;
-            this.ToComboBox.Items.AddRange(new object[] {
+            this.ConvertToComboBox.FormattingEnabled = true;
+            this.ConvertToComboBox.Items.AddRange(new object[] {
             "Celsius",
             "Kelvin",
             "Fahrenheit"});
-            this.ToComboBox.Location = new System.Drawing.Point(217, 3);
-            this.ToComboBox.Name = "ToComboBox";
-            this.ToComboBox.Size = new System.Drawing.Size(137, 28);
-            this.ToComboBox.TabIndex = 2;
-            this.ToComboBox.Text = "To";
+            this.ConvertToComboBox.Location = new System.Drawing.Point(217, 3);
+            this.ConvertToComboBox.Name = "ConvertToComboBox";
+            this.ConvertToComboBox.Size = new System.Drawing.Size(137, 28);
+            this.ConvertToComboBox.TabIndex = 2;
+            this.ConvertToComboBox.Text = "Convert to";
             // 
             // TemperatureTaskForm
             // 
@@ -157,13 +157,13 @@
 
         #endregion
 
-        private TextBox InitialValueBox;
-        private TextBox ConvertedValueBox;
+        private TextBox InputBox;
+        private TextBox OutputBox;
         private Button ConvertButton;
         private Label ConvertSymbolsLabel;
         private TableLayoutPanel tableLayoutPanel1;
         private TableLayoutPanel tableLayoutPanel2;
-        private ComboBox FromComboBox;
-        private ComboBox ToComboBox;
+        private ComboBox ConvertFromComboBox;
+        private ComboBox ConvertToComboBox;
     }
 }

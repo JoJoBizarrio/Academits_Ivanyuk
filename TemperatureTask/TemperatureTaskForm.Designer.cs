@@ -28,199 +28,142 @@
         /// </summary>
         private void InitializeComponent()
         {
-            this.CelciusBox = new System.Windows.Forms.TextBox();
-            this.KelvinBox = new System.Windows.Forms.TextBox();
-            this.FarengeitBox = new System.Windows.Forms.TextBox();
-            this.ConvertedCelciusBox = new System.Windows.Forms.TextBox();
-            this.ConvertedKelvinBox = new System.Windows.Forms.TextBox();
-            this.ConvertedFarengeitBox = new System.Windows.Forms.TextBox();
-            this.CelciusLabel = new System.Windows.Forms.Label();
-            this.KelvinLabel = new System.Windows.Forms.Label();
-            this.FarengeitLabel = new System.Windows.Forms.Label();
-            this.ConvertSymbolsLabel = new System.Windows.Forms.Label();
-            this.toKelvinaRadioButton = new System.Windows.Forms.RadioButton();
-            this.toCelciusRadioButton = new System.Windows.Forms.RadioButton();
-            this.toFarengeitRadioButton = new System.Windows.Forms.RadioButton();
+            this.InitialValueBox = new System.Windows.Forms.TextBox();
+            this.ConvertedValueBox = new System.Windows.Forms.TextBox();
             this.ConvertButton = new System.Windows.Forms.Button();
+            this.ConvertSymbolsLabel = new System.Windows.Forms.Label();
+            this.tableLayoutPanel1 = new System.Windows.Forms.TableLayoutPanel();
+            this.tableLayoutPanel2 = new System.Windows.Forms.TableLayoutPanel();
+            this.FromComboBox = new System.Windows.Forms.ComboBox();
+            this.ToComboBox = new System.Windows.Forms.ComboBox();
+            this.tableLayoutPanel1.SuspendLayout();
+            this.tableLayoutPanel2.SuspendLayout();
             this.SuspendLayout();
             // 
-            // CelciusBox
+            // InitialValueBox
             // 
-            this.CelciusBox.Location = new System.Drawing.Point(110, 25);
-            this.CelciusBox.Name = "CelciusBox";
-            this.CelciusBox.Size = new System.Drawing.Size(79, 27);
-            this.CelciusBox.TabIndex = 0;
+            this.InitialValueBox.Anchor = System.Windows.Forms.AnchorStyles.Right;
+            this.InitialValueBox.Location = new System.Drawing.Point(40, 8);
+            this.InitialValueBox.Name = "InitialValueBox";
+            this.InitialValueBox.Size = new System.Drawing.Size(100, 27);
+            this.InitialValueBox.TabIndex = 0;
             // 
-            // KelvinBox
+            // ConvertedValueBox
             // 
-            this.KelvinBox.Location = new System.Drawing.Point(110, 63);
-            this.KelvinBox.Name = "KelvinBox";
-            this.KelvinBox.Size = new System.Drawing.Size(79, 27);
-            this.KelvinBox.TabIndex = 1;
-            // 
-            // FarengeitBox
-            // 
-            this.FarengeitBox.Location = new System.Drawing.Point(110, 99);
-            this.FarengeitBox.Name = "FarengeitBox";
-            this.FarengeitBox.Size = new System.Drawing.Size(79, 27);
-            this.FarengeitBox.TabIndex = 2;
-            // 
-            // ConvertedCelciusBox
-            // 
-            this.ConvertedCelciusBox.Enabled = false;
-            this.ConvertedCelciusBox.Location = new System.Drawing.Point(262, 25);
-            this.ConvertedCelciusBox.Name = "ConvertedCelciusBox";
-            this.ConvertedCelciusBox.ReadOnly = true;
-            this.ConvertedCelciusBox.Size = new System.Drawing.Size(79, 27);
-            this.ConvertedCelciusBox.TabIndex = 5;
-            // 
-            // ConvertedKelvinBox
-            // 
-            this.ConvertedKelvinBox.Enabled = false;
-            this.ConvertedKelvinBox.Location = new System.Drawing.Point(262, 63);
-            this.ConvertedKelvinBox.Name = "ConvertedKelvinBox";
-            this.ConvertedKelvinBox.ReadOnly = true;
-            this.ConvertedKelvinBox.Size = new System.Drawing.Size(79, 27);
-            this.ConvertedKelvinBox.TabIndex = 4;
-            // 
-            // ConvertedFarengeitBox
-            // 
-            this.ConvertedFarengeitBox.Enabled = false;
-            this.ConvertedFarengeitBox.Location = new System.Drawing.Point(262, 103);
-            this.ConvertedFarengeitBox.Name = "ConvertedFarengeitBox";
-            this.ConvertedFarengeitBox.ReadOnly = true;
-            this.ConvertedFarengeitBox.Size = new System.Drawing.Size(79, 27);
-            this.ConvertedFarengeitBox.TabIndex = 3;
-            // 
-            // CelciusLabel
-            // 
-            this.CelciusLabel.AutoSize = true;
-            this.CelciusLabel.Font = new System.Drawing.Font("Consolas", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
-            this.CelciusLabel.Location = new System.Drawing.Point(32, 31);
-            this.CelciusLabel.Name = "CelciusLabel";
-            this.CelciusLabel.Size = new System.Drawing.Size(72, 18);
-            this.CelciusLabel.TabIndex = 6;
-            this.CelciusLabel.Text = "Celcius:";
-            // 
-            // KelvinLabel
-            // 
-            this.KelvinLabel.AutoSize = true;
-            this.KelvinLabel.Font = new System.Drawing.Font("Consolas", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
-            this.KelvinLabel.Location = new System.Drawing.Point(40, 68);
-            this.KelvinLabel.Name = "KelvinLabel";
-            this.KelvinLabel.Size = new System.Drawing.Size(64, 18);
-            this.KelvinLabel.TabIndex = 7;
-            this.KelvinLabel.Text = "Kelvin:";
-            // 
-            // FarengeitLabel
-            // 
-            this.FarengeitLabel.AutoSize = true;
-            this.FarengeitLabel.Font = new System.Drawing.Font("Consolas", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
-            this.FarengeitLabel.Location = new System.Drawing.Point(16, 108);
-            this.FarengeitLabel.Name = "FarengeitLabel";
-            this.FarengeitLabel.Size = new System.Drawing.Size(88, 18);
-            this.FarengeitLabel.TabIndex = 11;
-            this.FarengeitLabel.Text = "Farengeit:";
-            // 
-            // ConvertSymbolsLabel
-            // 
-            this.ConvertSymbolsLabel.AutoSize = true;
-            this.ConvertSymbolsLabel.Location = new System.Drawing.Point(211, 28);
-            this.ConvertSymbolsLabel.Name = "ConvertSymbolsLabel";
-            this.ConvertSymbolsLabel.Size = new System.Drawing.Size(29, 100);
-            this.ConvertSymbolsLabel.TabIndex = 12;
-            this.ConvertSymbolsLabel.Text = "=>\r\n\r\n=>\r\n\r\n=>\r\n";
-            // 
-            // toKelvinaRadioButton
-            // 
-            this.toKelvinaRadioButton.AutoSize = true;
-            this.toKelvinaRadioButton.Checked = true;
-            this.toKelvinaRadioButton.Font = new System.Drawing.Font("Consolas", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
-            this.toKelvinaRadioButton.Location = new System.Drawing.Point(17, 157);
-            this.toKelvinaRadioButton.Name = "toKelvinaRadioButton";
-            this.toKelvinaRadioButton.Size = new System.Drawing.Size(101, 22);
-            this.toKelvinaRadioButton.TabIndex = 13;
-            this.toKelvinaRadioButton.TabStop = true;
-            this.toKelvinaRadioButton.Text = "to Kelvin";
-            this.toKelvinaRadioButton.UseVisualStyleBackColor = true;
-            // 
-            // toCelciusRadioButton
-            // 
-            this.toCelciusRadioButton.AutoSize = true;
-            this.toCelciusRadioButton.Font = new System.Drawing.Font("Consolas", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
-            this.toCelciusRadioButton.Location = new System.Drawing.Point(125, 157);
-            this.toCelciusRadioButton.Name = "toCelciusRadioButton";
-            this.toCelciusRadioButton.Size = new System.Drawing.Size(109, 22);
-            this.toCelciusRadioButton.TabIndex = 14;
-            this.toCelciusRadioButton.Text = "to Celcius";
-            this.toCelciusRadioButton.UseVisualStyleBackColor = true;
-            // 
-            // toFarengeitRadioButton
-            // 
-            this.toFarengeitRadioButton.AutoSize = true;
-            this.toFarengeitRadioButton.Font = new System.Drawing.Font("Consolas", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
-            this.toFarengeitRadioButton.Location = new System.Drawing.Point(240, 157);
-            this.toFarengeitRadioButton.Name = "toFarengeitRadioButton";
-            this.toFarengeitRadioButton.Size = new System.Drawing.Size(125, 22);
-            this.toFarengeitRadioButton.TabIndex = 15;
-            this.toFarengeitRadioButton.Text = "to Farengeit";
-            this.toFarengeitRadioButton.UseVisualStyleBackColor = true;
+            this.ConvertedValueBox.Anchor = System.Windows.Forms.AnchorStyles.Left;
+            this.ConvertedValueBox.Enabled = false;
+            this.ConvertedValueBox.Location = new System.Drawing.Point(217, 8);
+            this.ConvertedValueBox.Name = "ConvertedValueBox";
+            this.ConvertedValueBox.ReadOnly = true;
+            this.ConvertedValueBox.Size = new System.Drawing.Size(100, 27);
+            this.ConvertedValueBox.TabIndex = 5;
             // 
             // ConvertButton
             // 
             this.ConvertButton.Font = new System.Drawing.Font("Consolas", 14.25F, ((System.Drawing.FontStyle)((System.Drawing.FontStyle.Bold | System.Drawing.FontStyle.Italic))), System.Drawing.GraphicsUnit.Point);
-            this.ConvertButton.Location = new System.Drawing.Point(46, 208);
+            this.ConvertButton.Location = new System.Drawing.Point(52, 109);
             this.ConvertButton.Name = "ConvertButton";
-            this.ConvertButton.Size = new System.Drawing.Size(285, 60);
+            this.ConvertButton.Size = new System.Drawing.Size(277, 60);
             this.ConvertButton.TabIndex = 16;
             this.ConvertButton.Text = "Convert";
             this.ConvertButton.UseVisualStyleBackColor = true;
             this.ConvertButton.Click += new System.EventHandler(this.ConvertButton_Click);
             // 
+            // ConvertSymbolsLabel
+            // 
+            this.ConvertSymbolsLabel.Anchor = System.Windows.Forms.AnchorStyles.None;
+            this.ConvertSymbolsLabel.AutoSize = true;
+            this.ConvertSymbolsLabel.Location = new System.Drawing.Point(164, 11);
+            this.ConvertSymbolsLabel.Name = "ConvertSymbolsLabel";
+            this.ConvertSymbolsLabel.Size = new System.Drawing.Size(29, 20);
+            this.ConvertSymbolsLabel.TabIndex = 12;
+            this.ConvertSymbolsLabel.Text = "=>";
+            // 
+            // tableLayoutPanel1
+            // 
+            this.tableLayoutPanel1.ColumnCount = 3;
+            this.tableLayoutPanel1.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 40F));
+            this.tableLayoutPanel1.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 20F));
+            this.tableLayoutPanel1.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 40F));
+            this.tableLayoutPanel1.Controls.Add(this.InitialValueBox, 0, 0);
+            this.tableLayoutPanel1.Controls.Add(this.ConvertSymbolsLabel, 1, 0);
+            this.tableLayoutPanel1.Controls.Add(this.ConvertedValueBox, 2, 0);
+            this.tableLayoutPanel1.Location = new System.Drawing.Point(12, 12);
+            this.tableLayoutPanel1.Name = "tableLayoutPanel1";
+            this.tableLayoutPanel1.RowCount = 1;
+            this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 100F));
+            this.tableLayoutPanel1.Size = new System.Drawing.Size(358, 43);
+            this.tableLayoutPanel1.TabIndex = 0;
+            // 
+            // tableLayoutPanel2
+            // 
+            this.tableLayoutPanel2.ColumnCount = 3;
+            this.tableLayoutPanel2.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 40F));
+            this.tableLayoutPanel2.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 20F));
+            this.tableLayoutPanel2.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 40F));
+            this.tableLayoutPanel2.Controls.Add(this.FromComboBox, 0, 0);
+            this.tableLayoutPanel2.Controls.Add(this.ToComboBox, 2, 0);
+            this.tableLayoutPanel2.Location = new System.Drawing.Point(12, 61);
+            this.tableLayoutPanel2.Name = "tableLayoutPanel2";
+            this.tableLayoutPanel2.RowCount = 1;
+            this.tableLayoutPanel2.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 100F));
+            this.tableLayoutPanel2.Size = new System.Drawing.Size(358, 42);
+            this.tableLayoutPanel2.TabIndex = 17;
+            // 
+            // FromComboBox
+            // 
+            this.FromComboBox.FormattingEnabled = true;
+            this.FromComboBox.Items.AddRange(new object[] {
+            "Celsius",
+            "Kelvin",
+            "Fahrenheit"});
+            this.FromComboBox.Location = new System.Drawing.Point(3, 3);
+            this.FromComboBox.Name = "FromComboBox";
+            this.FromComboBox.Size = new System.Drawing.Size(137, 28);
+            this.FromComboBox.TabIndex = 1;
+            this.FromComboBox.Text = "From";
+            // 
+            // ToComboBox
+            // 
+            this.ToComboBox.FormattingEnabled = true;
+            this.ToComboBox.Items.AddRange(new object[] {
+            "Celsius",
+            "Kelvin",
+            "Fahrenheit"});
+            this.ToComboBox.Location = new System.Drawing.Point(217, 3);
+            this.ToComboBox.Name = "ToComboBox";
+            this.ToComboBox.Size = new System.Drawing.Size(137, 28);
+            this.ToComboBox.TabIndex = 2;
+            this.ToComboBox.Text = "To";
+            // 
             // TemperatureTaskForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 20F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(382, 283);
+            this.ClientSize = new System.Drawing.Size(382, 183);
+            this.Controls.Add(this.tableLayoutPanel2);
+            this.Controls.Add(this.tableLayoutPanel1);
             this.Controls.Add(this.ConvertButton);
-            this.Controls.Add(this.toFarengeitRadioButton);
-            this.Controls.Add(this.toCelciusRadioButton);
-            this.Controls.Add(this.toKelvinaRadioButton);
-            this.Controls.Add(this.ConvertSymbolsLabel);
-            this.Controls.Add(this.FarengeitLabel);
-            this.Controls.Add(this.KelvinLabel);
-            this.Controls.Add(this.CelciusLabel);
-            this.Controls.Add(this.ConvertedCelciusBox);
-            this.Controls.Add(this.ConvertedKelvinBox);
-            this.Controls.Add(this.ConvertedFarengeitBox);
-            this.Controls.Add(this.FarengeitBox);
-            this.Controls.Add(this.KelvinBox);
-            this.Controls.Add(this.CelciusBox);
-            this.MinimumSize = new System.Drawing.Size(397, 318);
+            this.MinimumSize = new System.Drawing.Size(400, 230);
             this.Name = "TemperatureTaskForm";
-            this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "Temperature\'s converter";
             this.WindowState = System.Windows.Forms.FormWindowState.Minimized;
+            this.tableLayoutPanel1.ResumeLayout(false);
+            this.tableLayoutPanel1.PerformLayout();
+            this.tableLayoutPanel2.ResumeLayout(false);
             this.ResumeLayout(false);
-            this.PerformLayout();
 
         }
 
         #endregion
 
-        private TextBox CelciusBox;
-        private TextBox KelvinBox;
-        private TextBox FarengeitBox;
-        private TextBox ConvertedCelciusBox;
-        private TextBox ConvertedKelvinBox;
-        private TextBox ConvertedFarengeitBox;
-        private Label CelciusLabel;
-        private Label KelvinLabel;
-        private Label FarengeitLabel;
-        private Label ConvertSymbolsLabel;
-        private RadioButton toKelvinaRadioButton;
-        private RadioButton toCelciusRadioButton;
-        private RadioButton toFarengeitRadioButton;
+        private TextBox InitialValueBox;
+        private TextBox ConvertedValueBox;
         private Button ConvertButton;
+        private Label ConvertSymbolsLabel;
+        private TableLayoutPanel tableLayoutPanel1;
+        private TableLayoutPanel tableLayoutPanel2;
+        private ComboBox FromComboBox;
+        private ComboBox ToComboBox;
     }
 }

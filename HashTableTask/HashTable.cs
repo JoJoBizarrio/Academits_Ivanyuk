@@ -180,22 +180,35 @@ namespace HashTableTask
         public override string ToString()
         {
             StringBuilder stringBuilder = new();
-            int listNumber = 0;
 
-            foreach (List<T> list in _lists)
+            foreach (T e in _lists[0])
             {
-                if (list == null || list.Count == 0)
+                if (e == null)
                 {
-                    ++listNumber;
+                    stringBuilder.Append("null, ");
+                }
+                else
+                {
+                    stringBuilder.Append(e);
+                    stringBuilder.Append(", ");
+                }
+            }
+
+            stringBuilder.Replace(", ", ".", stringBuilder.Length - 2, 2);
+            stringBuilder.Append(Environment.NewLine);
+
+            for (int i = 1; i < _lists.Length; ++i)
+            {
+                if (_lists[i] == null || _lists[i].Count == 0)
+                {
                     continue;
                 }
 
                 stringBuilder.Append("List ");
-                stringBuilder.Append(listNumber);
+                stringBuilder.Append(i);
                 stringBuilder.Append(": ");
-                ++listNumber;
 
-                foreach (T e in list)
+                foreach (T e in _lists[i])
                 {
                     stringBuilder.Append(e);
                     stringBuilder.Append(", ");

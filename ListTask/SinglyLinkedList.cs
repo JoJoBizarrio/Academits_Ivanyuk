@@ -56,21 +56,6 @@ namespace ListTask
             Count++;
         }
 
-        // Удаление первого элемента, пусть выдает значение элемента
-        public T RemoveFirst()
-        {
-            if (Count == 0)
-            {
-                throw new InvalidOperationException("Empty list.");
-            }
-
-            T removedValue = _head.Data;
-            _head = _head.Next;
-            Count--;
-
-            return removedValue;
-        }
-
         // Получение значения по указанному индексу.
         public T GetData(int index)
         {
@@ -111,6 +96,21 @@ namespace ListTask
             item.Next = insertedItem;
 
             Count++;
+        }
+
+        // Удаление первого элемента, пусть выдает значение элемента
+        public T RemoveFirst()
+        {
+            if (Count == 0)
+            {
+                throw new InvalidOperationException("Empty list.");
+            }
+
+            T removedData = _head.Data;
+            _head = _head.Next;
+            Count--;
+
+            return removedData;
         }
 
         // Удаление элемента по индексу, пусть выдает значение элемента

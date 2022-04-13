@@ -80,7 +80,7 @@ namespace HashTableTask
             {
                 for (int i = 0; i < _lists[0].Count; ++i)
                 {
-                    if (_lists[0][i].Equals(null))
+                    if (_lists[0][i] == null && item == null)
                     {
                         return true;
                     }
@@ -180,19 +180,22 @@ namespace HashTableTask
         public override string ToString()
         {
             StringBuilder stringBuilder = new();
+            int listNumber = 0;
 
-            for (int i = 0; i < _lists.Length; ++i)
+            foreach (List<T> list in _lists)
             {
-                if (_lists[i] == null || _lists[i].Count == 0)
+                if (list == null || list.Count == 0)
                 {
+                    ++listNumber;
                     continue;
                 }
 
                 stringBuilder.Append("List ");
-                stringBuilder.Append(i);
+                stringBuilder.Append(listNumber);
                 stringBuilder.Append(": ");
+                ++listNumber;
 
-                foreach (T e in _lists[i])
+                foreach (T e in list)
                 {
                     stringBuilder.Append(e);
                     stringBuilder.Append(", ");

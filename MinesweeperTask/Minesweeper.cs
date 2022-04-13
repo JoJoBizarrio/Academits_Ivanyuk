@@ -38,7 +38,7 @@
 
                 if (MinesweeperArrayRepresentation[randomСoordinateX, randomСoordinateY] >= 0)
                 {
-                    MinesweeperArrayRepresentation[randomСoordinateX, randomСoordinateY] = -1;
+                    MinesweeperArrayRepresentation[randomСoordinateX, randomСoordinateY] = 9;
 
                     MinesCoorditanes[i] = new Point(randomСoordinateX, randomСoordinateY);
                 }
@@ -53,58 +53,29 @@
                 int x = MinesCoorditanes[i].X;
                 int y = MinesCoorditanes[i].Y;
 
-                for (int j = -1; j <= 1; ++j)
+                for (int j = x - 1; j <= x + 1; ++j)
                 {
-                    if (x + j < 0 || x + j >= sizeX)
+                    if (j < 0 || j >= sizeX)
                     {
                         continue;
                     }
 
-                    for (int k = -1; k <= 1; ++k)
+                    for (int k = y - 1; k <= y + 1; ++k)
                     {
-                        if (y + k < 0 || y + k >= sizeY)
+                        if (k < 0 || k >= sizeY)
                         {
                             continue;
                         }
 
-                        if (MinesweeperArrayRepresentation[x + j, y + k] >= 0)
+                        if (MinesweeperArrayRepresentation[j, k] < 9)
                         {
-                            MinesweeperArrayRepresentation[x + j, y + k] += 1;
+                            MinesweeperArrayRepresentation[j, k] += 1;
                         }
                     }
                 }
             }
         }
-
-        public static void OpenCell(Minesweeper minesweeper, int x, int y)
-        {
-            if (minesweeper.MinesweeperArrayRepresentation[x, y] == 0)
-            {
-                for (int i = -1; i <= 1; ++i)
-                {
-                    if (x + i < 0 || x + i >= minesweeper.SizeX)
-                    {
-                        continue;
-                    }
-
-                    for (int j = -1; j <= 1; ++j)
-                    {
-                        if (y + j < 0 || y + j >= minesweeper.SizeY)
-                        {
-                            continue;
-                        }
-
-                        //TODO: открыть array[x,y];
-                        OpenCell(minesweeper, x + i, y + j);
-                    }
-                }
-            }
-            else
-            {
-                //TODO: вызов открыть ячейку с числом / поменять картинку на кнопке и задизейблить ее
-                return;
-            }
-        }
+        
     }
 }
 

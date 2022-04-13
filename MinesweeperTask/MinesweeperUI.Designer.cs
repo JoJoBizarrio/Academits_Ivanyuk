@@ -61,7 +61,7 @@
             this.ReferenceToolStripMenuItem});
             this.MenuStrip.Location = new System.Drawing.Point(0, 0);
             this.MenuStrip.Name = "MenuStrip";
-            this.MenuStrip.Size = new System.Drawing.Size(542, 28);
+            this.MenuStrip.Size = new System.Drawing.Size(582, 28);
             this.MenuStrip.TabIndex = 2;
             this.MenuStrip.Text = "menuStrip1";
             this.MenuStrip.ItemClicked += new System.Windows.Forms.ToolStripItemClickedEventHandler(this.menuStrip1_ItemClicked);
@@ -148,6 +148,7 @@
             // 
             // tableLayoutPanel1
             // 
+            this.tableLayoutPanel1.BackColor = System.Drawing.SystemColors.ActiveCaption;
             this.tableLayoutPanel1.ColumnCount = 1;
             this.tableLayoutPanel1.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle());
             this.tableLayoutPanel1.Controls.Add(this.tableLayoutPanel2, 0, 1);
@@ -158,7 +159,7 @@
             this.tableLayoutPanel1.RowCount = 2;
             this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 89.45749F));
             this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 10.54252F));
-            this.tableLayoutPanel1.Size = new System.Drawing.Size(542, 605);
+            this.tableLayoutPanel1.Size = new System.Drawing.Size(582, 605);
             this.tableLayoutPanel1.TabIndex = 4;
             // 
             // tableLayoutPanel2
@@ -174,7 +175,7 @@
             this.tableLayoutPanel2.Name = "tableLayoutPanel2";
             this.tableLayoutPanel2.RowCount = 1;
             this.tableLayoutPanel2.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 100F));
-            this.tableLayoutPanel2.Size = new System.Drawing.Size(536, 58);
+            this.tableLayoutPanel2.Size = new System.Drawing.Size(576, 58);
             this.tableLayoutPanel2.TabIndex = 0;
             // 
             // MineCountLabel
@@ -184,14 +185,13 @@
             this.MineCountLabel.Location = new System.Drawing.Point(10, 10);
             this.MineCountLabel.Margin = new System.Windows.Forms.Padding(10);
             this.MineCountLabel.Name = "MineCountLabel";
-            this.MineCountLabel.Size = new System.Drawing.Size(248, 38);
+            this.MineCountLabel.Size = new System.Drawing.Size(268, 38);
             this.MineCountLabel.TabIndex = 0;
             this.MineCountLabel.Text = "000";
             this.MineCountLabel.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
             // 
             // FieldTableLayoutPanel
             // 
-            this.FieldTableLayoutPanel.AutoSize = true;
             this.FieldTableLayoutPanel.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink;
             this.FieldTableLayoutPanel.BackColor = System.Drawing.SystemColors.ScrollBar;
             this.FieldTableLayoutPanel.CellBorderStyle = System.Windows.Forms.TableLayoutPanelCellBorderStyle.Inset;
@@ -219,24 +219,24 @@
             this.FieldTableLayoutPanel.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 11.11111F));
             this.FieldTableLayoutPanel.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 11.11111F));
             this.FieldTableLayoutPanel.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 11.11111F));
-            this.FieldTableLayoutPanel.Size = new System.Drawing.Size(502, 501);
+            this.FieldTableLayoutPanel.Size = new System.Drawing.Size(542, 501);
             this.FieldTableLayoutPanel.TabIndex = 1;
+            this.FieldTableLayoutPanel.Paint += new System.Windows.Forms.PaintEventHandler(this.FieldTableLayoutPanel_Paint);
             // 
             // MinesweeperUI
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 20F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.AutoSize = true;
             this.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink;
-            this.ClientSize = new System.Drawing.Size(542, 633);
+            this.ClientSize = new System.Drawing.Size(582, 633);
             this.Controls.Add(this.tableLayoutPanel1);
             this.Controls.Add(this.MenuStrip);
             this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
             this.MainMenuStrip = this.MenuStrip;
-            this.MinimumSize = new System.Drawing.Size(558, 659);
+            this.MinimizeBox = false;
+            this.MinimumSize = new System.Drawing.Size(600, 560);
             this.Name = "MinesweeperUI";
             this.Text = "Minesweeper";
-            this.WindowState = System.Windows.Forms.FormWindowState.Minimized;
             this.MenuStrip.ResumeLayout(false);
             this.MenuStrip.PerformLayout();
             this.tableLayoutPanel1.ResumeLayout(false);

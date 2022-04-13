@@ -13,83 +13,146 @@ namespace MinesweeperTask
 
         public void MinesweeperUI_MouseDown(object? sender, MouseEventArgs e)
         {
-            Image mineImage = Image.FromFile("..\\mine.png");
-
-
             if (sender != null)
             {
-                Button button = sender as Button;
+                Button currentButton = sender as Button;
 
-                int buttonIndex = FieldTableLayoutPanel.Controls.IndexOf(button);
+                int buttonIndex = FieldTableLayoutPanel.Controls.IndexOf(currentButton);
+
                 int i = buttonIndex / FieldTableLayoutPanel.RowCount;
                 int j = buttonIndex % FieldTableLayoutPanel.ColumnCount;
 
-                if (e.Button == MouseButtons.Left)
+                int value = _minesweeper.MinesweeperArrayRepresentation[i, j];
+
+                if (value == 11)
                 {
-                    int value = _minesweeper.MinesweeperArrayRepresentation[i, j];
-                    switch (value)
+                    return;
+                }
+
+                if (e.Button == MouseButtons.Right)
+                {
+                    if (currentButton.BackgroundImage == null)
                     {
-                        case 1:
-                            {
-                                FieldTableLayoutPanel.Controls[buttonIndex].BackgroundImage = Image.FromFile("..\\number1.png");
-                                break;
-                            }
-                        case 2:
-                            {
-                                FieldTableLayoutPanel.Controls[buttonIndex].BackgroundImage = Image.FromFile("..\\number2.png");
-                                break;
-                            }
-                        case 3:
-                            {
-                                FieldTableLayoutPanel.Controls[buttonIndex].BackgroundImage = Image.FromFile("..\\number3.png");
-                                break;
-                            }
-                        case 4:
-                            {
-                                FieldTableLayoutPanel.Controls[buttonIndex].BackgroundImage = Image.FromFile("..\\number4.png");
-                                break;
-                            }
-                        case 5:
-                            {
-                                FieldTableLayoutPanel.Controls[buttonIndex].BackgroundImage = Image.FromFile("..\\number5.png");
-                                break;
-                            }
-                        case 6:
-                            {
-                                FieldTableLayoutPanel.Controls[buttonIndex].BackgroundImage = Image.FromFile("..\\number6.png");
-                                break;
-                            }
-                        case 7:
-                            {
-                                FieldTableLayoutPanel.Controls[buttonIndex].BackgroundImage = Image.FromFile("..\\number7.png");
-                                break;
-                            }
-                        case 8:
-                            {
-                                FieldTableLayoutPanel.Controls[buttonIndex].BackgroundImage = Image.FromFile("..\\number8.png");
-                                break;
-                            }
-                        case < 0:
-                            {
-                                FieldTableLayoutPanel.Controls[buttonIndex].BackgroundImage = Image.FromFile("..\\mine.png");
-                                break;
-                            }
+                        currentButton.BackgroundImage = Image.FromFile("..\\flag.png");
+                        _minesweeper.MinesweeperArrayRepresentation[i, j] = -value;
+                        return;
+                    }
+
+                    if (value < 0)
+                    {
+                        currentButton.BackgroundImage = null;
+                        _minesweeper.MinesweeperArrayRepresentation[i, j] = -value;
+                        return;
+                    }
+                }
+
+                if (e.Button == MouseButtons.Left && currentButton.BackgroundImage == null)
+                {
+                    if (value == 0)
+                    {
+                        OpenZerosField(currentButton, i, j);
+                    }
+                    else
+                    {
+                        OpenCell(value, buttonIndex);
                     }
                 }
             }
         }
 
-        private void MinesweeperUI_Load(object sender, EventArgs e)
+        private void OpenZerosField(Button button, int x, int y)
         {
-            TableLayoutPanel tableLayoutPanel = new TableLayoutPanel();
-            tableLayoutPanel.RowCount = 9;
-            tableLayoutPanel.ColumnCount = 9;
-            tableLayoutPanel.CellBorderStyle = TableLayoutPanelCellBorderStyle.Single;
-            tableLayoutPanel.BackColor = Color.Black;
-            tableLayoutPanel.CreateControl();
-            tableLayoutPanel.Show();
-            tableLayoutPanel.Enabled = true;
+            for (int i = x - 1; i <= x + 1; i++)
+            {
+                if (i < 0 || i >= _minesweeper.SizeX)
+                {
+                    continue;
+                }
+
+                for (int j = y - 1; j <= y + 1; j++)
+                {
+                    if (j < 0 || j >= _minesweeper.SizeY)
+                    {
+                        continue;
+                    }
+
+                    if (_minesweeper.MinesweeperArrayRepresentation[i, j] >= 9 || !_buttons[i, j].Enabled)
+                    {
+                        continue;
+                    }
+
+                    if (_buttons[i, j].BackgroundImage == null && _minesweeper.MinesweeperArrayRepresentation[i, j] == 0 && _buttons[i, j].Enabled)
+                    {
+                        _buttons[i, j].Enabled = false;
+
+                        OpenZerosField(_buttons[i, j], i, j);
+                    }
+
+                    int buttonIndex = i * FieldTableLayoutPanel.ColumnCount + j;
+
+                    if (_minesweeper.MinesweeperArrayRepresentation[i, j] > 0 && _minesweeper.MinesweeperArrayRepresentation[i, j] < 9)
+                    {
+                        OpenCell(_minesweeper.MinesweeperArrayRepresentation[i, j], buttonIndex);
+                    }
+                }
+            }
         }
+
+        private void OpenCell(int value, int buttonIndex)
+        {
+            switch (value)
+            {
+                case 1:
+                    {
+                        FieldTableLayoutPanel.Controls[buttonIndex].BackgroundImage = Image.FromFile("..\\number1.png");
+                        break;
+                    }
+                case 2:
+                    {
+                        FieldTableLayoutPanel.Controls[buttonIndex].BackgroundImage = Image.FromFile("..\\number2.png");
+                        break;
+                    }
+                case 3:
+                    {
+                        FieldTableLayoutPanel.Controls[buttonIndex].BackgroundImage = Image.FromFile("..\\number3.png");
+                        break;
+                    }
+                case 4:
+                    {
+                        FieldTableLayoutPanel.Controls[buttonIndex].BackgroundImage = Image.FromFile("..\\number4.png");
+                        break;
+                    }
+                case 5:
+                    {
+                        FieldTableLayoutPanel.Controls[buttonIndex].BackgroundImage = Image.FromFile("..\\number5.png");
+                        break;
+                    }
+                case 6:
+                    {
+                        FieldTableLayoutPanel.Controls[buttonIndex].BackgroundImage = Image.FromFile("..\\number6.png");
+                        break;
+                    }
+                case 7:
+                    {
+                        FieldTableLayoutPanel.Controls[buttonIndex].BackgroundImage = Image.FromFile("..\\number7.png");
+                        break;
+                    }
+                case 8:
+                    {
+                        FieldTableLayoutPanel.Controls[buttonIndex].BackgroundImage = Image.FromFile("..\\number8.png");
+                        break;
+                    }
+                case 9:
+                    {
+                        FieldTableLayoutPanel.Controls[buttonIndex].BackgroundImage = Image.FromFile("..\\mine.png");
+                        //TODO: функция о конце игры , откртыия поля и диаолговое окно.
+                        break;
+                    }
+            }
+
+            FieldTableLayoutPanel.Controls[buttonIndex].Enabled = false;
+        }
+
 
         private void menuStrip1_ItemClicked(object sender, ToolStripItemClickedEventArgs e)
         {
@@ -137,6 +200,11 @@ namespace MinesweeperTask
 
                 }
             }
+        }
+
+        private void FieldTableLayoutPanel_Paint(object sender, PaintEventArgs e)
+        {
+
         }
     }
 }

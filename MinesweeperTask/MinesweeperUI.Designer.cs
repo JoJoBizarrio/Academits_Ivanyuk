@@ -221,7 +221,6 @@
             this.FieldTableLayoutPanel.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 11.11111F));
             this.FieldTableLayoutPanel.Size = new System.Drawing.Size(502, 501);
             this.FieldTableLayoutPanel.TabIndex = 1;
-            this.FieldTableLayoutPanel.MouseDown += new System.Windows.Forms.MouseEventHandler(this.FieldTableLayoutPanel_MouseDown);
             // 
             // MinesweeperUI
             // 

@@ -71,19 +71,15 @@ namespace ListTask
             return removedValue;
         }
 
-        // Получение/изменение значения по указанному индексу.
+        // Получение значения по указанному индексу.
         public T GetData(int index)
         {
-            if (index == 0)
-            {
-                return GetFirst();
-            }
-
             CheckIndex(index);
 
             return GetListItem(index).Data;
         }
 
+        // Изменение значения по указанному индексу.
         public void SetData(int index, T data)
         {
             CheckIndex(index);
@@ -94,10 +90,7 @@ namespace ListTask
         // Вставка элемента по индексу
         public void Insert(int index, T data)
         {
-            if (_head == null)
-            {
-                throw new InvalidOperationException("List empty.");
-            }
+            CheckIsEmptyList();
 
             if (index < 0 || index > Count)
             {
@@ -123,10 +116,7 @@ namespace ListTask
         // Удаление элемента по индексу, пусть выдает значение элемента
         public T RemoveAt(int index)
         {
-            if (_head == null)
-            {
-                throw new InvalidOperationException("List empty.");
-            }
+            CheckIsEmptyList();
 
             CheckIndex(index);
 
@@ -137,83 +127,72 @@ namespace ListTask
 
             ListItem<T> previousItem = GetListItem(index - 1);
 
-            T removedItem = previousItem.Next.Data;
+            T removedData = previousItem.Next.Data;
             previousItem.Next = previousItem.Next.Next;
 
             Count--;
-            return removedItem;
+            return removedData;
         }
-         
+
         // Удаление узла по значению, пусть выдает true, если элемент был удален
         public bool Remove(T data)
         {
-            if (_head == null)
-            {
-                throw new InvalidOperationException("List empty.");
-            }
+            CheckIsEmptyList();
 
-            if (_head.Data.Equals(data))
+            if ((_head.Data == null && data == null) || _head.Data.Equals(data))
             {
                 RemoveFirst();
                 return true;
             }
 
-            ListItem<T> previousItem = _head;
-
-            for (ListItem<T> item = _head.Next; item != null; item = item.Next)
+            for (ListItem<T> previousItem = _head, currentitem = _head.Next; currentitem != null; previousItem = currentitem, currentitem = currentitem.Next)
             {
-                if (item.Data.Equals(data))
+                if ((data == null && currentitem.Data == null) || (currentitem.Data != null && currentitem.Data.Equals(data)))
                 {
-                    previousItem.Next = item.Next;
+                    previousItem.Next = currentitem.Next;
                     Count--;
                     return true;
                 }
-
-                previousItem = item;
             }
 
             return false;
         }
 
         // Разворот списка за линейное время
-        public void Revert()
+        public void Reverse()
         {
+            CheckIsEmptyList();
+
             if (_head.Next == null)
             {
                 return;
             }
 
-            ListItem<T> item1 = _head;
-            ListItem<T> item2 = _head.Next;
+            ListItem<T> previousItem = _head;
+            ListItem<T> currentItem = _head.Next;
+            ListItem<T> counter = _head.Next.Next;
 
-            if (_head.Next.Next == null)
+            previousItem.Next = null;
+
+            while (counter != null)
             {
-                item1.Next = null;
-                item2.Next = item1;
-                _head = item2;
+                currentItem.Next = previousItem;
+                previousItem = currentItem;
+                currentItem = counter;
+
+                counter = counter.Next;
             }
-            else
-            {
-                ListItem<T> counter = _head.Next.Next;
-                item1.Next = null;
 
-                while (counter != null)
-                {
-                    item2.Next = item1;
-                    item1 = item2;
-                    item2 = counter;
-
-                    counter = counter.Next;
-                }
-
-                item2.Next = item1;
-                _head = item2;
-            }
+            currentItem.Next = previousItem;
+            _head = currentItem;
         }
+
 
         // Копирование списка
         public SinglyLinkedList<T> Copy()
         {
+            CheckIsEmptyList();
+
             SinglyLinkedList<T> listCopy = new(_head.Data);
             ListItem<T> itemCopy = listCopy._head;
 
@@ -226,14 +205,6 @@ namespace ListTask
             listCopy.Count = Count;
 
             return listCopy;
-        }
-
-        private void CheckIndex(int index)
-        {
-            if (index < 0 || index >= Count)
-            {
-                throw new IndexOutOfRangeException($"Index ({nameof(index)} = {index}) out of range: [0, {Count - 1}].");
-            }
         }
 
         // Вспомогательное: возвращает ячейку по индексу в виде ListItem<T>
@@ -251,23 +222,38 @@ namespace ListTask
             return item;
         }
 
+        private void CheckIndex(int index)
+        {
+            if (index < 0 || index >= Count)
+            {
+                throw new IndexOutOfRangeException($"Index (= {index}) out of range: [0, {Count - 1}].");
+            }
+        }
+
+        private void CheckIsEmptyList()
+        {
+            if (_head == null)
+            {
+                throw new InvalidOperationException("List empty.");
+            }
+        }
+
         // Вспомогательное
         public override string ToString()
         {
+            if (_head == null)
+            {
+                return "[]";
+            }
+
             StringBuilder stringBuilder = new();
             stringBuilder.Append('[');
 
-            if (Count == 0)
-            {
-                return stringBuilder.Append(']').ToString();
-            }
-
             for (ListItem<T> item = _head; item != null; item = item.Next)
             {
-                if (item == null)
+                if (item.Data == null)
                 {
-                    stringBuilder.Append("null");
-                    stringBuilder.Append(", ");
+                    stringBuilder.Append("null, ");
                 }
                 else
                 {

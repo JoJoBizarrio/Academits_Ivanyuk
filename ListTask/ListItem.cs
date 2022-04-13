@@ -1,6 +1,6 @@
 ﻿namespace ListTask
 {
-    partial class ListItem<T>
+    partial class ListItem<T> 
     {
         public T Data { get; set; }
 

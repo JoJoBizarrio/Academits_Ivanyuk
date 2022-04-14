@@ -20,11 +20,12 @@
             writer.WriteLine("<!DOCTYPE html>");
             writer.WriteLine("<html>");
             writer.WriteLine("<head>");
-            writer.WriteLine("<meta charset = \"utf - 8\">");
+            writer.WriteLine("<meta charset = \"utf-8\">");
             writer.WriteLine($"<title> {htmlPath} </title>");
             writer.WriteLine("</head>");
             writer.WriteLine("<body>");
             writer.WriteLine("<p>");
+            writer.WriteLine("</p>");
             writer.WriteLine("<table>");
 
             char currentSymbol;
@@ -37,9 +38,9 @@
             char leftParenthesis = '<';
             char rightParenthesis = '>';
             char ampersand = '&';
-            string leftParenthesisSubstitute = "&lt";
-            string rightParenthesisSubstitute = "&gt";
-            string ampersandSubstitute = "&amp";
+            string leftParenthesisSubstitute = "&lt;";
+            string rightParenthesisSubstitute = "&gt;";
+            string ampersandSubstitute = "&amp;";
 
             bool isCellWithRowBreakOrSpecificSymbols = false;
 
@@ -47,8 +48,8 @@
             {
                 if (!isCellWithRowBreakOrSpecificSymbols)
                 {
-                    writer.WriteLine($"{"<tr>",7}");
-                    writer.Write($"{"<td>",14}");
+                    writer.WriteLine($"{"<tr>",5}");
+                    writer.Write($"{"<td>",10}");
                 }
                 else
                 {
@@ -75,7 +76,7 @@
                     }
                     else if (isCellWithRowBreakOrSpecificSymbols)
                     {
-                        if (i == currentLineArray.Length - 1 || currentLineArray[i + 1] == cellSeparator)
+                        if (currentSymbol == specificSymbolsDesignator && (i == currentLineArray.Length - 1 || currentLineArray[i + 1] == cellSeparator))
                         {
                             isCellWithRowBreakOrSpecificSymbols = false;
                         }
@@ -109,19 +110,18 @@
                 if (!isCellWithRowBreakOrSpecificSymbols)
                 {
                     writer.WriteLine("</td>");
-                    writer.WriteLine($"{"</tr>",7}");
+                    writer.WriteLine($"{"</tr>",6}");
                 }
             }
 
             writer.WriteLine("</table>");
-            writer.WriteLine("</p>");
             writer.WriteLine("</body>");
             writer.WriteLine("</html>");
         }
 
         static void Main()
         {
-
+            ConvertCsvToHtml("..\\csv.txt", "..\\html.txt");
         }
     }
 }

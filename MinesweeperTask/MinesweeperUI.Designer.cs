@@ -182,6 +182,7 @@
             // 
             this.MineCounterLable.AutoSize = true;
             this.MineCounterLable.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.MineCounterLable.Font = new System.Drawing.Font("Consolas", 22.2F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point);
             this.MineCounterLable.Location = new System.Drawing.Point(10, 10);
             this.MineCounterLable.Margin = new System.Windows.Forms.Padding(10);
             this.MineCounterLable.Name = "MineCounterLable";

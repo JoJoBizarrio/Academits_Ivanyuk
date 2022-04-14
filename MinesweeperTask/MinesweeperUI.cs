@@ -48,16 +48,16 @@ namespace MinesweeperTask
                     {
                         currentButton.BackgroundImage = flag;
                         _minesweeper.Field[i, j] = -value;
-                        MineCounterLable.Text = (_minesweeper.MinesCount - 1).ToString();
+                        MineCounterLable.Text = (Convert.ToInt32(MineCounterLable.Text) - 1).ToString();
 
                         return;
                     }
 
-                    if (value < 0)
+                    if (value <= 0)
                     {
                         currentButton.BackgroundImage = null;
                         _minesweeper.Field[i, j] = -value;
-                        MineCounterLable.Text = (_minesweeper.MinesCount + 1).ToString();
+                        MineCounterLable.Text = (Convert.ToInt32(MineCounterLable.Text) + 1).ToString();
 
                         return;
                     }
@@ -175,7 +175,6 @@ namespace MinesweeperTask
 
         }
 
-
         private void ExitToolStripMenuItem_Click(object sender, EventArgs e)
         {
             Dispose();
@@ -197,10 +196,11 @@ namespace MinesweeperTask
             _minesweeper = new Minesweeper(sizeX, sizeY, minesCount, minutesCount);
             _buttons = new Button[sizeX, sizeY];
             MineCounterLable.Text = minesCount.ToString();
-
+            
             FieldTableLayoutPanel.Controls.Clear();
-            FieldTableLayoutPanel.RowCount = sizeX;
-            FieldTableLayoutPanel.ColumnCount = sizeY;
+            
+            //FieldTableLayoutPanel.RowCount = sizeX;
+            //FieldTableLayoutPanel.ColumnCount = sizeY;
 
             for (int i = 0; i < FieldTableLayoutPanel.RowCount; ++i)
             {

@@ -21,7 +21,7 @@ namespace MinesweeperTask
         {
             InitializeComponent();
 
-            EasyDifficultyToolStripMenuItem_Click(this, new EventArgs());
+            MediumDifficultyToolStripMenuItem_Click(this, new EventArgs());
         }
 
         public void MinesweeperUI_MouseDown(object? sender, MouseEventArgs e)
@@ -191,6 +191,11 @@ namespace MinesweeperTask
             StartNewCustomGame(9, 9, 10, 10);
         }
 
+        private void MediumDifficultyToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            StartNewCustomGame(18, 18, 40, 20);
+        }
+
         private void StartNewCustomGame(int sizeX, int sizeY, int minesCount, int minutesCount)
         {
             _minesweeper = new Minesweeper(sizeX, sizeY, minesCount, minutesCount);
@@ -198,17 +203,17 @@ namespace MinesweeperTask
             MineCounterLable.Text = minesCount.ToString();
             
             FieldTableLayoutPanel.Controls.Clear();
-            
-            //FieldTableLayoutPanel.RowCount = sizeX;
-            //FieldTableLayoutPanel.ColumnCount = sizeY;
+
+            FieldTableLayoutPanel.RowCount = sizeX;
+            FieldTableLayoutPanel.ColumnCount = sizeY;
 
             for (int i = 0; i < FieldTableLayoutPanel.RowCount; ++i)
             {
                 for (int j = 0; j < FieldTableLayoutPanel.ColumnCount; ++j)
                 {
                     _buttons[i, j] = new Button();
-                    _buttons[i, j].Height = 10;
-                    _buttons[i, j].Width = 10;
+                    _buttons[i, j].Height = 30;
+                    _buttons[i, j].Width = 30;
                     _buttons[i, j].Margin = Padding.Empty;
                     _buttons[i, j].Dock = DockStyle.Fill;
                     FieldTableLayoutPanel.Controls.Add(_buttons[i, j], i, j);
@@ -224,5 +229,7 @@ namespace MinesweeperTask
         {
 
         }
+
+        
     }
 }

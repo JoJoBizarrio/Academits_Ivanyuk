@@ -44,7 +44,7 @@
             this.AboutToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.tableLayoutPanel1 = new System.Windows.Forms.TableLayoutPanel();
             this.tableLayoutPanel2 = new System.Windows.Forms.TableLayoutPanel();
-            this.MineCountLabel = new System.Windows.Forms.Label();
+            this.MineCounterLable = new System.Windows.Forms.Label();
             this.FieldTableLayoutPanel = new System.Windows.Forms.TableLayoutPanel();
             this.timer1 = new System.Windows.Forms.Timer(this.components);
             this.MenuStrip.SuspendLayout();
@@ -169,7 +169,7 @@
             this.tableLayoutPanel2.ColumnCount = 2;
             this.tableLayoutPanel2.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 50F));
             this.tableLayoutPanel2.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 50F));
-            this.tableLayoutPanel2.Controls.Add(this.MineCountLabel, 0, 0);
+            this.tableLayoutPanel2.Controls.Add(this.MineCounterLable, 0, 0);
             this.tableLayoutPanel2.Dock = System.Windows.Forms.DockStyle.Fill;
             this.tableLayoutPanel2.Location = new System.Drawing.Point(3, 544);
             this.tableLayoutPanel2.Name = "tableLayoutPanel2";
@@ -178,17 +178,17 @@
             this.tableLayoutPanel2.Size = new System.Drawing.Size(576, 58);
             this.tableLayoutPanel2.TabIndex = 0;
             // 
-            // MineCountLabel
+            // MineCounterLable
             // 
-            this.MineCountLabel.AutoSize = true;
-            this.MineCountLabel.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.MineCountLabel.Location = new System.Drawing.Point(10, 10);
-            this.MineCountLabel.Margin = new System.Windows.Forms.Padding(10);
-            this.MineCountLabel.Name = "MineCountLabel";
-            this.MineCountLabel.Size = new System.Drawing.Size(268, 38);
-            this.MineCountLabel.TabIndex = 0;
-            this.MineCountLabel.Text = "000";
-            this.MineCountLabel.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
+            this.MineCounterLable.AutoSize = true;
+            this.MineCounterLable.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.MineCounterLable.Location = new System.Drawing.Point(10, 10);
+            this.MineCounterLable.Margin = new System.Windows.Forms.Padding(10);
+            this.MineCounterLable.Name = "MineCounterLable";
+            this.MineCounterLable.Size = new System.Drawing.Size(268, 38);
+            this.MineCounterLable.TabIndex = 0;
+            this.MineCounterLable.Text = "000";
+            this.MineCounterLable.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
             // 
             // FieldTableLayoutPanel
             // 
@@ -259,7 +259,7 @@
         private ToolStripMenuItem AboutToolStripMenuItem;
         private TableLayoutPanel tableLayoutPanel1;
         private TableLayoutPanel tableLayoutPanel2;
-        private Label MineCountLabel;
+        private Label MineCounterLable;
         private TableLayoutPanel FieldTableLayoutPanel;
         private ToolStripMenuItem EasyDifficultyToolStripMenuItem;
         private ToolStripMenuItem MediumDifficultyToolStripMenuItem;

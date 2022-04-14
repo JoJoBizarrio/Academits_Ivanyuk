@@ -2,17 +2,15 @@
 {
     public class Minesweeper
     {
-        public int[,] MinesweeperArrayRepresentation { get; set; }
+        public int[,] Field { get; set; }
 
-        public Button[,] Buttons { get; set; }
-
-        public Point[] MinesCoorditanes { get; private set; }
+        private Point[] MinesCoorditanes { get; set; }
 
         public int[,] LockedButtons { get; set; }
 
         public int MinutesCount { get; private set; }
 
-        public int MinesCount { get; private set; }
+        public int MinesCount { get; set; }
 
         public int SizeX { get; private set; }
 
@@ -20,7 +18,7 @@
 
         public Minesweeper(int sizeX, int sizeY, int minesCount, int minutesCount)
         {
-            MinesweeperArrayRepresentation = new int[sizeX, sizeY];
+            Field = new int[sizeX, sizeY];
             LockedButtons = new int[sizeX, sizeY];
             MinesCoorditanes = new Point[minesCount];
 
@@ -36,9 +34,9 @@
                 int randomСoordinateX = randomСoordinate.Next(sizeX);
                 int randomСoordinateY = randomСoordinate.Next(sizeY);
 
-                if (MinesweeperArrayRepresentation[randomСoordinateX, randomСoordinateY] >= 0)
+                if (Field[randomСoordinateX, randomСoordinateY] >= 0)
                 {
-                    MinesweeperArrayRepresentation[randomСoordinateX, randomСoordinateY] = 9;
+                    Field[randomСoordinateX, randomСoordinateY] = 9;
 
                     MinesCoorditanes[i] = new Point(randomСoordinateX, randomСoordinateY);
                 }
@@ -67,9 +65,9 @@
                             continue;
                         }
 
-                        if (MinesweeperArrayRepresentation[j, k] < 9)
+                        if (Field[j, k] < 9)
                         {
-                            MinesweeperArrayRepresentation[j, k] += 1;
+                            Field[j, k] += 1;
                         }
                     }
                 }

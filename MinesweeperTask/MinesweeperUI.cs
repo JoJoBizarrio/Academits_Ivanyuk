@@ -6,9 +6,22 @@ namespace MinesweeperTask
 
         private Button[,] _buttons;
 
+        Image number1 = Image.FromFile("..\\number1.png");
+        Image number2 = Image.FromFile("..\\number2.png");
+        Image number3 = Image.FromFile("..\\number3.png");
+        Image number4 = Image.FromFile("..\\number4.png");
+        Image number5 = Image.FromFile("..\\number5.png");
+        Image number6 = Image.FromFile("..\\number6.png");
+        Image number7 = Image.FromFile("..\\number7.png");
+        Image number8 = Image.FromFile("..\\number8.png");
+        Image mine = Image.FromFile("..\\mine.png");
+        Image flag = Image.FromFile("..\\flag.png");
+
         public MinesweeperUI()
         {
             InitializeComponent();
+
+            EasyDifficultyToolStripMenuItem_Click(this, new EventArgs());
         }
 
         public void MinesweeperUI_MouseDown(object? sender, MouseEventArgs e)
@@ -22,7 +35,7 @@ namespace MinesweeperTask
                 int i = buttonIndex / FieldTableLayoutPanel.RowCount;
                 int j = buttonIndex % FieldTableLayoutPanel.ColumnCount;
 
-                int value = _minesweeper.MinesweeperArrayRepresentation[i, j];
+                int value = _minesweeper.Field[i, j];
 
                 if (value == 11)
                 {
@@ -33,15 +46,19 @@ namespace MinesweeperTask
                 {
                     if (currentButton.BackgroundImage == null)
                     {
-                        currentButton.BackgroundImage = Image.FromFile("..\\flag.png");
-                        _minesweeper.MinesweeperArrayRepresentation[i, j] = -value;
+                        currentButton.BackgroundImage = flag;
+                        _minesweeper.Field[i, j] = -value;
+                        MineCounterLable.Text = (_minesweeper.MinesCount - 1).ToString();
+
                         return;
                     }
 
                     if (value < 0)
                     {
                         currentButton.BackgroundImage = null;
-                        _minesweeper.MinesweeperArrayRepresentation[i, j] = -value;
+                        _minesweeper.Field[i, j] = -value;
+                        MineCounterLable.Text = (_minesweeper.MinesCount + 1).ToString();
+
                         return;
                     }
                 }
@@ -50,17 +67,22 @@ namespace MinesweeperTask
                 {
                     if (value == 0)
                     {
-                        OpenZerosField(currentButton, i, j);
+                        OpenZeroCells(currentButton, i, j);
+                    }
+                    else if (value == 9)
+                    {
+                        FieldTableLayoutPanel.Controls[buttonIndex].BackgroundImage = mine;
+                        //TODO: функция о конце игры , откртыия поля и диаолговое окно.
                     }
                     else
                     {
-                        OpenCell(value, buttonIndex);
+                        OpenNumericCell(value, buttonIndex);
                     }
                 }
             }
         }
 
-        private void OpenZerosField(Button button, int x, int y)
+        private void OpenZeroCells(Button button, int x, int y)
         {
             for (int i = x - 1; i <= x + 1; i++)
             {
@@ -76,76 +98,70 @@ namespace MinesweeperTask
                         continue;
                     }
 
-                    if (_minesweeper.MinesweeperArrayRepresentation[i, j] >= 9 || !_buttons[i, j].Enabled)
+                    if (_minesweeper.Field[i, j] >= 9 || !_buttons[i, j].Enabled)
                     {
                         continue;
                     }
 
-                    if (_buttons[i, j].BackgroundImage == null && _minesweeper.MinesweeperArrayRepresentation[i, j] == 0 && _buttons[i, j].Enabled)
+                    if (_buttons[i, j].BackgroundImage == null && _minesweeper.Field[i, j] == 0 && _buttons[i, j].Enabled)
                     {
                         _buttons[i, j].Enabled = false;
 
-                        OpenZerosField(_buttons[i, j], i, j);
+                        OpenZeroCells(_buttons[i, j], i, j);
                     }
 
                     int buttonIndex = i * FieldTableLayoutPanel.ColumnCount + j;
 
-                    if (_minesweeper.MinesweeperArrayRepresentation[i, j] > 0 && _minesweeper.MinesweeperArrayRepresentation[i, j] < 9)
+                    if (_minesweeper.Field[i, j] > 0 && _minesweeper.Field[i, j] < 9)
                     {
-                        OpenCell(_minesweeper.MinesweeperArrayRepresentation[i, j], buttonIndex);
+                        OpenNumericCell(_minesweeper.Field[i, j], buttonIndex);
                     }
                 }
             }
         }
 
-        private void OpenCell(int value, int buttonIndex)
+        private void OpenNumericCell(int value, int buttonIndex)
         {
             switch (value)
             {
                 case 1:
                     {
-                        FieldTableLayoutPanel.Controls[buttonIndex].BackgroundImage = Image.FromFile("..\\number1.png");
+                        FieldTableLayoutPanel.Controls[buttonIndex].BackgroundImage = number1;
                         break;
                     }
                 case 2:
                     {
-                        FieldTableLayoutPanel.Controls[buttonIndex].BackgroundImage = Image.FromFile("..\\number2.png");
+                        FieldTableLayoutPanel.Controls[buttonIndex].BackgroundImage = number2;
                         break;
                     }
                 case 3:
                     {
-                        FieldTableLayoutPanel.Controls[buttonIndex].BackgroundImage = Image.FromFile("..\\number3.png");
+                        FieldTableLayoutPanel.Controls[buttonIndex].BackgroundImage = number3;
                         break;
                     }
                 case 4:
                     {
-                        FieldTableLayoutPanel.Controls[buttonIndex].BackgroundImage = Image.FromFile("..\\number4.png");
+                        FieldTableLayoutPanel.Controls[buttonIndex].BackgroundImage = number4;
                         break;
                     }
                 case 5:
                     {
-                        FieldTableLayoutPanel.Controls[buttonIndex].BackgroundImage = Image.FromFile("..\\number5.png");
+                        FieldTableLayoutPanel.Controls[buttonIndex].BackgroundImage = number5;
                         break;
                     }
                 case 6:
                     {
-                        FieldTableLayoutPanel.Controls[buttonIndex].BackgroundImage = Image.FromFile("..\\number6.png");
+                        FieldTableLayoutPanel.Controls[buttonIndex].BackgroundImage = number6;
                         break;
                     }
                 case 7:
                     {
-                        FieldTableLayoutPanel.Controls[buttonIndex].BackgroundImage = Image.FromFile("..\\number7.png");
+                        FieldTableLayoutPanel.Controls[buttonIndex].BackgroundImage = number7;
                         break;
                     }
                 case 8:
                     {
-                        FieldTableLayoutPanel.Controls[buttonIndex].BackgroundImage = Image.FromFile("..\\number8.png");
-                        break;
-                    }
-                case 9:
-                    {
-                        FieldTableLayoutPanel.Controls[buttonIndex].BackgroundImage = Image.FromFile("..\\mine.png");
-                        //TODO: функция о конце игры , откртыия поля и диаолговое окно.
+                        FieldTableLayoutPanel.Controls[buttonIndex].BackgroundImage = number8;
                         break;
                     }
             }
@@ -179,9 +195,10 @@ namespace MinesweeperTask
         private void StartNewCustomGame(int sizeX, int sizeY, int minesCount, int minutesCount)
         {
             _minesweeper = new Minesweeper(sizeX, sizeY, minesCount, minutesCount);
-
             _buttons = new Button[sizeX, sizeY];
+            MineCounterLable.Text = minesCount.ToString();
 
+            FieldTableLayoutPanel.Controls.Clear();
             FieldTableLayoutPanel.RowCount = sizeX;
             FieldTableLayoutPanel.ColumnCount = sizeY;
 
@@ -197,6 +214,7 @@ namespace MinesweeperTask
                     FieldTableLayoutPanel.Controls.Add(_buttons[i, j], i, j);
                     _buttons[i, j].BackgroundImageLayout = ImageLayout.Stretch;
                     _buttons[i, j].MouseDown += MinesweeperUI_MouseDown;
+                    _buttons[i, j].Text = _minesweeper.Field[i, j].ToString();
 
                 }
             }

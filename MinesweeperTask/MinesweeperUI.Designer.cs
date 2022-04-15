@@ -84,46 +84,46 @@
             this.HighDifficultyToolStripMenuItem,
             this.ExpertDifficultyToolStripMenuItem});
             this.NewGameToolStripMenuItem.Name = "NewGameToolStripMenuItem";
-            this.NewGameToolStripMenuItem.Size = new System.Drawing.Size(184, 26);
+            this.NewGameToolStripMenuItem.Size = new System.Drawing.Size(224, 26);
             this.NewGameToolStripMenuItem.Text = "New game";
             // 
             // EasyDifficultyToolStripMenuItem
             // 
             this.EasyDifficultyToolStripMenuItem.Name = "EasyDifficultyToolStripMenuItem";
-            this.EasyDifficultyToolStripMenuItem.Size = new System.Drawing.Size(147, 26);
+            this.EasyDifficultyToolStripMenuItem.Size = new System.Drawing.Size(224, 26);
             this.EasyDifficultyToolStripMenuItem.Text = "Easy";
             this.EasyDifficultyToolStripMenuItem.Click += new System.EventHandler(this.EasyDifficultyToolStripMenuItem_Click);
             // 
             // MediumDifficultyToolStripMenuItem
             // 
             this.MediumDifficultyToolStripMenuItem.Name = "MediumDifficultyToolStripMenuItem";
-            this.MediumDifficultyToolStripMenuItem.Size = new System.Drawing.Size(147, 26);
+            this.MediumDifficultyToolStripMenuItem.Size = new System.Drawing.Size(224, 26);
             this.MediumDifficultyToolStripMenuItem.Text = "Medium";
             this.MediumDifficultyToolStripMenuItem.Click += new System.EventHandler(this.MediumDifficultyToolStripMenuItem_Click);
             // 
             // HighDifficultyToolStripMenuItem
             // 
             this.HighDifficultyToolStripMenuItem.Name = "HighDifficultyToolStripMenuItem";
-            this.HighDifficultyToolStripMenuItem.Size = new System.Drawing.Size(147, 26);
+            this.HighDifficultyToolStripMenuItem.Size = new System.Drawing.Size(224, 26);
             this.HighDifficultyToolStripMenuItem.Text = "High";
             // 
             // ExpertDifficultyToolStripMenuItem
             // 
             this.ExpertDifficultyToolStripMenuItem.Name = "ExpertDifficultyToolStripMenuItem";
-            this.ExpertDifficultyToolStripMenuItem.Size = new System.Drawing.Size(147, 26);
+            this.ExpertDifficultyToolStripMenuItem.Size = new System.Drawing.Size(224, 26);
             this.ExpertDifficultyToolStripMenuItem.Text = "Expert";
             // 
             // CustomGameToolStripMenuItem
             // 
             this.CustomGameToolStripMenuItem.Name = "CustomGameToolStripMenuItem";
-            this.CustomGameToolStripMenuItem.Size = new System.Drawing.Size(184, 26);
+            this.CustomGameToolStripMenuItem.Size = new System.Drawing.Size(224, 26);
             this.CustomGameToolStripMenuItem.Text = "Custom game";
             this.CustomGameToolStripMenuItem.Click += new System.EventHandler(this.CustomGameToolStripMenuItem_Click);
             // 
             // ExitToolStripMenuItem
             // 
             this.ExitToolStripMenuItem.Name = "ExitToolStripMenuItem";
-            this.ExitToolStripMenuItem.Size = new System.Drawing.Size(184, 26);
+            this.ExitToolStripMenuItem.Size = new System.Drawing.Size(224, 26);
             this.ExitToolStripMenuItem.Text = "Exit";
             this.ExitToolStripMenuItem.Click += new System.EventHandler(this.ExitToolStripMenuItem_Click);
             // 
@@ -212,15 +212,15 @@
             this.FieldTableLayoutPanel.Margin = new System.Windows.Forms.Padding(20);
             this.FieldTableLayoutPanel.Name = "FieldTableLayoutPanel";
             this.FieldTableLayoutPanel.RowCount = 9;
-            this.FieldTableLayoutPanel.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 11.11111F));
-            this.FieldTableLayoutPanel.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 11.11111F));
-            this.FieldTableLayoutPanel.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 11.11111F));
-            this.FieldTableLayoutPanel.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 11.11111F));
-            this.FieldTableLayoutPanel.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 11.11111F));
-            this.FieldTableLayoutPanel.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 11.11111F));
-            this.FieldTableLayoutPanel.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 11.11111F));
-            this.FieldTableLayoutPanel.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 11.11111F));
-            this.FieldTableLayoutPanel.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 11.11111F));
+            this.FieldTableLayoutPanel.RowStyles.Add(new System.Windows.Forms.RowStyle());
+            this.FieldTableLayoutPanel.RowStyles.Add(new System.Windows.Forms.RowStyle());
+            this.FieldTableLayoutPanel.RowStyles.Add(new System.Windows.Forms.RowStyle());
+            this.FieldTableLayoutPanel.RowStyles.Add(new System.Windows.Forms.RowStyle());
+            this.FieldTableLayoutPanel.RowStyles.Add(new System.Windows.Forms.RowStyle());
+            this.FieldTableLayoutPanel.RowStyles.Add(new System.Windows.Forms.RowStyle());
+            this.FieldTableLayoutPanel.RowStyles.Add(new System.Windows.Forms.RowStyle());
+            this.FieldTableLayoutPanel.RowStyles.Add(new System.Windows.Forms.RowStyle());
+            this.FieldTableLayoutPanel.RowStyles.Add(new System.Windows.Forms.RowStyle());
             this.FieldTableLayoutPanel.Size = new System.Drawing.Size(20, 20);
             this.FieldTableLayoutPanel.TabIndex = 1;
             this.FieldTableLayoutPanel.Paint += new System.Windows.Forms.PaintEventHandler(this.FieldTableLayoutPanel_Paint);

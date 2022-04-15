@@ -37,18 +37,14 @@ namespace MinesweeperTask
 
                 int value = _minesweeper.Field[i, j];
 
-                if (value == 11)
-                {
-                    return;
-                }
-
                 if (e.Button == MouseButtons.Right)
                 {
                     if (currentButton.BackgroundImage == null)
                     {
                         currentButton.BackgroundImage = flag;
-                        _minesweeper.Field[i, j] = -value;
                         MineCounterLable.Text = (Convert.ToInt32(MineCounterLable.Text) - 1).ToString();
+
+                        _minesweeper.LockCell(i, j);
 
                         return;
                     }
@@ -56,8 +52,9 @@ namespace MinesweeperTask
                     if (value <= 0)
                     {
                         currentButton.BackgroundImage = null;
-                        _minesweeper.Field[i, j] = -value;
                         MineCounterLable.Text = (Convert.ToInt32(MineCounterLable.Text) + 1).ToString();
+
+                        _minesweeper.UnlockCell(i, j);
 
                         return;
                     }

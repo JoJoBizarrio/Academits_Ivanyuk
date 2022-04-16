@@ -1,6 +1,6 @@
 ﻿namespace MinesweeperTask
 {
-    partial class CustomGame
+    partial class CustomGameUI
     {
         /// <summary>
         /// Required designer variable.
@@ -31,11 +31,15 @@
             this.tableLayoutPanel1 = new System.Windows.Forms.TableLayoutPanel();
             this.tableLayoutPanel2 = new System.Windows.Forms.TableLayoutPanel();
             this.WidthLabel = new System.Windows.Forms.Label();
+            this.WidthRangeLabel = new System.Windows.Forms.Label();
             this.tableLayoutPanel3 = new System.Windows.Forms.TableLayoutPanel();
+            this.HeightRangeLabel = new System.Windows.Forms.Label();
             this.HeigthLabel = new System.Windows.Forms.Label();
             this.tableLayoutPanel6 = new System.Windows.Forms.TableLayoutPanel();
+            this.MinesRangeLabel = new System.Windows.Forms.Label();
             this.MinesLabel = new System.Windows.Forms.Label();
             this.tableLayoutPanel7 = new System.Windows.Forms.TableLayoutPanel();
+            this.MinutesRangeLabel = new System.Windows.Forms.Label();
             this.MinutesLabel = new System.Windows.Forms.Label();
             this.WidthTrackBar = new System.Windows.Forms.TrackBar();
             this.HeightTrackBar = new System.Windows.Forms.TrackBar();
@@ -50,10 +54,6 @@
             this.StartGameButton = new System.Windows.Forms.Button();
             this.CanselButton = new System.Windows.Forms.Button();
             this.tableLayoutPanel8 = new System.Windows.Forms.TableLayoutPanel();
-            this.WidthRangeLabel = new System.Windows.Forms.Label();
-            this.HeightRangeLabel = new System.Windows.Forms.Label();
-            this.MinesRangeLabel = new System.Windows.Forms.Label();
-            this.MinutesRangeLabel = new System.Windows.Forms.Label();
             this.tableLayoutPanel1.SuspendLayout();
             this.tableLayoutPanel2.SuspendLayout();
             this.tableLayoutPanel3.SuspendLayout();
@@ -121,6 +121,17 @@
             this.WidthLabel.TabIndex = 0;
             this.WidthLabel.Text = "Width";
             // 
+            // WidthRangeLabel
+            // 
+            this.WidthRangeLabel.Anchor = System.Windows.Forms.AnchorStyles.Top;
+            this.WidthRangeLabel.AutoSize = true;
+            this.WidthRangeLabel.Location = new System.Drawing.Point(51, 39);
+            this.WidthRangeLabel.Name = "WidthRangeLabel";
+            this.WidthRangeLabel.Size = new System.Drawing.Size(50, 20);
+            this.WidthRangeLabel.TabIndex = 1;
+            this.WidthRangeLabel.Text = "label1";
+            this.WidthRangeLabel.TextAlign = System.Drawing.ContentAlignment.TopCenter;
+            // 
             // tableLayoutPanel3
             // 
             this.tableLayoutPanel3.ColumnCount = 1;
@@ -135,6 +146,17 @@
             this.tableLayoutPanel3.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 40F));
             this.tableLayoutPanel3.Size = new System.Drawing.Size(153, 65);
             this.tableLayoutPanel3.TabIndex = 5;
+            // 
+            // HeightRangeLabel
+            // 
+            this.HeightRangeLabel.Anchor = System.Windows.Forms.AnchorStyles.Top;
+            this.HeightRangeLabel.AutoSize = true;
+            this.HeightRangeLabel.Location = new System.Drawing.Point(51, 39);
+            this.HeightRangeLabel.Name = "HeightRangeLabel";
+            this.HeightRangeLabel.Size = new System.Drawing.Size(50, 20);
+            this.HeightRangeLabel.TabIndex = 2;
+            this.HeightRangeLabel.Text = "label2";
+            this.HeightRangeLabel.TextAlign = System.Drawing.ContentAlignment.TopCenter;
             // 
             // HeigthLabel
             // 
@@ -162,6 +184,17 @@
             this.tableLayoutPanel6.Size = new System.Drawing.Size(153, 65);
             this.tableLayoutPanel6.TabIndex = 6;
             // 
+            // MinesRangeLabel
+            // 
+            this.MinesRangeLabel.Anchor = System.Windows.Forms.AnchorStyles.Top;
+            this.MinesRangeLabel.AutoSize = true;
+            this.MinesRangeLabel.Location = new System.Drawing.Point(51, 39);
+            this.MinesRangeLabel.Name = "MinesRangeLabel";
+            this.MinesRangeLabel.Size = new System.Drawing.Size(50, 20);
+            this.MinesRangeLabel.TabIndex = 3;
+            this.MinesRangeLabel.Text = "label3";
+            this.MinesRangeLabel.TextAlign = System.Drawing.ContentAlignment.TopCenter;
+            // 
             // MinesLabel
             // 
             this.MinesLabel.Anchor = System.Windows.Forms.AnchorStyles.None;
@@ -187,6 +220,17 @@
             this.tableLayoutPanel7.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 40F));
             this.tableLayoutPanel7.Size = new System.Drawing.Size(153, 68);
             this.tableLayoutPanel7.TabIndex = 7;
+            // 
+            // MinutesRangeLabel
+            // 
+            this.MinutesRangeLabel.Anchor = System.Windows.Forms.AnchorStyles.Top;
+            this.MinutesRangeLabel.AutoSize = true;
+            this.MinutesRangeLabel.Location = new System.Drawing.Point(51, 40);
+            this.MinutesRangeLabel.Name = "MinutesRangeLabel";
+            this.MinutesRangeLabel.Size = new System.Drawing.Size(50, 20);
+            this.MinutesRangeLabel.TabIndex = 4;
+            this.MinutesRangeLabel.Text = "label4";
+            this.MinutesRangeLabel.TextAlign = System.Drawing.ContentAlignment.TopCenter;
             // 
             // MinutesLabel
             // 
@@ -332,6 +376,7 @@
             this.StartGameButton.TabIndex = 9;
             this.StartGameButton.Text = "Start Game";
             this.StartGameButton.UseVisualStyleBackColor = true;
+            this.StartGameButton.Click += new System.EventHandler(this.StartGameButton_Click);
             // 
             // CanselButton
             // 
@@ -361,58 +406,14 @@
             this.tableLayoutPanel8.Size = new System.Drawing.Size(532, 62);
             this.tableLayoutPanel8.TabIndex = 1;
             // 
-            // WidthRangeLabel
-            // 
-            this.WidthRangeLabel.Anchor = System.Windows.Forms.AnchorStyles.Top;
-            this.WidthRangeLabel.AutoSize = true;
-            this.WidthRangeLabel.Location = new System.Drawing.Point(51, 39);
-            this.WidthRangeLabel.Name = "WidthRangeLabel";
-            this.WidthRangeLabel.Size = new System.Drawing.Size(50, 20);
-            this.WidthRangeLabel.TabIndex = 1;
-            this.WidthRangeLabel.Text = "label1";
-            this.WidthRangeLabel.TextAlign = System.Drawing.ContentAlignment.TopCenter;
-            // 
-            // HeightRangeLabel
-            // 
-            this.HeightRangeLabel.Anchor = System.Windows.Forms.AnchorStyles.Top;
-            this.HeightRangeLabel.AutoSize = true;
-            this.HeightRangeLabel.Location = new System.Drawing.Point(51, 39);
-            this.HeightRangeLabel.Name = "HeightRangeLabel";
-            this.HeightRangeLabel.Size = new System.Drawing.Size(50, 20);
-            this.HeightRangeLabel.TabIndex = 2;
-            this.HeightRangeLabel.Text = "label2";
-            this.HeightRangeLabel.TextAlign = System.Drawing.ContentAlignment.TopCenter;
-            // 
-            // MinesRangeLabel
-            // 
-            this.MinesRangeLabel.Anchor = System.Windows.Forms.AnchorStyles.Top;
-            this.MinesRangeLabel.AutoSize = true;
-            this.MinesRangeLabel.Location = new System.Drawing.Point(51, 39);
-            this.MinesRangeLabel.Name = "MinesRangeLabel";
-            this.MinesRangeLabel.Size = new System.Drawing.Size(50, 20);
-            this.MinesRangeLabel.TabIndex = 3;
-            this.MinesRangeLabel.Text = "label3";
-            this.MinesRangeLabel.TextAlign = System.Drawing.ContentAlignment.TopCenter;
-            // 
-            // MinutesRangeLabel
-            // 
-            this.MinutesRangeLabel.Anchor = System.Windows.Forms.AnchorStyles.Top;
-            this.MinutesRangeLabel.AutoSize = true;
-            this.MinutesRangeLabel.Location = new System.Drawing.Point(51, 40);
-            this.MinutesRangeLabel.Name = "MinutesRangeLabel";
-            this.MinutesRangeLabel.Size = new System.Drawing.Size(50, 20);
-            this.MinutesRangeLabel.TabIndex = 4;
-            this.MinutesRangeLabel.Text = "label4";
-            this.MinutesRangeLabel.TextAlign = System.Drawing.ContentAlignment.TopCenter;
-            // 
-            // CustomGame
+            // CustomGameUI
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 20F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(532, 353);
             this.Controls.Add(this.tableLayoutPanel8);
             this.Controls.Add(this.tableLayoutPanel1);
-            this.Name = "CustomGame";
+            this.Name = "CustomGameUI";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterParent;
             this.Text = "Custom game";
             this.WindowState = System.Windows.Forms.FormWindowState.Minimized;

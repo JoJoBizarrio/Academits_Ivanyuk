@@ -2,7 +2,7 @@ namespace MinesweeperTask
 {
     public partial class MinesweeperUI : Form
     {
-        private Minesweeper _minesweeper;
+        private MinesweeperLogic _minesweeper;
 
         private Button[,] _buttons;
 
@@ -190,7 +190,7 @@ namespace MinesweeperTask
         {
             Enabled = false;
 
-            _minesweeper = new Minesweeper(sizeX, sizeY, minesCount, minutesCount);
+            _minesweeper = new MinesweeperLogic(sizeX, sizeY, minesCount, minutesCount);
             _buttons = new Button[sizeX, sizeY];
             MineCounterLable.Text = minesCount.ToString();
             
@@ -224,8 +224,20 @@ namespace MinesweeperTask
         {
             Enabled = false;
 
-            CustomGame customGame = new CustomGame();
+            CustomGameUI customGame = new CustomGameUI();
             customGame.Show();
+
+            customGame.Disposed += CustomGame_Disposed;
+        }
+
+        private void CustomGame_Disposed(object? sender, EventArgs e)
+        {
+            Enabled = true;
+        }
+
+        private void CountdownTimer_Tick(object sender, EventArgs e)
+        {
+
         }
     }
 }

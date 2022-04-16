@@ -1,6 +1,6 @@
 ﻿namespace MinesweeperTask
 {
-    public class Minesweeper
+    public class MinesweeperLogic
     {
         public int[,] Field { get; set; }
 
@@ -17,7 +17,7 @@
         public int MinesCount { get; set; }
 
 
-        public Minesweeper(int fieldWidth, int fieldHeight, int minesCount, int minutesCount)
+        public MinesweeperLogic(int fieldWidth, int fieldHeight, int minesCount, int minutesCount)
         {
             Field = new int[fieldWidth, fieldHeight];
             LockedButtons = new int[fieldWidth, fieldHeight];

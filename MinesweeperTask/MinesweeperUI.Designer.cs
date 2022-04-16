@@ -45,7 +45,7 @@
             this.tableLayoutPanel2 = new System.Windows.Forms.TableLayoutPanel();
             this.MineCounterLable = new System.Windows.Forms.Label();
             this.FieldTableLayoutPanel = new System.Windows.Forms.TableLayoutPanel();
-            this.timer1 = new System.Windows.Forms.Timer(this.components);
+            this.CountdownTimer = new System.Windows.Forms.Timer(this.components);
             this.MenuStrip.SuspendLayout();
             this.tableLayoutPanel1.SuspendLayout();
             this.tableLayoutPanel2.SuspendLayout();
@@ -60,7 +60,7 @@
             this.ReferenceToolStripMenuItem});
             this.MenuStrip.Location = new System.Drawing.Point(0, 0);
             this.MenuStrip.Name = "MenuStrip";
-            this.MenuStrip.Size = new System.Drawing.Size(782, 28);
+            this.MenuStrip.Size = new System.Drawing.Size(1006, 28);
             this.MenuStrip.TabIndex = 2;
             this.MenuStrip.Text = "Menu";
             // 
@@ -81,41 +81,41 @@
             this.MediumDifficultyToolStripMenuItem,
             this.HardDifficultyToolStripMenuItem});
             this.NewGameToolStripMenuItem.Name = "NewGameToolStripMenuItem";
-            this.NewGameToolStripMenuItem.Size = new System.Drawing.Size(224, 26);
+            this.NewGameToolStripMenuItem.Size = new System.Drawing.Size(184, 26);
             this.NewGameToolStripMenuItem.Text = "New game";
             // 
             // EasyDifficultyToolStripMenuItem
             // 
             this.EasyDifficultyToolStripMenuItem.Name = "EasyDifficultyToolStripMenuItem";
-            this.EasyDifficultyToolStripMenuItem.Size = new System.Drawing.Size(224, 26);
+            this.EasyDifficultyToolStripMenuItem.Size = new System.Drawing.Size(147, 26);
             this.EasyDifficultyToolStripMenuItem.Text = "Easy";
             this.EasyDifficultyToolStripMenuItem.Click += new System.EventHandler(this.EasyDifficultyToolStripMenuItem_Click);
             // 
             // MediumDifficultyToolStripMenuItem
             // 
             this.MediumDifficultyToolStripMenuItem.Name = "MediumDifficultyToolStripMenuItem";
-            this.MediumDifficultyToolStripMenuItem.Size = new System.Drawing.Size(224, 26);
+            this.MediumDifficultyToolStripMenuItem.Size = new System.Drawing.Size(147, 26);
             this.MediumDifficultyToolStripMenuItem.Text = "Medium";
             this.MediumDifficultyToolStripMenuItem.Click += new System.EventHandler(this.MediumDifficultyToolStripMenuItem_Click);
             // 
             // HardDifficultyToolStripMenuItem
             // 
             this.HardDifficultyToolStripMenuItem.Name = "HardDifficultyToolStripMenuItem";
-            this.HardDifficultyToolStripMenuItem.Size = new System.Drawing.Size(224, 26);
+            this.HardDifficultyToolStripMenuItem.Size = new System.Drawing.Size(147, 26);
             this.HardDifficultyToolStripMenuItem.Text = "Hard";
             this.HardDifficultyToolStripMenuItem.Click += new System.EventHandler(this.HardDifficultyToolStripMenuItem_Click);
             // 
             // CustomGameToolStripMenuItem
             // 
             this.CustomGameToolStripMenuItem.Name = "CustomGameToolStripMenuItem";
-            this.CustomGameToolStripMenuItem.Size = new System.Drawing.Size(224, 26);
+            this.CustomGameToolStripMenuItem.Size = new System.Drawing.Size(184, 26);
             this.CustomGameToolStripMenuItem.Text = "Custom game";
             this.CustomGameToolStripMenuItem.Click += new System.EventHandler(this.CustomGameToolStripMenuItem_Click);
             // 
             // ExitToolStripMenuItem
             // 
             this.ExitToolStripMenuItem.Name = "ExitToolStripMenuItem";
-            this.ExitToolStripMenuItem.Size = new System.Drawing.Size(224, 26);
+            this.ExitToolStripMenuItem.Size = new System.Drawing.Size(184, 26);
             this.ExitToolStripMenuItem.Text = "Exit";
             this.ExitToolStripMenuItem.Click += new System.EventHandler(this.ExitToolStripMenuItem_Click);
             // 
@@ -136,7 +136,7 @@
             // AboutToolStripMenuItem
             // 
             this.AboutToolStripMenuItem.Name = "AboutToolStripMenuItem";
-            this.AboutToolStripMenuItem.Size = new System.Drawing.Size(224, 26);
+            this.AboutToolStripMenuItem.Size = new System.Drawing.Size(133, 26);
             this.AboutToolStripMenuItem.Text = "About";
             // 
             // tableLayoutPanel1
@@ -152,7 +152,7 @@
             this.tableLayoutPanel1.RowCount = 2;
             this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 89.45749F));
             this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 10.54252F));
-            this.tableLayoutPanel1.Size = new System.Drawing.Size(782, 725);
+            this.tableLayoutPanel1.Size = new System.Drawing.Size(1006, 725);
             this.tableLayoutPanel1.TabIndex = 4;
             // 
             // tableLayoutPanel2
@@ -168,7 +168,7 @@
             this.tableLayoutPanel2.Name = "tableLayoutPanel2";
             this.tableLayoutPanel2.RowCount = 1;
             this.tableLayoutPanel2.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 100F));
-            this.tableLayoutPanel2.Size = new System.Drawing.Size(776, 71);
+            this.tableLayoutPanel2.Size = new System.Drawing.Size(1000, 71);
             this.tableLayoutPanel2.TabIndex = 0;
             // 
             // MineCounterLable
@@ -179,7 +179,7 @@
             this.MineCounterLable.Location = new System.Drawing.Point(10, 10);
             this.MineCounterLable.Margin = new System.Windows.Forms.Padding(10);
             this.MineCounterLable.Name = "MineCounterLable";
-            this.MineCounterLable.Size = new System.Drawing.Size(368, 51);
+            this.MineCounterLable.Size = new System.Drawing.Size(480, 51);
             this.MineCounterLable.TabIndex = 0;
             this.MineCounterLable.Text = "000";
             this.MineCounterLable.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
@@ -216,17 +216,22 @@
             this.FieldTableLayoutPanel.Size = new System.Drawing.Size(20, 20);
             this.FieldTableLayoutPanel.TabIndex = 1;
             // 
+            // CountdownTimer
+            // 
+            this.CountdownTimer.Tick += new System.EventHandler(this.CountdownTimer_Tick);
+            // 
             // MinesweeperUI
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 20F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(782, 753);
+            this.ClientSize = new System.Drawing.Size(1006, 753);
             this.Controls.Add(this.tableLayoutPanel1);
             this.Controls.Add(this.MenuStrip);
             this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
             this.MainMenuStrip = this.MenuStrip;
             this.Name = "MinesweeperUI";
             this.Text = "Minesweeper";
+            this.WindowState = System.Windows.Forms.FormWindowState.Minimized;
             this.MenuStrip.ResumeLayout(false);
             this.MenuStrip.PerformLayout();
             this.tableLayoutPanel1.ResumeLayout(false);
@@ -254,6 +259,6 @@
         private ToolStripMenuItem EasyDifficultyToolStripMenuItem;
         private ToolStripMenuItem MediumDifficultyToolStripMenuItem;
         private ToolStripMenuItem HardDifficultyToolStripMenuItem;
-        private System.Windows.Forms.Timer timer1;
+        private System.Windows.Forms.Timer CountdownTimer;
     }
 }

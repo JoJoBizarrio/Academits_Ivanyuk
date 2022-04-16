@@ -71,8 +71,8 @@
             // 
             this.tableLayoutPanel1.ColumnCount = 3;
             this.tableLayoutPanel1.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 30F));
-            this.tableLayoutPanel1.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 50F));
-            this.tableLayoutPanel1.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 20F));
+            this.tableLayoutPanel1.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 55F));
+            this.tableLayoutPanel1.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 15F));
             this.tableLayoutPanel1.Controls.Add(this.tableLayoutPanel2, 0, 0);
             this.tableLayoutPanel1.Controls.Add(this.tableLayoutPanel3, 0, 1);
             this.tableLayoutPanel1.Controls.Add(this.tableLayoutPanel6, 0, 2);
@@ -93,7 +93,7 @@
             this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 25F));
             this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 25F));
             this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 25F));
-            this.tableLayoutPanel1.Size = new System.Drawing.Size(532, 287);
+            this.tableLayoutPanel1.Size = new System.Drawing.Size(501, 287);
             this.tableLayoutPanel1.TabIndex = 0;
             // 
             // tableLayoutPanel2
@@ -108,7 +108,7 @@
             this.tableLayoutPanel2.RowCount = 2;
             this.tableLayoutPanel2.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 60F));
             this.tableLayoutPanel2.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 40F));
-            this.tableLayoutPanel2.Size = new System.Drawing.Size(153, 65);
+            this.tableLayoutPanel2.Size = new System.Drawing.Size(144, 65);
             this.tableLayoutPanel2.TabIndex = 4;
             // 
             // WidthLabel
@@ -116,7 +116,7 @@
             this.WidthLabel.Anchor = System.Windows.Forms.AnchorStyles.None;
             this.WidthLabel.AutoSize = true;
             this.WidthLabel.Font = new System.Drawing.Font("Segoe UI", 13.8F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point);
-            this.WidthLabel.Location = new System.Drawing.Point(36, 4);
+            this.WidthLabel.Location = new System.Drawing.Point(31, 4);
             this.WidthLabel.Name = "WidthLabel";
             this.WidthLabel.Size = new System.Drawing.Size(81, 31);
             this.WidthLabel.TabIndex = 0;
@@ -126,7 +126,7 @@
             // 
             this.WidthRangeLabel.Anchor = System.Windows.Forms.AnchorStyles.Top;
             this.WidthRangeLabel.AutoSize = true;
-            this.WidthRangeLabel.Location = new System.Drawing.Point(51, 39);
+            this.WidthRangeLabel.Location = new System.Drawing.Point(47, 39);
             this.WidthRangeLabel.Name = "WidthRangeLabel";
             this.WidthRangeLabel.Size = new System.Drawing.Size(50, 20);
             this.WidthRangeLabel.TabIndex = 1;
@@ -145,14 +145,14 @@
             this.tableLayoutPanel3.RowCount = 2;
             this.tableLayoutPanel3.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 60F));
             this.tableLayoutPanel3.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 40F));
-            this.tableLayoutPanel3.Size = new System.Drawing.Size(153, 65);
+            this.tableLayoutPanel3.Size = new System.Drawing.Size(144, 65);
             this.tableLayoutPanel3.TabIndex = 5;
             // 
             // HeightRangeLabel
             // 
             this.HeightRangeLabel.Anchor = System.Windows.Forms.AnchorStyles.Top;
             this.HeightRangeLabel.AutoSize = true;
-            this.HeightRangeLabel.Location = new System.Drawing.Point(51, 39);
+            this.HeightRangeLabel.Location = new System.Drawing.Point(47, 39);
             this.HeightRangeLabel.Name = "HeightRangeLabel";
             this.HeightRangeLabel.Size = new System.Drawing.Size(50, 20);
             this.HeightRangeLabel.TabIndex = 2;
@@ -164,7 +164,7 @@
             this.HeigthLabel.Anchor = System.Windows.Forms.AnchorStyles.None;
             this.HeigthLabel.AutoSize = true;
             this.HeigthLabel.Font = new System.Drawing.Font("Segoe UI", 13.8F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point);
-            this.HeigthLabel.Location = new System.Drawing.Point(32, 4);
+            this.HeigthLabel.Location = new System.Drawing.Point(28, 4);
             this.HeigthLabel.Name = "HeigthLabel";
             this.HeigthLabel.Size = new System.Drawing.Size(88, 31);
             this.HeigthLabel.TabIndex = 1;
@@ -182,14 +182,14 @@
             this.tableLayoutPanel6.RowCount = 2;
             this.tableLayoutPanel6.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 60F));
             this.tableLayoutPanel6.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 40F));
-            this.tableLayoutPanel6.Size = new System.Drawing.Size(153, 65);
+            this.tableLayoutPanel6.Size = new System.Drawing.Size(144, 65);
             this.tableLayoutPanel6.TabIndex = 6;
             // 
             // MinesRangeLabel
             // 
             this.MinesRangeLabel.Anchor = System.Windows.Forms.AnchorStyles.Top;
             this.MinesRangeLabel.AutoSize = true;
-            this.MinesRangeLabel.Location = new System.Drawing.Point(51, 39);
+            this.MinesRangeLabel.Location = new System.Drawing.Point(47, 39);
             this.MinesRangeLabel.Name = "MinesRangeLabel";
             this.MinesRangeLabel.Size = new System.Drawing.Size(50, 20);
             this.MinesRangeLabel.TabIndex = 3;
@@ -201,7 +201,7 @@
             this.MinesLabel.Anchor = System.Windows.Forms.AnchorStyles.None;
             this.MinesLabel.AutoSize = true;
             this.MinesLabel.Font = new System.Drawing.Font("Segoe UI", 13.8F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point);
-            this.MinesLabel.Location = new System.Drawing.Point(37, 4);
+            this.MinesLabel.Location = new System.Drawing.Point(32, 4);
             this.MinesLabel.Name = "MinesLabel";
             this.MinesLabel.Size = new System.Drawing.Size(79, 31);
             this.MinesLabel.TabIndex = 2;
@@ -219,14 +219,14 @@
             this.tableLayoutPanel7.RowCount = 2;
             this.tableLayoutPanel7.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 60F));
             this.tableLayoutPanel7.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 40F));
-            this.tableLayoutPanel7.Size = new System.Drawing.Size(153, 68);
+            this.tableLayoutPanel7.Size = new System.Drawing.Size(144, 68);
             this.tableLayoutPanel7.TabIndex = 7;
             // 
             // MinutesRangeLabel
             // 
             this.MinutesRangeLabel.Anchor = System.Windows.Forms.AnchorStyles.Top;
             this.MinutesRangeLabel.AutoSize = true;
-            this.MinutesRangeLabel.Location = new System.Drawing.Point(51, 40);
+            this.MinutesRangeLabel.Location = new System.Drawing.Point(47, 40);
             this.MinutesRangeLabel.Name = "MinutesRangeLabel";
             this.MinutesRangeLabel.Size = new System.Drawing.Size(50, 20);
             this.MinutesRangeLabel.TabIndex = 4;
@@ -238,7 +238,7 @@
             this.MinutesLabel.Anchor = System.Windows.Forms.AnchorStyles.None;
             this.MinutesLabel.AutoSize = true;
             this.MinutesLabel.Font = new System.Drawing.Font("Segoe UI", 13.8F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point);
-            this.MinutesLabel.Location = new System.Drawing.Point(25, 4);
+            this.MinutesLabel.Location = new System.Drawing.Point(21, 4);
             this.MinutesLabel.Name = "MinutesLabel";
             this.MinutesLabel.Size = new System.Drawing.Size(102, 31);
             this.MinutesLabel.TabIndex = 3;
@@ -250,11 +250,11 @@
             | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
             this.WidthTrackBar.LargeChange = 3;
-            this.WidthTrackBar.Location = new System.Drawing.Point(162, 3);
+            this.WidthTrackBar.Location = new System.Drawing.Point(153, 3);
             this.WidthTrackBar.Maximum = 30;
             this.WidthTrackBar.Minimum = 9;
             this.WidthTrackBar.Name = "WidthTrackBar";
-            this.WidthTrackBar.Size = new System.Drawing.Size(260, 65);
+            this.WidthTrackBar.Size = new System.Drawing.Size(269, 65);
             this.WidthTrackBar.TabIndex = 8;
             this.WidthTrackBar.TickStyle = System.Windows.Forms.TickStyle.Both;
             this.WidthTrackBar.Value = 9;
@@ -263,11 +263,11 @@
             // 
             this.HeightTrackBar.Dock = System.Windows.Forms.DockStyle.Fill;
             this.HeightTrackBar.LargeChange = 1;
-            this.HeightTrackBar.Location = new System.Drawing.Point(162, 74);
+            this.HeightTrackBar.Location = new System.Drawing.Point(153, 74);
             this.HeightTrackBar.Maximum = 24;
             this.HeightTrackBar.Minimum = 9;
             this.HeightTrackBar.Name = "HeightTrackBar";
-            this.HeightTrackBar.Size = new System.Drawing.Size(260, 65);
+            this.HeightTrackBar.Size = new System.Drawing.Size(269, 65);
             this.HeightTrackBar.TabIndex = 9;
             this.HeightTrackBar.TickStyle = System.Windows.Forms.TickStyle.Both;
             this.HeightTrackBar.Value = 9;
@@ -277,36 +277,38 @@
             // 
             this.MinesCountTrackBar.Dock = System.Windows.Forms.DockStyle.Fill;
             this.MinesCountTrackBar.LargeChange = 1;
-            this.MinesCountTrackBar.Location = new System.Drawing.Point(162, 145);
+            this.MinesCountTrackBar.Location = new System.Drawing.Point(153, 145);
             this.MinesCountTrackBar.Maximum = 28;
             this.MinesCountTrackBar.Minimum = 9;
             this.MinesCountTrackBar.Name = "MinesCountTrackBar";
-            this.MinesCountTrackBar.Size = new System.Drawing.Size(260, 65);
+            this.MinesCountTrackBar.Size = new System.Drawing.Size(269, 65);
             this.MinesCountTrackBar.TabIndex = 10;
             this.MinesCountTrackBar.TickStyle = System.Windows.Forms.TickStyle.Both;
             this.MinesCountTrackBar.Value = 9;
+            this.MinesCountTrackBar.Scroll += new System.EventHandler(this.MinesCountTrackBar_Scroll);
             // 
             // MinutesCountTrackBar
             // 
             this.MinutesCountTrackBar.Dock = System.Windows.Forms.DockStyle.Fill;
             this.MinutesCountTrackBar.LargeChange = 1;
-            this.MinutesCountTrackBar.Location = new System.Drawing.Point(162, 216);
+            this.MinutesCountTrackBar.Location = new System.Drawing.Point(153, 216);
             this.MinutesCountTrackBar.Maximum = 200;
             this.MinutesCountTrackBar.Minimum = 10;
             this.MinutesCountTrackBar.Name = "MinutesCountTrackBar";
-            this.MinutesCountTrackBar.Size = new System.Drawing.Size(260, 68);
+            this.MinutesCountTrackBar.Size = new System.Drawing.Size(269, 68);
             this.MinutesCountTrackBar.TabIndex = 11;
             this.MinutesCountTrackBar.TickStyle = System.Windows.Forms.TickStyle.Both;
             this.MinutesCountTrackBar.Value = 10;
+            this.MinutesCountTrackBar.Scroll += new System.EventHandler(this.MinutesCountTrackBar_Scroll);
             // 
             // CurrentWidthLabel
             // 
             this.CurrentWidthLabel.Anchor = System.Windows.Forms.AnchorStyles.Left;
             this.CurrentWidthLabel.AutoSize = true;
             this.CurrentWidthLabel.Font = new System.Drawing.Font("Segoe UI", 13.8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
-            this.CurrentWidthLabel.Location = new System.Drawing.Point(428, 20);
+            this.CurrentWidthLabel.Location = new System.Drawing.Point(428, 4);
             this.CurrentWidthLabel.Name = "CurrentWidthLabel";
-            this.CurrentWidthLabel.Size = new System.Drawing.Size(76, 31);
+            this.CurrentWidthLabel.Size = new System.Drawing.Size(64, 62);
             this.CurrentWidthLabel.TabIndex = 12;
             this.CurrentWidthLabel.Text = "label1";
             this.CurrentWidthLabel.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
@@ -316,9 +318,9 @@
             this.CurrentHeightLabel.Anchor = System.Windows.Forms.AnchorStyles.Left;
             this.CurrentHeightLabel.AutoSize = true;
             this.CurrentHeightLabel.Font = new System.Drawing.Font("Segoe UI", 13.8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
-            this.CurrentHeightLabel.Location = new System.Drawing.Point(428, 91);
+            this.CurrentHeightLabel.Location = new System.Drawing.Point(428, 75);
             this.CurrentHeightLabel.Name = "CurrentHeightLabel";
-            this.CurrentHeightLabel.Size = new System.Drawing.Size(76, 31);
+            this.CurrentHeightLabel.Size = new System.Drawing.Size(64, 62);
             this.CurrentHeightLabel.TabIndex = 13;
             this.CurrentHeightLabel.Text = "label2";
             this.CurrentHeightLabel.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
@@ -328,9 +330,9 @@
             this.CurrentMinesLabel.Anchor = System.Windows.Forms.AnchorStyles.Left;
             this.CurrentMinesLabel.AutoSize = true;
             this.CurrentMinesLabel.Font = new System.Drawing.Font("Segoe UI", 13.8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
-            this.CurrentMinesLabel.Location = new System.Drawing.Point(428, 162);
+            this.CurrentMinesLabel.Location = new System.Drawing.Point(428, 146);
             this.CurrentMinesLabel.Name = "CurrentMinesLabel";
-            this.CurrentMinesLabel.Size = new System.Drawing.Size(76, 31);
+            this.CurrentMinesLabel.Size = new System.Drawing.Size(64, 62);
             this.CurrentMinesLabel.TabIndex = 14;
             this.CurrentMinesLabel.Text = "label3";
             this.CurrentMinesLabel.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
@@ -340,9 +342,9 @@
             this.CurrentMinutesLabel.Anchor = System.Windows.Forms.AnchorStyles.Left;
             this.CurrentMinutesLabel.AutoSize = true;
             this.CurrentMinutesLabel.Font = new System.Drawing.Font("Segoe UI", 13.8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
-            this.CurrentMinutesLabel.Location = new System.Drawing.Point(428, 234);
+            this.CurrentMinutesLabel.Location = new System.Drawing.Point(428, 219);
             this.CurrentMinutesLabel.Name = "CurrentMinutesLabel";
-            this.CurrentMinutesLabel.Size = new System.Drawing.Size(76, 31);
+            this.CurrentMinutesLabel.Size = new System.Drawing.Size(64, 62);
             this.CurrentMinutesLabel.TabIndex = 15;
             this.CurrentMinutesLabel.Text = "label4";
             this.CurrentMinutesLabel.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
@@ -378,7 +380,7 @@
             this.StartGameButton.Location = new System.Drawing.Point(5, 5);
             this.StartGameButton.Margin = new System.Windows.Forms.Padding(5);
             this.StartGameButton.Name = "StartGameButton";
-            this.StartGameButton.Size = new System.Drawing.Size(256, 52);
+            this.StartGameButton.Size = new System.Drawing.Size(240, 52);
             this.StartGameButton.TabIndex = 9;
             this.StartGameButton.Text = "Start Game";
             this.StartGameButton.UseVisualStyleBackColor = true;
@@ -388,10 +390,10 @@
             // 
             this.CanselButton.Dock = System.Windows.Forms.DockStyle.Fill;
             this.CanselButton.Font = new System.Drawing.Font("Segoe UI", 13.8F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point);
-            this.CanselButton.Location = new System.Drawing.Point(271, 5);
+            this.CanselButton.Location = new System.Drawing.Point(255, 5);
             this.CanselButton.Margin = new System.Windows.Forms.Padding(5);
             this.CanselButton.Name = "CanselButton";
-            this.CanselButton.Size = new System.Drawing.Size(256, 52);
+            this.CanselButton.Size = new System.Drawing.Size(241, 52);
             this.CanselButton.TabIndex = 10;
             this.CanselButton.Text = "Cansel";
             this.CanselButton.UseVisualStyleBackColor = true;
@@ -409,14 +411,14 @@
             this.tableLayoutPanel8.Name = "tableLayoutPanel8";
             this.tableLayoutPanel8.RowCount = 1;
             this.tableLayoutPanel8.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 100F));
-            this.tableLayoutPanel8.Size = new System.Drawing.Size(532, 62);
+            this.tableLayoutPanel8.Size = new System.Drawing.Size(501, 62);
             this.tableLayoutPanel8.TabIndex = 1;
             // 
             // CustomGameUI
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 20F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(532, 353);
+            this.ClientSize = new System.Drawing.Size(501, 353);
             this.Controls.Add(this.tableLayoutPanel8);
             this.Controls.Add(this.tableLayoutPanel1);
             this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));

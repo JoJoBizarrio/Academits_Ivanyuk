@@ -28,6 +28,7 @@
         /// </summary>
         private void InitializeComponent()
         {
+            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(CustomGameUI));
             this.tableLayoutPanel1 = new System.Windows.Forms.TableLayoutPanel();
             this.tableLayoutPanel2 = new System.Windows.Forms.TableLayoutPanel();
             this.WidthLabel = new System.Windows.Forms.Label();
@@ -250,6 +251,7 @@
             | System.Windows.Forms.AnchorStyles.Right)));
             this.WidthTrackBar.LargeChange = 3;
             this.WidthTrackBar.Location = new System.Drawing.Point(162, 3);
+            this.WidthTrackBar.Maximum = 30;
             this.WidthTrackBar.Minimum = 9;
             this.WidthTrackBar.Name = "WidthTrackBar";
             this.WidthTrackBar.Size = new System.Drawing.Size(260, 65);
@@ -262,18 +264,21 @@
             this.HeightTrackBar.Dock = System.Windows.Forms.DockStyle.Fill;
             this.HeightTrackBar.LargeChange = 1;
             this.HeightTrackBar.Location = new System.Drawing.Point(162, 74);
+            this.HeightTrackBar.Maximum = 24;
             this.HeightTrackBar.Minimum = 9;
             this.HeightTrackBar.Name = "HeightTrackBar";
             this.HeightTrackBar.Size = new System.Drawing.Size(260, 65);
             this.HeightTrackBar.TabIndex = 9;
             this.HeightTrackBar.TickStyle = System.Windows.Forms.TickStyle.Both;
             this.HeightTrackBar.Value = 9;
+            this.HeightTrackBar.Scroll += new System.EventHandler(this.HeightTrackBar_Scroll);
             // 
             // MinesCountTrackBar
             // 
             this.MinesCountTrackBar.Dock = System.Windows.Forms.DockStyle.Fill;
             this.MinesCountTrackBar.LargeChange = 1;
             this.MinesCountTrackBar.Location = new System.Drawing.Point(162, 145);
+            this.MinesCountTrackBar.Maximum = 28;
             this.MinesCountTrackBar.Minimum = 9;
             this.MinesCountTrackBar.Name = "MinesCountTrackBar";
             this.MinesCountTrackBar.Size = new System.Drawing.Size(260, 65);
@@ -286,12 +291,13 @@
             this.MinutesCountTrackBar.Dock = System.Windows.Forms.DockStyle.Fill;
             this.MinutesCountTrackBar.LargeChange = 1;
             this.MinutesCountTrackBar.Location = new System.Drawing.Point(162, 216);
-            this.MinutesCountTrackBar.Minimum = 9;
+            this.MinutesCountTrackBar.Maximum = 200;
+            this.MinutesCountTrackBar.Minimum = 10;
             this.MinutesCountTrackBar.Name = "MinutesCountTrackBar";
             this.MinutesCountTrackBar.Size = new System.Drawing.Size(260, 68);
             this.MinutesCountTrackBar.TabIndex = 11;
             this.MinutesCountTrackBar.TickStyle = System.Windows.Forms.TickStyle.Both;
-            this.MinutesCountTrackBar.Value = 9;
+            this.MinutesCountTrackBar.Value = 10;
             // 
             // CurrentWidthLabel
             // 
@@ -413,6 +419,7 @@
             this.ClientSize = new System.Drawing.Size(532, 353);
             this.Controls.Add(this.tableLayoutPanel8);
             this.Controls.Add(this.tableLayoutPanel1);
+            this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
             this.Name = "CustomGameUI";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterParent;
             this.Text = "Custom game";

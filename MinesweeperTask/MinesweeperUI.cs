@@ -20,8 +20,6 @@ namespace MinesweeperTask
         public MinesweeperUI()
         {
             InitializeComponent();
-
-            MediumDifficultyToolStripMenuItem_Click(this, new EventArgs());
         }
 
         public void MinesweeperUI_MouseDown(object? sender, MouseEventArgs e)
@@ -208,9 +206,10 @@ namespace MinesweeperTask
                     _buttons[i, j].Width = 30;
                     _buttons[i, j].Margin = Padding.Empty;
                     _buttons[i, j].Dock = DockStyle.Fill;
-                    FieldTableLayoutPanel.Controls.Add(_buttons[i, j], i, j);
                     _buttons[i, j].BackgroundImageLayout = ImageLayout.Stretch;
                     _buttons[i, j].MouseDown += MinesweeperUI_MouseDown;
+
+                    FieldTableLayoutPanel.Controls.Add(_buttons[i, j], i, j);
                     _buttons[i, j].Text = _minesweeper.Field[i, j].ToString();
 
                 }
@@ -225,7 +224,10 @@ namespace MinesweeperTask
             Enabled = false;
 
             CustomGameUI customGame = new CustomGameUI();
+            customGame.Activate();
+            customGame.BringToFront();
             customGame.Show();
+
 
             customGame.Disposed += CustomGame_Disposed;
         }

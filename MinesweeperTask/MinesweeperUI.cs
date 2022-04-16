@@ -6,16 +6,16 @@ namespace MinesweeperTask
 
         private Button[,] _buttons;
 
-        Image number1 = Image.FromFile("..\\number1.png");
-        Image number2 = Image.FromFile("..\\number2.png");
-        Image number3 = Image.FromFile("..\\number3.png");
-        Image number4 = Image.FromFile("..\\number4.png");
-        Image number5 = Image.FromFile("..\\number5.png");
-        Image number6 = Image.FromFile("..\\number6.png");
-        Image number7 = Image.FromFile("..\\number7.png");
-        Image number8 = Image.FromFile("..\\number8.png");
-        Image mine = Image.FromFile("..\\mine.png");
-        Image flag = Image.FromFile("..\\flag.png");
+        private Image _number1 = Image.FromFile("..\\number1.png");
+        private Image _number2 = Image.FromFile("..\\number2.png");
+        private Image _number3 = Image.FromFile("..\\number3.png");
+        private Image _number4 = Image.FromFile("..\\number4.png");
+        private Image _number5 = Image.FromFile("..\\number5.png");
+        private Image _number6 = Image.FromFile("..\\number6.png");
+        private Image _number7 = Image.FromFile("..\\number7.png");
+        private Image _number8 = Image.FromFile("..\\number8.png");
+        private Image _mine = Image.FromFile("..\\mine.png");
+        private Image _flag = Image.FromFile("..\\flag.png");
 
         public MinesweeperUI()
         {
@@ -41,7 +41,7 @@ namespace MinesweeperTask
                 {
                     if (currentButton.BackgroundImage == null)
                     {
-                        currentButton.BackgroundImage = flag;
+                        currentButton.BackgroundImage = _flag;
                         MineCounterLable.Text = (Convert.ToInt32(MineCounterLable.Text) - 1).ToString();
 
                         _minesweeper.LockCell(i, j);
@@ -68,7 +68,7 @@ namespace MinesweeperTask
                     }
                     else if (value == 9)
                     {
-                        FieldTableLayoutPanel.Controls[buttonIndex].BackgroundImage = mine;
+                        FieldTableLayoutPanel.Controls[buttonIndex].BackgroundImage = _mine;
                         //TODO: функция о конце игры , откртыия поля и диаолговое окно.
                     }
                     else
@@ -83,14 +83,14 @@ namespace MinesweeperTask
         {
             for (int i = x - 1; i <= x + 1; i++)
             {
-                if (i < 0 || i >= _minesweeper.SizeX)
+                if (i < 0 || i >= _minesweeper.FieldWidth)
                 {
                     continue;
                 }
 
                 for (int j = y - 1; j <= y + 1; j++)
                 {
-                    if (j < 0 || j >= _minesweeper.SizeY)
+                    if (j < 0 || j >= _minesweeper.FieldHeight)
                     {
                         continue;
                     }
@@ -123,42 +123,42 @@ namespace MinesweeperTask
             {
                 case 1:
                     {
-                        FieldTableLayoutPanel.Controls[buttonIndex].BackgroundImage = number1;
+                        FieldTableLayoutPanel.Controls[buttonIndex].BackgroundImage = _number1;
                         break;
                     }
                 case 2:
                     {
-                        FieldTableLayoutPanel.Controls[buttonIndex].BackgroundImage = number2;
+                        FieldTableLayoutPanel.Controls[buttonIndex].BackgroundImage = _number2;
                         break;
                     }
                 case 3:
                     {
-                        FieldTableLayoutPanel.Controls[buttonIndex].BackgroundImage = number3;
+                        FieldTableLayoutPanel.Controls[buttonIndex].BackgroundImage = _number3;
                         break;
                     }
                 case 4:
                     {
-                        FieldTableLayoutPanel.Controls[buttonIndex].BackgroundImage = number4;
+                        FieldTableLayoutPanel.Controls[buttonIndex].BackgroundImage = _number4;
                         break;
                     }
                 case 5:
                     {
-                        FieldTableLayoutPanel.Controls[buttonIndex].BackgroundImage = number5;
+                        FieldTableLayoutPanel.Controls[buttonIndex].BackgroundImage = _number5;
                         break;
                     }
                 case 6:
                     {
-                        FieldTableLayoutPanel.Controls[buttonIndex].BackgroundImage = number6;
+                        FieldTableLayoutPanel.Controls[buttonIndex].BackgroundImage = _number6;
                         break;
                     }
                 case 7:
                     {
-                        FieldTableLayoutPanel.Controls[buttonIndex].BackgroundImage = number7;
+                        FieldTableLayoutPanel.Controls[buttonIndex].BackgroundImage = _number7;
                         break;
                     }
                 case 8:
                     {
-                        FieldTableLayoutPanel.Controls[buttonIndex].BackgroundImage = number8;
+                        FieldTableLayoutPanel.Controls[buttonIndex].BackgroundImage = _number8;
                         break;
                     }
             }

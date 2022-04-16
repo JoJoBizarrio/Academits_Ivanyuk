@@ -4,6 +4,10 @@
     {
         public int[,] Field { get; set; }
 
+        public int FieldWidth { get; private set; }
+
+        public int FieldHeight { get; private set; }
+
         private Point[] MinesCoorditanes { get; set; }
 
         public int[,] LockedButtons { get; set; }
@@ -12,29 +16,26 @@
 
         public int MinesCount { get; set; }
 
-        public int SizeX { get; private set; }
 
-        public int SizeY { get; private set; }
-
-        public Minesweeper(int sizeX, int sizeY, int minesCount, int minutesCount)
+        public Minesweeper(int fieldWidth, int fieldHeight, int minesCount, int minutesCount)
         {
-            Field = new int[sizeX, sizeY];
-            LockedButtons = new int[sizeX, sizeY];
+            Field = new int[fieldWidth, fieldHeight];
+            LockedButtons = new int[fieldWidth, fieldHeight];
             MinesCoorditanes = new Point[minesCount];
 
             MinesCount = minesCount;
             MinutesCount = minutesCount;
-            SizeX = sizeX;
-            SizeY = sizeY;
+            FieldWidth = fieldWidth;
+            FieldHeight = fieldHeight;
 
             Random randomСoordinate = new Random();
 
             for (int i = 0; i < minesCount; ++i)
             {
-                int randomСoordinateX = randomСoordinate.Next(sizeX);
-                int randomСoordinateY = randomСoordinate.Next(sizeY);
+                int randomСoordinateX = randomСoordinate.Next(FieldWidth);
+                int randomСoordinateY = randomСoordinate.Next(FieldHeight);
 
-                if (Field[randomСoordinateX, randomСoordinateY] >= 0)
+                if (Field[randomСoordinateX, randomСoordinateY] < 9)
                 {
                     Field[randomСoordinateX, randomСoordinateY] = 9;
 
@@ -50,14 +51,14 @@
             {
                 for (int j = MinesCoorditanes[i].X - 1; j <= MinesCoorditanes[i].X + 1; ++j)
                 {
-                    if (j < 0 || j >= sizeX)
+                    if (j < 0 || j >= FieldWidth)
                     {
                         continue;
                     }
 
                     for (int k = MinesCoorditanes[i].Y - 1; k <= MinesCoorditanes[i].Y + 1; ++k)
                     {
-                        if (k < 0 || k >= sizeY)
+                        if (k < 0 || k >= FieldHeight)
                         {
                             continue;
                         }

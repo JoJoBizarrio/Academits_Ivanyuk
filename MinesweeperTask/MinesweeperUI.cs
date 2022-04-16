@@ -166,21 +166,9 @@ namespace MinesweeperTask
             FieldTableLayoutPanel.Controls[buttonIndex].Enabled = false;
         }
 
-
-        private void menuStrip1_ItemClicked(object sender, ToolStripItemClickedEventArgs e)
-        {
-
-        }
-
         private void ExitToolStripMenuItem_Click(object sender, EventArgs e)
         {
             Dispose();
-        }
-
-        private void CustomGameToolStripMenuItem_Click(object sender, EventArgs e)
-        {
-            CustomGame customGame = new CustomGame();
-            customGame.Show();
         }
 
         private void EasyDifficultyToolStripMenuItem_Click(object sender, EventArgs e)
@@ -190,7 +178,12 @@ namespace MinesweeperTask
 
         private void MediumDifficultyToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            StartNewCustomGame(18, 18, 40, 20);
+            StartNewCustomGame(16, 16, 40, 40);
+        }
+
+        private void HardDifficultyToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            StartNewCustomGame(30, 16, 99, 40);
         }
 
         private void StartNewCustomGame(int sizeX, int sizeY, int minesCount, int minutesCount)
@@ -222,11 +215,13 @@ namespace MinesweeperTask
             }
         }
 
-        private void FieldTableLayoutPanel_Paint(object sender, PaintEventArgs e)
+        // Окно CustomGame:
+        private void CustomGameToolStripMenuItem_Click(object sender, EventArgs e)
         {
-
+            CustomGame customGame = new CustomGame();
+            customGame.Show();
         }
 
-        
+
     }
 }

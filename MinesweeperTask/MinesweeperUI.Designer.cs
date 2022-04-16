@@ -35,8 +35,7 @@
             this.NewGameToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.EasyDifficultyToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.MediumDifficultyToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.HighDifficultyToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.ExpertDifficultyToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.HardDifficultyToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.CustomGameToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.ExitToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.HighScoresToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
@@ -64,7 +63,6 @@
             this.MenuStrip.Size = new System.Drawing.Size(782, 28);
             this.MenuStrip.TabIndex = 2;
             this.MenuStrip.Text = "Menu";
-            this.MenuStrip.ItemClicked += new System.Windows.Forms.ToolStripItemClickedEventHandler(this.menuStrip1_ItemClicked);
             // 
             // GameToolStripMenuItem
             // 
@@ -81,49 +79,43 @@
             this.NewGameToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.EasyDifficultyToolStripMenuItem,
             this.MediumDifficultyToolStripMenuItem,
-            this.HighDifficultyToolStripMenuItem,
-            this.ExpertDifficultyToolStripMenuItem});
+            this.HardDifficultyToolStripMenuItem});
             this.NewGameToolStripMenuItem.Name = "NewGameToolStripMenuItem";
-            this.NewGameToolStripMenuItem.Size = new System.Drawing.Size(184, 26);
+            this.NewGameToolStripMenuItem.Size = new System.Drawing.Size(224, 26);
             this.NewGameToolStripMenuItem.Text = "New game";
             // 
             // EasyDifficultyToolStripMenuItem
             // 
             this.EasyDifficultyToolStripMenuItem.Name = "EasyDifficultyToolStripMenuItem";
-            this.EasyDifficultyToolStripMenuItem.Size = new System.Drawing.Size(147, 26);
+            this.EasyDifficultyToolStripMenuItem.Size = new System.Drawing.Size(224, 26);
             this.EasyDifficultyToolStripMenuItem.Text = "Easy";
             this.EasyDifficultyToolStripMenuItem.Click += new System.EventHandler(this.EasyDifficultyToolStripMenuItem_Click);
             // 
             // MediumDifficultyToolStripMenuItem
             // 
             this.MediumDifficultyToolStripMenuItem.Name = "MediumDifficultyToolStripMenuItem";
-            this.MediumDifficultyToolStripMenuItem.Size = new System.Drawing.Size(147, 26);
+            this.MediumDifficultyToolStripMenuItem.Size = new System.Drawing.Size(224, 26);
             this.MediumDifficultyToolStripMenuItem.Text = "Medium";
             this.MediumDifficultyToolStripMenuItem.Click += new System.EventHandler(this.MediumDifficultyToolStripMenuItem_Click);
             // 
-            // HighDifficultyToolStripMenuItem
+            // HardDifficultyToolStripMenuItem
             // 
-            this.HighDifficultyToolStripMenuItem.Name = "HighDifficultyToolStripMenuItem";
-            this.HighDifficultyToolStripMenuItem.Size = new System.Drawing.Size(147, 26);
-            this.HighDifficultyToolStripMenuItem.Text = "High";
-            // 
-            // ExpertDifficultyToolStripMenuItem
-            // 
-            this.ExpertDifficultyToolStripMenuItem.Name = "ExpertDifficultyToolStripMenuItem";
-            this.ExpertDifficultyToolStripMenuItem.Size = new System.Drawing.Size(147, 26);
-            this.ExpertDifficultyToolStripMenuItem.Text = "Expert";
+            this.HardDifficultyToolStripMenuItem.Name = "HardDifficultyToolStripMenuItem";
+            this.HardDifficultyToolStripMenuItem.Size = new System.Drawing.Size(224, 26);
+            this.HardDifficultyToolStripMenuItem.Text = "Hard";
+            this.HardDifficultyToolStripMenuItem.Click += new System.EventHandler(this.HardDifficultyToolStripMenuItem_Click);
             // 
             // CustomGameToolStripMenuItem
             // 
             this.CustomGameToolStripMenuItem.Name = "CustomGameToolStripMenuItem";
-            this.CustomGameToolStripMenuItem.Size = new System.Drawing.Size(184, 26);
+            this.CustomGameToolStripMenuItem.Size = new System.Drawing.Size(224, 26);
             this.CustomGameToolStripMenuItem.Text = "Custom game";
             this.CustomGameToolStripMenuItem.Click += new System.EventHandler(this.CustomGameToolStripMenuItem_Click);
             // 
             // ExitToolStripMenuItem
             // 
             this.ExitToolStripMenuItem.Name = "ExitToolStripMenuItem";
-            this.ExitToolStripMenuItem.Size = new System.Drawing.Size(184, 26);
+            this.ExitToolStripMenuItem.Size = new System.Drawing.Size(224, 26);
             this.ExitToolStripMenuItem.Text = "Exit";
             this.ExitToolStripMenuItem.Click += new System.EventHandler(this.ExitToolStripMenuItem_Click);
             // 
@@ -144,7 +136,7 @@
             // AboutToolStripMenuItem
             // 
             this.AboutToolStripMenuItem.Name = "AboutToolStripMenuItem";
-            this.AboutToolStripMenuItem.Size = new System.Drawing.Size(133, 26);
+            this.AboutToolStripMenuItem.Size = new System.Drawing.Size(224, 26);
             this.AboutToolStripMenuItem.Text = "About";
             // 
             // tableLayoutPanel1
@@ -223,7 +215,6 @@
             this.FieldTableLayoutPanel.RowStyles.Add(new System.Windows.Forms.RowStyle());
             this.FieldTableLayoutPanel.Size = new System.Drawing.Size(20, 20);
             this.FieldTableLayoutPanel.TabIndex = 1;
-            this.FieldTableLayoutPanel.Paint += new System.Windows.Forms.PaintEventHandler(this.FieldTableLayoutPanel_Paint);
             // 
             // MinesweeperUI
             // 
@@ -262,8 +253,7 @@
         private TableLayoutPanel FieldTableLayoutPanel;
         private ToolStripMenuItem EasyDifficultyToolStripMenuItem;
         private ToolStripMenuItem MediumDifficultyToolStripMenuItem;
-        private ToolStripMenuItem HighDifficultyToolStripMenuItem;
-        private ToolStripMenuItem ExpertDifficultyToolStripMenuItem;
+        private ToolStripMenuItem HardDifficultyToolStripMenuItem;
         private System.Windows.Forms.Timer timer1;
     }
 }

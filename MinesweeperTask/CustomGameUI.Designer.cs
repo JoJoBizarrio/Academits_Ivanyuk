@@ -397,6 +397,7 @@
             this.CanselButton.TabIndex = 10;
             this.CanselButton.Text = "Cansel";
             this.CanselButton.UseVisualStyleBackColor = true;
+            this.CanselButton.Click += new System.EventHandler(this.CanselButton_Click);
             // 
             // tableLayoutPanel8
             // 

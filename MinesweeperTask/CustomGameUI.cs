@@ -98,9 +98,17 @@
             }
         }
 
-        private void StartGameButton_Click(object sender, EventArgs e)
+        public void StartGameButton_Click(object sender, EventArgs e)
         {
+            MinesweeperLogic minesweeper = new MinesweeperLogic(WidthTrackBar.Value, HeightTrackBar.Value, MinesCountTrackBar.Value, MinutesCountTrackBar.Value);
 
+
+            Dispose();
+        }
+
+        private void CanselButton_Click(object sender, EventArgs e)
+        {
+            Dispose();
         }
     }
 }

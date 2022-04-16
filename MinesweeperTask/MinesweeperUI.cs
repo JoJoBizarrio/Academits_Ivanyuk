@@ -3,8 +3,9 @@ namespace MinesweeperTask
     public partial class MinesweeperUI : Form
     {
         private MinesweeperLogic _minesweeper;
-
         private Button[,] _buttons;
+        private int _minutesCount;
+        private int _secondCount;
 
         private Image _number1 = Image.FromFile("..\\number1.png");
         private Image _number2 = Image.FromFile("..\\number2.png");
@@ -20,6 +21,10 @@ namespace MinesweeperTask
         public MinesweeperUI()
         {
             InitializeComponent();
+
+            CountdownTimerLabel.Text = $"00:00";
+
+            EasyDifficultyToolStripMenuItem_Click(new object(), new EventArgs());
         }
 
         public void MinesweeperUI_MouseDown(object? sender, MouseEventArgs e)
@@ -171,27 +176,32 @@ namespace MinesweeperTask
 
         private void EasyDifficultyToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            StartNewCustomGame(9, 9, 10, 10);
+            StartNewGame(9, 9, 10, 10);
         }
 
         private void MediumDifficultyToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            StartNewCustomGame(16, 16, 40, 40);
+            StartNewGame(16, 16, 40, 40);
         }
 
         private void HardDifficultyToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            StartNewCustomGame(30, 16, 99, 40);
+            StartNewGame(30, 16, 99, 80);
         }
 
-        private void StartNewCustomGame(int sizeX, int sizeY, int minesCount, int minutesCount)
+        public void StartNewGame(int sizeX, int sizeY, int minesCount, int minutesCount)
         {
             Enabled = false;
 
             _minesweeper = new MinesweeperLogic(sizeX, sizeY, minesCount, minutesCount);
             _buttons = new Button[sizeX, sizeY];
             MineCounterLable.Text = minesCount.ToString();
-            
+
+            _minutesCount = 2;
+            CountdownTimer.Interval = 1000;
+            CountdownTimer.Enabled = true;
+            CountdownTimer.Start();
+
             FieldTableLayoutPanel.Controls.Clear();
 
             FieldTableLayoutPanel.RowCount = sizeX;
@@ -211,11 +221,15 @@ namespace MinesweeperTask
 
                     FieldTableLayoutPanel.Controls.Add(_buttons[i, j], i, j);
                     _buttons[i, j].Text = _minesweeper.Field[i, j].ToString();
-
                 }
             }
 
             Enabled = true;
+        }
+
+        private void GetGameOver()
+        {
+
         }
 
         // Окно CustomGame:
@@ -228,7 +242,6 @@ namespace MinesweeperTask
             customGame.BringToFront();
             customGame.Show();
 
-
             customGame.Disposed += CustomGame_Disposed;
         }
 
@@ -240,6 +253,22 @@ namespace MinesweeperTask
         private void CountdownTimer_Tick(object sender, EventArgs e)
         {
 
+            if (_secondCount == 0)
+            {
+                if (_minutesCount == 0)
+                {
+                    GetGameOver();
+                }
+
+                _minutesCount -= 1;
+                _secondCount = 59;
+                CountdownTimerLabel.Text = $"{_minutesCount}:{_secondCount}";
+            }
+            else
+            {
+                _secondCount -= 1;
+                CountdownTimerLabel.Text = $"{_minutesCount}:{_secondCount}";
+            }
         }
     }
 }

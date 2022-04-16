@@ -1,22 +1,35 @@
-﻿using System.Text;
-
-namespace GraphTask
+﻿namespace GraphTask
 {
     internal class Graph
     {
-        private int[,] _graph;
+        private double[,] _graph;
 
-        public int PeeksCount { get => _graph.GetLength(0); private set => throw new NotImplementedException(); }
+        public int PeeksCount { get => _graph.GetLength(0); }
 
-        public int this[int rowIndex, int columnIndex]
+        public double this[int rowIndex, int columnIndex]
         {
-            get { CheckRowIndex(rowIndex); CheckColumnIndex(columnIndex); return _graph[rowIndex, columnIndex]; }
-            set { CheckRowIndex(rowIndex); CheckColumnIndex(columnIndex); if (rowIndex != columnIndex) { _graph[rowIndex, columnIndex] = value; } }
+            get
+            {
+                CheckRowIndex(rowIndex);
+                CheckColumnIndex(columnIndex);
+
+                return _graph[rowIndex, columnIndex];
+            }
+            set
+            {
+                CheckRowIndex(rowIndex);
+                CheckColumnIndex(columnIndex);
+
+                if (rowIndex != columnIndex)
+                {
+                    _graph[rowIndex, columnIndex] = value;
+                }
+            }
         }
 
         public Graph(int peeksCount)
         {
-            _graph = new int[peeksCount, peeksCount];
+            _graph = new double[peeksCount, peeksCount];
         }
 
         public void ConnectPeeks(int peek1Number, int peek2Number)
@@ -28,72 +41,60 @@ namespace GraphTask
             }
         }
 
-        public string BypassByWidth()
+        public void BypassByWidth(Func<double, double> func)
         {
-            NullifyDiagonal();
-
-            StringBuilder stringBuilder = new StringBuilder();
             Queue<int> queue = new Queue<int>();
             bool[] visited = new bool[PeeksCount];
 
-            stringBuilder.Append('[');
             queue.Enqueue(0);
 
             while (queue.Count > 0)
             {
                 int peekNumber = queue.Dequeue();
-                stringBuilder.Append(peekNumber);
-                stringBuilder.Append(", ");
 
                 for (int i = 0; i < PeeksCount; ++i)
                 {
-                    if (!visited[i] && _graph[peekNumber, i] > 0)
+                    if (_graph[peekNumber, i] > 0)
                     {
-                        queue.Enqueue(i);
+                        _graph[peekNumber, i] = func(_graph[peekNumber, i]);
+
+                        if (!visited[i])
+                        {
+                            queue.Enqueue(i);
+                        }
                     }
                 }
 
                 visited[peekNumber] = true;
             }
-
-            stringBuilder.Remove(stringBuilder.Length - 2, 2);
-            stringBuilder.Append(']');
-
-            return stringBuilder.ToString();
         }
 
-        public string BypassByDeep()
+        public void BypassByDeep(Func<double, double> func)
         {
-            NullifyDiagonal();
-
-            StringBuilder stringBuilder = new StringBuilder();
             Stack<int> stack = new Stack<int>();
             bool[] visited = new bool[PeeksCount];
 
-            stringBuilder.Append('[');
             stack.Push(0);
 
             while (stack.Count > 0)
             {
                 int peekNumber = stack.Pop();
-                stringBuilder.Append(peekNumber);
-                stringBuilder.Append(", ");
 
                 for (int i = PeeksCount - 1; i >= 0; --i)
                 {
-                    if (!visited[i] && _graph[peekNumber, i] > 0)
+                    if (_graph[peekNumber, i] > 0)
                     {
-                        stack.Push(i);
+                        _graph[peekNumber, i] = func(_graph[peekNumber, i]);
+
+                        if (!visited[i])
+                        {
+                            stack.Push(i);
+                        }
                     }
                 }
 
                 visited[peekNumber] = true;
             }
-
-            stringBuilder.Remove(stringBuilder.Length - 2, 2);
-            stringBuilder.Append(']');
-
-            return stringBuilder.ToString();
         }
 
         private void CheckRowIndex(int index)
@@ -109,14 +110,6 @@ namespace GraphTask
             if (index < 0 || index >= _graph.GetLength(1))
             {
                 throw new ArgumentOutOfRangeException($"Index out of range [0; {_graph.GetLength(1) - 1}]");
-            }
-        }
-
-        private void NullifyDiagonal()
-        {
-            for (int i = 0; i < _graph.GetLength(0); ++i)
-            {
-                _graph[i, i] = 0;
             }
         }
     }

@@ -188,6 +188,8 @@ namespace MinesweeperTask
 
         private void StartNewCustomGame(int sizeX, int sizeY, int minesCount, int minutesCount)
         {
+            Enabled = false;
+
             _minesweeper = new Minesweeper(sizeX, sizeY, minesCount, minutesCount);
             _buttons = new Button[sizeX, sizeY];
             MineCounterLable.Text = minesCount.ToString();
@@ -213,15 +215,17 @@ namespace MinesweeperTask
 
                 }
             }
+
+            Enabled = true;
         }
 
         // Окно CustomGame:
         private void CustomGameToolStripMenuItem_Click(object sender, EventArgs e)
         {
+            Enabled = false;
+
             CustomGame customGame = new CustomGame();
             customGame.Show();
         }
-
-
     }
 }

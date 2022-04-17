@@ -121,6 +121,7 @@
             this.WidthLabel.Size = new System.Drawing.Size(81, 31);
             this.WidthLabel.TabIndex = 0;
             this.WidthLabel.Text = "Width";
+            this.WidthLabel.TextAlign = System.Drawing.ContentAlignment.BottomCenter;
             // 
             // WidthRangeLabel
             // 
@@ -169,6 +170,7 @@
             this.HeigthLabel.Size = new System.Drawing.Size(88, 31);
             this.HeigthLabel.TabIndex = 1;
             this.HeigthLabel.Text = "Height";
+            this.HeigthLabel.TextAlign = System.Drawing.ContentAlignment.BottomCenter;
             // 
             // tableLayoutPanel6
             // 
@@ -206,6 +208,7 @@
             this.MinesLabel.Size = new System.Drawing.Size(79, 31);
             this.MinesLabel.TabIndex = 2;
             this.MinesLabel.Text = "Mines";
+            this.MinesLabel.TextAlign = System.Drawing.ContentAlignment.BottomCenter;
             // 
             // tableLayoutPanel7
             // 
@@ -243,6 +246,7 @@
             this.MinutesLabel.Size = new System.Drawing.Size(102, 31);
             this.MinutesLabel.TabIndex = 3;
             this.MinutesLabel.Text = "Minutes";
+            this.MinutesLabel.TextAlign = System.Drawing.ContentAlignment.BottomCenter;
             // 
             // WidthTrackBar
             // 

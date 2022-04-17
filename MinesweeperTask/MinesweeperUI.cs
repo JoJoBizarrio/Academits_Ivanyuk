@@ -2,22 +2,23 @@ namespace MinesweeperTask
 {
     public partial class MinesweeperUI : Form
     {
-        public MinesweeperLogic _minesweeper;
+        internal MinesweeperLogic _minesweeper;
         private CustomGameUI _customGame;
         private Button[,] _buttons;
+
         private int _minutesCount;
         private int _secondCount;
 
-        private Image _number1 = Image.FromFile("..\\number1.png");
-        private Image _number2 = Image.FromFile("..\\number2.png");
-        private Image _number3 = Image.FromFile("..\\number3.png");
-        private Image _number4 = Image.FromFile("..\\number4.png");
-        private Image _number5 = Image.FromFile("..\\number5.png");
-        private Image _number6 = Image.FromFile("..\\number6.png");
-        private Image _number7 = Image.FromFile("..\\number7.png");
-        private Image _number8 = Image.FromFile("..\\number8.png");
-        private Image _mine = Image.FromFile("..\\mine.png");
-        private Image _flag = Image.FromFile("..\\flag.png");
+        private Image _number1Image = Image.FromFile("..\\number1.png");
+        private Image _number2Image = Image.FromFile("..\\number2.png");
+        private Image _number3Image = Image.FromFile("..\\number3.png");
+        private Image _number4Image = Image.FromFile("..\\number4.png");
+        private Image _number5Image = Image.FromFile("..\\number5.png");
+        private Image _number6Image = Image.FromFile("..\\number6.png");
+        private Image _number7Image = Image.FromFile("..\\number7.png");
+        private Image _number8Image = Image.FromFile("..\\number8.png");
+        private Image _mineImage = Image.FromFile("..\\mine.png");
+        private Image _flagImage = Image.FromFile("..\\flag.png");
 
         public MinesweeperUI()
         {
@@ -25,7 +26,7 @@ namespace MinesweeperTask
 
             CountdownTimerLabel.Text = $"00:00";
 
-            EasyDifficultyToolStripMenuItem_Click(new object(), new EventArgs());
+            MediumDifficultyToolStripMenuItem_Click(new object(), new EventArgs());
         }
 
         public void MinesweeperUI_MouseDown(object? sender, MouseEventArgs e)
@@ -45,7 +46,7 @@ namespace MinesweeperTask
                 {
                     if (currentButton.BackgroundImage == null)
                     {
-                        currentButton.BackgroundImage = _flag;
+                        currentButton.BackgroundImage = _flagImage;
                         MineCounterLable.Text = (Convert.ToInt32(MineCounterLable.Text) - 1).ToString();
 
                         _minesweeper.LockCell(i, j);
@@ -72,8 +73,10 @@ namespace MinesweeperTask
                     }
                     else if (value == 9)
                     {
-                        FieldTableLayoutPanel.Controls[buttonIndex].BackgroundImage = _mine;
-                        //TODO: функция о конце игры , откртыия поля и диаолговое окно.
+                        FieldTableLayoutPanel.Controls[buttonIndex].BackgroundImage = _mineImage;
+
+                        OpenMineCells(i, j);
+                        GameOver();
                     }
                     else
                     {
@@ -127,42 +130,42 @@ namespace MinesweeperTask
             {
                 case 1:
                     {
-                        FieldTableLayoutPanel.Controls[buttonIndex].BackgroundImage = _number1;
+                        FieldTableLayoutPanel.Controls[buttonIndex].BackgroundImage = _number1Image;
                         break;
                     }
                 case 2:
                     {
-                        FieldTableLayoutPanel.Controls[buttonIndex].BackgroundImage = _number2;
+                        FieldTableLayoutPanel.Controls[buttonIndex].BackgroundImage = _number2Image;
                         break;
                     }
                 case 3:
                     {
-                        FieldTableLayoutPanel.Controls[buttonIndex].BackgroundImage = _number3;
+                        FieldTableLayoutPanel.Controls[buttonIndex].BackgroundImage = _number3Image;
                         break;
                     }
                 case 4:
                     {
-                        FieldTableLayoutPanel.Controls[buttonIndex].BackgroundImage = _number4;
+                        FieldTableLayoutPanel.Controls[buttonIndex].BackgroundImage = _number4Image;
                         break;
                     }
                 case 5:
                     {
-                        FieldTableLayoutPanel.Controls[buttonIndex].BackgroundImage = _number5;
+                        FieldTableLayoutPanel.Controls[buttonIndex].BackgroundImage = _number5Image;
                         break;
                     }
                 case 6:
                     {
-                        FieldTableLayoutPanel.Controls[buttonIndex].BackgroundImage = _number6;
+                        FieldTableLayoutPanel.Controls[buttonIndex].BackgroundImage = _number6Image;
                         break;
                     }
                 case 7:
                     {
-                        FieldTableLayoutPanel.Controls[buttonIndex].BackgroundImage = _number7;
+                        FieldTableLayoutPanel.Controls[buttonIndex].BackgroundImage = _number7Image;
                         break;
                     }
                 case 8:
                     {
-                        FieldTableLayoutPanel.Controls[buttonIndex].BackgroundImage = _number8;
+                        FieldTableLayoutPanel.Controls[buttonIndex].BackgroundImage = _number8Image;
                         break;
                     }
             }
@@ -221,6 +224,7 @@ namespace MinesweeperTask
                     _buttons[i, j].MouseDown += MinesweeperUI_MouseDown;
 
                     FieldTableLayoutPanel.Controls.Add(_buttons[i, j], i, j);
+                    //TODO: убрать строчку ниже
                     _buttons[i, j].Text = _minesweeper.Field[i, j].ToString();
                 }
             }
@@ -228,9 +232,59 @@ namespace MinesweeperTask
             Enabled = true;
         }
 
-        private void GetGameOver()
+        public void StartCustomNewGame(MinesweeperLogic minesweeper)
         {
+            StartCustomNewGame(minesweeper.FieldHeight, minesweeper.FieldWidth, minesweeper.MinesCount, minesweeper.MinutesCount);
+        }
 
+        private void GameOver()
+        {
+            CountdownTimer.Stop();
+
+            //TODO: диалоговое окно о конце игры, количестве затраченного времени
+        }
+
+        // Волна открывающихся мин равномерно расходящаяся от взрованной мины
+        private void OpenMineCells(int x, int y) 
+        {
+            Queue<Point> minePoints = new Queue<Point>();
+            minePoints.Enqueue(new Point(x, y));
+            bool[,] visited = new bool[_minesweeper.FieldWidth, _minesweeper.FieldHeight];
+
+            while (minePoints.Count > 0)
+            {
+                Point minePoint = minePoints.Dequeue();
+                visited[minePoint.X, minePoint.Y] = true;
+
+                for (int i = minePoint.X - 1; i <= minePoint.X + 1; i++)
+                {
+                    if (i < 0 || i >= _minesweeper.FieldWidth)
+                    {
+                        continue;
+                    }
+
+                    for (int j = minePoint.Y - 1; j <= minePoint.Y + 1; j++)
+                    {
+                        if (j < 0 || j >= _minesweeper.FieldHeight || visited[i, j])
+                        {
+                            continue;
+                        }
+
+                        if (_minesweeper.Field[i, j] < 9)
+                        {
+                            _buttons[i, j].Enabled = false;
+                        }
+
+                        if (_minesweeper.Field[i, j] >= 9)
+                        {
+                            _buttons[i, j].BackgroundImage = _mineImage;
+                            _buttons[i, j].Enabled = false;
+                        }
+
+                        minePoints.Enqueue(new Point(i, j));
+                    }
+                }
+            }
         }
 
         // Окно CustomGame:
@@ -248,18 +302,13 @@ namespace MinesweeperTask
             _customGame.Focus();
             _customGame.Select();
 
-            if (_customGame.StartGameButton.C
-            {
-                StartCustomNewGame(_customGame.FieldHeight, _customGame.FieldWidth, _customGame.MinesCount, _customGame.MinutesCount);
-            }
-
             _customGame.Disposed += CustomGame_Disposed;
         }
 
         public void NewGame(int sizeX, int sizeY, int minesCount, int minutesCount)
         {
-            
-        } 
+
+        }
 
         private void CustomGame_Disposed(object? sender, EventArgs e)
         {
@@ -276,7 +325,8 @@ namespace MinesweeperTask
             {
                 if (_minutesCount == 0)
                 {
-                    GetGameOver();
+                    OpenMineCells(_minesweeper.FieldHeight/2, _minesweeper.FieldWidth/2);
+                    GameOver();
                 }
 
                 _minutesCount -= 1;
@@ -288,6 +338,16 @@ namespace MinesweeperTask
                 _secondCount -= 1;
                 CountdownTimerLabel.Text = $"{_minutesCount}:{_secondCount}";
             }
+        }
+
+        private void HighScoresToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            MessageBox.Show("Soon...", "In developing");
+        }
+
+        private void AboutToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            MessageBox.Show("Soon...", "In developing");
         }
     }
 }

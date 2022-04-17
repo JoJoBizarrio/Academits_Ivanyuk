@@ -106,16 +106,12 @@
             }
         }
 
-        public static void StartGameButton_Click( int sizeX, int sizeY, int minesCount, int minutesCount)
-        {
-            _minesweeper
-
-
-        }
-
         public void StartGameButton_Click(object sender, EventArgs e)
         {
+            MinesweeperUI minesweeper = new MinesweeperUI();
+            MinesweeperLogic minesweeperLogic = new MinesweeperLogic(FieldWidth, FontHeight, MinesCount, MinutesCount);
 
+            minesweeper.StartCustomNewGame(minesweeperLogic);
         }
 
         private void CanselButton_Click(object sender, EventArgs e)

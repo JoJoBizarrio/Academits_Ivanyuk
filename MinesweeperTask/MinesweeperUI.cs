@@ -7,6 +7,7 @@ namespace MinesweeperTask
         private int _minutesCount;
         private int _secondCount;
 
+
         private Image _number1 = Image.FromFile("..\\number1.png");
         private Image _number2 = Image.FromFile("..\\number2.png");
         private Image _number3 = Image.FromFile("..\\number3.png");

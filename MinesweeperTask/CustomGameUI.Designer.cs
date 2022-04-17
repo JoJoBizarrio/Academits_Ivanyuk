@@ -262,6 +262,7 @@
             this.WidthTrackBar.TabIndex = 8;
             this.WidthTrackBar.TickStyle = System.Windows.Forms.TickStyle.Both;
             this.WidthTrackBar.Value = 9;
+            this.WidthTrackBar.Scroll += new System.EventHandler(this.WidthTrackBar_Scroll);
             // 
             // HeightTrackBar
             // 
@@ -464,7 +465,6 @@
         private TrackBar WidthTrackBar;
         private TableLayoutPanel tableLayoutPanel4;
         private TableLayoutPanel tableLayoutPanel5;
-        private Button StartGameButton;
         private Button CanselButton;
         private TableLayoutPanel tableLayoutPanel8;
         private TrackBar HeightTrackBar;
@@ -478,5 +478,6 @@
         private Label HeightRangeLabel;
         private Label MinesRangeLabel;
         private Label MinutesRangeLabel;
+        internal Button StartGameButton;
     }
 }

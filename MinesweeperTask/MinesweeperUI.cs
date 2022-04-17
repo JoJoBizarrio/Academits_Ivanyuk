@@ -2,11 +2,11 @@ namespace MinesweeperTask
 {
     public partial class MinesweeperUI : Form
     {
-        private MinesweeperLogic _minesweeper;
+        public MinesweeperLogic _minesweeper;
+        private CustomGameUI _customGame;
         private Button[,] _buttons;
         private int _minutesCount;
         private int _secondCount;
-
 
         private Image _number1 = Image.FromFile("..\\number1.png");
         private Image _number2 = Image.FromFile("..\\number2.png");
@@ -177,20 +177,20 @@ namespace MinesweeperTask
 
         private void EasyDifficultyToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            StartNewGame(9, 9, 10, 10);
+            StartCustomNewGame(9, 9, 10, 10);
         }
 
         private void MediumDifficultyToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            StartNewGame(16, 16, 40, 40);
+            StartCustomNewGame(16, 16, 40, 40);
         }
 
         private void HardDifficultyToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            StartNewGame(30, 16, 99, 80);
+            StartCustomNewGame(30, 16, 99, 80);
         }
 
-        public void StartNewGame(int sizeX, int sizeY, int minesCount, int minutesCount)
+        public void StartCustomNewGame(int sizeX, int sizeY, int minesCount, int minutesCount)
         {
             Enabled = false;
 
@@ -198,7 +198,7 @@ namespace MinesweeperTask
             _buttons = new Button[sizeX, sizeY];
             MineCounterLable.Text = minesCount.ToString();
 
-            _minutesCount = 2;
+            _minutesCount = minutesCount;
             CountdownTimer.Interval = 1000;
             CountdownTimer.Enabled = true;
             CountdownTimer.Start();
@@ -238,17 +238,35 @@ namespace MinesweeperTask
         {
             Enabled = false;
 
-            CustomGameUI customGame = new CustomGameUI();
-            customGame.Activate();
-            customGame.BringToFront();
-            customGame.Show();
+            _customGame = new CustomGameUI();
 
-            customGame.Disposed += CustomGame_Disposed;
+            SendToBack();
+
+            _customGame.Show();
+            _customGame.BringToFront();
+            _customGame.Activate();
+            _customGame.Focus();
+            _customGame.Select();
+
+            if (_customGame.StartGameButton.C
+            {
+                StartCustomNewGame(_customGame.FieldHeight, _customGame.FieldWidth, _customGame.MinesCount, _customGame.MinutesCount);
+            }
+
+            _customGame.Disposed += CustomGame_Disposed;
         }
+
+        public void NewGame(int sizeX, int sizeY, int minesCount, int minutesCount)
+        {
+            
+        } 
 
         private void CustomGame_Disposed(object? sender, EventArgs e)
         {
             Enabled = true;
+
+            Show();
+            BringToFront();
         }
 
         private void CountdownTimer_Tick(object sender, EventArgs e)

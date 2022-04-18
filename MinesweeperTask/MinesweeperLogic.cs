@@ -10,7 +10,7 @@
 
         private Point[] MinesCoorditanes { get; set; }
 
-        public int[,] LockedButtons { get; set; }
+        public int[,] LockedCells { get; set; }
 
         public int MinutesCount { get; private set; }
 
@@ -20,7 +20,7 @@
         public MinesweeperLogic(int fieldWidth, int fieldHeight, int minesCount, int minutesCount)
         {
             Field = new int[fieldWidth, fieldHeight];
-            LockedButtons = new int[fieldWidth, fieldHeight];
+            //LockedCells = new int[fieldWidth, fieldHeight];
             MinesCoorditanes = new Point[minesCount];
 
             MinesCount = minesCount;

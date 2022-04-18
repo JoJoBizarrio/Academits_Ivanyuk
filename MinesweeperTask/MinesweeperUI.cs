@@ -26,7 +26,7 @@ namespace MinesweeperTask
 
             CountdownTimerLabel.Text = $"00:00";
 
-            HardDifficultyToolStripMenuItem_Click(new object(), new EventArgs());
+            EasyDifficultyToolStripMenuItem_Click(new object(), new EventArgs());
         }
 
         public void MinesweeperUI_MouseDown(object? sender, MouseEventArgs e)

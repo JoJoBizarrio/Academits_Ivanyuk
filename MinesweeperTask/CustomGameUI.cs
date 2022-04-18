@@ -108,10 +108,14 @@
 
         public void StartGameButton_Click(object sender, EventArgs e)
         {
-            MinesweeperUI minesweeper = new MinesweeperUI();
-            MinesweeperLogic minesweeperLogic = new MinesweeperLogic(FieldWidth, FontHeight, MinesCount, MinutesCount);
+            MinesweeperUI minesweeper = this.Owner as MinesweeperUI;
 
-            minesweeper.StartCustomNewGame(minesweeperLogic);
+            if (minesweeper != null)
+            {
+                minesweeper.StartCustomNewGame(FieldWidth, FieldHeight, MinesCount, MinutesCount);
+            }
+
+            Dispose();
         }
 
         private void CanselButton_Click(object sender, EventArgs e)

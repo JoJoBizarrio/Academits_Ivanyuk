@@ -26,7 +26,7 @@ namespace MinesweeperTask
 
             CountdownTimerLabel.Text = $"00:00";
 
-            MediumDifficultyToolStripMenuItem_Click(new object(), new EventArgs());
+            HardDifficultyToolStripMenuItem_Click(new object(), new EventArgs());
         }
 
         public void MinesweeperUI_MouseDown(object? sender, MouseEventArgs e)
@@ -290,17 +290,16 @@ namespace MinesweeperTask
         // Окно CustomGame:
         private void CustomGameToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            Enabled = false;
+            //Enabled = false;
 
             _customGame = new CustomGameUI();
 
-            SendToBack();
-
-            _customGame.Show();
+            _customGame.Owner = this;
+            _customGame.ShowDialog();
             _customGame.BringToFront();
             _customGame.Activate();
-            _customGame.Focus();
-            _customGame.Select();
+
+            SendToBack();
 
             _customGame.Disposed += CustomGame_Disposed;
         }

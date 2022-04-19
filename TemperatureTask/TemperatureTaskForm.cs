@@ -6,7 +6,8 @@ namespace TemperatureTask
         {
             InitializeComponent();
 
-            ConvertButton.Click += ConvertButton_Click;
+            ConvertFromComboBox.Text = "Celsius";
+            ConvertToComboBox.Text = "Celsius";
         }
 
         private void ConvertButton_Click(object sender, EventArgs e)
@@ -14,18 +15,6 @@ namespace TemperatureTask
             if (string.IsNullOrEmpty(InputBox.Text))
             {
                 GetErrorMessageBox(2);
-                return;
-            }
-
-            if (ConvertFromComboBox.Text == "Convert from")
-            {
-                GetErrorMessageBox(3);
-                return;
-            }
-
-            if (ConvertToComboBox.Text == "Convert to")
-            {
-                GetErrorMessageBox(4);
                 return;
             }
 
@@ -131,14 +120,6 @@ namespace TemperatureTask
             else if (errorCode == 2)
             {
                 MessageBox.Show("Input field is empty.", "Error");
-            }
-            else if (errorCode == 3)
-            {
-                MessageBox.Show("Choose the scale from which to convert.", "Error");
-            }
-            else if (errorCode == 4)
-            {
-                MessageBox.Show("Choose the scale to which to convert.", "Error");
             }
         }
     }

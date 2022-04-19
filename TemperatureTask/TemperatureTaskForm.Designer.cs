@@ -112,7 +112,8 @@
             // 
             // ConvertFromComboBox
             // 
-            this.ConvertFromComboBox.FormattingEnabled = true;
+            this.ConvertFromComboBox.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
+            this.ConvertFromComboBox.ImeMode = System.Windows.Forms.ImeMode.Close;
             this.ConvertFromComboBox.Items.AddRange(new object[] {
             "Celsius",
             "Kelvin",
@@ -121,10 +122,10 @@
             this.ConvertFromComboBox.Name = "ConvertFromComboBox";
             this.ConvertFromComboBox.Size = new System.Drawing.Size(137, 28);
             this.ConvertFromComboBox.TabIndex = 1;
-            this.ConvertFromComboBox.Text = "Convert from";
             // 
             // ConvertToComboBox
             // 
+            this.ConvertToComboBox.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             this.ConvertToComboBox.FormattingEnabled = true;
             this.ConvertToComboBox.Items.AddRange(new object[] {
             "Celsius",
@@ -134,7 +135,6 @@
             this.ConvertToComboBox.Name = "ConvertToComboBox";
             this.ConvertToComboBox.Size = new System.Drawing.Size(137, 28);
             this.ConvertToComboBox.TabIndex = 2;
-            this.ConvertToComboBox.Text = "Convert to";
             // 
             // TemperatureTaskForm
             // 

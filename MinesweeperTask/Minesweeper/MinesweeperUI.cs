@@ -24,7 +24,6 @@ namespace MinesweeperTask
         {
             InitializeComponent();
 
-            CountdownTimerLabel.Text = $"00:00";
 
             EasyDifficultyToolStripMenuItem_Click(new object(), new EventArgs());
         }
@@ -38,7 +37,7 @@ namespace MinesweeperTask
                 int buttonIndex = FieldTableLayoutPanel.Controls.IndexOf(currentButton);
 
                 int i = buttonIndex / FieldTableLayoutPanel.RowCount;
-                int j = buttonIndex % FieldTableLayoutPanel.ColumnCount;
+                int j = buttonIndex % FieldTableLayoutPanel.RowCount;
 
                 int value = _minesweeper.Field[i, j];
 
@@ -69,11 +68,12 @@ namespace MinesweeperTask
                 {
                     if (value == 0)
                     {
-                        OpenZeroCells(currentButton, i, j);
+                        OpenZeroCells(i, j);
                     }
                     else if (value == 9)
                     {
-                        FieldTableLayoutPanel.Controls[buttonIndex].BackgroundImage = _mineImage;
+                        currentButton.BackgroundImage = _mineImage;
+                        currentButton.Enabled = false;
 
                         OpenMineCells(i, j);
                         GameOver();
@@ -86,7 +86,7 @@ namespace MinesweeperTask
             }
         }
 
-        private void OpenZeroCells(Button button, int x, int y)
+        private void OpenZeroCells(int x, int y)
         {
             for (int i = x - 1; i <= x + 1; i++)
             {
@@ -111,10 +111,10 @@ namespace MinesweeperTask
                     {
                         _buttons[i, j].Enabled = false;
 
-                        OpenZeroCells(_buttons[i, j], i, j);
+                        OpenZeroCells(i, j);
                     }
 
-                    int buttonIndex = i * FieldTableLayoutPanel.ColumnCount + j;
+                    int buttonIndex = i * FieldTableLayoutPanel.RowCount + j;
 
                     if (_minesweeper.Field[i, j] > 0 && _minesweeper.Field[i, j] < 9)
                     {
@@ -201,19 +201,22 @@ namespace MinesweeperTask
             _buttons = new Button[sizeX, sizeY];
             MineCounterLable.Text = minesCount.ToString();
 
+            FieldTableLayoutPanel.Controls.Clear();
+
+            CountdownTimerLabel.Text = $"00:00";
             _minutesCount = minutesCount;
+            _secondCount = 0;
+
             CountdownTimer.Interval = 1000;
             CountdownTimer.Enabled = true;
             CountdownTimer.Start();
 
-            FieldTableLayoutPanel.Controls.Clear();
+            FieldTableLayoutPanel.RowCount = sizeY;
+            FieldTableLayoutPanel.ColumnCount = sizeX;
 
-            FieldTableLayoutPanel.RowCount = sizeX;
-            FieldTableLayoutPanel.ColumnCount = sizeY;
-
-            for (int i = 0; i < FieldTableLayoutPanel.RowCount; ++i)
+            for (int i = 0; i < FieldTableLayoutPanel.ColumnCount; ++i)
             {
-                for (int j = 0; j < FieldTableLayoutPanel.ColumnCount; ++j)
+                for (int j = 0; j < FieldTableLayoutPanel.RowCount; ++j)
                 {
                     _buttons[i, j] = new Button();
                     _buttons[i, j].Height = 30;
@@ -245,7 +248,7 @@ namespace MinesweeperTask
         }
 
         // Волна открывающихся мин равномерно расходящаяся от взрованной мины
-        private void OpenMineCells(int x, int y) 
+        private void OpenMineCells(int x, int y)
         {
             Queue<Point> minePoints = new Queue<Point>();
             minePoints.Enqueue(new Point(x, y));
@@ -324,7 +327,7 @@ namespace MinesweeperTask
             {
                 if (_minutesCount == 0)
                 {
-                    OpenMineCells(_minesweeper.FieldHeight/2, _minesweeper.FieldWidth/2);
+                    OpenMineCells(_minesweeper.FieldHeight / 2, _minesweeper.FieldWidth / 2);
                     GameOver();
                 }
 

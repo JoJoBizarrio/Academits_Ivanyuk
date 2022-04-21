@@ -1,4 +1,4 @@
-﻿namespace MinesweeperTask
+﻿namespace MinesweeperTask.Minesweeper
 {
     partial class MinesweeperUI
     {
@@ -43,10 +43,10 @@
             this.AboutToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.tableLayoutPanel1 = new System.Windows.Forms.TableLayoutPanel();
             this.tableLayoutPanel2 = new System.Windows.Forms.TableLayoutPanel();
+            this.CountdownTimerLabel = new System.Windows.Forms.Label();
             this.MineCounterLable = new System.Windows.Forms.Label();
             this.FieldTableLayoutPanel = new System.Windows.Forms.TableLayoutPanel();
             this.CountdownTimer = new System.Windows.Forms.Timer(this.components);
-            this.CountdownTimerLabel = new System.Windows.Forms.Label();
             this.MenuStrip.SuspendLayout();
             this.tableLayoutPanel1.SuspendLayout();
             this.tableLayoutPanel2.SuspendLayout();
@@ -125,6 +125,7 @@
             this.HighScoresToolStripMenuItem.Name = "HighScoresToolStripMenuItem";
             this.HighScoresToolStripMenuItem.Size = new System.Drawing.Size(100, 24);
             this.HighScoresToolStripMenuItem.Text = "High scores";
+            this.HighScoresToolStripMenuItem.Click += new System.EventHandler(this.HighScoresToolStripMenuItem_Click);
             // 
             // ReferenceToolStripMenuItem
             // 
@@ -137,8 +138,9 @@
             // AboutToolStripMenuItem
             // 
             this.AboutToolStripMenuItem.Name = "AboutToolStripMenuItem";
-            this.AboutToolStripMenuItem.Size = new System.Drawing.Size(133, 26);
+            this.AboutToolStripMenuItem.Size = new System.Drawing.Size(224, 26);
             this.AboutToolStripMenuItem.Text = "About";
+            this.AboutToolStripMenuItem.Click += new System.EventHandler(this.AboutToolStripMenuItem_Click);
             // 
             // tableLayoutPanel1
             // 
@@ -172,6 +174,19 @@
             this.tableLayoutPanel2.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 100F));
             this.tableLayoutPanel2.Size = new System.Drawing.Size(1000, 71);
             this.tableLayoutPanel2.TabIndex = 0;
+            // 
+            // CountdownTimerLabel
+            // 
+            this.CountdownTimerLabel.AutoSize = true;
+            this.CountdownTimerLabel.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.CountdownTimerLabel.Font = new System.Drawing.Font("Consolas", 22.2F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point);
+            this.CountdownTimerLabel.Location = new System.Drawing.Point(510, 10);
+            this.CountdownTimerLabel.Margin = new System.Windows.Forms.Padding(10);
+            this.CountdownTimerLabel.Name = "CountdownTimerLabel";
+            this.CountdownTimerLabel.Size = new System.Drawing.Size(480, 51);
+            this.CountdownTimerLabel.TabIndex = 1;
+            this.CountdownTimerLabel.Text = "00:00";
+            this.CountdownTimerLabel.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
             // 
             // MineCounterLable
             // 
@@ -221,19 +236,6 @@
             // CountdownTimer
             // 
             this.CountdownTimer.Tick += new System.EventHandler(this.CountdownTimer_Tick);
-            // 
-            // CountdownTimerLabel
-            // 
-            this.CountdownTimerLabel.AutoSize = true;
-            this.CountdownTimerLabel.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.CountdownTimerLabel.Font = new System.Drawing.Font("Consolas", 22.2F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point);
-            this.CountdownTimerLabel.Location = new System.Drawing.Point(510, 10);
-            this.CountdownTimerLabel.Margin = new System.Windows.Forms.Padding(10);
-            this.CountdownTimerLabel.Name = "CountdownTimerLabel";
-            this.CountdownTimerLabel.Size = new System.Drawing.Size(480, 51);
-            this.CountdownTimerLabel.TabIndex = 1;
-            this.CountdownTimerLabel.Text = "00:00";
-            this.CountdownTimerLabel.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
             // 
             // MinesweeperUI
             // 

@@ -1,15 +1,25 @@
-﻿namespace MinesweeperTask
+﻿using MinesweeperTask.Minesweeper;
+
+namespace MinesweeperTask.CustomGame
 {
     public partial class CustomGameUI : Form
     {
+        public int FieldWidth { get => WidthTrackBar.Value; }
+
+        public int FieldHeight { get => HeightTrackBar.Value; }
+
+        public int MinesCount { get => MinesCountTrackBar.Value; }
+
+        public int MinutesCount { get => MinutesCountTrackBar.Value; }
+
         public CustomGameUI()
         {
             InitializeComponent();
 
             CurrentWidthLabel.Text = WidthTrackBar.Minimum.ToString();
-            CurrentHeightLabel.Text = HeightTrackBar.Minimum .ToString();
-            CurrentMinesLabel.Text = MinesCountTrackBar.Minimum .ToString();
-            CurrentMinutesLabel.Text = MinutesCountTrackBar.Minimum .ToString();
+            CurrentHeightLabel.Text = HeightTrackBar.Minimum.ToString();
+            CurrentMinesLabel.Text = MinesCountTrackBar.Minimum.ToString();
+            CurrentMinutesLabel.Text = MinutesCountTrackBar.Minimum.ToString();
 
             WidthRangeLabel.Text = "[9 - 30]";
             HeightRangeLabel.Text = "[9 - 24]";
@@ -93,15 +103,19 @@
 
                 if (trackBar != null)
                 {
-                     CurrentMinutesLabel.Text = trackBar.Value.ToString();
+                    CurrentMinutesLabel.Text = trackBar.Value.ToString();
                 }
             }
         }
 
         public void StartGameButton_Click(object sender, EventArgs e)
         {
-            MinesweeperLogic minesweeper = new MinesweeperLogic(WidthTrackBar.Value, HeightTrackBar.Value, MinesCountTrackBar.Value, MinutesCountTrackBar.Value);
+            MinesweeperUI minesweeper = this.Owner as MinesweeperUI;
 
+            if (minesweeper != null)
+            {
+                minesweeper.StartCustomNewGame(FieldWidth, FieldHeight, MinesCount, MinutesCount);
+            }
 
             Dispose();
         }

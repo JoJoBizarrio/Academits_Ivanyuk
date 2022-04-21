@@ -1,8 +1,8 @@
-﻿namespace MinesweeperTask
+﻿namespace MinesweeperTask.Minesweeper
 {
     public class MinesweeperLogic
     {
-        public int[,] Field { get; set; }
+        public int[,] Field { get; private set; }
 
         public int FieldWidth { get; private set; }
 
@@ -10,7 +10,7 @@
 
         private Point[] MinesCoorditanes { get; set; }
 
-        public int[,] LockedCells { get; set; }
+        public bool[,] IsLockedCell { get; set; }
 
         public int MinutesCount { get; private set; }
 
@@ -19,14 +19,15 @@
 
         public MinesweeperLogic(int fieldWidth, int fieldHeight, int minesCount, int minutesCount)
         {
-            Field = new int[fieldWidth, fieldHeight];
-            //LockedCells = new int[fieldWidth, fieldHeight];
+            FieldWidth = fieldWidth;
+            FieldHeight = fieldHeight;
+            
+            Field = new int[FieldWidth, FieldHeight];
+            IsLockedCell = new bool[FieldWidth, FieldHeight];
             MinesCoorditanes = new Point[minesCount];
 
             MinesCount = minesCount;
             MinutesCount = minutesCount;
-            FieldWidth = fieldWidth;
-            FieldHeight = fieldHeight;
 
             Random randomСoordinate = new Random();
 
@@ -70,16 +71,6 @@
                     }
                 }
             }
-        }
-
-        public void LockCell(int x, int y)
-        {
-            Field[x, y] = -Field[x, y];
-        }
-
-        public void UnlockCell(int x, int y)
-        {
-            LockCell(x, y);
         }
     }
 }

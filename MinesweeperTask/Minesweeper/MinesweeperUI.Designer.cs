@@ -1,4 +1,4 @@
-﻿namespace MinesweeperTask
+﻿namespace MinesweeperTask.Minesweeper
 {
     partial class MinesweeperUI
     {

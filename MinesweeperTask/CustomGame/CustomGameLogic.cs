@@ -1,4 +1,4 @@
-﻿namespace MinesweeperTask
+﻿namespace MinesweeperTask.CustomGame
 {
     internal class CustomGameLogic
     {

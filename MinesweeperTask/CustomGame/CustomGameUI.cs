@@ -1,4 +1,6 @@
-﻿namespace MinesweeperTask
+﻿using MinesweeperTask.Minesweeper;
+
+namespace MinesweeperTask.CustomGame
 {
     public partial class CustomGameUI : Form
     {

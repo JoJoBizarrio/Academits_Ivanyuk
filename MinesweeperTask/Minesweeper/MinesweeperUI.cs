@@ -1,5 +1,6 @@
 using MinesweeperTask.CustomGame;
 using MinesweeperTask.LostGame;
+using MinesweeperTask.WonGame;
 
 namespace MinesweeperTask.Minesweeper
 {
@@ -71,6 +72,7 @@ namespace MinesweeperTask.Minesweeper
                     if (value == 0)
                     {
                         OpenZeroCells(i, j);
+                        CheckIsWin();
                     }
                     else if (value == 9)
                     {
@@ -83,6 +85,7 @@ namespace MinesweeperTask.Minesweeper
                     else
                     {
                         OpenNumericCell(value, currentButton);
+                        CheckIsWin();
                     }
                 }
             }
@@ -116,9 +119,7 @@ namespace MinesweeperTask.Minesweeper
                         OpenZeroCells(i, j);
                     }
 
-                    int buttonIndex = i * FieldTableLayoutPanel.RowCount + j;
-
-                    if (_minesweeper.Field[i, j] > 0 && _minesweeper.Field[i, j] < 9)
+                    if (_minesweeper.Field[i, j] < 9)
                     {
                         OpenNumericCell(_minesweeper.Field[i, j], _buttons[i, j]);
                     }
@@ -175,10 +176,35 @@ namespace MinesweeperTask.Minesweeper
             button.Enabled = false;
         }
 
+        public void CheckIsWin()
+        {
+            for (int i = 0; i < _minesweeper.FieldHeight; i++)
+            {
+                for (int j = 0; j < _minesweeper.FieldWidth; j++)
+                {
+                    if (_minesweeper.Field[i, j] == 9)
+                    {
+                        continue;
+                    }
+
+                    if (_buttons[i, j].Enabled)
+                    {
+                        return;
+                    }
+                }
+            }
+
+            FieldTableLayoutPanel.Enabled = false;
+            CountdownTimer.Stop();
+
+            WonGameUI wonGame = new WonGameUI(_elapsedSecondCount);
+            wonGame.Owner = this;
+            wonGame.ShowDialog();
+        }
 
         private void EasyDifficultyToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            StartCustomNewGame(9, 9, 10, 10);
+            StartCustomNewGame(3, 3, 1, 1);
         }
 
         private void MediumDifficultyToolStripMenuItem_Click(object sender, EventArgs e)
@@ -242,13 +268,11 @@ namespace MinesweeperTask.Minesweeper
         {
             CountdownTimer.Stop();
 
-
             LostGameUI lostGameUI = new LostGameUI(_elapsedSecondCount);
 
             lostGameUI.Owner = this;
 
             lostGameUI.ShowDialog();
-            //TODO: диалоговое окно о конце игры, количестве затраченного времени
         }
 
         // Волна открывающихся мин равномерно расходящаяся от взрованной мины
@@ -310,14 +334,6 @@ namespace MinesweeperTask.Minesweeper
             customGameUI.Disposed += CustomGame_Disposed;
         }
 
-        private void CustomGame_Disposed(object? sender, EventArgs e)
-        {
-            Enabled = true;
-
-            Show();
-            BringToFront();
-        }
-
         private void CountdownTimer_Tick(object sender, EventArgs e)
         {
 
@@ -350,6 +366,14 @@ namespace MinesweeperTask.Minesweeper
         private void AboutToolStripMenuItem_Click(object sender, EventArgs e)
         {
             MessageBox.Show("Soon...", "In developing");
+        }
+
+        private void CustomGame_Disposed(object? sender, EventArgs e)
+        {
+            Enabled = true;
+
+            Show();
+            BringToFront();
         }
     }
 }

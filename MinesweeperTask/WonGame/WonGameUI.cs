@@ -1,11 +1,10 @@
 ﻿using MinesweeperTask.Minesweeper;
 
-namespace MinesweeperTask.LostGame
+namespace MinesweeperTask.WonGame
 {
-    public partial class LostGameUI : Form
+    public partial class WonGameUI : Form
     {
-
-        public LostGameUI(int elapsedSecondCount)
+        public WonGameUI(int elapsedSecondCount)
         {
             InitializeComponent();
 
@@ -23,19 +22,19 @@ namespace MinesweeperTask.LostGame
             Dispose();
         }
 
-        private void HardDifficultyButton_Click(object sender, EventArgs e)
-        {
-            MinesweeperUI minesweeper = this.Owner as MinesweeperUI;
-
-            minesweeper.StartCustomNewGame(16, 16, 40, 40);
-            Dispose();
-        }
-
         private void MediumDifficultyButton_Click(object sender, EventArgs e)
         {
             MinesweeperUI minesweeper = this.Owner as MinesweeperUI;
 
             minesweeper.StartCustomNewGame(30, 16, 99, 80);
+            Dispose();
+        }
+
+        private void HardDifficultyButton_Click(object sender, EventArgs e)
+        {
+            MinesweeperUI minesweeper = this.Owner as MinesweeperUI;
+
+            minesweeper.StartCustomNewGame(16, 16, 40, 40);
             Dispose();
         }
 

@@ -1,6 +1,6 @@
-﻿namespace MinesweeperTask.LostGame
+﻿namespace MinesweeperTask.WonGame
 {
-    partial class LostGameUI
+    partial class WonGameUI
     {
         /// <summary>
         /// Required designer variable.
@@ -28,7 +28,6 @@
         /// </summary>
         private void InitializeComponent()
         {
-            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(LostGameUI));
             this.ElapsedTimeLabel = new System.Windows.Forms.Label();
             this.tableLayoutPanel1 = new System.Windows.Forms.TableLayoutPanel();
             this.label2 = new System.Windows.Forms.Label();
@@ -56,14 +55,14 @@
             this.ElapsedTimeLabel.Font = new System.Drawing.Font("Segoe UI", 13.8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
             this.ElapsedTimeLabel.Location = new System.Drawing.Point(3, 0);
             this.ElapsedTimeLabel.Name = "ElapsedTimeLabel";
-            this.ElapsedTimeLabel.Size = new System.Drawing.Size(377, 52);
+            this.ElapsedTimeLabel.Size = new System.Drawing.Size(376, 52);
             this.ElapsedTimeLabel.TabIndex = 0;
             this.ElapsedTimeLabel.Text = "Elapsed time:";
             this.ElapsedTimeLabel.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
             // 
             // tableLayoutPanel1
             // 
-            this.tableLayoutPanel1.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left)
+            this.tableLayoutPanel1.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
             this.tableLayoutPanel1.ColumnCount = 1;
             this.tableLayoutPanel1.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 100F));
@@ -90,13 +89,13 @@
             this.label2.Name = "label2";
             this.label2.Size = new System.Drawing.Size(674, 58);
             this.label2.TabIndex = 2;
-            this.label2.Text = "You lost game! Try again.";
+            this.label2.Text = "You won game!";
             this.label2.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
             // 
             // tableLayoutPanel2
             // 
-            this.tableLayoutPanel2.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom)
-            | System.Windows.Forms.AnchorStyles.Left)
+            this.tableLayoutPanel2.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
             this.tableLayoutPanel2.ColumnCount = 2;
             this.tableLayoutPanel2.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 56.82492F));
@@ -115,9 +114,9 @@
             this.ElapsedTimeCountLabel.AutoSize = true;
             this.ElapsedTimeCountLabel.Dock = System.Windows.Forms.DockStyle.Fill;
             this.ElapsedTimeCountLabel.Font = new System.Drawing.Font("Segoe UI", 13.8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
-            this.ElapsedTimeCountLabel.Location = new System.Drawing.Point(386, 0);
+            this.ElapsedTimeCountLabel.Location = new System.Drawing.Point(385, 0);
             this.ElapsedTimeCountLabel.Name = "ElapsedTimeCountLabel";
-            this.ElapsedTimeCountLabel.Size = new System.Drawing.Size(285, 52);
+            this.ElapsedTimeCountLabel.Size = new System.Drawing.Size(286, 52);
             this.ElapsedTimeCountLabel.TabIndex = 1;
             this.ElapsedTimeCountLabel.Text = "00:00";
             this.ElapsedTimeCountLabel.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
@@ -229,15 +228,14 @@
             this.CanselButton.UseVisualStyleBackColor = true;
             this.CanselButton.Click += new System.EventHandler(this.CanselButton_Click);
             // 
-            // LostGameUI
+            // WonGameUI
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 20F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(704, 252);
             this.Controls.Add(this.tableLayoutPanel1);
-            this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
-            this.Name = "LostGameUI";
-            this.Text = "Lose! ";
+            this.Name = "WonGameUI";
+            this.Text = "Win!";
             this.tableLayoutPanel1.ResumeLayout(false);
             this.tableLayoutPanel1.PerformLayout();
             this.tableLayoutPanel2.ResumeLayout(false);

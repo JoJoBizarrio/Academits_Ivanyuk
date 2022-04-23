@@ -1,16 +1,16 @@
 using MinesweeperTask.CustomGame;
-using System.Windows;
+using MinesweeperTask.LostGame;
 
 namespace MinesweeperTask.Minesweeper
 {
     public partial class MinesweeperUI : Form
     {
         private MinesweeperLogic _minesweeper;
-        private CustomGameUI _customGame;
         private Button[,] _buttons;
 
         private int _minutesCount;
         private int _secondCount;
+        private int _elapsedSecondCount;
 
         private Image _number1Image = Image.FromFile("..\\images\\number1.png");
         private Image _number2Image = Image.FromFile("..\\images\\number2.png");
@@ -78,7 +78,7 @@ namespace MinesweeperTask.Minesweeper
                         currentButton.Enabled = false;
 
                         OpenMineCells(i, j);
-                        GameOver();
+                        FinishLostGame();
                     }
                     else
                     {
@@ -203,6 +203,7 @@ namespace MinesweeperTask.Minesweeper
             CountdownTimerLabel.Text = $"00:00";
             _minutesCount = minutesCount;
             _secondCount = 0;
+            _elapsedSecondCount = 0;
 
             CountdownTimer.Interval = 1000;
             CountdownTimer.Enabled = true;
@@ -237,10 +238,16 @@ namespace MinesweeperTask.Minesweeper
             Dispose();
         }
 
-        private void GameOver()
+        private void FinishLostGame()
         {
             CountdownTimer.Stop();
 
+
+            LostGameUI lostGameUI = new LostGameUI(_elapsedSecondCount);
+
+            lostGameUI.Owner = this;
+
+            lostGameUI.ShowDialog();
             //TODO: диалоговое окно о конце игры, количестве затраченного времени
         }
 
@@ -290,19 +297,17 @@ namespace MinesweeperTask.Minesweeper
         // Окно CustomGame:
         private void CustomGameToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            //Enabled = false;
+            CustomGameUI customGameUI = new CustomGameUI();
 
-            _customGame = new CustomGameUI();
+            customGameUI.Owner = this;
+            customGameUI.ShowDialog();
 
-            _customGame.Owner = this;
-            _customGame.ShowDialog();
-
-            _customGame.Activate();
-            _customGame.BringToFront();
+            customGameUI.Activate();
+            customGameUI.BringToFront();
 
             SendToBack();
 
-            _customGame.Disposed += CustomGame_Disposed;
+            customGameUI.Disposed += CustomGame_Disposed;
         }
 
         private void CustomGame_Disposed(object? sender, EventArgs e)
@@ -321,15 +326,17 @@ namespace MinesweeperTask.Minesweeper
                 if (_minutesCount == 0)
                 {
                     OpenMineCells(_minesweeper.FieldWidth / 2, _minesweeper.FieldHeight / 2);
-                    GameOver();
+                    FinishLostGame();
                 }
 
+                _elapsedSecondCount += 1;
                 _minutesCount -= 1;
                 _secondCount = 59;
                 CountdownTimerLabel.Text = $"{_minutesCount}:{_secondCount}";
             }
             else
             {
+                _elapsedSecondCount += 1;
                 _secondCount -= 1;
                 CountdownTimerLabel.Text = $"{_minutesCount}:{_secondCount}";
             }

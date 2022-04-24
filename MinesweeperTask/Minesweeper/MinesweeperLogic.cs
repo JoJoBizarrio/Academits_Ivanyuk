@@ -16,6 +16,11 @@
 
         public int MinesCount { get; set; }
 
+        public bool IsEasy { get; set; }
+
+        public bool IsMedium { get; set; }
+
+        public bool IsHard { get; set; }
 
         public MinesweeperLogic(int fieldWidth, int fieldHeight, int minesCount, int minutesCount)
         {

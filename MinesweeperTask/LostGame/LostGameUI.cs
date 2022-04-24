@@ -5,13 +5,13 @@ namespace MinesweeperTask.LostGame
     public partial class LostGameUI : Form
     {
 
-        public LostGameUI(int elapsedSecondCount)
+        public LostGameUI(int elapsedMinutesCount, int elapsedSecondCount)
         {
             InitializeComponent();
 
             MinesweeperUI minesweeper = this.Owner as MinesweeperUI;
 
-            ElapsedTimeCountLabel.Text = $"{elapsedSecondCount / 60}:{elapsedSecondCount % 60}"; // можно это в логику не переносить?
+            ElapsedTimeCountLabel.Text = $"{elapsedMinutesCount}:{elapsedSecondCount}"; // можно это в логику не переносить?
         }
 
         private void EasyDifficultyButton_Click(object sender, EventArgs e)

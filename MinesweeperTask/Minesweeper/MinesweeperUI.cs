@@ -1,6 +1,7 @@
 using MinesweeperTask.CustomGame;
 using MinesweeperTask.LostGame;
 using MinesweeperTask.WonGame;
+using MinesweeperTask.HighScores;
 
 namespace MinesweeperTask.Minesweeper
 {
@@ -24,8 +25,16 @@ namespace MinesweeperTask.Minesweeper
         private MinesweeperLogic _minesweeper;
         private Button[,] _buttons;
 
+        public bool Easy { get; private set; }
+
+        public bool Medium { get; private set; }
+
+        public bool Hard { get; private set; }
+
+
         private int _minutesCount;
         private int _secondCount;
+        private int _elapsedMinutesCount;
         private int _elapsedSecondCount;
 
         private Image _number1Image = Image.FromFile("..\\images\\number1.png");
@@ -212,7 +221,7 @@ namespace MinesweeperTask.Minesweeper
             FieldTableLayoutPanel.Enabled = false;
             CountdownTimer.Stop();
 
-            WonGameUI wonGame = new WonGameUI(_elapsedSecondCount);
+            WonGameUI wonGame = new WonGameUI(_elapsedMinutesCount, _elapsedSecondCount, _minesweeper);
             wonGame.Owner = this;
             wonGame.ShowDialog();
         }
@@ -237,13 +246,44 @@ namespace MinesweeperTask.Minesweeper
             Enabled = false;
 
             _minesweeper = new MinesweeperLogic(fieldWidth, fieldHeight, minesCount, minutesCount);
+
+            if (fieldWidth == EasyDifficultyFieldWidth && fieldHeight == EasyDifficultyFieldHeight &&
+                minesCount == EasyDifficultyMinesCount && minutesCount == EasyDifficultyMinutesCount)
+            {
+                _minesweeper.IsEasy = true;
+                _minesweeper.IsMedium = false;
+                _minesweeper.IsHard = false;
+            }
+            else if (fieldWidth == MediumDifficultyFieldWidth && fieldHeight == MediumDifficultyFieldHeight &&
+                     minesCount == MediumDifficultyMinesCount && minutesCount == MediumDifficultyMinutesCount)
+            {
+                _minesweeper.IsEasy = false;
+                _minesweeper.IsMedium = true;
+                _minesweeper.IsHard = false;
+            }
+            else if (fieldWidth == HardDifficultyFieldWidth && fieldHeight == HardDifficultyFieldHeight &&
+                     minesCount == HardDifficultyMinesCount && minutesCount == HardDifficultyMinutesCount)
+            {
+                _minesweeper.IsEasy = false;
+                _minesweeper.IsMedium = false;
+                _minesweeper.IsHard = true;
+            }
+            else
+            {
+                _minesweeper.IsEasy = false;
+                _minesweeper.IsMedium = false;
+                _minesweeper.IsHard = false;
+            }
+
             _buttons = new Button[fieldWidth, fieldHeight];
             MineCounterLable.Text = minesCount.ToString();
 
             FieldTableLayoutPanel.Controls.Clear();
-            CountdownTimerLabel.Text = $"00:00";
+
+            CountdownTimerLabel.Text = "00:00";
             _minutesCount = minutesCount;
             _secondCount = 0;
+            _elapsedMinutesCount = -1;
             _elapsedSecondCount = 0;
 
             CountdownTimer.Interval = 1000;
@@ -267,7 +307,7 @@ namespace MinesweeperTask.Minesweeper
 
                     FieldTableLayoutPanel.Controls.Add(_buttons[i, j], i, j);
                     //TODO: убрать строчку ниже
-                    //_buttons[i, j].Text = _minesweeper.Field[i, j].ToString();
+                    _buttons[i, j].Text = _minesweeper.Field[i, j].ToString();
                 }
             }
 
@@ -283,7 +323,7 @@ namespace MinesweeperTask.Minesweeper
         {
             CountdownTimer.Stop();
 
-            LostGameUI lostGameUI = new LostGameUI(_elapsedSecondCount);
+            LostGameUI lostGameUI = new LostGameUI(_elapsedMinutesCount, _elapsedSecondCount);
 
             lostGameUI.Owner = this;
 
@@ -338,6 +378,10 @@ namespace MinesweeperTask.Minesweeper
         {
             CustomGameUI customGameUI = new CustomGameUI();
 
+            Easy = false;
+            Medium = false;
+            Hard = false;
+
             customGameUI.Owner = this;
             customGameUI.ShowDialog();
 
@@ -360,7 +404,8 @@ namespace MinesweeperTask.Minesweeper
                     FinishLostGame();
                 }
 
-                _elapsedSecondCount += 1;
+                _elapsedMinutesCount += 1;
+                _elapsedSecondCount = 1;
                 _minutesCount -= 1;
                 _secondCount = 59;
                 CountdownTimerLabel.Text = $"{_minutesCount}:{_secondCount}";
@@ -375,7 +420,9 @@ namespace MinesweeperTask.Minesweeper
 
         private void HighScoresToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            MessageBox.Show("Soon...", "In developing");
+            HighScoreTableUI highScoreTable = new HighScoreTableUI();
+
+            highScoreTable.ShowDialog();
         }
 
         private void AboutToolStripMenuItem_Click(object sender, EventArgs e)

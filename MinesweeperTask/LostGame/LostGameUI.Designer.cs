@@ -56,14 +56,14 @@
             this.ElapsedTimeLabel.Font = new System.Drawing.Font("Segoe UI", 13.8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
             this.ElapsedTimeLabel.Location = new System.Drawing.Point(3, 0);
             this.ElapsedTimeLabel.Name = "ElapsedTimeLabel";
-            this.ElapsedTimeLabel.Size = new System.Drawing.Size(377, 52);
+            this.ElapsedTimeLabel.Size = new System.Drawing.Size(376, 52);
             this.ElapsedTimeLabel.TabIndex = 0;
             this.ElapsedTimeLabel.Text = "Elapsed time:";
             this.ElapsedTimeLabel.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
             // 
             // tableLayoutPanel1
             // 
-            this.tableLayoutPanel1.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left)
+            this.tableLayoutPanel1.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
             this.tableLayoutPanel1.ColumnCount = 1;
             this.tableLayoutPanel1.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 100F));
@@ -95,8 +95,8 @@
             // 
             // tableLayoutPanel2
             // 
-            this.tableLayoutPanel2.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom)
-            | System.Windows.Forms.AnchorStyles.Left)
+            this.tableLayoutPanel2.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
             this.tableLayoutPanel2.ColumnCount = 2;
             this.tableLayoutPanel2.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 56.82492F));
@@ -115,9 +115,9 @@
             this.ElapsedTimeCountLabel.AutoSize = true;
             this.ElapsedTimeCountLabel.Dock = System.Windows.Forms.DockStyle.Fill;
             this.ElapsedTimeCountLabel.Font = new System.Drawing.Font("Segoe UI", 13.8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
-            this.ElapsedTimeCountLabel.Location = new System.Drawing.Point(386, 0);
+            this.ElapsedTimeCountLabel.Location = new System.Drawing.Point(385, 0);
             this.ElapsedTimeCountLabel.Name = "ElapsedTimeCountLabel";
-            this.ElapsedTimeCountLabel.Size = new System.Drawing.Size(285, 52);
+            this.ElapsedTimeCountLabel.Size = new System.Drawing.Size(286, 52);
             this.ElapsedTimeCountLabel.TabIndex = 1;
             this.ElapsedTimeCountLabel.Text = "00:00";
             this.ElapsedTimeCountLabel.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
@@ -172,7 +172,6 @@
             this.tableLayoutPanel7.Controls.Add(this.EasyDifficultyButton, 0, 0);
             this.tableLayoutPanel7.Controls.Add(this.MediumDifficultyButton, 2, 0);
             this.tableLayoutPanel7.Controls.Add(this.HardDifficultyButton, 1, 0);
-            this.tableLayoutPanel7.Dock = System.Windows.Forms.DockStyle.Fill;
             this.tableLayoutPanel7.Location = new System.Drawing.Point(3, 3);
             this.tableLayoutPanel7.Name = "tableLayoutPanel7";
             this.tableLayoutPanel7.RowCount = 1;

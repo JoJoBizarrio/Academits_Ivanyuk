@@ -6,6 +6,21 @@ namespace MinesweeperTask.Minesweeper
 {
     public partial class MinesweeperUI : Form
     {
+        public const int EasyDifficultyFieldWidth = 9;
+        public const int EasyDifficultyFieldHeight = 9;
+        public const int EasyDifficultyMinesCount = 10;
+        public const int EasyDifficultyMinutesCount = 5;
+
+        public const int MediumDifficultyFieldWidth = 16;
+        public const int MediumDifficultyFieldHeight = 16;
+        public const int MediumDifficultyMinesCount = 40;
+        public const int MediumDifficultyMinutesCount = 15;
+
+        public const int HardDifficultyFieldWidth = 30;
+        public const int HardDifficultyFieldHeight = 24;
+        public const int HardDifficultyMinesCount = 99;
+        public const int HardDifficultyMinutesCount = 40;
+
         private MinesweeperLogic _minesweeper;
         private Button[,] _buttons;
 
@@ -202,19 +217,19 @@ namespace MinesweeperTask.Minesweeper
             wonGame.ShowDialog();
         }
 
-        private void EasyDifficultyToolStripMenuItem_Click(object sender, EventArgs e)
+        public void EasyDifficultyToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            StartCustomNewGame(3, 3, 1, 1);
+            StartCustomNewGame(EasyDifficultyFieldHeight, EasyDifficultyFieldWidth, EasyDifficultyMinesCount, EasyDifficultyMinutesCount);
         }
 
-        private void MediumDifficultyToolStripMenuItem_Click(object sender, EventArgs e)
+        public void MediumDifficultyToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            StartCustomNewGame(16, 16, 40, 40);
+            StartCustomNewGame(MediumDifficultyFieldHeight, MediumDifficultyFieldWidth, MediumDifficultyMinesCount, MediumDifficultyMinutesCount);
         }
 
-        private void HardDifficultyToolStripMenuItem_Click(object sender, EventArgs e)
+        public void HardDifficultyToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            StartCustomNewGame(30, 16, 99, 80);
+            StartCustomNewGame(HardDifficultyFieldHeight, HardDifficultyFieldWidth, HardDifficultyMinesCount, HardDifficultyMinutesCount);
         }
 
         public void StartCustomNewGame(int fieldWidth, int fieldHeight, int minesCount, int minutesCount)

@@ -18,7 +18,7 @@ namespace MinesweeperTask.WonGame
         {
             MinesweeperUI minesweeper = this.Owner as MinesweeperUI;
 
-            minesweeper.StartCustomNewGame(9, 9, 10, 10);
+            minesweeper.EasyDifficultyToolStripMenuItem_Click(sender, e);
             Dispose();
         }
 
@@ -26,7 +26,7 @@ namespace MinesweeperTask.WonGame
         {
             MinesweeperUI minesweeper = this.Owner as MinesweeperUI;
 
-            minesweeper.StartCustomNewGame(30, 16, 99, 80);
+            minesweeper.MediumDifficultyToolStripMenuItem_Click(sender, e);
             Dispose();
         }
 
@@ -34,7 +34,7 @@ namespace MinesweeperTask.WonGame
         {
             MinesweeperUI minesweeper = this.Owner as MinesweeperUI;
 
-            minesweeper.StartCustomNewGame(16, 16, 40, 40);
+            minesweeper.HardDifficultyToolStripMenuItem_Click(sender, e);
             Dispose();
         }
 

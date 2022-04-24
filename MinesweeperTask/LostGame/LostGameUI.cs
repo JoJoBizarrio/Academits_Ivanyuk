@@ -12,14 +12,13 @@ namespace MinesweeperTask.LostGame
             MinesweeperUI minesweeper = this.Owner as MinesweeperUI;
 
             ElapsedTimeCountLabel.Text = $"{elapsedSecondCount / 60}:{elapsedSecondCount % 60}"; // можно это в логику не переносить?
-
         }
 
         private void EasyDifficultyButton_Click(object sender, EventArgs e)
         {
             MinesweeperUI minesweeper = this.Owner as MinesweeperUI;
 
-            minesweeper.StartCustomNewGame(9, 9, 10, 10);
+            minesweeper.EasyDifficultyToolStripMenuItem_Click(sender, e);
             Dispose();
         }
 
@@ -27,7 +26,7 @@ namespace MinesweeperTask.LostGame
         {
             MinesweeperUI minesweeper = this.Owner as MinesweeperUI;
 
-            minesweeper.StartCustomNewGame(16, 16, 40, 40);
+            minesweeper.MediumDifficultyToolStripMenuItem_Click(sender, e);
             Dispose();
         }
 
@@ -35,7 +34,7 @@ namespace MinesweeperTask.LostGame
         {
             MinesweeperUI minesweeper = this.Owner as MinesweeperUI;
 
-            minesweeper.StartCustomNewGame(30, 16, 99, 80);
+            minesweeper.HardDifficultyToolStripMenuItem_Click(sender, e);
             Dispose();
         }
 

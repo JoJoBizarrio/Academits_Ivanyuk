@@ -16,7 +16,7 @@
 
         public int MinesCount { get; set; }
 
-        public bool IsEasy { get; set; }
+        public bool IsEasy { get; set ; }
 
         public bool IsMedium { get; set; }
 

@@ -1,4 +1,6 @@
-﻿namespace MinesweeperTask.HighScores
+﻿using System.Net;
+
+namespace MinesweeperTask.HighScores
 {
     public partial class HighScoreTableUI : Form
     {
@@ -52,6 +54,7 @@
                     EasyListBox.Items.Add($"{i} - {reader.ReadLine()}");
                     i++;
                 }
+
                 i = 1;
 
                 while (i < 10)
@@ -61,6 +64,7 @@
                 }
 
                 i = 1;
+
                 while (i < 10)
                 {
 
@@ -68,6 +72,14 @@
                     i++;
                 }
             }
+
+            reader.Close();
+            reader.Dispose();
+
+            // Вот тут пытаюсь сделать серверный файл, но гугл-диск не поддеживает данный метод.
+            // Но вот если найти такой сервер на который можно закинуть файл, скачивать и менять то можно сделать онлайн рекорды или это както совсем подругому реализовывают?
+            //WebClient highScoresFileDownloader = new WebClient();
+            //highScoresFileDownloader.UploadFile("https://drive.google.com/file/d/1GSvFPknIYWU6zVFtI-S7RXGJDwAV-6Wb/view?usp=sharing", "..\\HighScores.txt"); 
         }
     }
 }

@@ -17,7 +17,7 @@ namespace MinesweeperTask.LostGame
         private void EasyDifficultyButton_Click(object sender, EventArgs e)
         {
             MinesweeperUI minesweeper = this.Owner as MinesweeperUI;
-
+            
             minesweeper.EasyDifficultyToolStripMenuItem_Click(sender, e);
             Dispose();
         }

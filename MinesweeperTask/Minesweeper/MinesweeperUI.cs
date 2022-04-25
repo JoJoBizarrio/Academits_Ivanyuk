@@ -243,7 +243,7 @@ namespace MinesweeperTask.Minesweeper
 
         public void StartCustomNewGame(int fieldWidth, int fieldHeight, int minesCount, int minutesCount)
         {
-            Enabled = false;
+            //Enabled = false;
 
             _minesweeper = new MinesweeperLogic(fieldWidth, fieldHeight, minesCount, minutesCount);
 
@@ -312,6 +312,7 @@ namespace MinesweeperTask.Minesweeper
             }
 
             Enabled = true;
+            FieldTableLayoutPanel.Enabled = true;
         }
 
         private void ExitToolStripMenuItem_Click(object sender, EventArgs e)

@@ -1,5 +1,4 @@
 ﻿using MinesweeperTask.Minesweeper;
-using System.Globalization;
 
 namespace MinesweeperTask.WonGame
 {
@@ -93,6 +92,7 @@ namespace MinesweeperTask.WonGame
             MinesweeperUI minesweeper = this.Owner as MinesweeperUI;
 
             minesweeper.EasyDifficultyToolStripMenuItem_Click(sender, e);
+
             Dispose();
         }
 
@@ -101,6 +101,7 @@ namespace MinesweeperTask.WonGame
             MinesweeperUI minesweeper = this.Owner as MinesweeperUI;
 
             minesweeper.MediumDifficultyToolStripMenuItem_Click(sender, e);
+
             Dispose();
         }
 
@@ -109,6 +110,7 @@ namespace MinesweeperTask.WonGame
             MinesweeperUI minesweeper = this.Owner as MinesweeperUI;
 
             minesweeper.HardDifficultyToolStripMenuItem_Click(sender, e);
+
             Dispose();
         }
 

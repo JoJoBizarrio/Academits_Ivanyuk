@@ -1,6 +1,6 @@
 ﻿using MinesweeperTask.Minesweeper;
 
-namespace MinesweeperTask.WonGame
+namespace MinesweeperTask.Minesweeper.WonGame
 {
     public partial class WonGameUI : Form
     {

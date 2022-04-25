@@ -1,4 +1,4 @@
-﻿namespace MinesweeperTask.LostGame
+﻿namespace MinesweeperTask.Minesweeper.LostGame
 {
     partial class LostGameUI
     {

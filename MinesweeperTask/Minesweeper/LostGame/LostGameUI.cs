@@ -1,6 +1,4 @@
-﻿using MinesweeperTask.Minesweeper;
-
-namespace MinesweeperTask.LostGame
+﻿namespace MinesweeperTask.Minesweeper.LostGame
 {
     public partial class LostGameUI : Form
     {

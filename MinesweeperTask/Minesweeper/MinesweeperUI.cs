@@ -1,6 +1,6 @@
 using MinesweeperTask.CustomGame;
-using MinesweeperTask.LostGame;
-using MinesweeperTask.WonGame;
+using MinesweeperTask.Minesweeper.LostGame;
+using MinesweeperTask.Minesweeper.WonGame;
 using MinesweeperTask.HighScores;
 
 namespace MinesweeperTask.Minesweeper

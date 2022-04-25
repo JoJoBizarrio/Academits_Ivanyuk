@@ -1,4 +1,4 @@
-﻿namespace MinesweeperTask.WonGame
+﻿namespace MinesweeperTask.Minesweeper.WonGame
 {
     partial class WonGameUI
     {

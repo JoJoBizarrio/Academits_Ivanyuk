@@ -93,7 +93,7 @@
             this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 25F));
             this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 25F));
             this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 25F));
-            this.tableLayoutPanel1.Size = new System.Drawing.Size(501, 287);
+            this.tableLayoutPanel1.Size = new System.Drawing.Size(502, 287);
             this.tableLayoutPanel1.TabIndex = 0;
             // 
             // tableLayoutPanel2
@@ -258,7 +258,7 @@
             this.WidthTrackBar.Maximum = 30;
             this.WidthTrackBar.Minimum = 9;
             this.WidthTrackBar.Name = "WidthTrackBar";
-            this.WidthTrackBar.Size = new System.Drawing.Size(269, 65);
+            this.WidthTrackBar.Size = new System.Drawing.Size(270, 65);
             this.WidthTrackBar.TabIndex = 8;
             this.WidthTrackBar.TickStyle = System.Windows.Forms.TickStyle.Both;
             this.WidthTrackBar.Value = 9;
@@ -272,7 +272,7 @@
             this.HeightTrackBar.Maximum = 24;
             this.HeightTrackBar.Minimum = 9;
             this.HeightTrackBar.Name = "HeightTrackBar";
-            this.HeightTrackBar.Size = new System.Drawing.Size(269, 65);
+            this.HeightTrackBar.Size = new System.Drawing.Size(270, 65);
             this.HeightTrackBar.TabIndex = 9;
             this.HeightTrackBar.TickStyle = System.Windows.Forms.TickStyle.Both;
             this.HeightTrackBar.Value = 9;
@@ -286,7 +286,7 @@
             this.MinesCountTrackBar.Maximum = 28;
             this.MinesCountTrackBar.Minimum = 9;
             this.MinesCountTrackBar.Name = "MinesCountTrackBar";
-            this.MinesCountTrackBar.Size = new System.Drawing.Size(269, 65);
+            this.MinesCountTrackBar.Size = new System.Drawing.Size(270, 65);
             this.MinesCountTrackBar.TabIndex = 10;
             this.MinesCountTrackBar.TickStyle = System.Windows.Forms.TickStyle.Both;
             this.MinesCountTrackBar.Value = 9;
@@ -300,7 +300,7 @@
             this.MinutesCountTrackBar.Maximum = 200;
             this.MinutesCountTrackBar.Minimum = 10;
             this.MinutesCountTrackBar.Name = "MinutesCountTrackBar";
-            this.MinutesCountTrackBar.Size = new System.Drawing.Size(269, 68);
+            this.MinutesCountTrackBar.Size = new System.Drawing.Size(270, 68);
             this.MinutesCountTrackBar.TabIndex = 11;
             this.MinutesCountTrackBar.TickStyle = System.Windows.Forms.TickStyle.Both;
             this.MinutesCountTrackBar.Value = 10;
@@ -311,7 +311,7 @@
             this.CurrentWidthLabel.Anchor = System.Windows.Forms.AnchorStyles.Left;
             this.CurrentWidthLabel.AutoSize = true;
             this.CurrentWidthLabel.Font = new System.Drawing.Font("Segoe UI", 13.8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
-            this.CurrentWidthLabel.Location = new System.Drawing.Point(428, 4);
+            this.CurrentWidthLabel.Location = new System.Drawing.Point(429, 4);
             this.CurrentWidthLabel.Name = "CurrentWidthLabel";
             this.CurrentWidthLabel.Size = new System.Drawing.Size(64, 62);
             this.CurrentWidthLabel.TabIndex = 12;
@@ -323,7 +323,7 @@
             this.CurrentHeightLabel.Anchor = System.Windows.Forms.AnchorStyles.Left;
             this.CurrentHeightLabel.AutoSize = true;
             this.CurrentHeightLabel.Font = new System.Drawing.Font("Segoe UI", 13.8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
-            this.CurrentHeightLabel.Location = new System.Drawing.Point(428, 75);
+            this.CurrentHeightLabel.Location = new System.Drawing.Point(429, 75);
             this.CurrentHeightLabel.Name = "CurrentHeightLabel";
             this.CurrentHeightLabel.Size = new System.Drawing.Size(64, 62);
             this.CurrentHeightLabel.TabIndex = 13;
@@ -335,7 +335,7 @@
             this.CurrentMinesLabel.Anchor = System.Windows.Forms.AnchorStyles.Left;
             this.CurrentMinesLabel.AutoSize = true;
             this.CurrentMinesLabel.Font = new System.Drawing.Font("Segoe UI", 13.8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
-            this.CurrentMinesLabel.Location = new System.Drawing.Point(428, 146);
+            this.CurrentMinesLabel.Location = new System.Drawing.Point(429, 146);
             this.CurrentMinesLabel.Name = "CurrentMinesLabel";
             this.CurrentMinesLabel.Size = new System.Drawing.Size(64, 62);
             this.CurrentMinesLabel.TabIndex = 14;
@@ -347,7 +347,7 @@
             this.CurrentMinutesLabel.Anchor = System.Windows.Forms.AnchorStyles.Left;
             this.CurrentMinutesLabel.AutoSize = true;
             this.CurrentMinutesLabel.Font = new System.Drawing.Font("Segoe UI", 13.8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
-            this.CurrentMinutesLabel.Location = new System.Drawing.Point(428, 219);
+            this.CurrentMinutesLabel.Location = new System.Drawing.Point(429, 219);
             this.CurrentMinutesLabel.Name = "CurrentMinutesLabel";
             this.CurrentMinutesLabel.Size = new System.Drawing.Size(64, 62);
             this.CurrentMinutesLabel.TabIndex = 15;
@@ -385,7 +385,7 @@
             this.StartGameButton.Location = new System.Drawing.Point(5, 5);
             this.StartGameButton.Margin = new System.Windows.Forms.Padding(5);
             this.StartGameButton.Name = "StartGameButton";
-            this.StartGameButton.Size = new System.Drawing.Size(240, 52);
+            this.StartGameButton.Size = new System.Drawing.Size(241, 52);
             this.StartGameButton.TabIndex = 9;
             this.StartGameButton.Text = "Start Game";
             this.StartGameButton.UseVisualStyleBackColor = true;
@@ -395,7 +395,7 @@
             // 
             this.CanselButton.Dock = System.Windows.Forms.DockStyle.Fill;
             this.CanselButton.Font = new System.Drawing.Font("Segoe UI", 13.8F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point);
-            this.CanselButton.Location = new System.Drawing.Point(255, 5);
+            this.CanselButton.Location = new System.Drawing.Point(256, 5);
             this.CanselButton.Margin = new System.Windows.Forms.Padding(5);
             this.CanselButton.Name = "CanselButton";
             this.CanselButton.Size = new System.Drawing.Size(241, 52);
@@ -417,20 +417,26 @@
             this.tableLayoutPanel8.Name = "tableLayoutPanel8";
             this.tableLayoutPanel8.RowCount = 1;
             this.tableLayoutPanel8.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 100F));
-            this.tableLayoutPanel8.Size = new System.Drawing.Size(501, 62);
+            this.tableLayoutPanel8.Size = new System.Drawing.Size(502, 62);
             this.tableLayoutPanel8.TabIndex = 1;
             // 
             // CustomGameUI
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 20F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(501, 353);
+            this.CancelButton = this.CanselButton;
+            this.ClientSize = new System.Drawing.Size(502, 353);
             this.Controls.Add(this.tableLayoutPanel8);
             this.Controls.Add(this.tableLayoutPanel1);
             this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
+            this.MaximizeBox = false;
+            this.MaximumSize = new System.Drawing.Size(520, 400);
+            this.MinimizeBox = false;
+            this.MinimumSize = new System.Drawing.Size(520, 0);
             this.Name = "CustomGameUI";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterParent;
             this.Text = "Custom game";
+            this.TopMost = true;
             this.WindowState = System.Windows.Forms.FormWindowState.Minimized;
             this.tableLayoutPanel1.ResumeLayout(false);
             this.tableLayoutPanel1.PerformLayout();

@@ -30,7 +30,7 @@ namespace MinesweeperTask.CustomGame
             HeightTrackBar.ValueChanged += HeightTrackBar_ValueChanged;
         }
 
-        private void HeightTrackBar_ValueChanged(object? sender, EventArgs e)
+        private void HeightTrackBar_ValueChanged(object sender, EventArgs e)
         {
             if (sender != null)
             {
@@ -43,7 +43,7 @@ namespace MinesweeperTask.CustomGame
             }
         }
 
-        private void WidthTrackBar_ValueChanged(object? sender, EventArgs e)
+        private void WidthTrackBar_ValueChanged(object sender, EventArgs e)
         {
             if (sender != null)
             {
@@ -56,7 +56,7 @@ namespace MinesweeperTask.CustomGame
             }
         }
 
-        private void WidthTrackBar_Scroll(object? sender, EventArgs e)
+        private void WidthTrackBar_Scroll(object sender, EventArgs e)
         {
             if (sender != null)
             {

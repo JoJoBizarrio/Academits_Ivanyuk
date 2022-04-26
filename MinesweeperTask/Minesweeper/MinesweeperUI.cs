@@ -2,6 +2,7 @@ using MinesweeperTask.CustomGame;
 using MinesweeperTask.Minesweeper.LostGame;
 using MinesweeperTask.Minesweeper.WonGame;
 using MinesweeperTask.HighScores;
+using MinesweeperTask.Referense;
 
 namespace MinesweeperTask.Minesweeper
 {
@@ -25,37 +26,30 @@ namespace MinesweeperTask.Minesweeper
         private MinesweeperLogic _minesweeper;
         private Button[,] _buttons;
 
-        public bool Easy { get; private set; }
-
-        public bool Medium { get; private set; }
-
-        public bool Hard { get; private set; }
-
-
         private int _minutesCount;
         private int _secondCount;
         private int _elapsedMinutesCount;
         private int _elapsedSecondCount;
 
-        private Image _number1Image = Image.FromFile("..\\images\\number1.png");
-        private Image _number2Image = Image.FromFile("..\\images\\number2.png");
-        private Image _number3Image = Image.FromFile("..\\images\\number3.png");
-        private Image _number4Image = Image.FromFile("..\\images\\number4.png");
-        private Image _number5Image = Image.FromFile("..\\images\\number5.png");
-        private Image _number6Image = Image.FromFile("..\\images\\number6.png");
-        private Image _number7Image = Image.FromFile("..\\images\\number7.png");
-        private Image _number8Image = Image.FromFile("..\\images\\number8.png");
-        private Image _mineImage = Image.FromFile("..\\images\\mine.png");
-        private Image _flagImage = Image.FromFile("..\\images\\flag.png");
+        private readonly Image _number1Image = Image.FromFile("..\\images\\number1.png");
+        private readonly Image _number2Image = Image.FromFile("..\\images\\number2.png");
+        private readonly Image _number3Image = Image.FromFile("..\\images\\number3.png");
+        private readonly Image _number4Image = Image.FromFile("..\\images\\number4.png");
+        private readonly Image _number5Image = Image.FromFile("..\\images\\number5.png");
+        private readonly Image _number6Image = Image.FromFile("..\\images\\number6.png");
+        private readonly Image _number7Image = Image.FromFile("..\\images\\number7.png");
+        private readonly Image _number8Image = Image.FromFile("..\\images\\number8.png");
+        private readonly Image _mineImage = Image.FromFile("..\\images\\mine.png");
+        private readonly Image _flagImage = Image.FromFile("..\\images\\flag.png");
 
-        public MinesweeperUI() // зачем мне здесь конструктор MinesweeperUI ? он нужен?
+        public MinesweeperUI()
         {
             InitializeComponent();
 
             EasyDifficultyToolStripMenuItem_Click(new object(), new EventArgs());
         }
 
-        public void MinesweeperUI_MouseDown(object? sender, MouseEventArgs e)
+        public void MinesweeperUI_MouseDown(object sender, MouseEventArgs e)
         {
             if (sender != null)
             {
@@ -63,8 +57,8 @@ namespace MinesweeperTask.Minesweeper
 
                 int buttonIndex = FieldTableLayoutPanel.Controls.IndexOf(currentButton);
 
-                int i = buttonIndex / FieldTableLayoutPanel.RowCount;
-                int j = buttonIndex % FieldTableLayoutPanel.RowCount;
+                int i = _minesweeper.GetCellPosition(buttonIndex).X;
+                int j = _minesweeper.GetCellPosition(buttonIndex).Y;
 
                 int value = _minesweeper.Field[i, j];
 
@@ -75,7 +69,7 @@ namespace MinesweeperTask.Minesweeper
                         currentButton.BackgroundImage = _flagImage;
                         MineCounterLable.Text = (Convert.ToInt32(MineCounterLable.Text) - 1).ToString();
 
-                        _minesweeper.IsLockedCell[i, j] = true;
+                        _minesweeper.LockCell(i, j);
 
                         return;
                     }
@@ -85,7 +79,7 @@ namespace MinesweeperTask.Minesweeper
                         currentButton.BackgroundImage = null;
                         MineCounterLable.Text = (Convert.ToInt32(MineCounterLable.Text) + 1).ToString();
 
-                        _minesweeper.IsLockedCell[i, j] = false;
+                        _minesweeper.UnlockCell(i, j);
 
                         return;
                     }
@@ -307,7 +301,7 @@ namespace MinesweeperTask.Minesweeper
 
                     FieldTableLayoutPanel.Controls.Add(_buttons[i, j], i, j);
                     //TODO: убрать строчку ниже
-                    _buttons[i, j].Text = _minesweeper.Field[i, j].ToString();
+                    //_buttons[i, j].Text = _minesweeper.Field[i, j].ToString();
                 }
             }
 
@@ -379,10 +373,6 @@ namespace MinesweeperTask.Minesweeper
         {
             CustomGameUI customGameUI = new CustomGameUI();
 
-            Easy = false;
-            Medium = false;
-            Hard = false;
-
             customGameUI.Owner = this;
             customGameUI.ShowDialog();
 
@@ -401,6 +391,10 @@ namespace MinesweeperTask.Minesweeper
             {
                 if (_minutesCount == 0)
                 {
+                    _elapsedMinutesCount += 1;
+                    _elapsedSecondCount = 0;
+                    
+                    CountdownTimer.Stop();
                     OpenMineCells(_minesweeper.FieldWidth / 2, _minesweeper.FieldHeight / 2);
                     FinishLostGame();
                 }
@@ -409,12 +403,14 @@ namespace MinesweeperTask.Minesweeper
                 _elapsedSecondCount = 1;
                 _minutesCount -= 1;
                 _secondCount = 59;
+
                 CountdownTimerLabel.Text = $"{_minutesCount}:{_secondCount}";
             }
             else
             {
                 _elapsedSecondCount += 1;
                 _secondCount -= 1;
+
                 CountdownTimerLabel.Text = $"{_minutesCount}:{_secondCount}";
             }
         }
@@ -428,13 +424,19 @@ namespace MinesweeperTask.Minesweeper
 
         private void AboutToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            MessageBox.Show("Soon...", "In developing");
+            CreatorsUI creatorsUI = new CreatorsUI();
+
+            // вот эти методы ниже не работают Activate, BringtoFront, SetDesktopLocation. Как создавалось диалогое окно в свернутом виде так и создается.
+            creatorsUI.Activate();
+            creatorsUI.BringToFront();
+            //creatorsUI.SetDesktopLocation(this.Location.X, this.Location.Y);
         }
 
-        private void CustomGame_Disposed(object? sender, EventArgs e)
+        private void CustomGame_Disposed(object sender, EventArgs e)
         {
             Enabled = true;
 
+            Activate();
             Show();
             BringToFront();
         }

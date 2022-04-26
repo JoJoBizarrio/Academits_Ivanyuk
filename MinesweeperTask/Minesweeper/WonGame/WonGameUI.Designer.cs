@@ -235,6 +235,7 @@
             this.ClientSize = new System.Drawing.Size(704, 252);
             this.Controls.Add(this.tableLayoutPanel1);
             this.Name = "WonGameUI";
+            this.StartPosition = System.Windows.Forms.FormStartPosition.CenterParent;
             this.Text = "Win!";
             this.tableLayoutPanel1.ResumeLayout(false);
             this.tableLayoutPanel1.PerformLayout();

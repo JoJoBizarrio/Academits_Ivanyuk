@@ -142,8 +142,15 @@
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(287, 373);
             this.Controls.Add(this.HighScoresTabControl);
+            this.MaximizeBox = false;
+            this.MaximumSize = new System.Drawing.Size(305, 420);
+            this.MinimizeBox = false;
+            this.MinimumSize = new System.Drawing.Size(305, 0);
             this.Name = "HighScoreTableUI";
+            this.ShowIcon = false;
+            this.StartPosition = System.Windows.Forms.FormStartPosition.CenterParent;
             this.Text = "High score table";
+            this.WindowState = System.Windows.Forms.FormWindowState.Minimized;
             this.HighScoresTabControl.ResumeLayout(false);
             this.EasyTabPage.ResumeLayout(false);
             this.tableLayoutPanel1.ResumeLayout(false);

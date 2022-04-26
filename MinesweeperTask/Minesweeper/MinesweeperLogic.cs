@@ -16,7 +16,7 @@
 
         public int MinesCount { get; set; }
 
-        public bool IsEasy { get; set ; }
+        public bool IsEasy { get; set; }
 
         public bool IsMedium { get; set; }
 
@@ -26,7 +26,7 @@
         {
             FieldWidth = fieldWidth;
             FieldHeight = fieldHeight;
-            
+
             Field = new int[FieldWidth, FieldHeight];
             IsLockedCell = new bool[FieldWidth, FieldHeight];
             MinesCoorditanes = new Point[minesCount];
@@ -76,6 +76,21 @@
                     }
                 }
             }
+        }
+
+        public void LockCell(int x, int y)
+        {
+            IsLockedCell[x, y] = true;
+        }
+
+        public void UnlockCell(int x, int y)
+        {
+            IsLockedCell[x, y] = false;
+        }
+
+        public Point GetCellPosition(int indexButton)
+        {
+            return new Point(indexButton / FieldHeight, indexButton % FieldHeight);
         }
     }
 }

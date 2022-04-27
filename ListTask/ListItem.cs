@@ -1,6 +1,6 @@
 ﻿namespace ListTask
 {
-    partial class ListItem<T> 
+    internal class ListItem<T>
     {
         public T Data { get; set; }
 
@@ -8,7 +8,7 @@
 
         public ListItem(T data) => Data = data;
 
-        public ListItem(T data, ListItem<T> next) 
+        public ListItem(T data, ListItem<T> next)
         {
             Data = data;
             Next = next;

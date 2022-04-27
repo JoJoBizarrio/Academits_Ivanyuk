@@ -11,8 +11,6 @@ namespace RangeTask
         // вместо {4. Сделать метод для получения длины диапазона}, свойство:
         public double Length => To - From;
 
-        public Range() { }
-
         // 2. Описать конструктор, при помощи которого заполняются поля
         public Range(double from, double to)
         {
@@ -31,7 +29,7 @@ namespace RangeTask
         {
             if (To <= range.From || From >= range.To)
             {
-                return new Range();
+                return null;
             }
 
             return new Range(Math.Max(From, range.From), Math.Min(To, range.To));
@@ -53,36 +51,26 @@ namespace RangeTask
         }
 
         // Получение разности двух интервалов.
-        public Range[] GetDifference(Range range) // пытался упростить, не получилось
+        public Range[] GetDifference(Range range)
         {
-            if (To <= range.From || From >= range.To)
+            if (From >= range.To || To <= range.From) // range не пересекается с this и возвращаем целый this.
             {
                 return new Range[] { new Range(From, To) };
             }
 
-            if (From >= range.From & To <= range.To)
+            if (From >= range.From && To <= range.To) // range покрывает диапазон this, возвращаем пустоту.
             {
                 return Array.Empty<Range>();
             }
 
-            if (From == range.From)
+            if (From < range.To && From >= range.From && To > range.To)
             {
                 return new Range[] { new Range(range.To, To) };
             }
 
-            if (To == range.To)
+            if (From < range.From && To > range.From && To <= range.To)
             {
                 return new Range[] { new Range(From, range.From) };
-            }
-
-            if (IsInside(range.From) && !IsInside(range.To))
-            {
-                return new Range[] { new Range(From, range.From) };
-            }
-
-            if (!IsInside(range.From) && IsInside(range.To))
-            {
-                return new Range[] { new Range(range.To, To) };
             }
 
             return new Range[] { new Range(From, range.From), new Range(range.To, To) };
@@ -90,27 +78,30 @@ namespace RangeTask
 
         public override string ToString()
         {
-            if (From == 0 & To == 0)
-            {
-                return "[]";
-            }
+            StringBuilder stringBuilder = new();
 
-            return $"({From}; {To})";
+            stringBuilder.Append('(');
+            stringBuilder.Append(From);
+            stringBuilder.Append("\u002C ");
+            stringBuilder.Append(To);
+            stringBuilder.Append(')');
+
+            return stringBuilder.ToString();
         }
 
         public static string ToString(Range[] ranges)
         {
+            if (ranges.Length == 0)
+            {
+                return "[]";
+            }
+
             StringBuilder stringBuilder = new("[");
 
             foreach (Range e in ranges)
             {
                 stringBuilder.Append(e);
                 stringBuilder.Append(", ");
-            }
-
-            if (string.IsNullOrEmpty(stringBuilder.ToString()))
-            {
-                return "[]";
             }
 
             if (stringBuilder.ToString() == "[")

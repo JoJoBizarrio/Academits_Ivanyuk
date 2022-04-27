@@ -13,7 +13,7 @@
 
             //Console.WriteLine(ht);
 
-            //int[] array1 = new int[40];
+            //int[] array1 = new int[30];
 
             //ht.CopyTo(array1, 3);
 

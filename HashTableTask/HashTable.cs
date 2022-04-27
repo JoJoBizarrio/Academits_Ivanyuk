@@ -5,9 +5,9 @@ namespace HashTableTask
 {
     internal class HashTable<T> : ICollection<T>
     {
-        private int DefaultCapacity = 10;
+        private const int DefaultCapacity = 10;
 
-        private List<T>[] _lists;
+        private readonly List<T>[] _lists;
         private int _modCount;
 
         public int Count { get; private set; }
@@ -36,7 +36,7 @@ namespace HashTableTask
                 return 0;
             }
 
-            return Math.Abs(item.GetHashCode()) % _lists.Length; 
+            return Math.Abs(item.GetHashCode()) % _lists.Length;
         }
 
         public void Add(T item)
@@ -55,19 +55,14 @@ namespace HashTableTask
 
         public void Clear()
         {
-            if (_lists == null) 
+            foreach (List<T> list in _lists)
             {
-                return;
-            }
-
-            for (int i = 0; i < _lists.Length; ++i)
-            {
-                if (_lists[i] == null)
+                if (list == null)
                 {
                     continue;
                 }
 
-                _lists[i].Clear();
+                list.Clear();
             }
 
             Count = 0;
@@ -76,39 +71,17 @@ namespace HashTableTask
 
         public bool Contains(T item)
         {
-            if (item == null)
-            {
-                for (int i = 0; i < _lists[0].Count; ++i)
-                {
-                    if (_lists[0][i] == null && item == null)
-                    {
-                        return true;
-                    }
-                }
+            int listIndex = GetIndex(item);
 
-                return false;
-            }
-
-            return _lists[GetIndex(item)].Contains(item);
+            return _lists[listIndex] != null && _lists[listIndex].Contains(item);
         }
 
         public bool Remove(T item)
         {
-            if (item == null)
-            {
-                for (int i = 0; i < _lists[0].Count; ++i)
-                {
-                    if (_lists[0][i] == null)
-                    {
-                        _lists[0].RemoveAt(i);
-                        return true;
-                    }
-                }
+            int listIndex = GetIndex(item);
 
-                return false;
-            }
 
-            if (_lists[GetIndex(item)].Remove(item))
+            if (_lists[listIndex] != null && _lists[listIndex].Remove(item))
             {
                 Count--;
                 _modCount++;
@@ -132,7 +105,7 @@ namespace HashTableTask
 
             if (array.Length - arrayIndex < Count)
             {
-                throw new ArgumentException($"The count of elements in the source Collection<T> is greater than the available space from the position specified " +
+                throw new ArgumentException("The count of elements in the source Collection<T> is greater than the available space from the position specified " +
                                             $"by {nameof(arrayIndex)} (= {arrayIndex}) to the end of the destination {nameof(array)}.");
             }
 
@@ -181,41 +154,21 @@ namespace HashTableTask
         {
             StringBuilder stringBuilder = new();
 
-            foreach (T e in _lists[0])
+            foreach (List<T> list in _lists)
             {
-                if (e == null)
-                {
-                    stringBuilder.Append("null, ");
-                }
-                else
-                {
-                    stringBuilder.Append(e);
-                    stringBuilder.Append(", ");
-                }
-            }
-
-            stringBuilder.Replace(", ", ".", stringBuilder.Length - 2, 2);
-            stringBuilder.Append(Environment.NewLine);
-
-            for (int i = 1; i < _lists.Length; ++i)
-            {
-                if (_lists[i] == null || _lists[i].Count == 0)
+                if (list == null)
                 {
                     continue;
                 }
 
-                stringBuilder.Append("List ");
-                stringBuilder.Append(i);
-                stringBuilder.Append(": ");
-
-                foreach (T e in _lists[i])
+                foreach (T e in list)
                 {
                     stringBuilder.Append(e);
                     stringBuilder.Append(", ");
                 }
 
                 stringBuilder.Replace(", ", ".", stringBuilder.Length - 2, 2);
-                stringBuilder.Append(Environment.NewLine);
+                stringBuilder.AppendLine();
             }
 
             return stringBuilder.ToString();

@@ -25,7 +25,7 @@ namespace ListTask
                     throw new ArgumentException($"Capacity = {value} must be greater than count = {Count}.");
                 }
 
-                if (value == Count)
+                if (value == Capacity)
                 {
                     return;
                 }
@@ -71,7 +71,7 @@ namespace ListTask
         {
             if (items.Length == 0)
             {
-                throw new ArgumentException("Empty array.");
+                return;
             }
 
             _items = new T[2 * items.Length];
@@ -116,9 +116,7 @@ namespace ListTask
             CheckIndex(index);
 
             Array.Copy(_items, index + 1, _items, index, Count - index - 1);
-            _items[^1] = default; // 1) это является занулением? я не понимаю как занулить ссылку вручную.
-                                  // 2) вот если будет int[] то там будет ноль после дефолта, но ссылка будет все еще активна. Правильно понимаю?
-                                  // ref _items[^1] = null; это тоже не работает. без ref аналогично. 
+            _items[Count - 1] = default; 
 
             Count--;
             _modCount++;
@@ -155,12 +153,12 @@ namespace ListTask
         {
             if (index < 0 || index >= array.Length)
             {
-                throw new ArgumentOutOfRangeException(nameof(index), index, $"Index out of range: [0, {Count - 1}].");
+                throw new ArgumentOutOfRangeException(nameof(index), index, $"Index out of range: [0, {array.Length - 1}].");
             }
 
             if (array == null)
             {
-                throw new ArgumentNullException("Array is null.");
+                throw new ArgumentNullException(nameof(array), "Array is null.");
             }
 
             if (Count > array.Length - index)
@@ -194,7 +192,7 @@ namespace ListTask
 
         public void TrimExcess()
         {
-            if ((double)Count / (double)Capacity <= 0.9)
+            if ((double)Count / Capacity <= 0.9)
             {
                 Capacity = Count;
             }

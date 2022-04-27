@@ -7,25 +7,26 @@
             // 1. Прочитать в список все строки из файла
             string path = "..\\net6.0\\textToList.txt";
 
-            if (!File.Exists(path))
+            try
             {
-                Console.WriteLine("Ошибка: файл не найден.");
-            }
-            else
-            {
-                using (StreamReader reader = new StreamReader(path))
+                File.Exists(path);
+
+                using StreamReader reader = new StreamReader(path);
+
+                List<string> fileStrings = new();
+
+                string currentLine;
+
+                while ((currentLine = reader.ReadLine()) != null)
                 {
-                    List<string> datasetByFile = new();
-
-                    string currentLine;
-
-                    while ((currentLine = reader.ReadLine()) != null)
-                    {
-                        datasetByFile.Add(currentLine);
-                    }
-
-                    Console.WriteLine(string.Join(", ", datasetByFile));
+                    fileStrings.Add(currentLine);
                 }
+
+                Console.WriteLine(string.Join(", ", fileStrings));
+            }
+            catch
+            {
+                Console.WriteLine("Ошибка.");
             }
 
             //================================================================
@@ -46,27 +47,17 @@
             //===================================================================
             // 3. Есть список из целых чисел, в нём некоторые числа могут повторяться.
             // Надо создать новый список, в котором будут элементы первого списка в таком же порядке, но без повторений.
-            List<int> list3WithoutRepeats = new();
+            List<int> nonrepeatingIntegerNumbersList = new(integerNumbersList.Count);
 
             for (int i = 0; i < integerNumbersList.Count; ++i)
             {
-                bool isRepeat = false;
-
-                for (int j = 0; j < list3WithoutRepeats.Count; ++j)
+                if (!nonrepeatingIntegerNumbersList.Contains(integerNumbersList[i]))
                 {
-                    if (integerNumbersList[i] == list3WithoutRepeats[j])
-                    {
-                        isRepeat = true;
-                    }
-                }
-
-                if (!isRepeat)
-                {
-                    list3WithoutRepeats.Add(integerNumbersList[i]);
+                    nonrepeatingIntegerNumbersList.Add(integerNumbersList[i]);
                 }
             }
 
-            Console.WriteLine(string.Join(", ", list3WithoutRepeats));
+            Console.WriteLine(string.Join(", ", nonrepeatingIntegerNumbersList));
         }
     }
 }

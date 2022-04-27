@@ -23,7 +23,6 @@ namespace ListTask
         {
             if (array.Length == 0)
             {
-                new SinglyLinkedList<T>();
                 return;
             }
 
@@ -41,10 +40,7 @@ namespace ListTask
         // Получение значение первого элемента
         public T GetFirst()
         {
-            if (Count == 0)
-            {
-                throw new InvalidOperationException("Empty list.");
-            }
+            CheckIsEmptyList();
 
             return _head.Data;
         }
@@ -56,7 +52,7 @@ namespace ListTask
             Count++;
         }
 
-        // Получение значения по указанному индексу.
+        // Получение значения по указанному индексу
         public T GetData(int index)
         {
             CheckIndex(index);
@@ -64,19 +60,21 @@ namespace ListTask
             return GetListItem(index).Data;
         }
 
-        // Изменение значения по указанному индексу.
-        public void SetData(int index, T data)
+        // Изменение значения по указанному индексу
+        public T SetData(int index, T data)
         {
             CheckIndex(index);
 
-            GetListItem(index).Data = data;
+            ListItem<T> listItem = GetListItem(index);
+            T oldData = listItem.Data;
+            listItem.Data = data;
+
+            return oldData;
         }
 
         // Вставка элемента по индексу
         public void Insert(int index, T data)
         {
-            CheckIsEmptyList();
-
             if (index < 0 || index > Count)
             {
                 throw new ArgumentOutOfRangeException(nameof(index), index, $"Index is out of range: [0, {Count}].");
@@ -88,12 +86,9 @@ namespace ListTask
                 return;
             }
 
-            CheckIndex(index);
+            ListItem<T> previousItem = GetListItem(index - 1);
 
-            ListItem<T> item = GetListItem(index - 1);
-            ListItem<T> insertedItem = new(data, item.Next);
-
-            item.Next = insertedItem;
+            previousItem.Next = new ListItem<T>(data, previousItem.Next);
 
             Count++;
         }
@@ -101,10 +96,7 @@ namespace ListTask
         // Удаление первого элемента, пусть выдает значение элемента
         public T RemoveFirst()
         {
-            if (Count == 0)
-            {
-                throw new InvalidOperationException("Empty list.");
-            }
+            CheckIsEmptyList();
 
             T removedData = _head.Data;
             _head = _head.Next;
@@ -116,8 +108,6 @@ namespace ListTask
         // Удаление элемента по индексу, пусть выдает значение элемента
         public T RemoveAt(int index)
         {
-            CheckIsEmptyList();
-
             CheckIndex(index);
 
             if (index == 0)
@@ -137,19 +127,22 @@ namespace ListTask
         // Удаление узла по значению, пусть выдает true, если элемент был удален
         public bool Remove(T data)
         {
-            CheckIsEmptyList();
+            if (Equals(_head, null))
+            {
+                return false;
+            }
 
-            if ((_head.Data == null && data == null) || _head.Data.Equals(data))
+            if (Equals(_head.Data, data))
             {
                 RemoveFirst();
                 return true;
             }
 
-            for (ListItem<T> previousItem = _head, currentitem = _head.Next; currentitem != null; previousItem = currentitem, currentitem = currentitem.Next)
+            for (ListItem<T> previousItem = _head, currentItem = _head.Next; currentItem != null; previousItem = currentItem, currentItem = currentItem.Next)
             {
-                if ((data == null && currentitem.Data == null) || (currentitem.Data != null && currentitem.Data.Equals(data)))
+                if (Equals(data, currentItem.Data))
                 {
-                    previousItem.Next = currentitem.Next;
+                    previousItem.Next = currentItem.Next;
                     Count--;
                     return true;
                 }
@@ -161,26 +154,24 @@ namespace ListTask
         // Разворот списка за линейное время
         public void Reverse()
         {
-            CheckIsEmptyList();
-
-            if (_head.Next == null)
+            if (Count == 0 || Count == 1)
             {
                 return;
             }
 
             ListItem<T> previousItem = _head;
             ListItem<T> currentItem = _head.Next;
-            ListItem<T> counter = _head.Next.Next;
+            ListItem<T> nextItem = _head.Next.Next;
 
             previousItem.Next = null;
 
-            while (counter != null)
+            while (nextItem != null)
             {
                 currentItem.Next = previousItem;
                 previousItem = currentItem;
-                currentItem = counter;
+                currentItem = nextItem;
 
-                counter = counter.Next;
+                nextItem = nextItem.Next;
             }
 
             currentItem.Next = previousItem;
@@ -191,7 +182,10 @@ namespace ListTask
         // Копирование списка
         public SinglyLinkedList<T> Copy()
         {
-            CheckIsEmptyList();
+            if (Count == 0)
+            {
+                return new SinglyLinkedList<T>();
+            }
 
             SinglyLinkedList<T> listCopy = new(_head.Data);
             ListItem<T> itemCopy = listCopy._head;
@@ -210,8 +204,6 @@ namespace ListTask
         // Вспомогательное: возвращает ячейку по индексу в виде ListItem<T>
         private ListItem<T> GetListItem(int index)
         {
-            CheckIndex(index);
-
             ListItem<T> item = _head;
 
             for (int i = 0; i < index; i++)

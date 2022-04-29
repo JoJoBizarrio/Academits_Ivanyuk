@@ -189,14 +189,13 @@ namespace TreeTask
                 if (isLeftChild)
                 {
                     deletedNodeParent.Left = null;
-                    Count--;
                 }
                 else
                 {
                     deletedNodeParent.Right = null;
-                    Count--;
                 }
 
+                Count--;
                 return true;
             }
 
@@ -206,14 +205,13 @@ namespace TreeTask
                 if (isLeftChild)
                 {
                     deletedNodeParent.Left = deletedNode.Right;
-                    Count--;
                 }
                 else
                 {
                     deletedNodeParent.Right = deletedNode.Right;
-                    Count--;
                 }
 
+                Count--;
                 return true;
             }
 
@@ -223,14 +221,13 @@ namespace TreeTask
                 if (isLeftChild)
                 {
                     deletedNodeParent.Left = deletedNode.Left;
-                    Count--;
                 }
                 else
                 {
                     deletedNodeParent.Right = deletedNode.Left;
-                    Count--;
                 }
 
+                Count--;
                 return true;
             }
 
@@ -269,8 +266,8 @@ namespace TreeTask
 
                 deletedNode.Left = null; // зануляем удаляемый нод
                 deletedNode.Right = null;
-                Count--;
 
+                Count--;
                 return true;
             }
 
@@ -287,8 +284,8 @@ namespace TreeTask
 
             deletedNode.Left = null; // зануляем удаляемый нод
             deletedNode.Right = null;
-            Count--;
 
+            Count--;
             return true;
         }
 
@@ -325,7 +322,7 @@ namespace TreeTask
                 if (treeNode.Left == null)
                 {
                     treeNode.Left = _root.Left;
-                    _root = treeNode; // в данном случае затираются старые _root.Left and _root.Right и сборщик их убирет или нужно вручную занулить их перед присваиванием?
+                    _root = treeNode;
                     Count--;
 
                     return;
@@ -345,7 +342,7 @@ namespace TreeTask
             }
         }
 
-        public void BypassInWidth(Func<T, T> func)
+        public void BypassInWidth(Action<T> func)
         {
             CheckFirst();
 
@@ -358,7 +355,7 @@ namespace TreeTask
             {
                 treeNode = queue.Dequeue();
 
-                treeNode.Data = func(treeNode.Data);
+                func(treeNode.Data);
 
                 if (treeNode.Left != null)
                 {
@@ -372,7 +369,7 @@ namespace TreeTask
             }
         }
 
-        public void BypassInDeep(Func<T, T> func)
+        public void BypassInDeep(Action<T> func)
         {
             CheckFirst();
 
@@ -385,7 +382,7 @@ namespace TreeTask
             {
                 treeNode = stack.Pop();
 
-                treeNode.Data = func(treeNode.Data);
+                func(treeNode.Data);
 
                 if (treeNode.Right != null)
                 {
@@ -399,14 +396,14 @@ namespace TreeTask
             }
         }
 
-        public void BypassInRecursiveDeep(Func<T, T> func)
+        public void BypassInRecursiveDeep(Action<T> func)
         {
             BypassInRecursiveDeep(func, _root);
         }
 
-        private void BypassInRecursiveDeep(Func<T, T> func, TreeNode<T> treeNode)
+        private void BypassInRecursiveDeep(Action<T> func, TreeNode<T> treeNode)
         {
-            treeNode.Data = func(treeNode.Data);
+            func(treeNode.Data);
 
             if (treeNode.Left != null)
             {

@@ -2,29 +2,34 @@
 {
     internal class TempretureTaskLogic
     {
-        public const double KelvinConversionFactor = 273.15;
-        public const double FarengeitConversionFactor = 32;
+        public const double KelvinConversionConstant = 273.15;
+        public const double FarengeitConversionConstant = 32;
 
-        public string[] Scales = new string[] { "Celsius", "Kelvin", "Fahrenheit" };
+        public string[] Scales = new string[]
+        {
+            "Celsius",
+            "Kelvin",
+            "Fahrenheit"
+        };
 
         private static double GetKelvinFromCelsius(double celsius)
         {
-            return celsius + KelvinConversionFactor;
+            return celsius + KelvinConversionConstant;
         }
 
         private static double GetFahrenheitFromCelsius(double celsius)
         {
-            return celsius * 9.0 / 5 + FarengeitConversionFactor;
+            return celsius * 9.0 / 5 + FarengeitConversionConstant;
         }
 
         private static double GetCelsiusFromFahrenheit(double fahrenheit)
         {
-            return (fahrenheit - FarengeitConversionFactor) * 5.0 / 9;
+            return (fahrenheit - FarengeitConversionConstant) * 5.0 / 9;
         }
 
         private static double GetCelsiusFromKelvin(double kelvin)
         {
-            return kelvin - KelvinConversionFactor;
+            return kelvin - KelvinConversionConstant;
         }
 
         private static double GetKelvinFromFahrenheit(double fahrenheit)

@@ -114,10 +114,6 @@
             // 
             this.ConvertFromComboBox.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             this.ConvertFromComboBox.ImeMode = System.Windows.Forms.ImeMode.Close;
-            this.ConvertFromComboBox.Items.AddRange(new object[] {
-            "Celsius",
-            "Kelvin",
-            "Fahrenheit"});
             this.ConvertFromComboBox.Location = new System.Drawing.Point(3, 3);
             this.ConvertFromComboBox.Name = "ConvertFromComboBox";
             this.ConvertFromComboBox.Size = new System.Drawing.Size(137, 28);
@@ -127,10 +123,6 @@
             // 
             this.ConvertToComboBox.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             this.ConvertToComboBox.FormattingEnabled = true;
-            this.ConvertToComboBox.Items.AddRange(new object[] {
-            "Celsius",
-            "Kelvin",
-            "Fahrenheit"});
             this.ConvertToComboBox.Location = new System.Drawing.Point(217, 3);
             this.ConvertToComboBox.Name = "ConvertToComboBox";
             this.ConvertToComboBox.Size = new System.Drawing.Size(137, 28);
@@ -144,9 +136,13 @@
             this.Controls.Add(this.tableLayoutPanel2);
             this.Controls.Add(this.tableLayoutPanel1);
             this.Controls.Add(this.ConvertButton);
+            this.MaximizeBox = false;
+            this.MinimizeBox = false;
             this.MinimumSize = new System.Drawing.Size(400, 230);
             this.Name = "TemperatureTaskForm";
+            this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "Temperature\'s converter";
+            this.TopMost = true;
             this.WindowState = System.Windows.Forms.FormWindowState.Minimized;
             this.tableLayoutPanel1.ResumeLayout(false);
             this.tableLayoutPanel1.PerformLayout();

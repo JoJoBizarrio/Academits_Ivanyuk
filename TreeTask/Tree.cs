@@ -32,6 +32,7 @@ namespace TreeTask
             {
                 _root = new TreeNode<T>(data);
                 Count++;
+
                 return;
             }
 

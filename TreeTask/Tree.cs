@@ -1,10 +1,12 @@
-﻿namespace TreeTask
+﻿using TreeTask.Comparers;
+
+namespace TreeTask
 {
     internal class Tree<T> where T : IComparable<T>
     {
         private TreeNode<T> _root;
 
-        private Comparer<T> _comparison;
+        private DataComparer<T> _comparison;
 
         public int Count { get; private set; }
 
@@ -16,7 +18,7 @@
             Count++;
         }
 
-        public Tree(T root, Comparer<T> comparer)
+        public Tree(T root, DataComparer<T> comparer)
         {
             _root = new TreeNode<T>(root);
             _comparison = comparer;

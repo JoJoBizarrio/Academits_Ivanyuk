@@ -1,6 +1,6 @@
-﻿namespace TreeTask
+﻿namespace TreeTask.Comparers
 {
-    internal class Comparer<T> : IComparer<T>
+    internal class DataComparer<T> : IComparer<T>
     {
         public int Compare(T data1, T data2)
         {

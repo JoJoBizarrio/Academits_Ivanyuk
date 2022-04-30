@@ -26,7 +26,7 @@
             //treeTest.BypassInWidth(write);
             //Console.WriteLine();
 
-            //Comparer<string> comparer = new Comparer<string>();
+            //DataComparer<string> comparer = new DataComparer<string>();
 
             //Tree<string> treeTest2 = new("abc");
 

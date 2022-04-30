@@ -31,8 +31,8 @@ namespace TreeTask
             if (_root == null)
             {
                 _root = new TreeNode<T>(data);
-                Count++;
 
+                Count++;
                 return;
             }
 
@@ -45,6 +45,7 @@ namespace TreeTask
                     if (treeNode.Left == null)
                     {
                         treeNode.Left = new TreeNode<T>(data);
+
                         Count++;
                         return;
                     }
@@ -58,6 +59,7 @@ namespace TreeTask
                     if (treeNode.Right == null)
                     {
                         treeNode.Right = new TreeNode<T>(data);
+
                         Count++;
                         return;
                     }
@@ -313,27 +315,22 @@ namespace TreeTask
 
         private void RemoveFirst()
         {
-            if (_root.Left == null && _root.Right == null)
+            if (_root.Left == null || _root.Right == null)
             {
-                _root = null;
+                if (_root.Left == null && _root.Right == null)
+                {
+                    _root = null;
+                }
+                else if (_root.Left == null)
+                {
+                    _root = _root.Right;
+                }
+                else
+                {
+                    _root = _root.Left;
+                }
+
                 Count--;
-
-                return;
-            }
-
-            if (_root.Left == null)
-            {
-                _root = _root.Right;
-                Count--;
-
-                return;
-            }
-
-            if (_root.Right == null)
-            {
-                _root = _root.Left;
-                Count--;
-
                 return;
             }
 
@@ -345,8 +342,8 @@ namespace TreeTask
                 {
                     treeNode.Left = _root.Left;
                     _root = treeNode;
-                    Count--;
 
+                    Count--;
                     return;
                 }
                 else

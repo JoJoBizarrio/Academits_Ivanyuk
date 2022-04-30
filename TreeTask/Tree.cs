@@ -1,10 +1,10 @@
-﻿using System.Text;
-
-namespace TreeTask
+﻿namespace TreeTask
 {
     internal class Tree<T> where T : IComparable<T>
     {
         private TreeNode<T> _root;
+
+        private Comparer<T> _comparison;
 
         public int Count { get; private set; }
 
@@ -13,6 +13,14 @@ namespace TreeTask
         public Tree(T root)
         {
             _root = new TreeNode<T>(root);
+            Count++;
+        }
+
+        public Tree(T root, Comparer<T> comparer)
+        {
+            _root = new TreeNode<T>(root);
+            _comparison = comparer;
+
             Count++;
         }
 
@@ -29,7 +37,7 @@ namespace TreeTask
 
             while (true)
             {
-                if (data.CompareTo(treeNode.Data) < 0)
+                if ((_comparison != null && _comparison.Compare(data, treeNode.Data) < 0) || Comparison(data, treeNode.Data) < 0)
                 {
                     if (treeNode.Left == null)
                     {
@@ -58,7 +66,7 @@ namespace TreeTask
             }
         }
 
-        public bool HasData(T data) => GetTreeNode(data) != null;
+        public bool Contains(T data) => GetTreeNode(data) != null;
 
         private TreeNode<T> GetTreeNode(T data)
         {
@@ -67,19 +75,19 @@ namespace TreeTask
                 return null;
             }
 
-            if ((data == null && _root.Data == null) || data.Equals(_root.Data))
+            if ((data == null && _root.Data == null) || Equals(data, _root.Data))
             {
                 return _root;
             }
 
             TreeNode<T> treeNode = GetTreeNodeParent(data);
 
-            if (treeNode.Left != null && treeNode.Left.Data.Equals(data))
+            if (treeNode.Left != null && Equals(treeNode.Left.Data, data))
             {
                 return treeNode.Left;
             }
 
-            if (treeNode.Right != null && treeNode.Right.Data.Equals(data))
+            if (treeNode.Right != null && Equals(treeNode.Right.Data, data))
             {
                 return treeNode.Right;
             }
@@ -89,18 +97,18 @@ namespace TreeTask
 
         private TreeNode<T> GetTreeNodeParent(T data)
         {
-            if (_root == null || data.Equals(_root.Data))
+            if (_root == null || Equals(data, _root.Data))
             {
                 return null;
             }
 
-            if (data == null & _root.Data == null)
+            if (data == null && _root.Data == null)
             {
                 return null;
             }
 
             TreeNode<T> treeNode = _root;
-            TreeNode<T> treeNodeParent = _root; // поскольку компилятор ругается на 122 строке если не присвоить переменную в этом месте пришлось присвоить.
+            TreeNode<T> treeNodeParent = _root;
 
             if (data == null)
             {
@@ -122,11 +130,22 @@ namespace TreeTask
 
             while (true)
             {
-                if (data.CompareTo(treeNode.Data) == 0)
+                int comparisonResult;
+
+                if (_comparison != null)
                 {
-                    return treeNodeParent; // нету такого исхода когда данная переменная не присвоена если не присваивать на 116
+                    comparisonResult = _comparison.Compare(data, treeNode.Data);
                 }
-                else if (data.CompareTo(treeNode.Data) < 0)
+                else
+                {
+                    comparisonResult = Comparison(data, treeNode.Data);
+                }
+
+                if (comparisonResult == 0)
+                {
+                    return treeNodeParent;
+                }
+                else if (comparisonResult < 0)
                 {
                     if (treeNode.Left == null)
                     {
@@ -157,7 +176,7 @@ namespace TreeTask
         {
             CheckFirst();
 
-            if (data.Equals(_root.Data))
+            if (Equals(data, _root.Data))
             {
                 RemoveFirst();
                 return true;
@@ -173,7 +192,7 @@ namespace TreeTask
             TreeNode<T> deletedNode;
             bool isLeftChild = false;
 
-            if (data.CompareTo(deletedNodeParent.Data) < 0)
+            if ((_comparison != null && _comparison.Compare(data, deletedNodeParent.Data) < 0) || Comparison(data, deletedNodeParent.Data) < 0)
             {
                 deletedNode = deletedNodeParent.Left;
                 isLeftChild = true;
@@ -291,7 +310,7 @@ namespace TreeTask
 
         private void RemoveFirst()
         {
-            if (_root.Left == null & _root.Right == null)
+            if (_root.Left == null && _root.Right == null)
             {
                 _root = null;
                 Count--;
@@ -414,6 +433,27 @@ namespace TreeTask
             {
                 BypassInRecursiveDeep(func, treeNode.Right);
             }
+        }
+
+        private static int Comparison(T data1, T data2)
+        {
+            if (Equals(data1, data2))
+            {
+                return 0;
+            }
+
+            if (data1 == null)
+            {
+                return -1;
+            }
+
+            if (data2 == null)
+            {
+                return 1;
+            }
+
+            IComparable<T> comparableData = data1;
+            return comparableData.CompareTo(data2);
         }
     }
 }

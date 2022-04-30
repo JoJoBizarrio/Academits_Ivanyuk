@@ -9,114 +9,103 @@
                 throw new FileNotFoundException("File .csv doesn't exist.");
             }
 
-            if (!File.Exists(htmlPath))
+            try
             {
-                File.Create(htmlPath);
-            }
+                using StreamReader reader = new StreamReader(csvPath);
+                using StreamWriter writer = new StreamWriter(htmlPath);
 
-            using StreamReader reader = new StreamReader(csvPath);
-            using StreamWriter writer = new StreamWriter(htmlPath);
+                writer.WriteLine("<!DOCTYPE html>");
+                writer.WriteLine("<html>");
+                writer.WriteLine("<head>");
+                writer.WriteLine("<meta charset=\"utf-8\">");
+                writer.WriteLine($"<title> {htmlPath} </title>");
+                writer.WriteLine("</head>");
+                writer.WriteLine("<body>");
+                writer.WriteLine("<p>");
+                writer.WriteLine("</p>");
+                writer.WriteLine("<table>");
 
-            writer.WriteLine("<!DOCTYPE html>");
-            writer.WriteLine("<html>");
-            writer.WriteLine("<head>");
-            writer.WriteLine("<meta charset = \"utf-8\">");
-            writer.WriteLine($"<title> {htmlPath} </title>");
-            writer.WriteLine("</head>");
-            writer.WriteLine("<body>");
-            writer.WriteLine("<p>");
-            writer.WriteLine("</p>");
-            writer.WriteLine("<table>");
+                string currentLine;
 
-            char currentSymbol;
-            string currentLine;
-            char[] currentLineArray;
+                char cellSeparator = ',';
+                char specificSymbolsDesignator = '"';
 
-            char cellSeparator = ',';
-            char specificSymbolsDesignator = '"';
+                bool isCellWithRowBreakOrSpecificSymbols = false;
 
-            char leftParenthesis = '<';
-            char rightParenthesis = '>';
-            char ampersand = '&';
-            string leftParenthesisSubstitute = "&lt;";
-            string rightParenthesisSubstitute = "&gt;";
-            string ampersandSubstitute = "&amp;";
-
-            bool isCellWithRowBreakOrSpecificSymbols = false;
-
-            while ((currentLine = reader.ReadLine()) != null)
-            {
-                if (!isCellWithRowBreakOrSpecificSymbols)
+                while ((currentLine = reader.ReadLine()) != null)
                 {
-                    writer.WriteLine($"{"<tr>",5}");
-                    writer.Write($"{"<td>",10}");
-                }
-                else
-                {
-                    writer.Write("<br/>");
-                }
-
-                currentLineArray = currentLine.ToCharArray();
-
-                for (int i = 0; i < currentLineArray.Length; ++i)
-                {
-                    currentSymbol = currentLineArray[i];
-
-                    if (currentSymbol == leftParenthesis)
+                    if (!isCellWithRowBreakOrSpecificSymbols)
                     {
-                        writer.Write(leftParenthesisSubstitute);
-                    }
-                    else if (currentSymbol == rightParenthesis)
-                    {
-                        writer.Write(rightParenthesisSubstitute);
-                    }
-                    else if (currentSymbol == ampersand)
-                    {
-                        writer.Write(ampersandSubstitute);
-                    }
-                    else if (isCellWithRowBreakOrSpecificSymbols)
-                    {
-                        if (currentSymbol == specificSymbolsDesignator && (i == currentLineArray.Length - 1 || currentLineArray[i + 1] == cellSeparator))
-                        {
-                            isCellWithRowBreakOrSpecificSymbols = false;
-                        }
-                        else if (currentSymbol == specificSymbolsDesignator)
-                        {
-                            writer.Write(currentSymbol);
-                            ++i;
-                        }
-                        else
-                        {
-                            writer.Write(currentSymbol);
-                        }
+                        writer.WriteLine($"{"<tr>",6}");
+                        writer.Write($"{"<td>",10}");
                     }
                     else
                     {
-                        if (currentSymbol == specificSymbolsDesignator)
+                        writer.Write("<br/>");
+                    }
+
+                    for (int i = 0; i < currentLine.Length; ++i)
+                    {
+                        if (currentLine[i] == '<')
                         {
-                            isCellWithRowBreakOrSpecificSymbols = true;
+                            writer.Write("&lt;");
                         }
-                        else if (currentSymbol == cellSeparator)
+                        else if (currentLine[i] == '>')
                         {
-                            writer.Write("</td><td>");
+                            writer.Write("&gt;");
+                        }
+                        else if (currentLine[i] == '&')
+                        {
+                            writer.Write("&amp;");
+                        }
+                        else if (isCellWithRowBreakOrSpecificSymbols)
+                        {
+                            if (currentLine[i] == specificSymbolsDesignator && (i == currentLine.Length - 1 || currentLine[i + 1] == cellSeparator))
+                            {
+                                isCellWithRowBreakOrSpecificSymbols = false;
+                            }
+                            else if (currentLine[i] == specificSymbolsDesignator)
+                            {
+                                writer.Write(currentLine[i]);
+                                ++i;
+                            }
+                            else
+                            {
+                                writer.Write(currentLine[i]);
+                            }
                         }
                         else
                         {
-                            writer.Write(currentSymbol);
+                            if (currentLine[i] == specificSymbolsDesignator)
+                            {
+                                isCellWithRowBreakOrSpecificSymbols = true;
+                            }
+                            else if (currentLine[i] == cellSeparator)
+                            {
+                                writer.Write("</td><td>");
+                            }
+                            else
+                            {
+                                writer.Write(currentLine[i]);
+                            }
                         }
+                    }
+
+                    if (!isCellWithRowBreakOrSpecificSymbols)
+                    {
+                        writer.WriteLine("</td>");
+                        writer.WriteLine($"{"</tr>",6}");
                     }
                 }
 
-                if (!isCellWithRowBreakOrSpecificSymbols)
-                {
-                    writer.WriteLine("</td>");
-                    writer.WriteLine($"{"</tr>",6}");
-                }
+                writer.WriteLine("</table>");
+                writer.WriteLine("</body>");
+                writer.WriteLine("</html>");
             }
-
-            writer.WriteLine("</table>");
-            writer.WriteLine("</body>");
-            writer.WriteLine("</html>");
+            catch (Exception exception)
+            {
+                Console.WriteLine($"Ошибка {exception}");
+            }
         }
 
         static void Main()

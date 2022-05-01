@@ -54,7 +54,7 @@
         public void BypassByWidth(Action<int> func)
         {
             Queue<int> queue = new Queue<int>();
-            bool[] visited = new bool[VertexesCount];
+            bool[] visitedVertexes = new bool[VertexesCount];
 
             queue.Enqueue(0);
 
@@ -62,7 +62,7 @@
             {
                 int vertexIndex = queue.Dequeue();
 
-                if (!visited[vertexIndex])
+                if (!visitedVertexes[vertexIndex])
                 {
                     func(vertexIndex);
                 }
@@ -71,21 +71,21 @@
                 {
                     if (_bondsTable[vertexIndex, i] > 0)
                     {
-                        if (!visited[i])
+                        if (!visitedVertexes[i])
                         {
                             queue.Enqueue(i);
                         }
                     }
                 }
 
-                visited[vertexIndex] = true;
+                visitedVertexes[vertexIndex] = true;
             }
         }
 
         public void BypassByDeep(Action<int> func)
         {
             Stack<int> stack = new Stack<int>();
-            bool[] visited = new bool[VertexesCount];
+            bool[] visitedVertexes = new bool[VertexesCount];
 
             stack.Push(0);
 
@@ -93,7 +93,7 @@
             {
                 int vertexIndex = stack.Pop();
 
-                if (!visited[vertexIndex])
+                if (!visitedVertexes[vertexIndex])
                 {
                     func(vertexIndex);
                 }
@@ -102,16 +102,42 @@
                 {
                     if (_bondsTable[vertexIndex, i] > 0)
                     {
-                        if (!visited[i])
+                        if (!visitedVertexes[i])
                         {
                             stack.Push(i);
                         }
                     }
                 }
 
-                visited[vertexIndex] = true;
+                visitedVertexes[vertexIndex] = true;
             }
         }
+
+        public void BypassByRecursiveDeep(Action<int> func)
+        {
+            bool[] visitedVertexes = new bool[VertexesCount];
+
+            func(0);
+            visitedVertexes[0] = true;
+
+            BypassByRecursiveDeep(func, 0, visitedVertexes);
+            
+        }
+
+        private void BypassByRecursiveDeep(Action<int> func, int vertexIndex, bool[] visitedVertexes)
+        {
+            for (int i = 0; i < VertexesCount; i++)
+            {
+                if (_bondsTable[vertexIndex, i] > 0 && !visitedVertexes[i])
+                {
+                    func(i);
+                    visitedVertexes[i] = true;
+
+                    BypassByRecursiveDeep(func, i, visitedVertexes);
+                }
+            }
+        }
+
 
         private void CheckRowIndex(int index)
         {

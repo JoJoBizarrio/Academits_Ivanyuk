@@ -11,6 +11,8 @@
             graph.BypassByWidth(action);
             Console.WriteLine();
             graph.BypassByDeep(action);
+            Console.WriteLine();
+            graph.BypassByRecursiveDeep(action);
         }
     }
 }

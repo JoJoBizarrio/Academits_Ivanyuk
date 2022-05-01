@@ -453,6 +453,7 @@ namespace TreeTask
             }
 
             IComparable<T> comparableData = data1;
+
             return comparableData.CompareTo(data2);
         }
     }

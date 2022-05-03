@@ -31,16 +31,16 @@ namespace MinesweeperTask.Minesweeper
         private int _elapsedMinutesCount;
         private int _elapsedSecondCount;
 
-        private readonly Image _number1Image = Image.FromFile("..\\images\\number1.png");
-        private readonly Image _number2Image = Image.FromFile("..\\images\\number2.png");
-        private readonly Image _number3Image = Image.FromFile("..\\images\\number3.png");
-        private readonly Image _number4Image = Image.FromFile("..\\images\\number4.png");
-        private readonly Image _number5Image = Image.FromFile("..\\images\\number5.png");
-        private readonly Image _number6Image = Image.FromFile("..\\images\\number6.png");
-        private readonly Image _number7Image = Image.FromFile("..\\images\\number7.png");
-        private readonly Image _number8Image = Image.FromFile("..\\images\\number8.png");
-        private readonly Image _mineImage = Image.FromFile("..\\images\\mine.png");
-        private readonly Image _flagImage = Image.FromFile("..\\images\\flag.png");
+        private readonly Image _number1Image = Image.FromFile("..\\..\\..\\images\\number1.png");
+        private readonly Image _number2Image = Image.FromFile("..\\..\\..\\images\\number2.png");
+        private readonly Image _number3Image = Image.FromFile("..\\..\\..\\images\\number3.png");
+        private readonly Image _number4Image = Image.FromFile("..\\..\\..\\images\\number4.png");
+        private readonly Image _number5Image = Image.FromFile("..\\..\\..\\images\\number5.png");
+        private readonly Image _number6Image = Image.FromFile("..\\..\\..\\images\\number6.png");
+        private readonly Image _number7Image = Image.FromFile("..\\..\\..\\images\\number7.png");
+        private readonly Image _number8Image = Image.FromFile("..\\..\\..\\images\\number8.png");
+        private readonly Image _mineImage = Image.FromFile("..\\..\\..\\images\\mine.png");
+        private readonly Image _flagImage = Image.FromFile("..\\..\\..\\images\\flag.png");
 
         public MinesweeperUI()
         {

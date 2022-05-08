@@ -4,7 +4,7 @@
     {
         static void Main()
         {
-            var people = new List<Person>()
+            var people = new List<Person>
             {
                 new("Misha", 15),
                 new("Sasha", 20),
@@ -37,8 +37,7 @@
             //Г) при помощи группировки получить Map , в котором ключи имена, а значения средний возраст
             var averageAgeByName = people
                 .GroupBy(x => x.Name)
-                .ToDictionary(x => x.Key, x => x
-                                                .Average(x => x.Age))
+                .ToDictionary(g => g.Key, g => g.Average(x => x.Age))
                 .ToList();
 
             Console.WriteLine(string.Join(", ", averageAgeByName));

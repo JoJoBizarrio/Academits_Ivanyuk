@@ -22,7 +22,7 @@ namespace ListTask
             {
                 if (value < Count)
                 {
-                    throw new ArgumentException($"Capacity = {value} must be greater than count = {Count}.");
+                    throw new ArgumentOutOfRangeException(nameof(value), $"New value capacity is less than {nameof(Count)}.");
                 }
 
                 if (value == Capacity)
@@ -61,7 +61,7 @@ namespace ListTask
         {
             if (capacity < 0)
             {
-                throw new ArgumentException($"Capacity must be > 0 {nameof(capacity)} = {capacity}.", nameof(capacity));
+                throw new ArgumentOutOfRangeException($"New value {nameof(capacity)} is less than 0.", nameof(capacity));
             }
 
             _items = new T[capacity];
@@ -151,16 +151,17 @@ namespace ListTask
 
         public void CopyTo(T[] array, int index)
         {
-            if (index < 0 || index >= array.Length)
-            {
-                throw new ArgumentOutOfRangeException(nameof(index), index, $"Index out of range: [0, {array.Length - 1}].");
-            }
-
             if (array == null)
             {
                 throw new ArgumentNullException(nameof(array), "Array is null.");
             }
 
+            if (index < 0 || index >= array.Length)
+            {
+                throw new ArgumentOutOfRangeException(nameof(index), index, $"Index out of range: [0, {array.Length - 1}].");
+            }
+
+            
             if (Count > array.Length - index)
             {
                 throw new ArgumentException($"The number of elements in the source list ({nameof(_items)}) is greater than the available space " +
@@ -242,7 +243,7 @@ namespace ListTask
                 return;
             }
 
-            Capacity = 2 * Count;
+            Capacity = 2 * Capacity;
         }
     }
 }

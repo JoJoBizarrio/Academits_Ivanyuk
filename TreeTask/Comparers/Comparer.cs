@@ -4,7 +4,7 @@
     {
         public int Compare(T data1, T data2)
         {
-            if (Equals(data1, data2))
+            if (data1 == null && data2 == null)
             {
                 return 0;
             }
@@ -19,7 +19,7 @@
                 return 1;
             }
 
-            IComparable<T> comparableData = data1 as IComparable<T>;
+            IComparable<T> comparableData = (IComparable<T>) data1;
 
             return comparableData.CompareTo(data2);
         }

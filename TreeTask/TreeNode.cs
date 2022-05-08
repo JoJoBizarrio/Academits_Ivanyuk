@@ -1,6 +1,6 @@
 ﻿namespace TreeTask
 {
-    internal class TreeNode<T> where T : IComparable<T>
+    internal class TreeNode<T>
     {
         public T Data { get; set; }
 

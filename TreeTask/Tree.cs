@@ -2,11 +2,11 @@
 
 namespace TreeTask
 {
-    internal class Tree<T> where T : IComparable<T>
+    internal class Tree<T>
     {
         private TreeNode<T> _root;
 
-        private DataComparer<T> _comparison;
+        private IComparer<T> _comparison;
 
         public int Count { get; private set; }
 
@@ -17,11 +17,20 @@ namespace TreeTask
             _root = new TreeNode<T>(root);
             Count++;
         }
+        public Tree(IComparer<T> comparer)
+        {
+            _comparison = comparer;
+        }
 
-        public Tree(T root, DataComparer<T> comparer)
+        public Tree(T root, IComparer<T> comparer)
         {
             _root = new TreeNode<T>(root);
             _comparison = comparer;
+
+            if (_comparison == null)
+            {
+                _comparison = new DataComparer<T>();
+            }
 
             Count++;
         }
@@ -40,7 +49,7 @@ namespace TreeTask
 
             while (true)
             {
-                if ((_comparison != null && _comparison.Compare(data, treeNode.Data) < 0) || Comparison(data, treeNode.Data) < 0)
+                if (Comparison(data, treeNode.Data) < 0)
                 {
                     if (treeNode.Left == null)
                     {
@@ -135,16 +144,8 @@ namespace TreeTask
 
             while (true)
             {
-                int comparisonResult;
+                int comparisonResult = _comparison.Compare(data, treeNode.Data);
 
-                if (_comparison != null)
-                {
-                    comparisonResult = _comparison.Compare(data, treeNode.Data);
-                }
-                else
-                {
-                    comparisonResult = Comparison(data, treeNode.Data);
-                }
 
                 if (comparisonResult == 0)
                 {
@@ -452,7 +453,7 @@ namespace TreeTask
                 return 1;
             }
 
-            IComparable<T> comparableData = data1;
+            IComparable<T> comparableData = (IComparable<T>)data1;
 
             return comparableData.CompareTo(data2);
         }

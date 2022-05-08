@@ -4,9 +4,9 @@ namespace TreeTask
 {
     internal class Tree<T>
     {
-        private TreeNode<T> _root;
+        private Node<T> _root;
 
-        private IComparer<T> _comparison;
+        private readonly IComparer<T> _comparer;
 
         public int Count { get; private set; }
 
@@ -14,23 +14,21 @@ namespace TreeTask
 
         public Tree(T root)
         {
-            _root = new TreeNode<T>(root);
+            _root = new Node<T>(root);
+            _comparer = new DataComparer<T>();
+
             Count++;
         }
+
         public Tree(IComparer<T> comparer)
         {
-            _comparison = comparer;
+            _comparer = comparer;
         }
 
         public Tree(T root, IComparer<T> comparer)
         {
-            _root = new TreeNode<T>(root);
-            _comparison = comparer;
-
-            if (_comparison == null)
-            {
-                _comparison = new DataComparer<T>();
-            }
+            _root = new Node<T>(root);
+            _comparer = comparer;
 
             Count++;
         }
@@ -39,173 +37,148 @@ namespace TreeTask
         {
             if (_root == null)
             {
-                _root = new TreeNode<T>(data);
+                _root = new Node<T>(data);
 
                 Count++;
                 return;
             }
 
-            TreeNode<T> treeNode = _root;
+            Node<T> node = _root;
 
             while (true)
             {
-                if (Comparison(data, treeNode.Data) < 0)
+                if (_comparer.Compare(data, node.Data) < 0)
                 {
-                    if (treeNode.Left == null)
+                    if (node.Left == null)
                     {
-                        treeNode.Left = new TreeNode<T>(data);
+                        node.Left = new Node<T>(data);
 
                         Count++;
                         return;
                     }
-                    else
-                    {
-                        treeNode = treeNode.Left;
-                    }
+
+                    node = node.Left;
                 }
                 else
                 {
-                    if (treeNode.Right == null)
+                    if (node.Right == null)
                     {
-                        treeNode.Right = new TreeNode<T>(data);
+                        node.Right = new Node<T>(data);
 
                         Count++;
                         return;
                     }
-                    else
-                    {
-                        treeNode = treeNode.Right;
-                    }
+
+                    node = node.Right;
+
                 }
             }
         }
 
-        public bool Contains(T data) => GetTreeNode(data) != null;
+        public bool Contains(T data) => GetNode(data) != null;
 
-        private TreeNode<T> GetTreeNode(T data)
+        private Node<T> GetNode(T data)
         {
             if (_root == null)
             {
                 return null;
             }
 
-            if ((data == null && _root.Data == null) || Equals(data, _root.Data))
+            if (_comparer.Compare(data, _root.Data) == 0)
             {
                 return _root;
             }
 
-            TreeNode<T> treeNode = GetTreeNodeParent(data);
+            Node<T> node = GetNodeParent(data);
 
-            if (treeNode.Left != null && Equals(treeNode.Left.Data, data))
+            if (_comparer.Compare(node.Left.Data, data) == 0)
             {
-                return treeNode.Left;
+                return node.Left;
             }
 
-            if (treeNode.Right != null && Equals(treeNode.Right.Data, data))
+            if (_comparer.Compare(node.Right.Data, data) == 0)
             {
-                return treeNode.Right;
+                return node.Right;
             }
 
             return null;
         }
 
-        private TreeNode<T> GetTreeNodeParent(T data)
+        private Node<T> GetNodeParent(T data)
         {
-            if (_root == null || Equals(data, _root.Data))
+            if (_root == null || _comparer.Compare(data, _root.Data) == 0)
             {
                 return null;
             }
 
-            if (data == null && _root.Data == null)
-            {
-                return null;
-            }
-
-            TreeNode<T> treeNode = _root;
-            TreeNode<T> treeNodeParent = _root;
-
-            if (data == null)
-            {
-                while (treeNode != null)
-                {
-                    if (treeNode.Data == null)
-                    {
-                        return treeNodeParent;
-                    }
-                    else
-                    {
-                        treeNodeParent = treeNode;
-                        treeNode = treeNode.Left;
-                    }
-                }
-
-                return null;
-            }
+            Node<T> node = _root;
 
             while (true)
             {
-                int comparisonResult = _comparison.Compare(data, treeNode.Data);
+                Node<T> nodeParent = node;
 
+                int comparisonResult = _comparer.Compare(data, node.Data);
+
+                if (comparisonResult < 0)
+                {
+                    if (node.Left == null)
+                    {
+                        return null;
+                    }
+
+                    node = node.Left;
+                }
 
                 if (comparisonResult == 0)
                 {
-                    return treeNodeParent;
+                    return nodeParent;
                 }
-                else if (comparisonResult < 0)
+
+                if (comparisonResult > 0)
                 {
-                    if (treeNode.Left == null)
+                    if (node.Right == null)
                     {
                         return null;
                     }
-                    else
-                    {
-                        treeNodeParent = treeNode;
-                        treeNode = treeNode.Left;
-                    }
-                }
-                else
-                {
-                    if (treeNode.Right == null)
-                    {
-                        return null;
-                    }
-                    else
-                    {
-                        treeNodeParent = treeNode;
-                        treeNode = treeNode.Right;
-                    }
+
+                    node = node.Right;
                 }
             }
         }
 
         public bool Remove(T data)
         {
-            CheckFirst();
-
-            if (Equals(data, _root.Data))
-            {
-                RemoveFirst();
-                return true;
-            }
-
-            TreeNode<T> deletedNodeParent = GetTreeNodeParent(data);
-
-            if (deletedNodeParent == null)
+            if (_root == null)
             {
                 return false;
             }
 
-            TreeNode<T> deletedNode;
+            Node<T> deletedNode;
+            Node<T> deletedNodeParent;
             bool isLeftChild = false;
 
-            if ((_comparison != null && _comparison.Compare(data, deletedNodeParent.Data) < 0) || Comparison(data, deletedNodeParent.Data) < 0)
+            if (_comparer.Compare(data, _root.Data) == 0)
             {
-                deletedNode = deletedNodeParent.Left;
-                isLeftChild = true;
+                deletedNode = _root;
             }
             else
             {
-                deletedNode = deletedNodeParent.Right;
+                deletedNodeParent = GetNodeParent(data);
+
+                if (deletedNodeParent == null)
+                {
+                    return false;
+                }
+
+                if (_comparer.Compare(data, deletedNodeParent.Data) < 0)
+                {
+                    deletedNode = deletedNodeParent.Left;
+                    isLeftChild = true;
+                }
+                else
+                {
+                    deletedNode = deletedNodeParent.Right;
+                }
             }
 
             // нет детей
@@ -257,37 +230,37 @@ namespace TreeTask
             }
 
             // 2 ребенка
-            TreeNode<T> minRightBranch = deletedNode.Right;
-            TreeNode<T> minRightBranchParent = deletedNode;
+            Node<T> rightBranchMinNode = deletedNode.Right;
+            Node<T> rightBranchMinNodeParent = deletedNode;
 
-            if (minRightBranch.Left != null)
+            if (rightBranchMinNode.Left != null)
             {
-                while (minRightBranch.Left != null)
+                while (rightBranchMinNode.Left != null)
                 {
-                    minRightBranchParent = minRightBranch;
-                    minRightBranch = minRightBranch.Left;
+                    rightBranchMinNodeParent = rightBranchMinNode;
+                    rightBranchMinNode = rightBranchMinNode.Left;
                 }
 
-                if (minRightBranch.Right == null)
+                if (rightBranchMinNode.Right == null)
                 {
-                    minRightBranchParent.Left = null; // занулили родителя левого правой ветки
+                    rightBranchMinNodeParent.Left = null; // занулили родителя левого правой ветки
                 }
                 else
                 {
-                    minRightBranchParent.Left = minRightBranch.Right; // если есть ребенок соединили 
+                    rightBranchMinNodeParent.Left = rightBranchMinNode.Right; // если есть ребенок соединили 
                 }
 
                 if (isLeftChild) // смотрим куда идет поворот после родителя удаляемого нода
                 {
-                    deletedNodeParent.Left = minRightBranch; // перенаправили ссылку родителя удаляемого на минамльного левого
+                    deletedNodeParent.Left = rightBranchMinNode; // перенаправили ссылку родителя удаляемого на минамльного левого
                 }
                 else
                 {
-                    deletedNodeParent.Right = minRightBranch;
+                    deletedNodeParent.Right = rightBranchMinNode;
                 }
 
-                minRightBranch.Left = deletedNode.Left; // минимальный левый принимает ссылки детей от удаляемого
-                minRightBranch.Right = deletedNode.Right;
+                rightBranchMinNode.Left = deletedNode.Left; // минимальный левый принимает ссылки детей от удаляемого
+                rightBranchMinNode.Right = deletedNode.Right;
 
                 deletedNode.Left = null; // зануляем удаляемый нод
                 deletedNode.Right = null;
@@ -314,131 +287,90 @@ namespace TreeTask
             return true;
         }
 
-        private void RemoveFirst()
-        {
-            if (_root.Left == null || _root.Right == null)
-            {
-                if (_root.Left == null && _root.Right == null)
-                {
-                    _root = null;
-                }
-                else if (_root.Left == null)
-                {
-                    _root = _root.Right;
-                }
-                else
-                {
-                    _root = _root.Left;
-                }
-
-                Count--;
-                return;
-            }
-
-            TreeNode<T> treeNode = _root.Right;
-
-            while (true)
-            {
-                if (treeNode.Left == null)
-                {
-                    treeNode.Left = _root.Left;
-                    _root = treeNode;
-
-                    Count--;
-                    return;
-                }
-                else
-                {
-                    treeNode = treeNode.Left;
-                }
-            }
-        }
-
-        private void CheckFirst()
+        public void BypassByWidth(Action<T> action)
         {
             if (_root == null)
             {
-                throw new NullReferenceException($"Tree {this} is empty.");
+                return;
             }
-        }
 
-        public void BypassInWidth(Action<T> func)
-        {
-            CheckFirst();
-
-            Queue<TreeNode<T>> queue = new();
-
-            TreeNode<T> treeNode = _root;
-            queue.Enqueue(treeNode);
+            Queue<Node<T>> queue = new();
+            queue.Enqueue(_root);
 
             while (queue.Count != 0)
             {
-                treeNode = queue.Dequeue();
+                Node<T> node = queue.Dequeue();
 
-                func(treeNode.Data);
+                action(node.Data);
 
-                if (treeNode.Left != null)
+                if (node.Left != null)
                 {
-                    queue.Enqueue(treeNode.Left);
+                    queue.Enqueue(node.Left);
                 }
 
-                if (treeNode.Right != null)
+                if (node.Right != null)
                 {
-                    queue.Enqueue(treeNode.Right);
+                    queue.Enqueue(node.Right);
                 }
             }
         }
 
-        public void BypassInDeep(Action<T> func)
+        public void BypassByDeep(Action<T> action)
         {
-            CheckFirst();
+            if (_root == null)
+            {
+                return;
+            }
 
-            Stack<TreeNode<T>> stack = new();
-            TreeNode<T> treeNode = _root;
-
-            stack.Push(treeNode);
+            Stack<Node<T>> stack = new();
+            stack.Push(_root);
 
             while (stack.Count != 0)
             {
-                treeNode = stack.Pop();
+                Node<T> node = stack.Pop();
 
-                func(treeNode.Data);
+                action(node.Data);
 
-                if (treeNode.Right != null)
+                if (node.Right != null)
                 {
-                    stack.Push(treeNode.Right);
+                    stack.Push(node.Right);
                 }
 
-                if (treeNode.Left != null)
+                if (node.Left != null)
                 {
-                    stack.Push(treeNode.Left);
+                    stack.Push(node.Left);
                 }
             }
         }
 
-        public void BypassInRecursiveDeep(Action<T> func)
+        public void BypassByDeepRecursive(Action<T> action)
         {
-            BypassInRecursiveDeep(func, _root);
-        }
-
-        private void BypassInRecursiveDeep(Action<T> func, TreeNode<T> treeNode)
-        {
-            func(treeNode.Data);
-
-            if (treeNode.Left != null)
+            if (_root == null)
             {
-                BypassInRecursiveDeep(func, treeNode.Left);
+                return;
             }
 
-            if (treeNode.Right != null)
+            BypassByDeepRecursive(action, _root);
+        }
+
+        private void BypassByDeepRecursive(Action<T> action, Node<T> node)
+        {
+            action(node.Data);
+
+            if (node.Left != null)
             {
-                BypassInRecursiveDeep(func, treeNode.Right);
+                BypassByDeepRecursive(action, node.Left);
+            }
+
+            if (node.Right != null)
+            {
+                BypassByDeepRecursive(action, node.Right);
             }
         }
 
         private static int Comparison(T data1, T data2)
         {
-            if (Equals(data1, data2))
+            if (data1 == null && data2 == null)
             {
                 return 0;
             }

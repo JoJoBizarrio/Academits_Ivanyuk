@@ -22,10 +22,10 @@ namespace TreeTask
                 Console.Write(", ");
             };
 
-            treeTest.BypassInDeep(write);
+            treeTest.BypassByDeep(write);
             Console.WriteLine();
 
-            treeTest.BypassInWidth(write);
+            treeTest.BypassByWidth(write);
             Console.WriteLine();
 
             DataComparer<string> comparer = new DataComparer<string>();
@@ -55,14 +55,14 @@ namespace TreeTask
                 }
             };
 
-            treeTest2.BypassInDeep(write2);
+            treeTest2.BypassByDeep(write2);
             Console.WriteLine();
 
-            treeTest2.BypassInWidth(write2);
+            treeTest2.BypassByWidth(write2);
 
             Tree<string> tree = new Tree<string>("abs");
             tree = new Tree<string>(comparer);
-            tree.BypassInDeep(write2);
+            tree.BypassByDeep(write2);
         }
     }
 }

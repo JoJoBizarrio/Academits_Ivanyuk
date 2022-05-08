@@ -77,7 +77,7 @@ namespace ListTask
         {
             if (index < 0 || index > Count)
             {
-                throw new ArgumentOutOfRangeException(nameof(index), index, $"Index is out of range: [0, {Count}].");
+                throw new IndexOutOfRangeException($"Index is out of range: [0, {Count}].");
             }
 
             if (index == 0)
@@ -154,14 +154,14 @@ namespace ListTask
         // Разворот списка за линейное время
         public void Reverse()
         {
-            if (Count == 0 || Count == 1)
+            if (Count <= 1)
             {
                 return;
             }
 
             ListItem<T> previousItem = _head;
             ListItem<T> currentItem = _head.Next;
-            ListItem<T> nextItem = _head.Next.Next;
+            ListItem<T> nextItem = currentItem.Next;
 
             previousItem.Next = null;
 

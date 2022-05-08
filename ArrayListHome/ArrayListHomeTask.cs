@@ -2,15 +2,13 @@
 {
     class ArrayListHomeTask
     {
-        static void Main(string[] args)
+        static void Main()
         {
             // 1. Прочитать в список все строки из файла
             string path = "..\\net6.0\\textToList.txt";
 
             try
             {
-                File.Exists(path);
-
                 using StreamReader reader = new StreamReader(path);
 
                 List<string> fileStrings = new();
@@ -24,9 +22,29 @@
 
                 Console.WriteLine(string.Join(", ", fileStrings));
             }
-            catch
+            catch (ArgumentNullException)
             {
-                Console.WriteLine("Ошибка.");
+                Console.WriteLine("path имеет значение null.");
+            }
+            catch (ArgumentException)
+            {
+                Console.WriteLine("Параметр path является пустой строкой (\"\").");
+            }
+            catch (DirectoryNotFoundException)
+            {
+                Console.WriteLine("Указан недопустимый путь.");
+            }
+            catch (FileNotFoundException)
+            {
+                Console.WriteLine("Файл не найден.");
+            }
+            catch (IOException)
+            {
+                Console.WriteLine("path содержит неправильный или недопустимый синтаксис имени файла, имени каталога или метки тома.");
+            }
+            catch (Exception exception)
+            {
+                Console.WriteLine(exception);
             }
 
             //================================================================
@@ -47,17 +65,17 @@
             //===================================================================
             // 3. Есть список из целых чисел, в нём некоторые числа могут повторяться.
             // Надо создать новый список, в котором будут элементы первого списка в таком же порядке, но без повторений.
-            List<int> nonrepeatingIntegerNumbersList = new(integerNumbersList.Count);
+            List<int> nonRepeatingIntegerNumbersList = new(integerNumbersList.Count);
 
-            for (int i = 0; i < integerNumbersList.Count; ++i)
+            foreach (int e in nonRepeatingIntegerNumbersList)
             {
-                if (!nonrepeatingIntegerNumbersList.Contains(integerNumbersList[i]))
+                if (!nonRepeatingIntegerNumbersList.Contains(e))
                 {
-                    nonrepeatingIntegerNumbersList.Add(integerNumbersList[i]);
+                    nonRepeatingIntegerNumbersList.Add(e);
                 }
             }
 
-            Console.WriteLine(string.Join(", ", nonrepeatingIntegerNumbersList));
+            Console.WriteLine(string.Join(", ", nonRepeatingIntegerNumbersList));
         }
     }
 }

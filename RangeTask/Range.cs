@@ -78,15 +78,7 @@ namespace RangeTask
 
         public override string ToString()
         {
-            StringBuilder stringBuilder = new();
-
-            stringBuilder.Append('(');
-            stringBuilder.Append(From);
-            stringBuilder.Append("\u002C ");
-            stringBuilder.Append(To);
-            stringBuilder.Append(')');
-
-            return stringBuilder.ToString();
+            return $"({From}, {To})";
         }
 
         public static string ToString(Range[] ranges)
@@ -100,13 +92,12 @@ namespace RangeTask
 
             foreach (Range e in ranges)
             {
-                stringBuilder.Append(e);
+                stringBuilder.Append('(');
+                stringBuilder.Append(e.From);
                 stringBuilder.Append(", ");
-            }
-
-            if (stringBuilder.ToString() == "[")
-            {
-                return stringBuilder.Append(']').ToString();
+                stringBuilder.Append(e.To);
+                stringBuilder.Append(')');
+                stringBuilder.Append(", ");
             }
 
             return stringBuilder.Replace(", ", "]", stringBuilder.Length - 2, 2).ToString();

@@ -55,6 +55,11 @@ namespace HashTableTask
 
         public void Clear()
         {
+            if (Count <= 0)
+            {
+                return;
+            }
+
             foreach (List<T> list in _lists)
             {
                 if (list == null)
@@ -79,7 +84,6 @@ namespace HashTableTask
         public bool Remove(T item)
         {
             int listIndex = GetIndex(item);
-
 
             if (_lists[listIndex] != null && _lists[listIndex].Remove(item))
             {

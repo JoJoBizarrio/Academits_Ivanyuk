@@ -51,7 +51,7 @@
             }
         }
 
-        public void BypassByWidth(Action<int> func)
+        public void BypassByWidth(Action<int> action)
         {
             Queue<int> queue = new Queue<int>();
             bool[] visitedVertexes = new bool[VertexesCount];
@@ -64,7 +64,7 @@
 
                 if (!visitedVertexes[vertexIndex])
                 {
-                    func(vertexIndex);
+                    action(vertexIndex);
                 }
 
                 for (int i = 0; i < VertexesCount; ++i)
@@ -82,7 +82,7 @@
             }
         }
 
-        public void BypassByDeep(Action<int> func)
+        public void BypassByDeep(Action<int> action)
         {
             Stack<int> stack = new Stack<int>();
             bool[] visitedVertexes = new bool[VertexesCount];
@@ -95,7 +95,7 @@
 
                 if (!visitedVertexes[vertexIndex])
                 {
-                    func(vertexIndex);
+                    action(vertexIndex);
                 }
 
                 for (int i = VertexesCount - 1; i >= 0; --i)
@@ -113,27 +113,27 @@
             }
         }
 
-        public void BypassByRecursiveDeep(Action<int> func)
+        public void BypassByRecursiveDeep(Action<int> action)
         {
             bool[] visitedVertexes = new bool[VertexesCount];
 
-            func(0);
+            action(0);
             visitedVertexes[0] = true;
 
-            BypassByRecursiveDeep(func, 0, visitedVertexes);
+            BypassByRecursiveDeep(action, 0, visitedVertexes);
             
         }
 
-        private void BypassByRecursiveDeep(Action<int> func, int vertexIndex, bool[] visitedVertexes)
+        private void BypassByRecursiveDeep(Action<int> action, int vertexIndex, bool[] visitedVertexes)
         {
             for (int i = 0; i < VertexesCount; i++)
             {
                 if (_bondsTable[vertexIndex, i] > 0 && !visitedVertexes[i])
                 {
-                    func(i);
+                    action(i);
                     visitedVertexes[i] = true;
 
-                    BypassByRecursiveDeep(func, i, visitedVertexes);
+                    BypassByRecursiveDeep(action, i, visitedVertexes);
                 }
             }
         }

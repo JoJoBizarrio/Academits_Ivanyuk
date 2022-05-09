@@ -153,32 +153,58 @@ namespace TreeTask
                 return false;
             }
 
-            Node<T> deletedNode;
-            Node<T> deletedNodeParent;
-            bool isLeftChild = false;
-
             if (_comparer.Compare(data, _root.Data) == 0)
             {
-                deletedNode = _root;
+                if (_root.Left == null && _root.Right == null)
+                {
+                    _root = null;
+                    return true;
+                }
+
+                if (_root.Right == null)
+                {
+                    _root = _root.Left;
+                    return true;
+                }
+
+                if (_root.Left == null)
+                {
+                    _root = _root.Right;
+                    return true;
+                }
+
+                Node<T> nodeForJoinLeftBranch = _root.Right;
+
+                while (nodeForJoinLeftBranch.Left != null)
+                {
+                    nodeForJoinLeftBranch = nodeForJoinLeftBranch.Left;
+                }
+
+                nodeForJoinLeftBranch.Left = _root.Left;
+                _root = _root.Right;
+
+                Count--;
+                return true;
+            }
+
+            Node<T> deletedNodeParent = GetNodeParent(data);
+
+            if (deletedNodeParent == null)
+            {
+                return false;
+            }
+
+            Node<T> deletedNode;
+            bool isLeftChild = false;
+
+            if (_comparer.Compare(data, deletedNodeParent.Data) < 0)
+            {
+                deletedNode = deletedNodeParent.Left;
+                isLeftChild = true;
             }
             else
             {
-                deletedNodeParent = GetNodeParent(data);
-
-                if (deletedNodeParent == null)
-                {
-                    return false;
-                }
-
-                if (_comparer.Compare(data, deletedNodeParent.Data) < 0)
-                {
-                    deletedNode = deletedNodeParent.Left;
-                    isLeftChild = true;
-                }
-                else
-                {
-                    deletedNode = deletedNodeParent.Right;
-                }
+                deletedNode = deletedNodeParent.Right;
             }
 
             // нет детей
@@ -366,28 +392,6 @@ namespace TreeTask
             {
                 BypassByDeepRecursive(action, node.Right);
             }
-        }
-
-        private static int Comparison(T data1, T data2)
-        {
-            if (data1 == null && data2 == null)
-            {
-                return 0;
-            }
-
-            if (data1 == null)
-            {
-                return -1;
-            }
-
-            if (data2 == null)
-            {
-                return 1;
-            }
-
-            IComparable<T> comparableData = (IComparable<T>)data1;
-
-            return comparableData.CompareTo(data2);
         }
     }
 }

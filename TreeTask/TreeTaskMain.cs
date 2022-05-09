@@ -15,6 +15,9 @@ namespace TreeTask
             treeTest.Add(14);
             treeTest.Add(13);
             treeTest.Add(1);
+            treeTest.Add(9);
+            treeTest.Remove(8);
+
 
             Action<int> write = (x) =>
             {

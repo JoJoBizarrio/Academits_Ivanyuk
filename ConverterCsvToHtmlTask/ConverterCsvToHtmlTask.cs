@@ -4,11 +4,6 @@
     {
         public static void ConvertCsvToHtml(string csvPath, string htmlPath)
         {
-            if (!File.Exists(csvPath))
-            {
-                throw new FileNotFoundException("File .csv doesn't exist.");
-            }
-
             try
             {
                 using StreamReader reader = new StreamReader(csvPath);
@@ -18,17 +13,15 @@
                 writer.WriteLine("<html>");
                 writer.WriteLine("<head>");
                 writer.WriteLine("<meta charset=\"utf-8\">");
-                writer.WriteLine($"<title> {htmlPath} </title>");
+                writer.WriteLine($"<title>{htmlPath}</title>");
                 writer.WriteLine("</head>");
                 writer.WriteLine("<body>");
-                writer.WriteLine("<p>");
-                writer.WriteLine("</p>");
                 writer.WriteLine("<table>");
 
                 string currentLine;
 
-                char cellSeparator = ',';
-                char specificSymbolsDesignator = '"';
+                const char cellSeparator = ',';
+                const char specificSymbolsDesignator = '"';
 
                 bool isCellWithRowBreakOrSpecificSymbols = false;
 
@@ -36,7 +29,8 @@
                 {
                     if (!isCellWithRowBreakOrSpecificSymbols)
                     {
-                        writer.WriteLine($"{"<tr>",6}");
+                        writer.Write($"{" ",3}");
+                        writer.WriteLine($"{"<tr>",-1}");
                         writer.Write($"{"<td>",10}");
                     }
                     else
@@ -94,7 +88,8 @@
                     if (!isCellWithRowBreakOrSpecificSymbols)
                     {
                         writer.WriteLine("</td>");
-                        writer.WriteLine($"{"</tr>",6}");
+                        writer.Write($"{" ",3}");
+                        writer.WriteLine($"{"</tr>",-1}");
                     }
                 }
 
@@ -108,9 +103,21 @@
             }
         }
 
-        static void Main()
+        static void Main(string[] args)
         {
-            ConvertCsvToHtml("..\\csv.txt", "..\\html.txt");
+            string csvPath = "..\\csv.csv";
+            string htmlPath = "..\\html.html";
+
+            if (!File.Exists(csvPath))
+            {
+                Console.Write("File .csv doesn't exist.");
+            }
+            else
+            {
+                // ConvertCsvToHtml(args[108], args[109]); - вот в такой форме не работает
+                ConvertCsvToHtml(csvPath, htmlPath);
+            }
+            
         }
     }
 }

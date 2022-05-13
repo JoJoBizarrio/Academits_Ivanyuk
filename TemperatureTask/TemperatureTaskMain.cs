@@ -1,3 +1,5 @@
+using TemperatureTask.Scales;
+
 namespace TemperatureTask
 {
     internal static class TemperatureTaskMain
@@ -6,7 +8,11 @@ namespace TemperatureTask
         static void Main()
         {
             ApplicationConfiguration.Initialize();
-            Application.Run(new TemperatureTaskForm());
+
+            ITemperatureScale[] scales = { new CelsiusScale(), new FahrenheitScale(), new KelvinScale() };
+
+            TemperatureTaskForm temperatureTaskForm = new TemperatureTaskForm(scales);
+            Application.Run(temperatureTaskForm);
         }
     }
 }

@@ -1,14 +1,14 @@
+using TemperatureTask.Scales;
+
 namespace TemperatureTask
 {
-    public partial class TemperatureTaskForm : Form
+    internal partial class TemperatureTaskForm : Form
     {
-        private TempretureTaskLogic _tempratureTaskLogic = new TempretureTaskLogic();
-
-        public TemperatureTaskForm()
+        public TemperatureTaskForm(ITemperatureScale[] scales)
         {
             InitializeComponent();
 
-            foreach (string e in _tempratureTaskLogic.Scales)
+            foreach (ITemperatureScale e in scales)
             {
                 ConvertFromComboBox.Items.Add(e);
                 ConvertToComboBox.Items.Add(e);
@@ -37,7 +37,8 @@ namespace TemperatureTask
             }
             else
             {
-                OutputBox.Text = _tempratureTaskLogic.GetConvetedTemperature(ConvertFromComboBox.Text, ConvertToComboBox.Text, enteredTemperature).ToString();
+                OutputBox.Text = Convert.ToString(TemperatureConverter.Convert
+                                 (enteredTemperature, (ITemperatureScale)ConvertFromComboBox.SelectedItem, (ITemperatureScale)ConvertToComboBox.SelectedItem));
             }
         }
 

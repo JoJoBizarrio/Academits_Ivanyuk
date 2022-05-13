@@ -11,10 +11,5 @@
         {
             return value + 273.15;
         }
-
-        public override string ToString()
-        {
-            return "Kelvin";
-        }
     }
 }

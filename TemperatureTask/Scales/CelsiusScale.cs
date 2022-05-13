@@ -11,10 +11,5 @@
         {
             return value;
         }
-
-        public override string ToString()
-        {
-            return "Celsius";
-        }
     }
 }

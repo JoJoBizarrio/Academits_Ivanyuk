@@ -11,10 +11,5 @@
         {
             return value * 9 / 5 + 32;
         }
-
-        public override string ToString()
-        {
-            return "Fahrenheit";
-        }
     }
 }

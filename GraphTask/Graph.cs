@@ -122,39 +122,37 @@
 
         private void BypassByRecursiveDeep(Action<int> action, int vertexIndex, bool[] visitedVertexes, int visitedVertexesCount)
         {
-            
-                visitedVertexes[vertexIndex] = true;
-                bool isDisconnectVertex = true;
 
+            visitedVertexes[vertexIndex] = true;
+            bool isDisconnectVertex = true;
+
+            for (int i = 0; i < VertexesCount; i++)
+            {
+                if (_matrix[vertexIndex, i] > 0)
+                {
+                    isDisconnectVertex = false;
+                }
+            }
+
+            if (!isDisconnectVertex)
+            {
                 for (int i = 0; i < VertexesCount; i++)
                 {
-                    if (_matrix[vertexIndex, i] > 0)
+                    if (_matrix[vertexIndex, i] > 0 && !visitedVertexes[i])
                     {
-                        isDisconnectVertex = false;
+                        action(i);
+                        visitedVertexesCount++;
+
+                        BypassByRecursiveDeep(action, i, visitedVertexes, visitedVertexesCount);
                     }
                 }
-
-                if (!isDisconnectVertex)
-                {
-                    for (int i = 0; i < VertexesCount; i++)
-                    {
-                        if (_matrix[vertexIndex, i] > 0 && !visitedVertexes[i])
-                        {
-                            action(i);
-                            visitedVertexesCount++;
-
-                            BypassByRecursiveDeep(action, i, visitedVertexes, visitedVertexesCount);
-                        }
-                    }
-                }
-                else
-                {
-                    action(vertexIndex);
-                    visitedVertexesCount++;
-                    visitedVertexes[vertexIndex] = true;
-                }
-
-            
+            }
+            else
+            {
+                action(vertexIndex);
+                visitedVertexesCount++;
+                visitedVertexes[vertexIndex] = true;
+            }
         }
 
         private void CheckRowIndex(int index)
